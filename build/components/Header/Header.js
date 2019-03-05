@@ -32,6 +32,7 @@ import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
 import Link from '@source/partials/Link';
 import Loader from '@source/partials/Loader';
+import Country from './components/Country/Country';
 var GET_CONTEXT = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client \n  }\n"], ["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client \n  }\n"])));
 var GET_PAGES_URLS = gql(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  query pagesUrls($language: ID!) {\n    pagesUrls(where: { language: $language }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"], ["\n  query pagesUrls($language: ID!) {\n    pagesUrls(where: { language: $language }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"])));
 var ComposedQuery = adopt({
@@ -102,7 +103,8 @@ var Header = /** @class */ (function (_super) {
                         React.createElement("div", { className: 'header__controls' },
                             React.createElement("img", { src: "/assets/divesoft/images/search.svg", alt: "search" }),
                             React.createElement("img", { src: "/assets/divesoft/images/user.svg", alt: "account" }),
-                            React.createElement("button", null, "e-shop"))))));
+                            React.createElement("button", null, "e-shop")),
+                        React.createElement(Country, null)))));
         }));
     };
     Header.prototype.transformNavigationsIntoTree = function (navigation, urls) {

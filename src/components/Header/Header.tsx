@@ -1,10 +1,12 @@
 import * as React from 'react';
-import Hamburger from './components/Hamburger';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
 import Link from '@source/partials/Link';
+
 import Loader from '@source/partials/Loader';
+import Hamburger from './components/Hamburger';
+import Country from './components/Country/Country';
 
 const GET_CONTEXT = gql`
   {
@@ -137,6 +139,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                     <img src="/assets/divesoft/images/user.svg" alt="account"/>
                     <button>e-shop</button>
                   </div>
+                  <Country />
                 </div>
               </div>
             </header>

@@ -8,6 +8,27 @@
 
   &__wrapper {
     padding: 35px 0;
+    position: relative;
+  }
+
+  &__select {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    
+    select {
+      outline: none;
+      border: none;
+      background: transparent;
+      color: $lightGrey;
+      font-size: 15px;
+      width:75px;
+    }
+
+    @include xl {
+      right: -10%;
+      top: 20%;
+    }
   }
 
   &__logo {
