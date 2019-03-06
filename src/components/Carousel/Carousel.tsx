@@ -102,7 +102,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 autoPlay={true}
                 dotsDisabled={false}
                 buttonsDisabled={true}
-                autoPlayInterval={1000000}
+                autoPlayInterval={10000}
                 items={this.state.galleryItems}
                 onSlideChanged={(e) => {
                   this.setState({ currentIndex: e.item }); 
