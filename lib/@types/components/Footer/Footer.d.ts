@@ -1,6 +1,12 @@
 import * as React from 'react';
 export interface FooterProps {
-    data: {};
+    data: {
+        copyrights: string;
+        facebookUrl: LooseObject;
+        youtubeUrl: LooseObject;
+        instagramUrl: LooseObject;
+        contacts: string;
+    };
 }
 export interface FooterState {
 }

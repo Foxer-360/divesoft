@@ -1,11 +1,11 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
+import { Query } from 'react-apollo';
+import ReactMarkdown from 'react-markdown';
 
 import Link from '../../partials/Link';
 import Loader from '@source/partials/Loader';
-import Button from '@source/partials/Button';
 
 const GET_CONTEXT = gql`
   {
@@ -47,7 +47,11 @@ const ComposedQuery = adopt({
 
 export interface FooterProps {
   data: {
-
+    copyrights: string;
+    facebookUrl: LooseObject;
+    youtubeUrl: LooseObject;
+    instagramUrl: LooseObject;
+    contacts: string;
   };
 }
 
@@ -59,7 +63,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
   }
 
   public render() {
-    const {} = this.props.data;
+    const { copyrights, facebookUrl, youtubeUrl, instagramUrl, contacts } = this.props.data;
 
     return (
       <ComposedQuery>
@@ -108,7 +112,6 @@ class Footer extends React.Component<FooterProps, FooterState> {
           
           return (
             <div>
-              <div style={{paddingTop: 200}} />
               <footer className={'footer'}>
                 <div className={'container'}>
                   <div className={'footer__newsletter'}>
@@ -119,8 +122,10 @@ class Footer extends React.Component<FooterProps, FooterState> {
                       <button className={'btn'}>OK</button>
                     </form>
                   </div>
-                  <div className={'footer__navigation'}>
-                    <nav>
+                  <div className={'footer__divider'} />
+                  <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
+                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
+                      <h6>Vše o nákupu</h6>
                       <ul>
                         {firstBottomNavItems &&
                           firstBottomNavItems.map((navItem, i) => (
@@ -132,7 +137,8 @@ class Footer extends React.Component<FooterProps, FooterState> {
                           ))}
                       </ul>
                     </nav>
-                    <nav>
+                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
+                      <h6>podpora</h6>
                       <ul>
                         {secondBottomNavItems &&
                           secondBottomNavItems.map((navItem, i) => (
@@ -144,7 +150,8 @@ class Footer extends React.Component<FooterProps, FooterState> {
                           ))}
                       </ul>
                     </nav>
-                    <nav>
+                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
+                      <h6>Mapa prodejců</h6>
                       <ul>
                         {thirdBottomNavItems &&
                           thirdBottomNavItems.map((navItem, i) => (
@@ -156,24 +163,26 @@ class Footer extends React.Component<FooterProps, FooterState> {
                           ))}
                       </ul>
                     </nav>
-                    <div className={'footer__navigation__contacts'}>
+                    <div className={'footer__navigation__contacts col-12 col-md-6 col-xl'}>
                       <h6>Kontakt</h6>
-                      <p>
-                        Divesoft, s.r.o.<br/> 
-                        Hálkova 2495<br/> 
-                        413 01 Roudnice nad Labem<br/><br/>
-
-                        Česká republika<br/> 
-                        Tel.: +420 416 857 057<br/> 
-                        E-mail: info@divesoft.cz
-                      </p>
+                      {contacts && <ReactMarkdown source={contacts} />}
                     </div>
                   </div>
-                  <div className={'footer__bottom'}>
-                    <div className={'footer__bottom__social'}>
-                      social1
+                  <div className={'footer__bottom row'}>
+                    <div className={'col'}>
+                      <div className={'footer__bottom__social d-flex justify-content-center'}>
+                        <Link url={facebookUrl && facebookUrl.url}>
+                          <div />
+                        </Link>
+                        <Link url={youtubeUrl && youtubeUrl.url}>
+                          <div />
+                        </Link>
+                        <Link url={instagramUrl && instagramUrl.url}>
+                          <div />
+                        </Link>
+                      </div>
+                      {copyrights && <p>{copyrights}</p>}
                     </div>
-                    <p>Copyright © 2019 Divesoft LLC All rights reserved.</p>
                   </div>
                 </div>
               </footer>

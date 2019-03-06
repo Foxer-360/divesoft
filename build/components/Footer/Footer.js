@@ -28,8 +28,9 @@ var __assign = (this && this.__assign) || function () {
 };
 import * as React from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
+import { Query } from 'react-apollo';
+import ReactMarkdown from 'react-markdown';
 import Link from '../../partials/Link';
 import Loader from '@source/partials/Loader';
 var GET_CONTEXT = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"], ["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"])));
@@ -59,7 +60,7 @@ var Footer = /** @class */ (function (_super) {
     }
     Footer.prototype.render = function () {
         var _this = this;
-        var _a = this.props.data;
+        var _a = this.props.data, copyrights = _a.copyrights, facebookUrl = _a.facebookUrl, youtubeUrl = _a.youtubeUrl, instagramUrl = _a.instagramUrl, contacts = _a.contacts;
         return (React.createElement(ComposedQuery, null, function (_a) {
             var _b = _a.getPagesUrls, loading = _b.loading, error = _b.error, data = _b.data, context = _a.context;
             if (!context.navigationsData ||
@@ -87,7 +88,6 @@ var Footer = /** @class */ (function (_super) {
                 transformedNavigations[thirdBottomNav] :
                 [];
             return (React.createElement("div", null,
-                React.createElement("div", { style: { paddingTop: 200 } }),
                 React.createElement("footer", { className: 'footer' },
                     React.createElement("div", { className: 'container' },
                         React.createElement("div", { className: 'footer__newsletter' },
@@ -96,37 +96,36 @@ var Footer = /** @class */ (function (_super) {
                             React.createElement("form", { action: "#" },
                                 React.createElement("input", { type: "email" }),
                                 React.createElement("button", { className: 'btn' }, "OK"))),
-                        React.createElement("div", { className: 'footer__navigation' },
-                            React.createElement("nav", null,
+                        React.createElement("div", { className: 'footer__divider' }),
+                        React.createElement("div", { className: 'footer__navigation row d-flex justify-content-between align-items-start' },
+                            React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
+                                React.createElement("h6", null, "V\u0161e o n\u00E1kupu"),
                                 React.createElement("ul", null, firstBottomNavItems &&
                                     firstBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link, { url: navItem.url && navItem.url }, navItem.name || navItem.title))); }))),
-                            React.createElement("nav", null,
+                            React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
+                                React.createElement("h6", null, "podpora"),
                                 React.createElement("ul", null, secondBottomNavItems &&
                                     secondBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link, { url: navItem.url && navItem.url }, navItem.name || navItem.title))); }))),
-                            React.createElement("nav", null,
+                            React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
+                                React.createElement("h6", null, "Mapa prodejc\u016F"),
                                 React.createElement("ul", null, thirdBottomNavItems &&
                                     thirdBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link, { url: navItem.url && navItem.url }, navItem.name || navItem.title))); }))),
-                            React.createElement("div", { className: 'footer__navigation__contacts' },
+                            React.createElement("div", { className: 'footer__navigation__contacts col-12 col-md-6 col-xl' },
                                 React.createElement("h6", null, "Kontakt"),
-                                React.createElement("p", null,
-                                    "Divesoft, s.r.o.",
-                                    React.createElement("br", null),
-                                    "H\u00E1lkova 2495",
-                                    React.createElement("br", null),
-                                    "413 01 Roudnice nad Labem",
-                                    React.createElement("br", null),
-                                    React.createElement("br", null),
-                                    "\u010Cesk\u00E1 republika",
-                                    React.createElement("br", null),
-                                    "Tel.: +420 416 857 057",
-                                    React.createElement("br", null),
-                                    "E-mail: info@divesoft.cz"))),
-                        React.createElement("div", { className: 'footer__bottom' },
-                            React.createElement("div", { className: 'footer__bottom__social' }, "social1"),
-                            React.createElement("p", null, "Copyright \u00A9 2019 Divesoft LLC All rights reserved."))))));
+                                contacts && React.createElement(ReactMarkdown, { source: contacts }))),
+                        React.createElement("div", { className: 'footer__bottom row' },
+                            React.createElement("div", { className: 'col' },
+                                React.createElement("div", { className: 'footer__bottom__social d-flex justify-content-center' },
+                                    React.createElement(Link, { url: facebookUrl && facebookUrl.url },
+                                        React.createElement("div", null)),
+                                    React.createElement(Link, { url: youtubeUrl && youtubeUrl.url },
+                                        React.createElement("div", null)),
+                                    React.createElement(Link, { url: instagramUrl && instagramUrl.url },
+                                        React.createElement("div", null))),
+                                copyrights && React.createElement("p", null, copyrights)))))));
         }));
     };
     Footer.prototype.transformNavigationsIntoTree = function (navigation, urls) {
