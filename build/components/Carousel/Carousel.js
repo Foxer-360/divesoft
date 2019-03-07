@@ -61,7 +61,7 @@ var Carousel = /** @class */ (function (_super) {
             var data = _a.data;
             return (React.createElement("div", { className: 'carousel' },
                 React.createElement("div", { className: 'carousel__images' },
-                    React.createElement(AliceCarousel, { autoPlay: true, dotsDisabled: false, buttonsDisabled: true, autoPlayInterval: 1000000, items: _this.state.galleryItems, onSlideChanged: function (e) {
+                    React.createElement(AliceCarousel, { autoPlay: true, dotsDisabled: false, buttonsDisabled: true, autoPlayInterval: 10000, items: _this.state.galleryItems, onSlideChanged: function (e) {
                             _this.setState({ currentIndex: e.item });
                         }, slideToIndex: _this.state.currentIndex }))));
         }));
