@@ -69,7 +69,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                   {slide.buttonTitle && 
                     <div 
                       className={'carousel__images__img__content__btnHolder'} 
-                      style={slide.isCentred ? {maxWidth: '20%', margin: '0 auto'} : {}}
+                      style={slide.isCentred ? {maxWidth: '50%', margin: '0 auto'} : {}}
                     >
                       <Button 
                         classes={`${slide.isBackgroundBlack ? '' : 'btn--bordered'} 
@@ -103,6 +103,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 dotsDisabled={false}
                 buttonsDisabled={true}
                 autoPlayInterval={10000}
+                infinite={false}
                 items={this.state.galleryItems}
                 onSlideChanged={(e) => {
                   this.setState({ currentIndex: e.item }); 

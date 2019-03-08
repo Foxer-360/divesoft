@@ -17,6 +17,7 @@
 
   .alice-carousel {
     height: 700px;
+    overflow: hidden;
     
     @include max-md {
       height: 500px;

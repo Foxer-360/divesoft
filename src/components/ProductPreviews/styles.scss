@@ -1,6 +1,10 @@
 .product-previews {
   padding: 100px 0;
 
+  @include max-md {
+    padding: 45px 0;
+  }
+
   .btn { width: 180px; }
 
   &__top {
@@ -12,11 +16,22 @@
       color: $lightGrey;
       margin: 0;
       padding: 0;
+
+      @include max-md {
+        font-size: 1rem;
+      }
     }
   }
 
   .col {
     padding: 0;
+  }
+
+  @include max-lg {
+    .row {
+      display: block !important;
+      margin: 0 !important;
+    }
   }
 
   &__list {
@@ -30,6 +45,14 @@
     height: 500px;
     position: relative;
     background-size: cover;
+
+    @include max-lg {
+      height: 300px;
+    }
+
+    @include max-md {
+      height: 250px;
+    }
 
     &__content {
       width: 65%;
@@ -47,6 +70,14 @@
 
     &__title {
       color: #242424;
+
+      @include max-lg {
+        font-size: 1.5rem;
+      }
+
+      @include max-md {
+        font-size: 1.25rem;
+      }
     }
 
     &:hover {
@@ -58,6 +89,10 @@
 
       &__title {
         font-size: 1.5rem;
+
+        @include max-md {
+          font-size: 1.25rem;
+        }
       }
     }
 
