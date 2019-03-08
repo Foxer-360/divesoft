@@ -46,8 +46,8 @@ var Carousel = /** @class */ (function (_super) {
                                     React.createElement("h1", { style: slide.isBackgroundBlack ? { color: 'white' } : {} }, slide.title),
                                 slide.description && React.createElement("p", null, slide.description),
                                 slide.buttonTitle &&
-                                    React.createElement("div", { className: 'carousel__images__img__content__btnHolder', style: slide.isCentred ? { maxWidth: '100%' } : {} },
-                                        React.createElement(Button, { classes: (slide.isBackgroundBlack ? '' : 'btn--bordered') + " \n                              " + (slide.isCentred ? 'btn--center' : ''), url: slide.url && slide.url.url }, slide.buttonTitle)))),
+                                    React.createElement("div", { className: 'carousel__images__img__content__btnHolder', style: slide.isCentred ? { maxWidth: '20%', margin: '0 auto' } : {} },
+                                        React.createElement(Button, { classes: (slide.isBackgroundBlack ? '' : 'btn--bordered') + " \n                                  " + (slide.isCentred ? 'btn--center' : ''), url: slide.url }, slide.buttonTitle)))),
                         React.createElement(Media, { key: i, type: 'image', data: slide.image })));
                 }
             });

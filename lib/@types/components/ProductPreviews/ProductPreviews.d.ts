@@ -4,6 +4,7 @@ interface ProductPreview {
     description: string;
     image: LooseObject;
     url: LooseObject;
+    isBkgDark: boolean;
 }
 export interface ProductPreviewsProps {
     data: {
