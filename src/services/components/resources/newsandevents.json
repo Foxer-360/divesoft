@@ -1,11 +1,13 @@
 {
   "name": "NewsAndEvents",
   "data": {
+    "backgroundImage": {},
+    "titleColor": "#ffffff",
     "newsAndEvents": [
       {
         "img": {
           "recommendedSizes": {
-            "width": "380",
+            "width": "356",
             "height": "263"
           }
         },
@@ -18,7 +20,7 @@
       {
         "img": {
           "recommendedSizes": {
-            "width": "380",
+            "width": "356",
             "height": "263"
           }
         },
@@ -31,7 +33,7 @@
       {
         "img": {
           "recommendedSizes": {
-            "width": "380",
+            "width": "356",
             "height": "263"
           }
         },
@@ -47,13 +49,22 @@
     "schema": {
       "type": "object",
       "properties": {
+        "backgroundImage": {
+          "type": "image"
+        },
+        "titleColor": {
+          "type": "enum",
+          "title": "Title color",
+          "options": {
+            "#ffffff": "white",
+            "#343434": "black",
+            "#6c6c6c": "grey",
+            "#e50000": "red"
+          }
+        },
         "title": {
           "type": "text",
           "title": "Title"
-        },
-        "showMore": {
-          "type": "boolean",
-          "title": "Add button show more?"
         },
         "newsAndEvents": {
           "type": "array",

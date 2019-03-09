@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import getImageUrl from '@source/helpers/getImageUrl';
 import Button from '@source/partials/Button';
 import Media from '@source/partials/Media';
 import Link from '@source/partials/Link';
@@ -17,42 +18,70 @@ interface NewsOrEvent {
 export interface NewsAndEventsProps {
   data: {
     title?: string;
-    showMore?: boolean;
+    titleColor?: string;
+    backgroundImage?: LooseObject;
     newsAndEvents: NewsOrEvent[];
   };
 }
 
-export interface NewsAndEventsState {}
+export interface NewsAndEventsState {
+  // tslint:disable-next-line:no-any
+  items: Array<any>;
+  itemsToShow: number;
+  expanded: boolean;
+}
 
 class NewsAndEvents extends React.Component<NewsAndEventsProps, NewsAndEventsState> {
   constructor(props: NewsAndEventsProps) {
     super(props);
 
-    this.state = {};
-  }  
+    this.state = {
+      items: [],
+      itemsToShow: 9,
+      expanded: false
+    };
+
+    this.showMore = this.showMore.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ items: this.props.data.newsAndEvents });
+  }
+
+  showMore () {
+    this.state.itemsToShow >= 3 ? 
+    this.setState({ itemsToShow: this.state.items.length, expanded: true }) : 
+    this.setState({ itemsToShow: 9, expanded: false });
+    
+  }
 
   public render() {
-    const { newsAndEvents, title, showMore } = this.props.data;
+    const { title, titleColor, backgroundImage } = this.props.data;
 
     return (
-      <List data={newsAndEvents}>
+      <List data={this.state.items}>
         {({ data }) => (
-          <div className={'newsAndEvents'}>
+          <div 
+            className={'newsAndEvents'} 
+            style={{ 
+              backgroundImage: backgroundImage && `url(${getImageUrl(backgroundImage)})` 
+            }}
+          >
             <div className={'container'}>
-              {title && <h3>{title}</h3>}
-              <div className={'newsAndEvents__list row'}>
-                {data.map((item, i) => (
+              {title && <h3 style={{ color: `${titleColor}` }}>{title}</h3>}
+              <div className={'newsAndEvents__list row d-flex justify-content-between align-items-center'}>
+                {data.slice(0, this.state.itemsToShow).map((item, i) => (
                   <div key={i} className={'newsAndEvents__list__item col'}>
                     <div className="row">
                       {item.img && <Media type={'image'} data={item.img} />}
                     </div>
                     <div className="row">
                       <div className={'newsAndEvents__list__item__content'}>
-                        <p>
-                          <span style={{color: '#e50000'}}>{item.day}</span>
-                          / {item.mounthAndYear}</p>
+                        <p className={'newsAndEvents__list__item__content--date'}>
+                          <span>{item.day}</span> / {item.mounthAndYear}
+                        </p>
                         <h4>{item.title}</h4>
-                        <p>{item.text}</p>
+                        <p className={'newsAndEvents__list__item__content--text'}>{item.text}</p>
                         <Link url={item.url && item.url.url}>
                           More information
                         </Link>
@@ -61,6 +90,12 @@ class NewsAndEvents extends React.Component<NewsAndEventsProps, NewsAndEventsSta
                   </div>
                 ))}
               </div>
+
+              {this.state.items.length >= 9 ? 
+                <button className={'btn'} onClick={this.showMore}>
+                  Show {this.state.expanded ? 'less' : 'more'}
+                </button> : ''}
+              
             </div>
           </div>
         )}

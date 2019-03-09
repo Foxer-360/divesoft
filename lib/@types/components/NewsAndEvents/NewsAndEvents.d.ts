@@ -10,14 +10,20 @@ interface NewsOrEvent {
 export interface NewsAndEventsProps {
     data: {
         title?: string;
-        showMore?: boolean;
+        titleColor?: string;
+        backgroundImage?: LooseObject;
         newsAndEvents: NewsOrEvent[];
     };
 }
 export interface NewsAndEventsState {
+    items: Array<any>;
+    itemsToShow: number;
+    expanded: boolean;
 }
 declare class NewsAndEvents extends React.Component<NewsAndEventsProps, NewsAndEventsState> {
     constructor(props: NewsAndEventsProps);
+    componentDidMount(): void;
+    showMore(): void;
     render(): JSX.Element;
 }
 export default NewsAndEvents;
