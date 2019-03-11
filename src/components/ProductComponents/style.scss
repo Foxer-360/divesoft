@@ -15,35 +15,42 @@
 
   &__list {
 
-    .col-md-6, .col-lg-4 { padding: 8px 5px; }
-    .col-12 { padding: 30px 5px; }
+    .col-12, .col-md-6, .col-lg-4 { padding: 8px 8px; }
 
     &__item {
       width: 100%;
+      min-width: 350px;
       position: relative;
-      padding-left: 144px;
-
-      h5 {
-        word-break: break-all;
-      }
-
-      p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: $lightGrey;
-      }
+      @include clearfix;
 
       .mediaRatio {
         padding: 0 !important;
+        min-height: 130px;
+        max-height: 130px;
+        min-width: 130px;
+        max-width: 130px;
         height: 130px;
-        width: 130px;
-        position: absolute;
-        left: 0;
+        width: 35%;
+        float: left;
       }
 
-      a {
-        color: $red;
-        &:hover { text-decoration: underline; }
+      &__content {
+        width: 60%;
+        float: left;
+        max-height: 140px;
+        padding-left: 15px;
+        overflow: hidden;
+  
+        p {
+          margin: 0;
+          font-size: 0.9rem;
+          color: $lightGrey;
+        }
+        
+        a {
+          color: $red;
+          &:hover { text-decoration: underline; }
+        }
       }
     }
   }

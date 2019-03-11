@@ -36,9 +36,11 @@ const ProductComponents = (props: ProductComponentsProps) => {
                   <div key={i} className="col-12 col-md-6 col-lg-4">
                     <div className={'productComponents__list__item'}>
                       <Media type={'image'} data={item.image} />
-                      {item.title && <h5>{item.title}</h5>}
-                      {item.description && <p>{item.description}</p>}
-                      <Link url={item.url && item.url.url}>More information</Link>
+                      <div className={'productComponents__list__item__content'}>
+                        {item.title && <h5>{item.title}</h5>}
+                        {item.description && <p>{item.description}</p>}
+                        <Link url={item.url && item.url.url}>More information</Link>
+                      </div>
                     </div>
                   </div>
                 ))}
