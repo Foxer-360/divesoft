@@ -26,7 +26,6 @@ var GalleryAndVideo = /** @class */ (function (_super) {
     GalleryAndVideo.prototype.render = function () {
         var _this = this;
         var _a = this.props.data, title = _a.title, video = _a.video, images = _a.images;
-        console.log(video);
         return (React.createElement(List, { data: images }, function (_a) {
             var data = _a.data;
             return (React.createElement("div", { className: 'galleryAndVideo' },
@@ -35,12 +34,12 @@ var GalleryAndVideo = /** @class */ (function (_super) {
                     React.createElement("div", { className: 'row galleryAndVideo__content' },
                         React.createElement("div", { className: "col" }, video && React.createElement(Media, { type: 'embeddedVideo', data: video })),
                         React.createElement("div", { className: "col" },
-                            React.createElement("div", { className: "row" }, data && data.length >= 2 && data.slice(0, 2).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__content__img col' },
+                            React.createElement("div", { className: "row" }, data && data.length >= 2 && data.slice(0, 2).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__content__img col-12 col-md-6' },
                                 React.createElement(Media, { type: 'image', data: item.image }))); })),
-                            React.createElement("div", { className: "row" }, data && data.length >= 4 && data.slice(2, 4).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__content__img col' },
+                            React.createElement("div", { className: "row" }, data && data.length >= 4 && data.slice(2, 4).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__content__img col-12 col-md-6' },
                                 React.createElement(Media, { type: 'image', data: item.image }))); })))),
                     _this.state.showMore &&
-                        React.createElement("div", { className: "row" }, data.slice(4, data.length - 1).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__more col-3' },
+                        React.createElement("div", { className: "row", style: { marginTop: 15 } }, data.slice(4, data.length - 1).map(function (item, i) { return (React.createElement("div", { key: i, className: 'galleryAndVideo__more col-12 col-md-6 col-xl-3' },
                             React.createElement(Media, { type: 'image', data: item.image }))); })),
                     data && data.length > 4 &&
                         React.createElement("button", { className: 'btn', onClick: function () { return _this.setState({ showMore: !_this.state.showMore }); } }, "Show more"))));

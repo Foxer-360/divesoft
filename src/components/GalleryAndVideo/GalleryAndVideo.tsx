@@ -30,7 +30,6 @@ class GalleryAndVideo extends React.Component<GalleryAndVideoProps, GalleryAndVi
 
   public render() {
     const { title, video, images } = this.props.data;
-    console.log(video);
 
     return (
       <List data={images}>
@@ -46,14 +45,14 @@ class GalleryAndVideo extends React.Component<GalleryAndVideoProps, GalleryAndVi
                 <div className="col">
                   <div className="row">
                     {data && data.length >= 2 && data.slice(0, 2).map((item, i) => (
-                      <div key={i} className={'galleryAndVideo__content__img col'}>
+                      <div key={i} className={'galleryAndVideo__content__img col-12 col-md-6'}>
                         <Media type={'image'} data={item.image} />
                       </div>
                     ))}
                   </div>
                   <div className="row">
                     {data && data.length >= 4 && data.slice(2, 4).map((item, i) => (
-                      <div key={i} className={'galleryAndVideo__content__img col'}>
+                      <div key={i} className={'galleryAndVideo__content__img col-12 col-md-6'}>
                         <Media type={'image'} data={item.image} />
                       </div>
                     ))}
@@ -62,9 +61,9 @@ class GalleryAndVideo extends React.Component<GalleryAndVideoProps, GalleryAndVi
               </div>
 
               {this.state.showMore && 
-                <div className="row">
+                <div className="row" style={{ marginTop: 15 }}>
                   {data.slice(4, data.length - 1).map((item, i) => (
-                    <div key={i} className={'galleryAndVideo__more col-3'}>
+                    <div key={i} className={'galleryAndVideo__more col-12 col-md-6 col-xl-3'}>
                       <Media type={'image'} data={item.image} />
                     </div>
                   ))}

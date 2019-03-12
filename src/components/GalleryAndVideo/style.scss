@@ -7,67 +7,73 @@
     margin-bottom: 30px;
   }
 
+  .row {
+    @include max-xl { margin-bottom: 15px; }
+  }
+
   .btn {
     max-width: 200px;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 20px;
   }
 
   .mediaRatio {
-    &--video {
-      height: 96.9%;
-      @include max-xl { height: 100%; }
-    }
-  }
+    padding: 0 !important;
+    height: 240px;
+    @include max-md { height: 200px; }
+    @include max-sm { height: 110px; }
 
-  .col {
-    &:not(:last-child) { margin-right: 10px; }
-    @include xl {
-      padding-right: 0;
-    }
-  }
-  .row {
-    @include max-xl {
-      margin-left: 0;
-      margin-right: 0;
+    &--video {
+      padding-top: 100% !important;
+      height: 440px !important;
+      
+      @include max-xl { 
+        height: 100% !important;
+        margin-bottom: 15px;
+      }
     }
   }
 
   &__content {
-    @include max-xl {
-      display: block;
-      
-      .col {
-        padding-left: 0;
-        padding-right: 0;
+    @include max-xl { display: block; }
 
+    .col {
+      &:nth-child(2) {
         .row {
-          padding-left: 0;
-          padding-right: 0;
+          @include xl { 
+            height: 48.6%;
+            padding-top: 0;
+          }
+
+          @include max-md {
+            .galleryAndVideo__content__img {
+              &:not(:last-child) {
+                margin-bottom: 15px;
+              }
+            }
+          }
+
+          .mediaRatio {
+            @include xl { height: 100%; }
+          }
+
+          &:first-child {
+            @include xl { margin-bottom: 15px; }
+          }
         }
-
-        &:first-of-type { margin-bottom: 15px; }
       }
-    }
-
-    .row {
-      .galleryAndVideo__content__img {
-        margin-bottom: 10px;
-      }
-    }
-
-    &__img {
-      width: 280px;
-      
-      &:not(:first-child) { padding-left: 0; }
     }
   }
 
   &__more {
-    .mediaRation {
+    margin-bottom: 15px;
+
+    .mediaRatio {
       padding: 0 !important;
-      width: 100%;
-      max-height: 160px;
+      height: 240px;
+
+      @include max-md { height: 200px; }
+      @include max-sm { height: 110px; }
     }
   }
 }
