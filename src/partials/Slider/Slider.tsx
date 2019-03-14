@@ -10,6 +10,7 @@ export interface SliderProps {
   autoplay?: boolean;
   showDots?: boolean;
   showArrows?: boolean;
+  paddingTop?: number;
   // tslint:disable-next-line:no-any
   slides: Array<any>;
 }
@@ -30,7 +31,7 @@ class Slider extends React.Component<SliderProps, SliderState> {
       slides: [],
       interval: null,
       currentIndex: 0,
-      translateValue: 0,
+      translateValue: 0
     };
   }
   
@@ -103,7 +104,10 @@ class Slider extends React.Component<SliderProps, SliderState> {
   render() {
 
     return (
-      <div className="slider">
+      <div 
+        className="slider" 
+        style={this.props.paddingTop ? {paddingTop: this.props.paddingTop} : {}}
+      >
         <div 
           className="slider__wrapper"
           style={{ 
