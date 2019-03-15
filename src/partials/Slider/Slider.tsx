@@ -1,9 +1,9 @@
 import React from 'react';
 
+import Dots from './components/Dots';
 import Slide from './components/Slide';
 import LeftArrow from './components/LeftArrow';
 import RightArrow from './components/RightArrow';
-import Dots from './components/Dots';
 
 export interface SliderProps {
   delay?: number;
@@ -28,7 +28,7 @@ class Slider extends React.Component<SliderProps, SliderState> {
     super(props);
 
     this.state = {
-      slides: [],
+      slides: this.props.slides,
       interval: null,
       currentIndex: 0,
       translateValue: 0
@@ -37,13 +37,14 @@ class Slider extends React.Component<SliderProps, SliderState> {
   
   componentDidMount () {
     const { autoplay, delay } = this.props;
-    this.setState({slides: this.props.slides});
 
     if (autoplay) {
       let interval = setInterval(this.goToNextSlide, delay);
       this.setState({ interval });
     }
   }
+
+  componentWillReceiveProps = (nextProps) => this.setState({ slides: nextProps.slides });
 
   componentWillUnmount = () => clearInterval(this.state.interval);
 
