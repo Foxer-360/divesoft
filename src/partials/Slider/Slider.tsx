@@ -10,7 +10,7 @@ export interface SliderProps {
   autoplay?: boolean;
   showDots?: boolean;
   showArrows?: boolean;
-  class?: string;
+  wrapperClasses?: string;
   // tslint:disable-next-line:no-any
   slides: Array<any>;
 }
@@ -115,7 +115,7 @@ class Slider extends React.Component<SliderProps, SliderState> {
   render() {
 
     return (
-      <div className={`slider ${this.props.class}`}>
+      <div className={`slider ${this.props.wrapperClasses}`}>
         <div 
           className="slider__wrapper"
           style={{ 
