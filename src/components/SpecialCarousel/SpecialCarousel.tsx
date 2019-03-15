@@ -109,7 +109,7 @@ class SpecialCarousel extends React.Component<SpecialCarouselProps, SpecialCarou
       <List data={this.state.galleryItems}>
         {({ data }) => 
           <Slider 
-            delay={1000000}
+            delay={10000}
             slides={data}
             autoplay={this.state.galleryItems.length <= 1 ? false : true} 
             showDots={this.state.galleryItems.length <= 1 ? false : true}
