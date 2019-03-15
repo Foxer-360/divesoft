@@ -49,47 +49,57 @@ class Slider extends React.Component<SliderProps, SliderState> {
   componentWillUnmount = () => clearInterval(this.state.interval);
 
   goToNextSlide = () => {
+    clearInterval(this.state.interval);
+
     if (this.state.currentIndex === this.state.slides.length - 1) {
       return this.setState({
         currentIndex: 0,
-        translateValue: 0
+        translateValue: 0,
+        interval: setInterval(this.goToNextSlide, this.props.delay)
       });
     }
 
     this.setState(prevState => ({
       currentIndex: prevState.currentIndex + 1,
-      translateValue: prevState.translateValue + -(this.slideWidth())
+      translateValue: prevState.translateValue + -(this.slideWidth()),
+      interval: setInterval(this.goToNextSlide, this.props.delay)
     }));
   }
 
   goToPrevSlide = () => {
+    clearInterval(this.state.interval);
+
     if (this.state.currentIndex === 0) { 
-      this.setState({
+      return this.setState({
         currentIndex: this.state.slides.length,
-        translateValue: this.state.slides.length * -(this.slideWidth())
+        translateValue: this.state.slides.length * -(this.slideWidth()),
+        interval: setInterval(this.goToNextSlide, this.props.delay)
       });
     }
     
     this.setState(prevState => ({
       currentIndex: prevState.currentIndex - 1,
-      translateValue: prevState.translateValue + this.slideWidth()
+      translateValue: prevState.translateValue + this.slideWidth(),
+      interval: setInterval(this.goToNextSlide, this.props.delay)
     }));
   }
 
   goTo = (index) => {
-    if (index === this.state.currentIndex) {
-      return;
-    }
+    if (index === this.state.currentIndex) { return; }
 
+    clearInterval(this.state.interval);
+    
     if (index > this.state.currentIndex) {
       this.setState({
         currentIndex: index,
-        translateValue: index * -(this.slideWidth())
+        translateValue: index * -(this.slideWidth()),
+        interval: setInterval(this.goToNextSlide, this.props.delay)
       });
     } else {
       this.setState({
         currentIndex: index,
-        translateValue: this.state.translateValue + (this.state.currentIndex - index) * (this.slideWidth())
+        translateValue: this.state.translateValue + (this.state.currentIndex - index) * (this.slideWidth()),
+        interval: setInterval(this.goToNextSlide, this.props.delay)
       });
     }
   }
