@@ -19,7 +19,6 @@
           }
         },
         "isBackgroundBlack": false,
-        "isCentred": false,
         "firstDocImg": {
           "recommendedSizes": {
             "width": "50",
@@ -69,10 +68,6 @@
               "isBackgroundBlack": {
                 "type": "boolean",
                 "title": "Make text white?"
-              },
-              "isCentred": {
-                "type": "boolean",
-                "title": "Is centred?"
               },
               "firstDocImg": {
                 "type": "image"

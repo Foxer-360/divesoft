@@ -10,7 +10,7 @@ export interface SliderProps {
   autoplay?: boolean;
   showDots?: boolean;
   showArrows?: boolean;
-  paddingTop?: number;
+  class?: string;
   // tslint:disable-next-line:no-any
   slides: Array<any>;
 }
@@ -104,10 +104,7 @@ class Slider extends React.Component<SliderProps, SliderState> {
   render() {
 
     return (
-      <div 
-        className="slider" 
-        style={this.props.paddingTop ? {paddingTop: this.props.paddingTop} : {}}
-      >
+      <div className={`slider ${this.props.class}`}>
         <div 
           className="slider__wrapper"
           style={{ 

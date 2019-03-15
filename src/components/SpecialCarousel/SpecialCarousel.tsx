@@ -17,9 +17,7 @@ interface Slide {
   subTitle?: string;
   description?: string;
   productImg?: LooseObject;
-
   isBackgroundBlack?: boolean;
-  isCentred?: boolean;
 
   firstDocImg?: LooseObject;
   firstDocText?: string;
@@ -56,7 +54,7 @@ class SpecialCarousel extends React.Component<SpecialCarouselProps, SpecialCarou
           (
             <div key={i} className={'specialCarousel'}>
 
-              <div className={`specialCarousel__content ${slide.isCentred ? 'center' : ''}`}>
+              <div className={`specialCarousel__content`}>
                 <div className="container">
                   {slide.title && 
                     <h2 style={slide.isBackgroundBlack ? {color: 'white'} : {}}>

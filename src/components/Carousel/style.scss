@@ -1,3 +1,8 @@
+.sliderAtTop {
+  padding-top: 120px;
+  @include max-sm { padding-top: 70px; }
+}
+
 .slider {
   overflow: hidden;
 
