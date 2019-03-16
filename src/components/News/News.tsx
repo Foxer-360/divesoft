@@ -35,34 +35,56 @@ const News = (props: NewsProps) => {
     <div className={'news'}>
       <div className="container">
         <div className="row">
-          <div className="col-10">
-            {title && <p className={'news__title'}>{title}</p>}
+          <div className="col-12 col-md-9">
+            {title && <h4 className={'news__title'}>{title}</h4>}
           </div>
-          <div className="col-2">
-            {shareUrl && <Button url={shareUrl}>Share</Button>}
+          <div className="col-12 col-md-3">
+            {shareUrl && 
+              <div className={'news__btnHolder'}>
+                <Button 
+                  url={shareUrl} 
+                  classes={'btn--bordered news__btnHolder__share'}
+                >
+                  Share
+                </Button>
+              </div>}
           </div>
         </div>
+
+        <div className={'news__divider'} />
+
         {firstText && <div className="row">
-          {firstText && <ReactMarkdown source={firstText} />}
-        </div>}
+            <div className="col-12">
+              {firstText && <ReactMarkdown source={firstText} />}
+          </div></div>}
+
         {firstImg && <div className="row">
-          <Media type={'image'} data={firstImg} />
-        </div>}
+          <div className="col-12">
+            <Media type={'image'} data={firstImg} class={'news__firstImg'} />
+          </div></div>}
+
         {secondText && <div className="row">
-          <ReactMarkdown source={secondText} />
-        </div>}
+          <div className="col-12">
+            <ReactMarkdown source={secondText} />
+          </div></div>}
+
         <div className="row">
           <div className="col-12 col-md-6">
-            {secondImg && <Media type={'image'} data={secondImg} />}
+            {secondImg && <Media class={'news__secondImg'} type={'image'} data={secondImg} />}
           </div>
           <div className="col-12 col-md-6">
-            {thirdImg && <Media type={'image'} data={thirdImg} />}
+            {thirdImg && <Media class={'news__thirdImg'} type={'image'} data={thirdImg} />}
           </div>
         </div>
+
         {thirdText && <div className="row">
-          <ReactMarkdown source={thirdText} />
+          <div className="col-12">
+            <ReactMarkdown source={thirdText} />
+          </div>
         </div>}
-        {buttonUrl && <Button url={buttonUrl}>All news & events</Button>}
+
+        {buttonUrl && 
+          <Button classes={'news__btn btn--center'} url={buttonUrl}>All news & events</Button>}
       </div>
     </div>
   );
