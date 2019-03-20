@@ -24,6 +24,7 @@ import SpecialCarousel from './SpecialCarousel';
 import AboutLeftPicture from './AboutLeftPicture';
 import AboutRightPicture from './AboutRightPicture';
 import ProductComponents from './ProductComponents';
+import ContactsMap from './ContactsMap';
 
 export {
   AlertNotFound,
@@ -52,4 +53,5 @@ export {
   AboutLeftPicture,
   AboutRightPicture,
   ProductComponents,
+  ContactsMap,
 };

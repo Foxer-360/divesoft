@@ -1,4 +1,15 @@
-@import './components/Marker/style.scss';
+.marker {
+  border-style: solid;
+	border-left-width: 14px;
+  border-bottom-width: 14px;
+	border-color:   
+    $red
+    transparent
+    transparent
+		$red;
+	transform: rotate(45deg);
+  z-index: 200;
+}
 
 .map {
   height: 400px;
