@@ -6,6 +6,7 @@ export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 import List from '../List';
 import Marker from './components/Marker';
 import MapStyles from './components/MapStyles';
+import ContactRow from './components/ContactRow';
 
 interface MapItem {
   city: string;
@@ -28,7 +29,7 @@ export interface ContactsMapProps {
 }
 
 export interface ContactsMapState {
-
+  
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
@@ -104,34 +105,39 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     return (
       <List data={mapItems}>
         {({ data }) => (
-          <div style={{ width: '100%', position: 'relative' }}>
-            {title ? <h2 style={{ paddingBottom: '30px', textAlign: 'center' }}>{title}</h2> : ''}
-            
-            <section className={'map'}>
-              {this.renderControls()}
+          <>
+            <div style={{ width: '100%', position: 'relative' }}>
+              {title ? <h2 style={{ paddingBottom: '30px', textAlign: 'center' }}>{title}</h2> : ''}
+              
+              <section className={'map'}>
+                {this.renderControls()}
 
-              {mapItems && (
-                <GoogleMapReact
-                  yesIWantToUseGoogleMapApiInternals={true}  
-                  bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-                  defaultCenter={defaultCenter}
-                  defaultZoom={6}
-                  options={{ 
-                    scrollwheel: false,
-                    styles: MapStyles
-                  }}
-                >
-                  {data && data.map((item, i) => (
-                    <Marker
-                      key={i}
-                      lat={item.lat}
-                      lng={item.lng}
-                    />
-                  ))}
-                </GoogleMapReact>
-              )}
-            </section>
-          </div>
+                {mapItems && (
+                  <GoogleMapReact
+                    yesIWantToUseGoogleMapApiInternals={true}  
+                    bootstrapURLKeys={{ key: GoogleMapsApiKey }}
+                    defaultCenter={defaultCenter}
+                    defaultZoom={6}
+                    options={{ 
+                      scrollwheel: false,
+                      styles: MapStyles
+                    }}
+                  >
+                    {data && data.map((item, i) => (
+                      <Marker
+                        key={i}
+                        lat={item.lat}
+                        lng={item.lng}
+                      />
+                    ))}
+                  </GoogleMapReact>
+                )}
+              </section>
+            </div>
+
+            {data && data.map((item, i) => 
+              <ContactRow key={i} title={'1'} rows={[]} />)}
+          </>
         )}
       </List>
     );

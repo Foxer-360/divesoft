@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 import * as React from 'react';
 import { isObjectLike } from 'lodash';
 // import WebFont from 'webfontloader';
-import { AlertNotFound, Faq, Map, News, Hero, Header, Footer, Carousel, Calendar, Firmwares, Downloads, ContactRow, AboutUsHome, ListOfLinks, VideoGallery, PhotoGallery, ProductsMenu, Testimonials, NewsAndEvents, ContactColumns, ProductsPreview, GalleryAndVideo, SpecialCarousel, AboutLeftPicture, AboutRightPicture, ProductComponents, } from '../../components';
+import { AlertNotFound, Faq, Map, News, Hero, Header, Footer, Carousel, Calendar, Firmwares, Downloads, ContactRow, AboutUsHome, ListOfLinks, VideoGallery, PhotoGallery, ProductsMenu, Testimonials, NewsAndEvents, ContactColumns, ProductsPreview, GalleryAndVideo, SpecialCarousel, AboutLeftPicture, AboutRightPicture, ProductComponents, ContactsMap, } from '../../components';
 import * as resources from './resources';
 // WEB FONTS
 // WebFont.load({
@@ -52,6 +52,7 @@ var ComponentsService = /** @class */ (function () {
             ABOUTLEFTPICTURE: 'AboutLeftPicture',
             ABOUTRIGHTPICTURE: 'AboutRightPicture',
             PRODUCTCOMPONENTS: 'ProductComponents',
+            CONTACTSMAP: 'ContactsMap',
         };
     }
     /***/
@@ -115,6 +116,8 @@ var ComponentsService = /** @class */ (function () {
                 return AboutRightPicture;
             case this.Types.PRODUCTCOMPONENTS:
                 return ProductComponents;
+            case this.Types.CONTACTSMAP:
+                return ContactsMap;
             default:
                 return function () { return React.createElement(AlertNotFound, { type: "component" }); };
         }

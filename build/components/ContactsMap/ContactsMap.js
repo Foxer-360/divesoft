@@ -1,0 +1,84 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import React from 'react';
+import GoogleMapReact from 'google-map-react';
+import { geolocated } from 'react-geolocated';
+export var GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
+import List from '../List';
+import Marker from './components/Marker';
+import MapStyles from './components/MapStyles';
+import ContactRow from './components/ContactRow';
+var ContactsMap = /** @class */ (function (_super) {
+    __extends(ContactsMap, _super);
+    function ContactsMap(props) {
+        return _super.call(this, props) || this;
+    }
+    ContactsMap.prototype.renderControls = function () {
+        var _this = this;
+        var cities = [];
+        var countries = [];
+        var associations = [];
+        var propsToArray = function () {
+            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
+                countries.push(_this.props.data.mapItems[i].country);
+            }
+            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
+                cities.push(_this.props.data.mapItems[i].city);
+            }
+            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
+                associations.push(_this.props.data.mapItems[i].association);
+            }
+        };
+        var uniqueArray = function (arr) { return Array.from(new Set(arr)); };
+        propsToArray();
+        cities = uniqueArray(cities);
+        countries = uniqueArray(countries);
+        associations = uniqueArray(associations);
+        return (React.createElement("div", { className: 'map__controls' },
+            React.createElement("div", { className: 'container' },
+                React.createElement("div", { className: "row" },
+                    React.createElement("div", { className: "col-12 col-md-4" },
+                        React.createElement("div", { className: 'select' },
+                            React.createElement("select", null, countries && countries.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); })))),
+                    React.createElement("div", { className: "col-12 col-md-4" },
+                        React.createElement("div", { className: 'select' },
+                            React.createElement("select", null, cities && cities.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); })))),
+                    React.createElement("div", { className: "col-12 col-md-4" },
+                        React.createElement("div", { className: 'select' },
+                            React.createElement("select", null, associations && associations.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); }))))))));
+    };
+    ContactsMap.prototype.render = function () {
+        var _this = this;
+        var defaultCenter = { lat: 50.08804, lng: 14.42076 };
+        var _a = this.props.data, title = _a.title, mapItems = _a.mapItems;
+        return (React.createElement(List, { data: mapItems }, function (_a) {
+            var data = _a.data;
+            return (React.createElement(React.Fragment, null,
+                React.createElement("div", { style: { width: '100%', position: 'relative' } },
+                    title ? React.createElement("h2", { style: { paddingBottom: '30px', textAlign: 'center' } }, title) : '',
+                    React.createElement("section", { className: 'map' },
+                        _this.renderControls(),
+                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: defaultCenter, defaultZoom: 6, options: {
+                                scrollwheel: false,
+                                styles: MapStyles
+                            } }, data && data.map(function (item, i) { return (React.createElement(Marker, { key: i, lat: item.lat, lng: item.lng })); }))))),
+                data && data.map(function (item, i) {
+                    return React.createElement(ContactRow, { key: i, title: '1', rows: [] });
+                })));
+        }));
+    };
+    return ContactsMap;
+}(React.Component));
+export default geolocated()(ContactsMap);
+//# sourceMappingURL=ContactsMap.js.map

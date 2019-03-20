@@ -24,5 +24,6 @@ import SpecialCarousel from './SpecialCarousel';
 import AboutLeftPicture from './AboutLeftPicture';
 import AboutRightPicture from './AboutRightPicture';
 import ProductComponents from './ProductComponents';
-export { AlertNotFound, Faq, Map, News, Hero, Header, Footer, Carousel, Calendar, Firmwares, Downloads, ContactRow, AboutUsHome, ListOfLinks, VideoGallery, PhotoGallery, ProductsMenu, Testimonials, NewsAndEvents, ContactColumns, GalleryAndVideo, ProductsPreview, SpecialCarousel, AboutLeftPicture, AboutRightPicture, ProductComponents, };
+import ContactsMap from './ContactsMap';
+export { AlertNotFound, Faq, Map, News, Hero, Header, Footer, Carousel, Calendar, Firmwares, Downloads, ContactRow, AboutUsHome, ListOfLinks, VideoGallery, PhotoGallery, ProductsMenu, Testimonials, NewsAndEvents, ContactColumns, GalleryAndVideo, ProductsPreview, SpecialCarousel, AboutLeftPicture, AboutRightPicture, ProductComponents, ContactsMap, };
 //# sourceMappingURL=index.js.map
