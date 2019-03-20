@@ -3,12 +3,7 @@ export interface ContactRowState {
     showMore: boolean;
 }
 interface Contact {
-    city: string;
-    association: string;
-    lat: number;
-    lng: number;
     name: string;
-    country: string;
     position: string;
     email: string;
     phone: string;

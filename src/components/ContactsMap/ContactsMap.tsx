@@ -7,6 +7,7 @@ import List from '../List';
 import Marker from './components/Marker';
 import MapStyles from './components/MapStyles';
 import ContactRow from './components/ContactRow';
+import { map } from '@source/services/components/resources';
 
 interface MapItem {
   city: string;
@@ -39,7 +40,6 @@ export interface ContactsMapState {
   cities: any;
   countries: any;
   associations: any;
-
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
@@ -150,11 +150,6 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     }
   }
 
-  // changeCenter(e: React.MouseEvent<HTMLElement>) {
-  //   console.log(e);
-  //   return this.setState({ mapCenter: { lat: 35, lng: 35 } });
-  // }
-
   renderControls() {
     const { cities, countries, associations } = this.state;
 
@@ -204,6 +199,42 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     );
   }
 
+  renderRows () {
+    const { mapItems } = this.props.data;
+    const { associations } = this.state;
+    let resultRows = [];
+    
+    // name: string;
+    // position: string;
+    // email: string;
+    // phone: string;
+    // web: LooseObject;
+
+    for (let i = 0; i < associations.length; i++) {
+      let composedRows = [];
+
+      for (let j = 0; j < mapItems.length; j++) {
+        if (mapItems[j].association === associations[i]) {
+          composedRows.push(
+            {
+              name: mapItems[j].name,
+              position: mapItems[j].position,
+              email: mapItems[j].email,
+              phone: mapItems[j].phone,
+              web: mapItems[j].web
+            }
+          );
+        }
+      }
+      
+      resultRows.push(
+        <ContactRow key={i} title={associations[i]} rows={composedRows} />
+      );
+    }
+
+    return resultRows;
+  }
+
   public render() {
     const { title, mapItems } = this.props.data;
 
@@ -223,7 +254,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
                     bootstrapURLKeys={{ key: GoogleMapsApiKey }}
                     defaultCenter={{ lat: 50, lng: 14 }}
                     center={this.state.mapCenter}
-                    defaultZoom={4}
+                    defaultZoom={5}
                     options={{ 
                       scrollwheel: false,
                       styles: MapStyles
@@ -241,8 +272,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
               </section>
             </div>
 
-            {data && data.map((item, i) => 
-              <ContactRow key={i} title={'1'} rows={[]} />)}
+            {this.renderRows()}
           </>
         )}
       </List>

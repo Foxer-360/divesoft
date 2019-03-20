@@ -28,6 +28,42 @@
         "web": ""
       },
       {
+        "city": "Washington",
+        "association":"DC",
+        "lat": 38.902681,
+        "lng": -77.019885,
+        "name": "Jack",
+        "country": "USA",
+        "position": "Instructor",
+        "email": "lof@golemgear.com",
+        "phone": "+18133639774",
+        "web": ""
+      },
+      {
+        "city": "Washington",
+        "association":"DC",
+        "lat": 38.902681,
+        "lng": -77.019885,
+        "name": "Jack",
+        "country": "USA",
+        "position": "Instructor",
+        "email": "lof@golemgear.com",
+        "phone": "+18133639774",
+        "web": ""
+      },
+      {
+        "city": "Washington",
+        "association":"DC",
+        "lat": 38.902681,
+        "lng": -77.019885,
+        "name": "Jack",
+        "country": "USA",
+        "position": "Instructor",
+        "email": "lof@golemgear.com",
+        "phone": "+18133639774",
+        "web": ""
+      },
+      {
         "city": "Rome",
         "association":"RIM",
         "lat": 41.895289,

@@ -112,10 +112,6 @@ var ContactsMap = /** @class */ (function (_super) {
             default: return;
         }
     };
-    // changeCenter(e: React.MouseEvent<HTMLElement>) {
-    //   console.log(e);
-    //   return this.setState({ mapCenter: { lat: 35, lng: 35 } });
-    // }
     ContactsMap.prototype.renderControls = function () {
         var _this = this;
         var _a = this.state, cities = _a.cities, countries = _a.countries, associations = _a.associations;
@@ -132,6 +128,32 @@ var ContactsMap = /** @class */ (function (_super) {
                         React.createElement("div", { className: 'select' },
                             React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'association'); }, value: this.state.associationSelectedValue }, associations && associations.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); }))))))));
     };
+    ContactsMap.prototype.renderRows = function () {
+        var mapItems = this.props.data.mapItems;
+        var associations = this.state.associations;
+        var resultRows = [];
+        // name: string;
+        // position: string;
+        // email: string;
+        // phone: string;
+        // web: LooseObject;
+        for (var i = 0; i < associations.length; i++) {
+            var composedRows = [];
+            for (var j = 0; j < mapItems.length; j++) {
+                if (mapItems[j].association === associations[i]) {
+                    composedRows.push({
+                        name: mapItems[j].name,
+                        position: mapItems[j].position,
+                        email: mapItems[j].email,
+                        phone: mapItems[j].phone,
+                        web: mapItems[j].web
+                    });
+                }
+            }
+            resultRows.push(React.createElement(ContactRow, { key: i, title: associations[i], rows: composedRows }));
+        }
+        return resultRows;
+    };
     ContactsMap.prototype.render = function () {
         var _this = this;
         var _a = this.props.data, title = _a.title, mapItems = _a.mapItems;
@@ -142,13 +164,11 @@ var ContactsMap = /** @class */ (function (_super) {
                     title ? React.createElement("h2", { style: { paddingBottom: '30px', textAlign: 'center' } }, title) : '',
                     React.createElement("section", { className: 'map' },
                         _this.renderControls(),
-                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: _this.state.mapCenter, defaultZoom: 4, options: {
+                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: _this.state.mapCenter, defaultZoom: 5, options: {
                                 scrollwheel: false,
                                 styles: MapStyles
                             } }, data && data.map(function (item, i) { return (React.createElement(Marker, { key: i, lat: item.lat, lng: item.lng })); }))))),
-                data && data.map(function (item, i) {
-                    return React.createElement(ContactRow, { key: i, title: '1', rows: [] });
-                })));
+                _this.renderRows()));
         }));
     };
     return ContactsMap;
