@@ -36,6 +36,10 @@ export interface ContactsMapState {
     lat: number,
     lng: number
   };
+  cities: any;
+  countries: any;
+  associations: any;
+
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
@@ -43,11 +47,49 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     super(props);
 
     this.state = {
-      countrySelectedValue: 'select country',
-      citySelectedValue: 'select city',
-      associationSelectedValue: 'select association',
-      mapCenter: { lat: 50, lng: 14 }
+      countrySelectedValue: '',
+      citySelectedValue: '',
+      associationSelectedValue: '',
+      mapCenter: { lat: 50, lng: 14 },
+      cities: [],
+      countries: [],
+      associations: []
     };
+  }
+
+  componentDidMount = () => this.getUniqControlProps();
+
+  getUniqControlProps() {
+    let uniqCities = [];
+    let uniqCountries = [];
+    let uniqAssociations = [];
+
+    const { mapItems } = this.props.data;
+
+    const propsToArray = () => {
+      for (let i = 0; i < mapItems.length; i++) {
+        uniqCountries.push(mapItems[i].country);
+      }
+      for (let i = 0; i < mapItems.length; i++) {
+        uniqCities.push(mapItems[i].city);
+      }
+      for (let i = 0; i < mapItems.length; i++) {
+        uniqAssociations.push(mapItems[i].association);
+      }
+    };
+
+    const uniqueArray = arr => Array.from(new Set(arr));
+    
+    propsToArray();
+    uniqCities = uniqueArray(uniqCities);
+    uniqCountries = uniqueArray(uniqCountries);
+    uniqAssociations = uniqueArray(uniqAssociations);
+    
+    return this.setState({
+      cities: uniqCities,
+      countries: uniqCountries,
+      associations: uniqAssociations
+    });
   }
 
   defineLocation(loc: string, type: string) {
@@ -55,6 +97,29 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
 
     for (let i = 0; i < mapItems.length; i++) {
       if (mapItems[i][type] === loc) {
+        switch (type) {
+          case 'country':
+            this.setState({
+              citySelectedValue: mapItems[i].city,
+              associationSelectedValue: mapItems[i].association
+            });
+            break;
+          case 'city':
+            this.setState({
+              countrySelectedValue: mapItems[i].country,
+              associationSelectedValue: mapItems[i].association
+            });
+            break;
+          case 'association':
+            this.setState({
+              countrySelectedValue: mapItems[i].country,
+              citySelectedValue: mapItems[i].city
+            });
+            break;
+          
+          default: break;
+        }
+
         return {
           lat: mapItems[i].lat,
           lng: mapItems[i].lng
@@ -91,28 +156,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
   // }
 
   renderControls() {
-    let cities = [];
-    let countries = [];
-    let associations = [];
-
-    const propsToArray = () => {
-      for (let i = 0; i < this.props.data.mapItems.length; i++) {
-        countries.push(this.props.data.mapItems[i].country);
-      }
-      for (let i = 0; i < this.props.data.mapItems.length; i++) {
-        cities.push(this.props.data.mapItems[i].city);
-      }
-      for (let i = 0; i < this.props.data.mapItems.length; i++) {
-        associations.push(this.props.data.mapItems[i].association);
-      }
-    };
-
-    const uniqueArray = arr => Array.from(new Set(arr));
-    
-    propsToArray();
-    cities = uniqueArray(cities);
-    countries = uniqueArray(countries);
-    associations = uniqueArray(associations);
+    const { cities, countries, associations } = this.state;
 
     return (
       <div className={'map__controls'}>
@@ -179,7 +223,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
                     bootstrapURLKeys={{ key: GoogleMapsApiKey }}
                     defaultCenter={{ lat: 50, lng: 14 }}
                     center={this.state.mapCenter}
-                    defaultZoom={6}
+                    defaultZoom={4}
                     options={{ 
                       scrollwheel: false,
                       styles: MapStyles

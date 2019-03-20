@@ -23,18 +23,70 @@ var ContactsMap = /** @class */ (function (_super) {
     __extends(ContactsMap, _super);
     function ContactsMap(props) {
         var _this = _super.call(this, props) || this;
+        _this.componentDidMount = function () { return _this.getUniqControlProps(); };
         _this.state = {
-            countrySelectedValue: 'select country',
-            citySelectedValue: 'select city',
-            associationSelectedValue: 'select association',
-            mapCenter: { lat: 50, lng: 14 }
+            countrySelectedValue: '',
+            citySelectedValue: '',
+            associationSelectedValue: '',
+            mapCenter: { lat: 50, lng: 14 },
+            cities: [],
+            countries: [],
+            associations: []
         };
         return _this;
     }
+    ContactsMap.prototype.getUniqControlProps = function () {
+        var uniqCities = [];
+        var uniqCountries = [];
+        var uniqAssociations = [];
+        var mapItems = this.props.data.mapItems;
+        var propsToArray = function () {
+            for (var i = 0; i < mapItems.length; i++) {
+                uniqCountries.push(mapItems[i].country);
+            }
+            for (var i = 0; i < mapItems.length; i++) {
+                uniqCities.push(mapItems[i].city);
+            }
+            for (var i = 0; i < mapItems.length; i++) {
+                uniqAssociations.push(mapItems[i].association);
+            }
+        };
+        var uniqueArray = function (arr) { return Array.from(new Set(arr)); };
+        propsToArray();
+        uniqCities = uniqueArray(uniqCities);
+        uniqCountries = uniqueArray(uniqCountries);
+        uniqAssociations = uniqueArray(uniqAssociations);
+        return this.setState({
+            cities: uniqCities,
+            countries: uniqCountries,
+            associations: uniqAssociations
+        });
+    };
     ContactsMap.prototype.defineLocation = function (loc, type) {
         var mapItems = this.props.data.mapItems;
         for (var i = 0; i < mapItems.length; i++) {
             if (mapItems[i][type] === loc) {
+                switch (type) {
+                    case 'country':
+                        this.setState({
+                            citySelectedValue: mapItems[i].city,
+                            associationSelectedValue: mapItems[i].association
+                        });
+                        break;
+                    case 'city':
+                        this.setState({
+                            countrySelectedValue: mapItems[i].country,
+                            associationSelectedValue: mapItems[i].association
+                        });
+                        break;
+                    case 'association':
+                        this.setState({
+                            countrySelectedValue: mapItems[i].country,
+                            citySelectedValue: mapItems[i].city
+                        });
+                        break;
+                    default: break;
+                }
                 return {
                     lat: mapItems[i].lat,
                     lng: mapItems[i].lng
@@ -66,25 +118,7 @@ var ContactsMap = /** @class */ (function (_super) {
     // }
     ContactsMap.prototype.renderControls = function () {
         var _this = this;
-        var cities = [];
-        var countries = [];
-        var associations = [];
-        var propsToArray = function () {
-            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
-                countries.push(_this.props.data.mapItems[i].country);
-            }
-            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
-                cities.push(_this.props.data.mapItems[i].city);
-            }
-            for (var i = 0; i < _this.props.data.mapItems.length; i++) {
-                associations.push(_this.props.data.mapItems[i].association);
-            }
-        };
-        var uniqueArray = function (arr) { return Array.from(new Set(arr)); };
-        propsToArray();
-        cities = uniqueArray(cities);
-        countries = uniqueArray(countries);
-        associations = uniqueArray(associations);
+        var _a = this.state, cities = _a.cities, countries = _a.countries, associations = _a.associations;
         return (React.createElement("div", { className: 'map__controls' },
             React.createElement("div", { className: 'container' },
                 React.createElement("div", { className: "row" },
@@ -108,7 +142,7 @@ var ContactsMap = /** @class */ (function (_super) {
                     title ? React.createElement("h2", { style: { paddingBottom: '30px', textAlign: 'center' } }, title) : '',
                     React.createElement("section", { className: 'map' },
                         _this.renderControls(),
-                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: _this.state.mapCenter, defaultZoom: 6, options: {
+                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: _this.state.mapCenter, defaultZoom: 4, options: {
                                 scrollwheel: false,
                                 styles: MapStyles
                             } }, data && data.map(function (item, i) { return (React.createElement(Marker, { key: i, lat: item.lat, lng: item.lng })); }))))),
