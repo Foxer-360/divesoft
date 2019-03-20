@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
 export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
@@ -29,12 +29,35 @@ export interface ContactsMapProps {
 }
 
 export interface ContactsMapState {
-  
+  countrySelectedValue: string;
+  citySelectedValue: string;
+  associationSelectedValue: string;
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
   constructor(props: ContactsMapProps) {
     super(props);
+
+    this.state = {
+      countrySelectedValue: 'select country',
+      citySelectedValue: 'select city',
+      associationSelectedValue: 'select association'
+    };
+  }
+
+  onSelectChange(event: React.FormEvent<HTMLSelectElement>, type?: string) {
+    var safeSearchTypeValue: string = event.currentTarget.value;
+
+    switch (type) {
+      case 'country':
+        return this.setState({ countrySelectedValue: safeSearchTypeValue });
+      case 'city':
+        return this.setState({ citySelectedValue: safeSearchTypeValue });
+      case 'association':
+        return this.setState({ associationSelectedValue: safeSearchTypeValue });
+
+      default: return;
+    }
   }
 
   renderControls() {
@@ -67,27 +90,36 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
           <div className="row">
             <div className="col-12 col-md-4">
               <div className={'select'}>
-                <select>
+                <select 
+                  onChange={e => this.onSelectChange(e, 'country')} 
+                  value={this.state.countrySelectedValue}
+                >
                   {countries && countries.map((item, i) => (
-                    <option key={i} value={i}>{item}</option>
+                    <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
               </div>
             </div>
             <div className="col-12 col-md-4">
               <div className={'select'}>
-                <select>
+                <select 
+                  onChange={e => this.onSelectChange(e, 'city')} 
+                  value={this.state.citySelectedValue}
+                >
                   {cities && cities.map((item, i) => (
-                    <option key={i} value={i}>{item}</option>
+                    <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
               </div>
             </div>
             <div className="col-12 col-md-4">
               <div className={'select'}>
-                <select>
+                <select 
+                  onChange={e => this.onSelectChange(e, 'association')} 
+                  value={this.state.associationSelectedValue}
+                >
                   {associations && associations.map((item, i) => (
-                    <option key={i} value={i}>{item}</option>
+                    <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
               </div>

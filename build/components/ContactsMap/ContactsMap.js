@@ -22,8 +22,26 @@ import ContactRow from './components/ContactRow';
 var ContactsMap = /** @class */ (function (_super) {
     __extends(ContactsMap, _super);
     function ContactsMap(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            countrySelectedValue: 'select country',
+            citySelectedValue: 'select city',
+            associationSelectedValue: 'select association'
+        };
+        return _this;
     }
+    ContactsMap.prototype.onSelectChange = function (event, type) {
+        var safeSearchTypeValue = event.currentTarget.value;
+        switch (type) {
+            case 'country':
+                return this.setState({ countrySelectedValue: safeSearchTypeValue });
+            case 'city':
+                return this.setState({ citySelectedValue: safeSearchTypeValue });
+            case 'association':
+                return this.setState({ associationSelectedValue: safeSearchTypeValue });
+            default: return;
+        }
+    };
     ContactsMap.prototype.renderControls = function () {
         var _this = this;
         var cities = [];
@@ -50,13 +68,13 @@ var ContactsMap = /** @class */ (function (_super) {
                 React.createElement("div", { className: "row" },
                     React.createElement("div", { className: "col-12 col-md-4" },
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", null, countries && countries.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'country'); }, value: this.state.countrySelectedValue }, countries && countries.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-4" },
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", null, cities && cities.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'city'); }, value: this.state.citySelectedValue }, cities && cities.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-4" },
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", null, associations && associations.map(function (item, i) { return (React.createElement("option", { key: i, value: i }, item)); }))))))));
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'association'); }, value: this.state.associationSelectedValue }, associations && associations.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); }))))))));
     };
     ContactsMap.prototype.render = function () {
         var _this = this;
