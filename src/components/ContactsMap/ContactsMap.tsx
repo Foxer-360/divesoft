@@ -32,6 +32,10 @@ export interface ContactsMapState {
   countrySelectedValue: string;
   citySelectedValue: string;
   associationSelectedValue: string;
+  mapCenter: { 
+    lat: number,
+    lng: number
+  };
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
@@ -41,24 +45,50 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     this.state = {
       countrySelectedValue: 'select country',
       citySelectedValue: 'select city',
-      associationSelectedValue: 'select association'
+      associationSelectedValue: 'select association',
+      mapCenter: { lat: 50, lng: 14 }
     };
   }
 
+  defineLocation(loc: string, type: string) {
+    const { mapItems } = this.props.data;
+
+    for (let i = 0; i < mapItems.length; i++) {
+      if (mapItems[i][type] === loc) {
+        return {
+          lat: mapItems[i].lat,
+          lng: mapItems[i].lng
+        };
+      }
+    }
+
+  }
+  
   onSelectChange(event: React.FormEvent<HTMLSelectElement>, type?: string) {
     var safeSearchTypeValue: string = event.currentTarget.value;
 
     switch (type) {
       case 'country':
-        return this.setState({ countrySelectedValue: safeSearchTypeValue });
+        this.setState({ countrySelectedValue: safeSearchTypeValue });
+        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        break;
       case 'city':
-        return this.setState({ citySelectedValue: safeSearchTypeValue });
+        this.setState({ citySelectedValue: safeSearchTypeValue });
+        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        break;
       case 'association':
-        return this.setState({ associationSelectedValue: safeSearchTypeValue });
+        this.setState({ associationSelectedValue: safeSearchTypeValue });
+        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        break;
 
       default: return;
     }
   }
+
+  // changeCenter(e: React.MouseEvent<HTMLElement>) {
+  //   console.log(e);
+  //   return this.setState({ mapCenter: { lat: 35, lng: 35 } });
+  // }
 
   renderControls() {
     let cities = [];
@@ -131,7 +161,6 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
   }
 
   public render() {
-    const defaultCenter = { lat: 50.08804, lng: 14.42076 };
     const { title, mapItems } = this.props.data;
 
     return (
@@ -143,12 +172,13 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
               
               <section className={'map'}>
                 {this.renderControls()}
-
+                
                 {mapItems && (
                   <GoogleMapReact
                     yesIWantToUseGoogleMapApiInternals={true}  
                     bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-                    defaultCenter={defaultCenter}
+                    defaultCenter={{ lat: 50, lng: 14 }}
+                    center={this.state.mapCenter}
                     defaultZoom={6}
                     options={{ 
                       scrollwheel: false,

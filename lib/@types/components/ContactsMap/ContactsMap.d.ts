@@ -22,6 +22,10 @@ export interface ContactsMapState {
     countrySelectedValue: string;
     citySelectedValue: string;
     associationSelectedValue: string;
+    mapCenter: {
+        lat: number;
+        lng: number;
+    };
 }
 declare const _default: React.ComponentClass<ContactsMapProps & import("react-geolocated").ExternalProps, any>;
 export default _default;

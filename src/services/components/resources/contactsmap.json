@@ -6,8 +6,8 @@
       {
         "city": "Prague",
         "association":"ANDI",
-        "lat": "50.042957",
-        "lng": "14.451078",
+        "lat": 50.042957,
+        "lng": 14.451078,
         "name": "Jakub Řeháček, US",
         "country": "Czech republic",
         "position": "Instructor Trainer",
@@ -18,8 +18,8 @@
       {
         "city": "Washington",
         "association":"DC",
-        "lat": "38.902681",
-        "lng": "-77.019885",
+        "lat": 38.902681,
+        "lng": -77.019885,
         "name": "Jack",
         "country": "USA",
         "position": "Instructor",
@@ -30,8 +30,8 @@
       {
         "city": "Rome",
         "association":"RIM",
-        "lat": "41.895289",
-        "lng": "12.482166",
+        "lat": 41.895289,
+        "lng": 12.482166,
         "name": "Jakub Řeháček, US",
         "country": "Italy",
         "position": "Trainer",
@@ -42,8 +42,8 @@
       {
         "city": "Barcelona",
         "association": "SP",
-        "lat": "41.382190",
-        "lng": "2.184369",
+        "lat": 41.382190,
+        "lng": 2.184369,
         "name": "Jakub Řeháček, US",
         "country": "Spain",
         "position": "Instructor Trainer",
@@ -75,11 +75,11 @@
                 "title": "Association"
               },
               "lat": {
-                "type": "text",
+                "type": "number",
                 "title": "lat"
               },
               "lng": {
-                "type": "text",
+                "type": "number",
                 "title": "lng"
               },
               "name": {

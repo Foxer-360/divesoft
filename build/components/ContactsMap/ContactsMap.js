@@ -26,22 +26,44 @@ var ContactsMap = /** @class */ (function (_super) {
         _this.state = {
             countrySelectedValue: 'select country',
             citySelectedValue: 'select city',
-            associationSelectedValue: 'select association'
+            associationSelectedValue: 'select association',
+            mapCenter: { lat: 50, lng: 14 }
         };
         return _this;
     }
+    ContactsMap.prototype.defineLocation = function (loc, type) {
+        var mapItems = this.props.data.mapItems;
+        for (var i = 0; i < mapItems.length; i++) {
+            if (mapItems[i][type] === loc) {
+                return {
+                    lat: mapItems[i].lat,
+                    lng: mapItems[i].lng
+                };
+            }
+        }
+    };
     ContactsMap.prototype.onSelectChange = function (event, type) {
         var safeSearchTypeValue = event.currentTarget.value;
         switch (type) {
             case 'country':
-                return this.setState({ countrySelectedValue: safeSearchTypeValue });
+                this.setState({ countrySelectedValue: safeSearchTypeValue });
+                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                break;
             case 'city':
-                return this.setState({ citySelectedValue: safeSearchTypeValue });
+                this.setState({ citySelectedValue: safeSearchTypeValue });
+                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                break;
             case 'association':
-                return this.setState({ associationSelectedValue: safeSearchTypeValue });
+                this.setState({ associationSelectedValue: safeSearchTypeValue });
+                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                break;
             default: return;
         }
     };
+    // changeCenter(e: React.MouseEvent<HTMLElement>) {
+    //   console.log(e);
+    //   return this.setState({ mapCenter: { lat: 35, lng: 35 } });
+    // }
     ContactsMap.prototype.renderControls = function () {
         var _this = this;
         var cities = [];
@@ -78,7 +100,6 @@ var ContactsMap = /** @class */ (function (_super) {
     };
     ContactsMap.prototype.render = function () {
         var _this = this;
-        var defaultCenter = { lat: 50.08804, lng: 14.42076 };
         var _a = this.props.data, title = _a.title, mapItems = _a.mapItems;
         return (React.createElement(List, { data: mapItems }, function (_a) {
             var data = _a.data;
@@ -87,7 +108,7 @@ var ContactsMap = /** @class */ (function (_super) {
                     title ? React.createElement("h2", { style: { paddingBottom: '30px', textAlign: 'center' } }, title) : '',
                     React.createElement("section", { className: 'map' },
                         _this.renderControls(),
-                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: defaultCenter, defaultZoom: 6, options: {
+                        mapItems && (React.createElement(GoogleMapReact, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: _this.state.mapCenter, defaultZoom: 6, options: {
                                 scrollwheel: false,
                                 styles: MapStyles
                             } }, data && data.map(function (item, i) { return (React.createElement(Marker, { key: i, lat: item.lat, lng: item.lng })); }))))),
