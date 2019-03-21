@@ -3,8 +3,8 @@ export declare const GoogleMapsApiKey = "AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI
 interface MapItem {
     city: string;
     association: string;
-    lat: number;
-    lng: number;
+    lat: string;
+    lng: string;
     name: string;
     country: string;
     position: string;
@@ -29,6 +29,7 @@ export interface ContactsMapState {
     cities: any;
     countries: any;
     associations: any;
+    currentAssociation: string;
 }
 declare const _default: React.ComponentClass<ContactsMapProps & import("react-geolocated").ExternalProps, any>;
 export default _default;

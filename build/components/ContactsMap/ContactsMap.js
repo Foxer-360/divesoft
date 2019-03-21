@@ -28,10 +28,14 @@ var ContactsMap = /** @class */ (function (_super) {
             countrySelectedValue: '',
             citySelectedValue: '',
             associationSelectedValue: '',
-            mapCenter: { lat: 50, lng: 14 },
+            mapCenter: {
+                lat: 50,
+                lng: 14
+            },
             cities: [],
             countries: [],
-            associations: []
+            associations: [],
+            currentAssociation: 'all'
         };
         return _this;
     }
@@ -70,26 +74,30 @@ var ContactsMap = /** @class */ (function (_super) {
                     case 'country':
                         this.setState({
                             citySelectedValue: mapItems[i].city,
-                            associationSelectedValue: mapItems[i].association
+                            associationSelectedValue: mapItems[i].association,
+                            currentAssociation: mapItems[i].association
                         });
                         break;
                     case 'city':
                         this.setState({
                             countrySelectedValue: mapItems[i].country,
-                            associationSelectedValue: mapItems[i].association
+                            associationSelectedValue: mapItems[i].association,
+                            currentAssociation: mapItems[i].association
                         });
                         break;
                     case 'association':
                         this.setState({
                             countrySelectedValue: mapItems[i].country,
-                            citySelectedValue: mapItems[i].city
+                            citySelectedValue: mapItems[i].city,
+                            currentAssociation: mapItems[i].association
                         });
                         break;
                     default: break;
                 }
+                this.renderRows();
                 return {
-                    lat: mapItems[i].lat,
-                    lng: mapItems[i].lng
+                    lat: parseFloat(mapItems[i].lat),
+                    lng: parseFloat(mapItems[i].lng)
                 };
             }
         }
@@ -98,16 +106,22 @@ var ContactsMap = /** @class */ (function (_super) {
         var safeSearchTypeValue = event.currentTarget.value;
         switch (type) {
             case 'country':
-                this.setState({ countrySelectedValue: safeSearchTypeValue });
-                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                this.setState({
+                    countrySelectedValue: safeSearchTypeValue,
+                    mapCenter: this.defineLocation(safeSearchTypeValue, type)
+                });
                 break;
             case 'city':
-                this.setState({ citySelectedValue: safeSearchTypeValue });
-                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                this.setState({
+                    citySelectedValue: safeSearchTypeValue,
+                    mapCenter: this.defineLocation(safeSearchTypeValue, type)
+                });
                 break;
             case 'association':
-                this.setState({ associationSelectedValue: safeSearchTypeValue });
-                this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+                this.setState({
+                    associationSelectedValue: safeSearchTypeValue,
+                    mapCenter: this.defineLocation(safeSearchTypeValue, type)
+                });
                 break;
             default: return;
         }
@@ -132,25 +146,24 @@ var ContactsMap = /** @class */ (function (_super) {
         var mapItems = this.props.data.mapItems;
         var associations = this.state.associations;
         var resultRows = [];
-        // name: string;
-        // position: string;
-        // email: string;
-        // phone: string;
-        // web: LooseObject;
         for (var i = 0; i < associations.length; i++) {
             var composedRows = [];
             for (var j = 0; j < mapItems.length; j++) {
                 if (mapItems[j].association === associations[i]) {
-                    composedRows.push({
-                        name: mapItems[j].name,
-                        position: mapItems[j].position,
-                        email: mapItems[j].email,
-                        phone: mapItems[j].phone,
-                        web: mapItems[j].web
-                    });
+                    if (mapItems[j].association === this.state.currentAssociation || this.state.currentAssociation === 'all') {
+                        composedRows.push({
+                            name: mapItems[j].name,
+                            position: mapItems[j].position,
+                            email: mapItems[j].email,
+                            phone: mapItems[j].phone,
+                            web: mapItems[j].web
+                        });
+                    }
                 }
             }
-            resultRows.push(React.createElement(ContactRow, { key: i, title: associations[i], rows: composedRows }));
+            if (this.state.currentAssociation === associations[i] || this.state.currentAssociation === 'all') {
+                resultRows.push(React.createElement(ContactRow, { key: i, title: associations[i], rows: composedRows }));
+            }
         }
         return resultRows;
     };
@@ -168,7 +181,7 @@ var ContactsMap = /** @class */ (function (_super) {
                                 scrollwheel: false,
                                 styles: MapStyles
                             } }, data && data.map(function (item, i) { return (React.createElement(Marker, { key: i, lat: item.lat, lng: item.lng })); }))))),
-                _this.renderRows()));
+                React.createElement("div", { className: 'map__rows' }, _this.renderRows())));
         }));
     };
     return ContactsMap;

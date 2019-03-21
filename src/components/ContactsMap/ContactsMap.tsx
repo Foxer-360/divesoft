@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
 export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
@@ -7,13 +7,11 @@ import List from '../List';
 import Marker from './components/Marker';
 import MapStyles from './components/MapStyles';
 import ContactRow from './components/ContactRow';
-import { map } from '@source/services/components/resources';
-
 interface MapItem {
   city: string;
   association: string;
-  lat: number;
-  lng: number;
+  lat: string;
+  lng: string;
   name: string;
   country: string;
   position: string;
@@ -40,6 +38,7 @@ export interface ContactsMapState {
   cities: any;
   countries: any;
   associations: any;
+  currentAssociation: string;
 }
 
 class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
@@ -50,10 +49,14 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
       countrySelectedValue: '',
       citySelectedValue: '',
       associationSelectedValue: '',
-      mapCenter: { lat: 50, lng: 14 },
+      mapCenter: { 
+        lat: 50,
+        lng: 14 
+      },
       cities: [],
       countries: [],
-      associations: []
+      associations: [],
+      currentAssociation: 'all'
     };
   }
 
@@ -101,28 +104,31 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
           case 'country':
             this.setState({
               citySelectedValue: mapItems[i].city,
-              associationSelectedValue: mapItems[i].association
+              associationSelectedValue: mapItems[i].association,
+              currentAssociation: mapItems[i].association
             });
             break;
           case 'city':
             this.setState({
               countrySelectedValue: mapItems[i].country,
-              associationSelectedValue: mapItems[i].association
+              associationSelectedValue: mapItems[i].association,
+              currentAssociation: mapItems[i].association
             });
             break;
           case 'association':
             this.setState({
               countrySelectedValue: mapItems[i].country,
-              citySelectedValue: mapItems[i].city
+              citySelectedValue: mapItems[i].city,
+              currentAssociation: mapItems[i].association
             });
             break;
           
           default: break;
         }
-
+        this.renderRows();
         return {
-          lat: mapItems[i].lat,
-          lng: mapItems[i].lng
+          lat: parseFloat(mapItems[i].lat),
+          lng: parseFloat(mapItems[i].lng)
         };
       }
     }
@@ -134,16 +140,22 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
 
     switch (type) {
       case 'country':
-        this.setState({ countrySelectedValue: safeSearchTypeValue });
-        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        this.setState({ 
+          countrySelectedValue: safeSearchTypeValue,
+          mapCenter: this.defineLocation(safeSearchTypeValue, type) 
+        });
         break;
       case 'city':
-        this.setState({ citySelectedValue: safeSearchTypeValue });
-        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        this.setState({ 
+          citySelectedValue: safeSearchTypeValue,
+          mapCenter: this.defineLocation(safeSearchTypeValue, type)
+        });
         break;
       case 'association':
-        this.setState({ associationSelectedValue: safeSearchTypeValue });
-        this.setState({ mapCenter: this.defineLocation(safeSearchTypeValue, type) });
+        this.setState({ 
+          associationSelectedValue: safeSearchTypeValue,
+          mapCenter: this.defineLocation(safeSearchTypeValue, type)
+        });
         break;
 
       default: return;
@@ -203,33 +215,31 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     const { mapItems } = this.props.data;
     const { associations } = this.state;
     let resultRows = [];
-    
-    // name: string;
-    // position: string;
-    // email: string;
-    // phone: string;
-    // web: LooseObject;
 
     for (let i = 0; i < associations.length; i++) {
       let composedRows = [];
 
       for (let j = 0; j < mapItems.length; j++) {
         if (mapItems[j].association === associations[i]) {
-          composedRows.push(
-            {
-              name: mapItems[j].name,
-              position: mapItems[j].position,
-              email: mapItems[j].email,
-              phone: mapItems[j].phone,
-              web: mapItems[j].web
-            }
-          );
+          if (mapItems[j].association === this.state.currentAssociation || this.state.currentAssociation === 'all') {
+            composedRows.push(
+              {
+                name: mapItems[j].name,
+                position: mapItems[j].position,
+                email: mapItems[j].email,
+                phone: mapItems[j].phone,
+                web: mapItems[j].web
+              }
+            );
+          }   
         }
       }
       
-      resultRows.push(
-        <ContactRow key={i} title={associations[i]} rows={composedRows} />
-      );
+      if (this.state.currentAssociation === associations[i] || this.state.currentAssociation === 'all') {
+        resultRows.push(
+          <ContactRow key={i} title={associations[i]} rows={composedRows} />
+        );
+      }
     }
 
     return resultRows;
@@ -247,7 +257,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
               
               <section className={'map'}>
                 {this.renderControls()}
-                
+
                 {mapItems && (
                   <GoogleMapReact
                     yesIWantToUseGoogleMapApiInternals={true}  
@@ -271,8 +281,10 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
                 )}
               </section>
             </div>
-
-            {this.renderRows()}
+            
+            <div className={'map__rows'}>
+              {this.renderRows()}
+            </div>
           </>
         )}
       </List>
