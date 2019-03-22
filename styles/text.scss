@@ -1,84 +1,19 @@
-h1, h2, h3, h4, h5, h6, p, a, li {
-  font-family: 'Corridor';
-  font-weight: 400;
-}
-
-h1 {
-  margin: 0;
-  font-size: 3.75rem; // 60px
-  padding-bottom: 1rem;
-  text-transform: uppercase;
-  @include max-md { font-size: 2.25rem; }
-}
-
-h2 {
-  margin: 0;
-  font-size: 2.25rem; // 36px
-  padding-bottom: 1rem;
-  text-transform: uppercase;
-  @include max-md { font-size: 1.9rem; }
-}
-
-h3 {
-  margin: 0;
-  font-size: 1.9rem; // 30px
-  padding-bottom: 1rem;
-  text-transform: uppercase;
-  @include max-md { font-size: 1.5rem; }
-}
-
-h4 {
-  margin: 0;
-  font-size: 1.5rem; // 24px
-  font-weight: 400;
-  padding-bottom: 1rem;
-  @include max-md { font-size: 1.25rem; }
-}
-
-h5 {
-  margin: 0;
-  font-size: 1.25rem; // 20px
-  padding-bottom: 1rem;
-  @include max-md { font-size: 1.225rem; }
-}
-
-h6 {
-  margin: 0;
-  font-size: 1.125rem; // 18px
-  padding-bottom: 1rem;
-  @include max-md { font-size: 1rem; }
-}
-
-p {
-  padding-bottom: 1rem
-}
-
-a {
-  color: $lightGrey;
-
-  &:hover {
-    color: $red;
-    text-decoration: none;
-  }
-}
-
 @font-face {
   font-family: 'Corridor';
   font-style: normal;
-  font-weight: 100;
+  font-weight: 200;
   src: url('/assets/divesoft/fonts/Corridor.eot');
   src:
     url(/assets/divesoft/fonts/Corridor.eot?#iefix) format("embedded-opentype"),
     url(/assets/divesoft/fonts/Corridor.woff2) format("woff2"),
     url(/assets/divesoft/fonts/Corridor.woff) format("woff"),
     url(/assets/divesoft/fonts/Corridor.ttf) format("truetype")
-    url(/assets/divesoft/fonts/CorridorMedium.svg#CorridorMedium) format("svg")
 }
 
 @font-face { 
   font-family: 'Corridor';
-  font-style: italic;
-  font-weight: 400;
+  font-style: italic; 
+  font-weight: 200;
   src: url('/assets/divesoft/fonts/CorridorItalic.eot');
   src: local('Corridor Italic'),
     local("CorridorItalic"),
@@ -126,4 +61,74 @@ a {
     url(/assets/divesoft/fonts/CorridorDemiBoldItalic.woff) format("woff"),
     url(/assets/divesoft/fonts/CorridorDemiBoldItalic.ttf) format("truetype"),
     url(/assets/divesoft/fonts/CorridorDemiBoldItalic.svg#CorridorDemiBoldItalic) format("svg")
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li {
+  font-family: 'Corridor';
+  font-weight: 200;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 3.75rem; // 60px
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  @include max-md { font-size: 2.25rem; }
+}
+
+h2 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.25rem; // 36px
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  @include max-md { font-size: 1.9rem; }
+}
+
+h3 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.9rem; // 30px
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  @include max-md { font-size: 1.5rem; }
+}
+
+h4 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.5rem; // 24px
+  font-weight: 400;
+  padding-bottom: 1rem;
+  @include max-md { font-size: 1.25rem; }
+}
+
+h5 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.25rem; // 20px
+  padding-bottom: 1rem;
+  @include max-md { font-size: 1.225rem; }
+}
+
+h6 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.125rem; // 18px
+  padding-bottom: 1rem;
+  @include max-md { font-size: 1rem; }
+}
+
+p {
+  padding-bottom: 1rem
+}
+
+a {
+  color: $lightGrey;
+
+  &:hover {
+    color: $red;
+    text-decoration: none;
+  }
 }
