@@ -1,33 +1,34 @@
 .serviceRow {
 
   &__text {
-    padding: 60px 0;
-    line-height: 3.2rem;
+    padding: 6rem 0;
     color: #5c5c5c;
+    line-height: 3.2rem;
     
     @include max-md { 
-      padding: 30px 0;
+      padding: 3rem 0;
       line-height: 2rem;
     }
   }
 
   &__list {
     position: relative;
-    padding: 50px 0;
+    padding: 5rem 0 3rem 0;
     
-    h3 { @include max-md { font-size: 2.4rem; } }
+    &__title { @include max-md { font-size: 2.4rem; } }
+
+    h5 {
+      padding-bottom: 1.6rem;
+      @include max-md { font-size: 2rem; }
+    }
     
-    .col-12 {
-      &:last-of-type {
-        .row {
-          &:last-of-type {
-            .col-12 {
-              .faq__list__divider {
-                margin-bottom: 0;
-              }
-            }
-          }
-        }
+    &__contacts {
+      color: #5c5c5c;
+      p { padding-bottom: 1rem; }
+      a {
+        font-weight: 200;
+        color: $red;
+        &:hover { text-decoration: underline; }
       }
     }
     
@@ -79,24 +80,28 @@
       }
 
       &--minus { &::before { display: none; } }
+
+      .col-12 {
+        &:last-of-type {
+          .row {
+            &:last-of-type {
+              .col-12 {
+                .faq__list__divider {
+                  margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     &__item {
       width: 85%;
 
-      h5 { 
-        padding-bottom: 0;
-        @include max-md { font-size: 1.8rem; }
-      }
-
       p { 
-        color: $lightGrey; 
-        margin: 0;
-        padding: 0;
-        line-height: 26px;
-        
-        &:first-of-type { padding-top: 25px; }
-        &:not(:last-of-type) { padding-bottom: 25px; }
+        color: #5c5c5c;
+
       }
     }
   }

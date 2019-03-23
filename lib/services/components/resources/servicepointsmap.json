@@ -127,7 +127,7 @@
                 "title": "Country"
               },
               "text": {
-                "type": "text",
+                "type": "markdown",
                 "title": "Text"
               },
               "address": {
@@ -148,7 +148,7 @@
               },
               "web": {
                 "type": "urlAutocomplete",
-                "title": "Web URL"
+                "title": "Web"
               }
             }
           }

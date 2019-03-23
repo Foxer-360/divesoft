@@ -152,7 +152,13 @@ var ServicePointsMap = /** @class */ (function (_super) {
                 if (mapItems[j].country === countries[i]) {
                     if (mapItems[j].country === this.state.currentCountry || this.state.currentCountry === 'all') {
                         composedRows.push({
-                            name: mapItems[j].title,
+                            city: mapItems[j].city,
+                            service: mapItems[j].service,
+                            country: mapItems[j].country,
+                            title: mapItems[j].title,
+                            text: mapItems[j].text,
+                            address: mapItems[j].address,
+                            storeChief: mapItems[j].storeChief,
                             email: mapItems[j].email,
                             phone: mapItems[j].phone,
                             web: mapItems[j].web

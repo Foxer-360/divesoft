@@ -19,7 +19,7 @@ const ServiceRow = (props: ServiceRowProps) => {
               <div className="row serviceRow__list">
 
                 <div className="col-12 col-md-3">
-                  <h3>{title}</h3>
+                  <h3 className={'serviceRow__list__title'}>{title}</h3>
                 </div>
                 <div className="col-12 col-md-9">
                   {data && data.map((item, i) => (
