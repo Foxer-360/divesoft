@@ -69,7 +69,7 @@ var SpecialCarousel = /** @class */ (function (_super) {
         var _this = this;
         return (React.createElement(List, { data: this.state.slides }, function (_a) {
             var data = _a.data;
-            return React.createElement(Slider, { delay: 1000000, slides: _this.renderSlides(data), autoplay: _this.state.slides.length <= 1 ? false : true, showDots: _this.state.slides.length <= 1 ? false : true, showArrows: _this.state.slides.length <= 1 ? false : true });
+            return React.createElement(Slider, { delay: 10000, slides: _this.renderSlides(data), autoplay: _this.state.slides.length <= 1 ? false : true, showDots: _this.state.slides.length <= 1 ? false : true, showArrows: _this.state.slides.length <= 1 ? false : true });
         }));
     };
     return SpecialCarousel;
