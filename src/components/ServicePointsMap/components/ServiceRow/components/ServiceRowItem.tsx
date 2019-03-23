@@ -40,13 +40,13 @@ class ServiceRowItem extends React.Component<ServiceRowItemProps, ServiceRowItem
         <div className="col-12">
           <div 
             onClick={() => this.setState({ show: !this.state.show })}
-            className={`faq__list__show ${this.state.show ? 'faq__list__show--minus' : ''}`} 
+            className={`serviceRow__list__show ${this.state.show ? 'serviceRow__list__show--minus' : ''}`} 
           />
-          <div className={'faq__list__item'}>
+          <div className={'serviceRow__list__item'}>
             <h5 onClick={() => this.setState({ show: !this.state.show })}>{title}</h5>
             {this.state.show && text && <ReactMarkdown source={text} />}
           </div>
-          <div className={'faq__list__divider'} />
+          <div className={'serviceRow__list__divider'} />
         </div>
       </div>
     ); 

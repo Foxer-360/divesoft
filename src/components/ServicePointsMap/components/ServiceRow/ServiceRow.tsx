@@ -3,20 +3,20 @@ import React from 'react';
 import List from '../../../List';
 import ServiceRowItem from './components/ServiceRowItem';
 
-interface FaqProps {
+interface ServiceRowProps {
   title: string;
   items: any;
 }
 
-const Faq = (props: FaqProps) => {
+const ServiceRow = (props: ServiceRowProps) => {
   const { title, items } = props;
 
   return (
     <List data={items}>
         {({ data }) => (
-          <div className={'faq'}>
+          <div className={'serviceRow'}>
             <div className="container">
-              <div className="row faq__list">
+              <div className="row serviceRow__list">
 
                 <div className="col-12 col-md-3">
                   <h3>{title}</h3>
@@ -24,9 +24,14 @@ const Faq = (props: FaqProps) => {
                 <div className="col-12 col-md-9">
                   {data && data.map((item, i) => (
                     <ServiceRowItem
-                      key={i} 
-                      title={item.title} 
-                      text={item.text} 
+                      key={i}
+                      web={item.web}
+                      text={item.text}
+                      title={item.title}
+                      phone={item.phone}
+                      email={item.email}
+                      address={item.address}
+                      storeChief={item.storeChief}
                     />
                   ))}
                 </div>
@@ -39,4 +44,4 @@ const Faq = (props: FaqProps) => {
   );
 };
 
-export default Faq;
+export default ServiceRow;

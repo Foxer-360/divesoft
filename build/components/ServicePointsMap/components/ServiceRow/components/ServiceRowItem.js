@@ -27,11 +27,11 @@ var ServiceRowItem = /** @class */ (function (_super) {
         var _a = this.props, title = _a.title, text = _a.text, address = _a.address, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web;
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-12" },
-                React.createElement("div", { onClick: function () { return _this.setState({ show: !_this.state.show }); }, className: "faq__list__show " + (this.state.show ? 'faq__list__show--minus' : '') }),
-                React.createElement("div", { className: 'faq__list__item' },
+                React.createElement("div", { onClick: function () { return _this.setState({ show: !_this.state.show }); }, className: "serviceRow__list__show " + (this.state.show ? 'serviceRow__list__show--minus' : '') }),
+                React.createElement("div", { className: 'serviceRow__list__item' },
                     React.createElement("h5", { onClick: function () { return _this.setState({ show: !_this.state.show }); } }, title),
                     this.state.show && text && React.createElement(ReactMarkdown, { source: text })),
-                React.createElement("div", { className: 'faq__list__divider' }))));
+                React.createElement("div", { className: 'serviceRow__list__divider' }))));
     };
     return ServiceRowItem;
 }(React.Component));
