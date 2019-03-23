@@ -70,6 +70,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding-bottom: 3rem;
+  @include max-md { padding-bottom: 1.5rem; }
 }
 
 p, a, li {
@@ -78,50 +79,65 @@ p, a, li {
 
 h1 {
   font-weight: 500;
-  font-size: 60px;
+  font-size: 6rem;
   text-transform: uppercase;
-  @include max-md { font-size: 24px; }
+  @include max-md { font-size: 3rem; }
 }
 
 h2 {
   font-weight: 500;
-  font-size: 36px;
+  font-size: 3.6rem;
   text-transform: uppercase;
-  @include max-md { font-size: 1.9rem; }
+  @include max-md { font-size: 2.4rem; }
 }
 
 h3 {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 3rem;
   text-transform: uppercase;
-  @include max-md { font-size: 20px; }
+  @include max-md { font-size: 2rem; }
 }
 
 h4 {
   font-weight: 500;
-  font-size: 24px;
-  @include max-md { font-size: 18px; }
+  font-size: 2.4rem;
+  @include max-md { font-size: 1.8rem; }
 }
 
 h5 {
   font-weight: 500;
-  font-size: 20px;
-  @include max-md { font-size: 16px; }
+  font-size: 2rem;
+  @include max-md { font-size: 1.6rem; }
 }
 
 h6 {
   font-weight: 500;
-  font-size: 18px;
-  @include max-md { font-size: 14px; }
+  font-size: 1.8rem;
 }
 
 p { padding-bottom: 1.6rem;}
 
 a {
-  color: $lightGrey;
+  color: #5c5c5c;
+  font-weight: 400;
 
   &:hover {
     color: $red;
     text-decoration: none;
+  }
+}
+
+.textDescription {
+  text-align: center;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #5c5c5c;
+  padding-bottom: 4rem;
+  font-weight: 400;
+
+  @include max-md {
+    padding-bottom: 2rem;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
   }
 }

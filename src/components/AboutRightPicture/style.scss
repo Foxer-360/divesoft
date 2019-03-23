@@ -30,7 +30,11 @@
 
     p {
       color: $lightGrey;
-      line-height: 30px;
+      line-height: 3rem;
+      @include max-md {
+        line-height: 2.7rem;
+        padding-bottom: 3rem;
+      }
     }
   }
 
