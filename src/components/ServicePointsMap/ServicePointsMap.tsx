@@ -6,58 +6,60 @@ export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 import List from '../List';
 import Marker from './components/Marker';
 import MapStyles from './components/MapStyles';
-import ContactRow from './components/ContactRow';
+import ServiceRow from './components/ServiceRow';
 
 interface MapItem {
   city: string;
-  association: string;
+  service: string;
   lat: string;
   lng: string;
-  name: string;
+  title: string;
   country: string;
-  position: string;
-  email: string;
-  phone: string;
-  web: LooseObject;
+  text?: string;
+  address?: string;
+  storeChief?: string;
+  email?: string;
+  phone?: string;
+  web?: LooseObject;
 }
 
-export interface ContactsMapProps {
+export interface ServicePointsMapProps {
   data: {
     title: string;
     mapItems: MapItem[];
   };
 }
 
-export interface ContactsMapState {
+export interface ServicePointsMapState {
   countrySelectedValue: string;
   citySelectedValue: string;
-  associationSelectedValue: string;
+  serviceSelectedValue: string;
   mapCenter: { 
     lat: number,
     lng: number
   };
-  cities: any;
-  countries: any;
-  associations: any;
-  currentAssociation: string;
+  cities: Array<string>;
+  countries: Array<string>;
+  services: Array<string>;
+  currentCountry: string;
 }
 
-class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, ContactsMapState> {
-  constructor(props: ContactsMapProps) {
+class ServicePointsMap extends React.Component<ServicePointsMapProps & GeolocatedProps, ServicePointsMapState> {
+  constructor(props: ServicePointsMapProps) {
     super(props);
 
     this.state = {
       countrySelectedValue: '',
       citySelectedValue: '',
-      associationSelectedValue: '',
+      serviceSelectedValue: '',
       mapCenter: { 
         lat: 50,
         lng: 14 
       },
       cities: [],
       countries: [],
-      associations: [],
-      currentAssociation: 'all'
+      services: [],
+      currentCountry: 'all'
     };
   }
 
@@ -66,7 +68,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
   getUniqControlProps() {
     let uniqCities = [];
     let uniqCountries = [];
-    let uniqAssociations = [];
+    let uniqServices = [];
 
     const { mapItems } = this.props.data;
 
@@ -78,7 +80,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
         uniqCities.push(mapItems[i].city);
       }
       for (let i = 0; i < mapItems.length; i++) {
-        uniqAssociations.push(mapItems[i].association);
+        uniqServices.push(mapItems[i].service);
       }
     };
 
@@ -87,12 +89,12 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
     propsToArray();
     uniqCities = uniqueArray(uniqCities);
     uniqCountries = uniqueArray(uniqCountries);
-    uniqAssociations = uniqueArray(uniqAssociations);
+    uniqServices = uniqueArray(uniqServices);
     
     return this.setState({
       cities: uniqCities,
       countries: uniqCountries,
-      associations: uniqAssociations
+      services: uniqServices
     });
   }
 
@@ -105,22 +107,22 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
           case 'country':
             this.setState({
               citySelectedValue: mapItems[i].city,
-              associationSelectedValue: mapItems[i].association,
-              currentAssociation: mapItems[i].association
+              serviceSelectedValue: mapItems[i].service,
+              currentCountry: mapItems[i].country
             });
             break;
           case 'city':
             this.setState({
               countrySelectedValue: mapItems[i].country,
-              associationSelectedValue: mapItems[i].association,
-              currentAssociation: mapItems[i].association
+              serviceSelectedValue: mapItems[i].service,
+              currentCountry: mapItems[i].country
             });
             break;
-          case 'association':
+          case 'service':
             this.setState({
               countrySelectedValue: mapItems[i].country,
               citySelectedValue: mapItems[i].city,
-              currentAssociation: mapItems[i].association
+              currentCountry: mapItems[i].country
             });
             break;
           
@@ -152,9 +154,9 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
           mapCenter: this.defineLocation(safeSearchTypeValue, type)
         });
         break;
-      case 'association':
+      case 'service':
         this.setState({ 
-          associationSelectedValue: safeSearchTypeValue,
+          serviceSelectedValue: safeSearchTypeValue,
           mapCenter: this.defineLocation(safeSearchTypeValue, type)
         });
         break;
@@ -164,7 +166,7 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
   }
 
   renderControls() {
-    const { cities, countries, associations } = this.state;
+    const { cities, countries, services } = this.state;
 
     return (
       <div className={'map__controls'}>
@@ -197,10 +199,10 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
             <div className="col-12 col-md-4">
               <div className={'select'}>
                 <select 
-                  onChange={e => this.onSelectChange(e, 'association')} 
-                  value={this.state.associationSelectedValue}
+                  onChange={e => this.onSelectChange(e, 'service')} 
+                  value={this.state.serviceSelectedValue}
                 >
-                  {associations && associations.map((item, i) => (
+                  {services && services.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
@@ -214,19 +216,18 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
 
   renderRows () {
     const { mapItems } = this.props.data;
-    const { associations } = this.state;
+    const { countries } = this.state;
     let resultRows = [];
 
-    for (let i = 0; i < associations.length; i++) {
+    for (let i = 0; i < countries.length; i++) {
       let composedRows = [];
 
       for (let j = 0; j < mapItems.length; j++) {
-        if (mapItems[j].association === associations[i]) {
-          if (mapItems[j].association === this.state.currentAssociation || this.state.currentAssociation === 'all') {
+        if (mapItems[j].country === countries[i]) {
+          if (mapItems[j].country === this.state.currentCountry || this.state.currentCountry === 'all') {
             composedRows.push(
               {
-                name: mapItems[j].name,
-                position: mapItems[j].position,
+                name: mapItems[j].title,
                 email: mapItems[j].email,
                 phone: mapItems[j].phone,
                 web: mapItems[j].web
@@ -236,9 +237,9 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
         }
       }
       
-      if (this.state.currentAssociation === associations[i] || this.state.currentAssociation === 'all') {
+      if (this.state.currentCountry === countries[i] || this.state.currentCountry === 'all') {
         resultRows.push(
-          <ContactRow key={i} title={associations[i]} rows={composedRows} />
+          <ServiceRow key={i} title={countries[i]} items={composedRows} />
         );
       }
     }
@@ -253,8 +254,11 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
       <List data={mapItems}>
         {({ data }) => (
           <>
-            <div className={'contactsMapWrapper'}>
-              {title ? <h2 style={{ paddingBottom: '30px', textAlign: 'center' }}>{title}</h2> : ''}
+            <div className={'servicePointsMapWrapper'}>
+              {title ? 
+                <div className="container">
+                  <p className={'textDescription servicePointsMapWrapper__title'}>{title}</p>
+                </div> : ''}
               
               <section className={'map'}>
                 {this.renderControls()}
@@ -293,4 +297,4 @@ class ContactsMap extends React.Component<ContactsMapProps & GeolocatedProps, Co
   }
 }
 
-export default geolocated()(ContactsMap);
+export default geolocated()(ServicePointsMap);
