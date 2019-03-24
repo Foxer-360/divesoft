@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import List from '../List';
+import List from '../../List';
 import MapComponent from './components/MapComponent';
 
 export interface MapProps {

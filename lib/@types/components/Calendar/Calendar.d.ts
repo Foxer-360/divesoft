@@ -5,7 +5,7 @@ export interface CalendarState {
     dates: Array<MyFormatOfDate>;
     switch: boolean;
 }
-interface MyFormatOfDate {
+export interface MyFormatOfDate {
     date: string;
     text: string;
     url: LooseObject;
@@ -26,6 +26,7 @@ declare class Calendar extends React.Component<CalendarProps, CalendarState> {
     renderDays(): JSX.Element;
     renderCells(): JSX.Element;
     renderControls(): JSX.Element;
+    renderMobileView(): JSX.Element;
     onDateClick: (day: any) => void;
     nextMonth: () => void;
     prevMonth: () => void;

@@ -1,8 +1,9 @@
 import React from 'react';
 import dateFns from 'date-fns';
+import Responsive from 'react-responsive';
 
 import Button from '@source/partials/Button';
-import MapComponent from '../Map/components/MapComponent';
+import MapComponent from './Map/components/MapComponent';
 
 export interface CalendarState {
   currentMonth: Date;
@@ -11,7 +12,7 @@ export interface CalendarState {
   switch: boolean;
 }
 
-interface MyFormatOfDate {
+export interface MyFormatOfDate {
   date: string;
   text: string;
   url: LooseObject;
@@ -63,6 +64,9 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     const days = [];
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
 
+    const Mobile = props => <Responsive {...props} maxWidth={767} />;
+    const Default = props => <Responsive {...props} minWidth={768} />;
+
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
@@ -71,7 +75,13 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
       );
     }
 
-    return <div className="calendar__days row">{days}</div>;
+    return (
+      <div className="calendar__days">
+        <div className="row">
+          {days}
+        </div>
+      </div>
+    );
   }
 
   renderCells() {
@@ -133,7 +143,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
       days = [];
     }
 
-    return <div className="calendar__body">{rows}</div>;
+    return  <div className="calendar__body">{rows}</div>;
   }
 
   renderControls () {
@@ -204,6 +214,88 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     );
   }
 
+  renderMobileView() {
+    const { currentMonth, selectedDate } = this.state;
+    const monthStart = dateFns.startOfMonth(currentMonth);
+    const monthEnd = dateFns.endOfMonth(monthStart);
+    const startDate = dateFns.startOfWeek(monthStart);
+    const endDate = dateFns.endOfWeek(monthEnd);
+
+    const dateFormat = 'D';
+    const resultView = [];
+
+    let rKey = 0;
+    let days = [];
+    let day = startDate;
+    let formattedDate = '';
+
+    const daysOfTheWeek = [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+    ];
+
+    const getDayofTheWeek = (key: number) => <p>{daysOfTheWeek[key]}</p>;
+    
+    while (day <= endDate) {
+
+      for (let i = 0; i < 7; i++) {
+        const cloneDay = day;
+        let myFormatOfDate = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
+        
+        formattedDate = dateFns.format(day, dateFormat);
+
+        if (dateFns.isSameMonth(day, monthStart)) {
+          days.push(
+            <div className={'row'}>
+              <div className="col-2">
+                {getDayofTheWeek(i)}
+              </div>
+              <div className="col-10">
+                <div
+                  className={`row mobileCell ${
+                    !dateFns.isSameMonth(day, monthStart)
+                      ? 'disabled'
+                      : dateFns.isSameDay(day, selectedDate) ? 'selected' : ''
+                  }`}
+                  key={i}
+                  onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
+                >
+                  <span className="mobileCell__number">{formattedDate}</span>
+                  <span className="mobileCell__bg">{formattedDate}</span>
+                  {this.state.dates && this.state.dates.map((item, j) => {
+                    if (item.date === myFormatOfDate && dateFns.isSameMonth(day, monthStart)) {
+                      return (
+                        <div className={'mobileCell__content'} key={j}>
+                          <p>{item.text}</p>
+                          <Button url={item.url}>></Button>
+                        </div>
+                      ); }
+                  })}
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        day = dateFns.addDays(day, 1);
+      }
+      
+      resultView.push(
+        <div key={'col' + (++rKey).toString()} className={'calendar__mobileBody__week'}>
+          {days}
+        </div>
+      );
+      days = [];
+    }
+
+    return  <div className="calendar__mobileBody">{resultView}</div>;
+  }
+
   onDateClick = day => {
     this.setState({
       selectedDate: day
@@ -223,15 +315,23 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
   }
 
   public render () {
-    
+
+    const Mobile = props => <Responsive {...props} maxWidth={767} />;
+    const Default = props => <Responsive {...props} minWidth={768} />;
+
     return (
       <div className={'calendar'}>
         {this.renderControls()}
         {this.state.switch ? 
-          <div className="container">
+          <div className="container calendar__container">
             {this.renderHeader()}
-            {this.renderDays()}
-            {this.renderCells()}
+            <Default>
+              {this.renderDays()}
+              {this.renderCells()}
+            </Default>
+            <Mobile>
+              {this.renderMobileView()}
+            </Mobile>
           </div> : 
           <MapComponent controls={false} items={this.state.dates} />}
       </div>

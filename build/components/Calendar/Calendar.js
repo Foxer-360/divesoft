@@ -11,10 +11,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import React from 'react';
 import dateFns from 'date-fns';
+import Responsive from 'react-responsive';
 import Button from '@source/partials/Button';
-import MapComponent from '../Map/components/MapComponent';
+import MapComponent from './Map/components/MapComponent';
 var Calendar = /** @class */ (function (_super) {
     __extends(Calendar, _super);
     function Calendar(props) {
@@ -56,10 +68,13 @@ var Calendar = /** @class */ (function (_super) {
         var dateFormat = 'dddd';
         var days = [];
         var startDate = dateFns.startOfWeek(this.state.currentMonth);
+        var Mobile = function (props) { return React.createElement(Responsive, __assign({}, props, { maxWidth: 767 })); };
+        var Default = function (props) { return React.createElement(Responsive, __assign({}, props, { minWidth: 768 })); };
         for (var i = 0; i < 7; i++) {
             days.push(React.createElement("div", { className: "col col-center", key: i }, dateFns.format(dateFns.addDays(startDate, i), dateFormat)));
         }
-        return React.createElement("div", { className: "calendar__days row" }, days);
+        return (React.createElement("div", { className: "calendar__days" },
+            React.createElement("div", { className: "row" }, days)));
     };
     Calendar.prototype.renderCells = function () {
         var _this = this;
@@ -134,14 +149,74 @@ var Calendar = /** @class */ (function (_super) {
                             switch: !_this.state.switch
                         }); } }, "Map")))));
     };
+    Calendar.prototype.renderMobileView = function () {
+        var _this = this;
+        var _a = this.state, currentMonth = _a.currentMonth, selectedDate = _a.selectedDate;
+        var monthStart = dateFns.startOfMonth(currentMonth);
+        var monthEnd = dateFns.endOfMonth(monthStart);
+        var startDate = dateFns.startOfWeek(monthStart);
+        var endDate = dateFns.endOfWeek(monthEnd);
+        var dateFormat = 'D';
+        var resultView = [];
+        var rKey = 0;
+        var days = [];
+        var day = startDate;
+        var formattedDate = '';
+        var daysOfTheWeek = [
+            'Sun',
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat',
+        ];
+        var getDayofTheWeek = function (key) { return React.createElement("p", null, daysOfTheWeek[key]); };
+        while (day <= endDate) {
+            var _loop_2 = function (i) {
+                var cloneDay = day;
+                var myFormatOfDate = day.getDate() + "." + (day.getMonth() + 1) + "." + day.getFullYear();
+                formattedDate = dateFns.format(day, dateFormat);
+                if (dateFns.isSameMonth(day, monthStart)) {
+                    days.push(React.createElement("div", { className: 'row' },
+                        React.createElement("div", { className: "col-2" }, getDayofTheWeek(i)),
+                        React.createElement("div", { className: "col-10" },
+                            React.createElement("div", { className: "row mobileCell " + (!dateFns.isSameMonth(day, monthStart)
+                                    ? 'disabled'
+                                    : dateFns.isSameDay(day, selectedDate) ? 'selected' : ''), key: i, onClick: function () { return _this.onDateClick(dateFns.parse(cloneDay)); } },
+                                React.createElement("span", { className: "mobileCell__number" }, formattedDate),
+                                React.createElement("span", { className: "mobileCell__bg" }, formattedDate),
+                                this_2.state.dates && this_2.state.dates.map(function (item, j) {
+                                    if (item.date === myFormatOfDate && dateFns.isSameMonth(day, monthStart)) {
+                                        return (React.createElement("div", { className: 'mobileCell__content', key: j },
+                                            React.createElement("p", null, item.text),
+                                            React.createElement(Button, { url: item.url }, ">")));
+                                    }
+                                })))));
+                }
+                day = dateFns.addDays(day, 1);
+            };
+            var this_2 = this;
+            for (var i = 0; i < 7; i++) {
+                _loop_2(i);
+            }
+            resultView.push(React.createElement("div", { key: 'col' + (++rKey).toString(), className: 'calendar__mobileBody__week' }, days));
+            days = [];
+        }
+        return React.createElement("div", { className: "calendar__mobileBody" }, resultView);
+    };
     Calendar.prototype.render = function () {
+        var Mobile = function (props) { return React.createElement(Responsive, __assign({}, props, { maxWidth: 767 })); };
+        var Default = function (props) { return React.createElement(Responsive, __assign({}, props, { minWidth: 768 })); };
         return (React.createElement("div", { className: 'calendar' },
             this.renderControls(),
             this.state.switch ?
-                React.createElement("div", { className: "container" },
+                React.createElement("div", { className: "container calendar__container" },
                     this.renderHeader(),
-                    this.renderDays(),
-                    this.renderCells()) :
+                    React.createElement(Default, null,
+                        this.renderDays(),
+                        this.renderCells()),
+                    React.createElement(Mobile, null, this.renderMobileView())) :
                 React.createElement(MapComponent, { controls: false, items: this.state.dates })));
     };
     return Calendar;
