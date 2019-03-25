@@ -17,20 +17,14 @@ import { geolocated } from 'react-geolocated';
 export var GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 import Marker from '../Marker';
 import MapStyles from './MapStyles';
-import Controls from './Controls';
 var MapComponent = /** @class */ (function (_super) {
     __extends(MapComponent, _super);
     function MapComponent(props) {
         return _super.call(this, props) || this;
     }
     MapComponent.prototype.render = function () {
-        var defaultCenter = { lat: 50.08804, lng: 14.42076 };
         return (React.createElement("div", { style: { width: '100%', position: 'relative' } },
-            this.props.title ?
-                React.createElement("h2", { style: { paddingBottom: '30px', textAlign: 'center' } }, this.props.title) : '',
-            this.props.controls ?
-                React.createElement(Controls, { items: this.props.items }) : '',
-            React.createElement("section", { className: 'map' }, this.props.items && (React.createElement(GoogleMapReact, { bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: defaultCenter, defaultZoom: 3, options: {
+            React.createElement("section", { className: 'map' }, this.props.items && (React.createElement(GoogleMapReact, { bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: this.props.mapCenter, defaultZoom: 5, options: {
                     scrollwheel: false,
                     styles: MapStyles
                 }, yesIWantToUseGoogleMapApiInternals: true }, this.props.items &&

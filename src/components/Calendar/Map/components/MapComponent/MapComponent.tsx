@@ -5,14 +5,16 @@ export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 
 import Marker from '../Marker';
 import MapStyles from './MapStyles';
-import Controls from './Controls';
 
 interface MapComponentState {}
 
 interface MapComponentProps {
   items: LooseObject;
-  title?: string;
   controls?: boolean;
+  mapCenter: {
+    lat: number;
+    lng: number;
+  };
 }
 
 class MapComponent extends React.Component<MapComponentProps & GeolocatedProps, MapComponentState> {
@@ -21,24 +23,16 @@ class MapComponent extends React.Component<MapComponentProps & GeolocatedProps, 
   }
 
   public render() {
-    const defaultCenter = { lat: 50.08804, lng: 14.42076 };
 
     return (
       <div style={{ width: '100%', position: 'relative' }}>
-        {this.props.title ? 
-          <h2 style={{ paddingBottom: '30px', textAlign: 'center' }}>
-            {this.props.title}
-          </h2> : ''}
-
-        {this.props.controls ?
-          <Controls items={this.props.items} /> : ''}
         
         <section className={'map'}>
           {this.props.items && (
             <GoogleMapReact
               bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-              defaultCenter={defaultCenter}
-              defaultZoom={3}
+              defaultCenter={this.props.mapCenter}
+              defaultZoom={5}
               options={{ 
                 scrollwheel: false,
                 styles: MapStyles
