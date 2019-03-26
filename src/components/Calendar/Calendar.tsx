@@ -1,8 +1,6 @@
 import React from 'react';
 import dateFns from 'date-fns';
 import Responsive from 'react-responsive';
-
-import Button from '@source/partials/Button';
 import MapComponent from './Map/components/MapComponent';
 
 export interface CalendarState {
@@ -53,9 +51,9 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
         lng: 14 
       },
 
-      countrySelectedValue: this.props.data.dates[0].country || '',
-      keywordSelectedValue: this.props.data.dates[0].keyword || '',
-      dateSelectedValue: this.props.data.dates[0].date || '',
+      countrySelectedValue: 'all',
+      keywordSelectedValue: 'all',
+      dateSelectedValue: 'all',
       keywords: [],
       countries: [],
       uniqDates: [],
@@ -224,7 +222,17 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
                 return (
                   <div className={'cell__content'} key={j}>
                     <p>{item.text}</p>
-                    <Button url={item.url}>See details</Button>
+                    <button 
+                      onClick={() => this.setState({
+                        mapCenter: {
+                          lat: parseFloat(item.lat),
+                          lng: parseFloat(item.lng),
+                        },
+                        switch: !this.state.switch
+                      })}
+                      className={'btn'}
+                    >See details
+                    </button>
                   </div>
                 ); }
             })}
@@ -270,14 +278,25 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     const { 
       countrySelectedValue,
       keywordSelectedValue,
-      dateSelectedValue
+      dateSelectedValue,
+      dates
     } = this.state;
 
-    console.log(countrySelectedValue + `\n`);
-    console.log(keywordSelectedValue + `\n`);
-    console.log(dateSelectedValue + `\n`);
-
-    return;
+    dates.map((item, i) => {
+      if (
+        item.country === countrySelectedValue && countrySelectedValue !== 'all' ||
+        item.keyword === keywordSelectedValue && keywordSelectedValue !== 'all' ||
+        item.date === dateSelectedValue && dateSelectedValue !== 'all'
+      ) {
+        return this.setState({ 
+          mapCenter: {
+            lat: parseFloat(item.lat),
+            lng: parseFloat(item.lng)
+          },
+          switch: false
+        });
+      }
+    });
   }
 
   /* FILTERS */
@@ -297,6 +316,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
                   onChange={e => this.onSelectChange(e, 'date')} 
                   value={this.state.dateSelectedValue}
                 >
+                  <option value={'all'} key="all">Select date</option>
                   {uniqDates && uniqDates.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
@@ -312,6 +332,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
                   onChange={e => this.onSelectChange(e, 'keyword')} 
                   value={this.state.keywordSelectedValue}
                 >
+                  <option value={'all'} key="all">Select keyword</option>
                   {keywords && keywords.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
@@ -327,6 +348,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
                   onChange={e => this.onSelectChange(e, 'country')} 
                   value={this.state.countrySelectedValue}
                 >
+                  <option value={'all'} key="all">Select country</option>
                   {countries && countries.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
@@ -430,7 +452,17 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
                       return (
                         <div className={'mobileCell__content'} key={j}>
                           <p>{item.text}</p>
-                          <Button url={item.url}>></Button>
+                          <button 
+                            onClick={() => this.setState({
+                              mapCenter: {
+                                lat: parseFloat(item.lat),
+                                lng: parseFloat(item.lng),
+                              },
+                              switch: !this.state.switch
+                            })}
+                            className={'btn'}
+                          >>
+                          </button>
                         </div>
                       ); }
                   })}

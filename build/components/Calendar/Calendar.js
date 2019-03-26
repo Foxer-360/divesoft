@@ -25,7 +25,6 @@ var __assign = (this && this.__assign) || function () {
 import React from 'react';
 import dateFns from 'date-fns';
 import Responsive from 'react-responsive';
-import Button from '@source/partials/Button';
 import MapComponent from './Map/components/MapComponent';
 var Calendar = /** @class */ (function (_super) {
     __extends(Calendar, _super);
@@ -33,11 +32,20 @@ var Calendar = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.componentDidMount = function () { return _this.getUniqControlProps(); };
         _this.search = function () {
-            var _a = _this.state, countrySelectedValue = _a.countrySelectedValue, keywordSelectedValue = _a.keywordSelectedValue, dateSelectedValue = _a.dateSelectedValue;
-            console.log(countrySelectedValue + "\n");
-            console.log(keywordSelectedValue + "\n");
-            console.log(dateSelectedValue + "\n");
-            return;
+            var _a = _this.state, countrySelectedValue = _a.countrySelectedValue, keywordSelectedValue = _a.keywordSelectedValue, dateSelectedValue = _a.dateSelectedValue, dates = _a.dates;
+            dates.map(function (item, i) {
+                if (item.country === countrySelectedValue && countrySelectedValue !== 'all' ||
+                    item.keyword === keywordSelectedValue && keywordSelectedValue !== 'all' ||
+                    item.date === dateSelectedValue && dateSelectedValue !== 'all') {
+                    return _this.setState({
+                        mapCenter: {
+                            lat: parseFloat(item.lat),
+                            lng: parseFloat(item.lng)
+                        },
+                        switch: false
+                    });
+                }
+            });
         };
         _this.onDateClick = function (day) {
             _this.setState({
@@ -63,9 +71,9 @@ var Calendar = /** @class */ (function (_super) {
                 lat: 50,
                 lng: 14
             },
-            countrySelectedValue: _this.props.data.dates[0].country || '',
-            keywordSelectedValue: _this.props.data.dates[0].keyword || '',
-            dateSelectedValue: _this.props.data.dates[0].date || '',
+            countrySelectedValue: 'all',
+            keywordSelectedValue: 'all',
+            dateSelectedValue: 'all',
             keywords: [],
             countries: [],
             uniqDates: [],
@@ -188,7 +196,13 @@ var Calendar = /** @class */ (function (_super) {
                         if (item.date === myFormatOfDate && dateFns.isSameMonth(day, monthStart)) {
                             return (React.createElement("div", { className: 'cell__content', key: j },
                                 React.createElement("p", null, item.text),
-                                React.createElement(Button, { url: item.url }, "See details")));
+                                React.createElement("button", { onClick: function () { return _this.setState({
+                                        mapCenter: {
+                                            lat: parseFloat(item.lat),
+                                            lng: parseFloat(item.lng),
+                                        },
+                                        switch: !_this.state.switch
+                                    }); }, className: 'btn' }, "See details")));
                         }
                     })));
                 day = dateFns.addDays(day, 1);
@@ -227,15 +241,21 @@ var Calendar = /** @class */ (function (_super) {
                     React.createElement("div", { className: "col-12 col-md-3" },
                         React.createElement("span", { className: 'calendar__controls__selectLabel' }, "Select date:"),
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'date'); }, value: this.state.dateSelectedValue }, uniqDates && uniqDates.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'date'); }, value: this.state.dateSelectedValue },
+                                React.createElement("option", { value: 'all', key: "all" }, "Select date"),
+                                uniqDates && uniqDates.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-3" },
                         React.createElement("span", { className: 'calendar__controls__selectLabel' }, "Search keyword:"),
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'keyword'); }, value: this.state.keywordSelectedValue }, keywords && keywords.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'keyword'); }, value: this.state.keywordSelectedValue },
+                                React.createElement("option", { value: 'all', key: "all" }, "Select keyword"),
+                                keywords && keywords.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-3" },
                         React.createElement("span", { className: 'calendar__controls__selectLabel' }, "Select country:"),
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'country'); }, value: this.state.countrySelectedValue }, countries && countries.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, 'country'); }, value: this.state.countrySelectedValue },
+                                React.createElement("option", { value: 'all', key: "all" }, "Select country"),
+                                countries && countries.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-3" },
                         React.createElement("button", { className: 'btn', onClick: function () { return _this.search(); } }, "Search events"))),
                 React.createElement("div", { className: 'calendar__controls__switch' },
@@ -290,7 +310,13 @@ var Calendar = /** @class */ (function (_super) {
                                     if (item.date === myFormatOfDate && dateFns.isSameMonth(day, monthStart)) {
                                         return (React.createElement("div", { className: 'mobileCell__content', key: j },
                                             React.createElement("p", null, item.text),
-                                            React.createElement(Button, { url: item.url }, ">")));
+                                            React.createElement("button", { onClick: function () { return _this.setState({
+                                                    mapCenter: {
+                                                        lat: parseFloat(item.lat),
+                                                        lng: parseFloat(item.lng),
+                                                    },
+                                                    switch: !_this.state.switch
+                                                }); }, className: 'btn' }, ">")));
                                     }
                                 })))));
                 }

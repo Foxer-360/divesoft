@@ -24,7 +24,7 @@ var MapComponent = /** @class */ (function (_super) {
     }
     MapComponent.prototype.render = function () {
         return (React.createElement("div", { style: { width: '100%', position: 'relative' } },
-            React.createElement("section", { className: 'map' }, this.props.items && (React.createElement(GoogleMapReact, { bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: this.props.mapCenter, defaultZoom: 5, options: {
+            React.createElement("section", { className: 'map' }, this.props.items && (React.createElement(GoogleMapReact, { bootstrapURLKeys: { key: GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: this.props.mapCenter, defaultZoom: 5, options: {
                     scrollwheel: false,
                     styles: MapStyles
                 }, yesIWantToUseGoogleMapApiInternals: true }, this.props.items &&

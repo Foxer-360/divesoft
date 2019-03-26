@@ -31,7 +31,8 @@ class MapComponent extends React.Component<MapComponentProps & GeolocatedProps, 
           {this.props.items && (
             <GoogleMapReact
               bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-              defaultCenter={this.props.mapCenter}
+              defaultCenter={{ lat: 50, lng: 14 }}
+              center={this.props.mapCenter}
               defaultZoom={5}
               options={{ 
                 scrollwheel: false,
