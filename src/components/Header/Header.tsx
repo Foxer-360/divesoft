@@ -157,8 +157,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                                 onClick={() => this.toggleDropdown()}
                                 className={'dropdownProducts__arrow'} 
                               /> : ''}
-                            {context.pageData.name === navItem.name ?
-                              <span className={'header__activePage'} /> : ''}
+                            {/* {context.pageData.name === navItem.name ?
+                              <span className={'header__activePage'} /> : ''} */}
                           </li>
                         );
                         })}
