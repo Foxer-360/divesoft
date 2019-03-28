@@ -13,19 +13,33 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import React from 'react';
 import List from '../List';
+import getImageUrl from '@source/helpers/getImageUrl';
 import GalleryItem from './components/GalleryItem';
 var PhotoGallery = /** @class */ (function (_super) {
     __extends(PhotoGallery, _super);
     function PhotoGallery(props) {
         var _this = _super.call(this, props) || this;
+        _this.getImageUrls = function () {
+            var images = _this.props.data.images;
+            if (!images) {
+                return;
+            }
+            var result = [];
+            images.map(function (item, i) {
+                result[i] = getImageUrl(item.img);
+            });
+            return result;
+        };
         _this.state = {
-            showMore: false
+            showMore: false,
+            imageUrls: _this.getImageUrls()
         };
         return _this;
     }
     PhotoGallery.prototype.render = function () {
         var _this = this;
         var _a = this.props.data, title = _a.title, description = _a.description, divider = _a.divider, images = _a.images;
+        console.log(this.state.imageUrls);
         return (React.createElement(List, { data: images }, function (_a) {
             var data = _a.data;
             return (React.createElement("div", { className: "photoGallery" },

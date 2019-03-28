@@ -1,10 +1,12 @@
 import React from 'react';
 
 import List from '../List';
+import getImageUrl from '@source/helpers/getImageUrl';
 import GalleryItem from './components/GalleryItem';
 
 export interface PhotoGalleryState {
   showMore: boolean;
+  imageUrls: Array<string>;
 }
 
 interface Image {
@@ -25,13 +27,29 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
     super(props);
 
     this.state = {
-      showMore: false
+      showMore: false,
+      imageUrls: this.getImageUrls()
     };
+  }
+
+  getImageUrls = () => {
+    const { images } = this.props.data;
+    if (!images) { return; }
+    
+    let result = [];
+    
+    images.map((item, i) => {
+      result[i] = getImageUrl(item.img);
+    });
+
+    return result;
   }
 
   public render () {
     const { title, description, divider, images } = this.props.data;
 
+    console.log(this.state.imageUrls);
+    
     return (
       <List data={images}>
         {({ data }) =>  (
