@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
 
+import Search from '../Search';
 import Link from '@source/partials/Link';
 import Media from '@source/partials/Media';
 import Loader from '@source/partials/Loader';
@@ -174,12 +175,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         style={{ cursor: 'pointer' }}
                       />
 
-                      {this.state.showSearch ? 
-                        <div className={'header__controls__search'}>
-                          <div className="container">
-                            <input type="email" placeholder={'search'} />
-                          </div>
-                        </div> : ''}
+                      {this.state.showSearch ? <Search /> : ''}
 
                       <img src="/assets/divesoft/images/user.png" alt="account"/>
                       <button>e-shop</button>
