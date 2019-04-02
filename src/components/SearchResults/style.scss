@@ -1,0 +1,121 @@
+.searchResults {
+  padding: 10px 0;
+  background: white;
+  top: 111px;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transition: 500ms ease;
+  transform: translate3d(0, -150%, 0);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+  min-height: calc(100vh - 70px);
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 100%;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $red;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f8f8f8;
+  }
+
+  @include medium-up {
+    top: 101px;
+    min-height: calc(100vh - 101px);
+    padding: 50px;
+    top: 70px;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  &__holder {
+    max-width: 1366px;
+    margin: 0 auto;
+    position: relative;
+    width: 90%;
+
+    @include medium-up {
+      width: 100%;
+    }
+
+    &__heading {
+      text-transform: uppercase;
+      text-align: left;
+      font-weight: 400;
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 28px;
+      font-weight: 400;
+      letter-spacing: -0.88px;
+      color: $mainGrey;
+      position: relative;
+      padding: 10px 0;
+
+      @include medium-up {
+        font-size: 3.5rem;
+      }
+
+      &:after {
+        @include pseudo;
+        bottom: -16px;
+        height: 3px;
+        border-radius: 2px;
+        background-color: $red;
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  ul {
+    margin-top: 36px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 25px 0 50px;
+    box-sizing: border-box;
+
+    li {
+      a {
+        color: $mainGrey;
+        letter-spacing: 0.26px;
+        font-size: 1.8rem;
+        transition: 300ms ease;
+
+        @include medium-up {
+          font-size: 1.8rem;
+          letter-spacing: 0.44px;
+        }
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+  }
+
+  &--active {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &__closeIcon {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+
+  &__error {
+    text-align: center;
+    @extend .searchResults__holder__heading;
+
+    &:after {
+      display: none;
+    }
+  }
+}

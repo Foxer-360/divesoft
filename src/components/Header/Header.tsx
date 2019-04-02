@@ -69,6 +69,7 @@ export interface HeaderState {
   menuActive: boolean;
   showDropdown: boolean;
   showSearch: boolean;
+  searchQuery: string;
 }
 
 class Header extends React.Component<HeaderProps, HeaderState> {
@@ -77,7 +78,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     this.state = {
       menuActive: false,
       showDropdown: false,
-      showSearch: false
+      showSearch: false,
+      searchQuery: ''
     };
   }
 
@@ -175,7 +177,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         style={{ cursor: 'pointer' }}
                       />
 
-                      {this.state.showSearch ? <Search /> : ''}
+                      {this.state.showSearch ? 
+                        <Search /> : ''}
 
                       <img src="/assets/divesoft/images/user.png" alt="account"/>
                       <button>e-shop</button>
