@@ -121,7 +121,7 @@ var Header = /** @class */ (function (_super) {
                             React.createElement("div", { className: 'header__controls d-flex justify-content-between align-items-center' },
                                 React.createElement("img", { onClick: function () { return _this.setState({ showSearch: !_this.state.showSearch }); }, src: "/assets/divesoft/images/search.png", alt: "search", style: { cursor: 'pointer' } }),
                                 _this.state.showSearch ?
-                                    React.createElement(Search, null) : '',
+                                    React.createElement(Search, { language: context.languageData.code }) : '',
                                 React.createElement("img", { src: "/assets/divesoft/images/user.png", alt: "account" }),
                                 React.createElement("button", null, "e-shop")))),
                     React.createElement("div", { className: "hiddenMenu " + (_this.state.menuActive ? 'hiddenMenu--active' : '') },

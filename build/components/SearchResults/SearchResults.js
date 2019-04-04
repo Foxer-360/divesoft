@@ -80,11 +80,9 @@ var SearchResults = function (props) {
                 var pageUrlObj = pagesUrls.find(function (pUrl) { return pUrl.page === p.id; });
                 return __assign({}, p, (pageUrlObj ? { url: pageUrlObj.url } : {}));
             });
-            return (React.createElement("div", { className: 'searchResults__holder' },
+            return (React.createElement("div", { className: 'searchResults__holder container' },
                 React.createElement("h2", { className: "searchResults__holder__heading" }, "Search Results:"),
-                React.createElement("div", { className: 'searchResults__closeIcon', onClick: function () { return handleSearch(''); } }, "X"),
-                React.createElement("ul", null, filteredPages &&
-                    filteredPages.length > 0 &&
+                React.createElement("ul", null, filteredPages && filteredPages.length > 0 &&
                     filteredPages.map(function (page, index) { return (React.createElement("li", { key: index }, page.url && (React.createElement(Link, { to: page.url, onClick: function () { return handleSearch(''); } }, page.translations[0].name)))); }))));
         })));
 };

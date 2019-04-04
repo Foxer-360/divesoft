@@ -5,6 +5,7 @@ export interface SearchState {
     value: string;
 }
 export interface SearchProps {
+    language?: string;
 }
 declare class Search extends React.Component<SearchProps, SearchState> {
     searchInput: any;

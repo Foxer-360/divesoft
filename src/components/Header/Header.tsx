@@ -178,7 +178,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                       />
 
                       {this.state.showSearch ? 
-                        <Search /> : ''}
+                        <Search language={context.languageData.code} /> : ''}
 
                       <img src="/assets/divesoft/images/user.png" alt="account"/>
                       <button>e-shop</button>

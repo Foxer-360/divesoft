@@ -1,15 +1,14 @@
 .searchResults {
   padding: 10px 0;
   background: white;
-  top: 111px;
+  top: 168px;
   position: fixed;
   left: 0;
   width: 100%;
   z-index: 100;
   transition: 500ms ease;
-  transform: translate3d(0, -150%, 0);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
-  min-height: calc(100vh - 70px);
+  border-top: 1px solid #f8f8f8;
+  @include max-sm { top: 118px; }
 
   ::-webkit-scrollbar {
     width: 8px;
@@ -25,23 +24,7 @@
     background: #f8f8f8;
   }
 
-  @include medium-up {
-    top: 101px;
-    min-height: calc(100vh - 101px);
-    padding: 50px;
-    top: 70px;
-    transform: translate3d(0, -100%, 0);
-  }
-
   &__holder {
-    max-width: 1366px;
-    margin: 0 auto;
-    position: relative;
-    width: 90%;
-
-    @include medium-up {
-      width: 100%;
-    }
 
     &__heading {
       text-transform: uppercase;
@@ -52,13 +35,9 @@
       line-height: 28px;
       font-weight: 400;
       letter-spacing: -0.88px;
-      color: $mainGrey;
+      color: $darkGrey;
       position: relative;
       padding: 10px 0;
-
-      @include medium-up {
-        font-size: 3.5rem;
-      }
 
       &:after {
         @include pseudo;
@@ -83,12 +62,12 @@
 
     li {
       a {
-        color: $mainGrey;
+        color: $darkGrey;
         letter-spacing: 0.26px;
         font-size: 1.8rem;
         transition: 300ms ease;
 
-        @include medium-up {
+        @include md {
           font-size: 1.8rem;
           letter-spacing: 0.44px;
         }

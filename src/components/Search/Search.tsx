@@ -7,7 +7,9 @@ export interface SearchState {
   value: string;
 }
 
-export interface SearchProps {}
+export interface SearchProps {
+  language?: string;
+}
 
 class Search extends React.Component<SearchProps, SearchState> {
   public searchInput: any;
@@ -59,27 +61,15 @@ class Search extends React.Component<SearchProps, SearchState> {
               onChange={e => this.handleChange(e.target.value)}
               defaultValue={''}
             />
-          
-            {value.length > 0 && (
-              <div
-                className={'textSearch__clear'}
-                onClick={() => {
-                  this.searchInput.current.value = '';
-                  this.handleChange('');
-                }}
-              >
-                X
-              </div>
-            )}
           </div>
         </div>
-
-        <SearchResults
-          searchQuery={this.state.searchQuery}
-          active={this.state.searchQuery && this.state.searchQuery.length > 0}
+        
+        {searchFocus && searchQuery && searchQuery.length > 0 && <SearchResults
+          searchQuery={searchQuery}
+          active={searchQuery && searchQuery.length > 1}
           handleSearch={this.handleChange}
-          languageCode={'en'} // fix
-        />
+          languageCode={this.props.language}
+        />}
       </>
     );
   }

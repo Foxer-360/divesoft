@@ -47,12 +47,8 @@ var Search = /** @class */ (function (_super) {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: 'search' },
                 React.createElement("div", { className: "container" },
-                    React.createElement("input", { type: "text", placeholder: 'search', ref: this.searchInput, onFocus: function () { return _this.focusSearch(); }, onBlur: function () { return _this.unFocusSearch(); }, onChange: function (e) { return _this.handleChange(e.target.value); }, defaultValue: '' }),
-                    value.length > 0 && (React.createElement("div", { className: 'textSearch__clear', onClick: function () {
-                            _this.searchInput.current.value = '';
-                            _this.handleChange('');
-                        } }, "X")))),
-            React.createElement(SearchResults, { searchQuery: this.state.searchQuery, active: this.state.searchQuery && this.state.searchQuery.length > 0, handleSearch: this.handleChange, languageCode: 'en' })));
+                    React.createElement("input", { type: "text", placeholder: 'search', ref: this.searchInput, onFocus: function () { return _this.focusSearch(); }, onBlur: function () { return _this.unFocusSearch(); }, onChange: function (e) { return _this.handleChange(e.target.value); }, defaultValue: '' }))),
+            searchFocus && searchQuery && searchQuery.length > 0 && React.createElement(SearchResults, { searchQuery: searchQuery, active: searchQuery && searchQuery.length > 1, handleSearch: this.handleChange, languageCode: this.props.language })));
     };
     return Search;
 }(React.Component));

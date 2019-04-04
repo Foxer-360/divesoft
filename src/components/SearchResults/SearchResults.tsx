@@ -180,16 +180,10 @@ const SearchResults = (props: SearchResultsProps) => {
             });
 
           return (
-            <div className={'searchResults__holder'}>
+            <div className={'searchResults__holder container'}>
               <h2 className="searchResults__holder__heading">Search Results:</h2>
-
-              <div className={'searchResults__closeIcon'} onClick={() => handleSearch('')}>
-                X
-              </div>
-
               <ul>
-                {filteredPages &&
-                  filteredPages.length > 0 &&
+                {filteredPages && filteredPages.length > 0 &&
                   filteredPages.map((page, index) => (
                     <li key={index}>
                       {page.url && (
