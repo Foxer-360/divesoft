@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 import Link from '../Link';
+import Button from '../Button';
 
 export interface MapBoxProps {
-  title: string;
+  title?: string;
   country?: string;
   text?: string;
   address?: string;
@@ -11,9 +13,11 @@ export interface MapBoxProps {
   phone?: string;
   service?: string;
   storeChief?: string;
+  keywords?: string;
   web?: LooseObject;
   name?: string;
   position?: string;
+  url?: LooseObject;
   onClick: any;
 }
 
@@ -24,6 +28,7 @@ export function MapBox(props: MapBoxProps) {
     address,
     city,
     email,
+    url,
     phone,
     service,
     storeChief,
@@ -31,6 +36,7 @@ export function MapBox(props: MapBoxProps) {
     web,
     name,
     position,
+    keywords,
     onClick
   } = props;
 
@@ -41,6 +47,8 @@ export function MapBox(props: MapBoxProps) {
       {title && <h3>{title}</h3>}
       {name && <h3>{name}</h3>}
 
+      {keywords && <p>{keywords}</p>}
+
       {country && <h4>{country}{' '}
         <span style={{ color: '#6c6c6c', fontSize: '1.6rem' }}>
           {city}
@@ -49,7 +57,9 @@ export function MapBox(props: MapBoxProps) {
 
       {address && <h5>{address}</h5>}
       {position && <h5>{position}</h5>}
-      
+
+      {url && <Button classes={'mapBox--btn'} url={url}>See details</Button>}
+
       <div className={'mapBox__info'}>
         {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
         {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}

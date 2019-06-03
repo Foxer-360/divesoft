@@ -28,6 +28,15 @@
     padding-bottom: 1rem;
   }
 
+  &--btn {
+    background: transparent;
+    border: 2px solid $red;
+    
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+
   &__info {
     max-height: 180px;
     overflow-y: scroll;

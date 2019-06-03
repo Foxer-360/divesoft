@@ -6060,6 +6060,11 @@ a {
   .mapBox p {
     color: #6c6c6c;
     padding-bottom: 1rem; }
+  .mapBox--btn {
+    background: transparent;
+    border: 2px solid #e50000; }
+    .mapBox--btn:hover {
+      text-decoration: none !important; }
   .mapBox__info {
     max-height: 180px;
     overflow-y: scroll;

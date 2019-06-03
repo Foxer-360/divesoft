@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Link_1 = require("../Link");
 var Button = function (props) {
+    console.log(props);
     // Button with link
     if (props.url) {
         return (React.createElement(Link_1.default, __assign({ className: "btn " + props.classes }, props.url), props.children));

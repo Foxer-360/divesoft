@@ -13,18 +13,21 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Link_1 = require("../Link");
+var Button_1 = require("../Button");
 function MapBox(props) {
-    var title = props.title, country = props.country, address = props.address, city = props.city, email = props.email, phone = props.phone, service = props.service, storeChief = props.storeChief, text = props.text, web = props.web, name = props.name, position = props.position, onClick = props.onClick;
+    var title = props.title, country = props.country, address = props.address, city = props.city, email = props.email, url = props.url, phone = props.phone, service = props.service, storeChief = props.storeChief, text = props.text, web = props.web, name = props.name, position = props.position, keywords = props.keywords, onClick = props.onClick;
     return (React.createElement("div", { className: 'mapBox' },
         React.createElement("div", { className: 'mapBox--close', onClick: function () { return onClick(); } }),
         title && React.createElement("h3", null, title),
         name && React.createElement("h3", null, name),
+        keywords && React.createElement("p", null, keywords),
         country && React.createElement("h4", null,
             country,
             ' ',
             React.createElement("span", { style: { color: '#6c6c6c', fontSize: '1.6rem' } }, city)),
         address && React.createElement("h5", null, address),
         position && React.createElement("h5", null, position),
+        url && React.createElement(Button_1.default, { classes: 'mapBox--btn', url: url }, "See details"),
         React.createElement("div", { className: 'mapBox__info' },
             phone && React.createElement("p", null,
                 "Phone: ",
