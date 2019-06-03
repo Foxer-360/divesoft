@@ -12,6 +12,8 @@ export interface MapBoxProps {
   service?: string;
   storeChief?: string;
   web?: LooseObject;
+  name?: string;
+  position?: string;
   onClick: any;
 }
 
@@ -27,6 +29,8 @@ export function MapBox(props: MapBoxProps) {
     storeChief,
     text,
     web,
+    name,
+    position,
     onClick
   } = props;
 
@@ -35,13 +39,16 @@ export function MapBox(props: MapBoxProps) {
       <div className={'mapBox--close'} onClick={() => onClick()} />
       
       {title && <h3>{title}</h3>}
-      {country && <h4>{country}
+      {name && <h3>{name}</h3>}
+
+      {country && <h4>{country}{' '}
         <span style={{ color: '#6c6c6c', fontSize: '1.6rem' }}>
           {city}
         </span>
       </h4>}
 
       {address && <h5>{address}</h5>}
+      {position && <h5>{position}</h5>}
       
       <div className={'mapBox__info'}>
         {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}

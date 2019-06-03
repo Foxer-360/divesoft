@@ -6,12 +6,14 @@ export const GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 
 import Marker from './components/Marker';
 import MapRows from './components/MapRows';
+import ContactRow from './components/ContactRow';
 import MapBox from '../../partials/MapBox';
 import MapStyles from './components/MapStyles';
 import getUniqMapControls from '../../helpers/getUniqMapControls';
 
 export interface MapProps {
   mapItems: any;
+  type: string;
 }
 
 export interface MapState {
@@ -35,6 +37,8 @@ export interface MapState {
   web: LooseObject;
   text: string;
   storeChief: string;
+  name: string;
+  position: string;
 }
 
 class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
@@ -62,6 +66,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       web: null,
       text: '',
       storeChief: '',
+      name: '',
+      position: ''
     };
   }
 
@@ -79,11 +85,13 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       web: item.web,
       storeChief: item.storeChief,
       text: item.text,
+      name: item.name,
+      position: item.position,
       showBox: item ? true : !this.state.showBox
     });
   }
 
-  renderRows(mapItems: LooseObject[] ) {
+  renderServiceRows(mapItems: any) {
     const { countries } = getUniqMapControls(mapItems);
     let resultRows = [];
 
@@ -121,6 +129,39 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     return resultRows;
   }
   
+  renderContactRows(mapItems: any) {
+    const { services } = getUniqMapControls(mapItems);
+    let resultRows = [];
+
+    for (let i = 0; i < services.length; i++) {
+      let composedRows = [];
+
+      for (let j = 0; j < mapItems.length; j++) {
+        if (mapItems[j].service === services[i]) {
+          if (mapItems[j].service === this.state.serviceSelectedValue || this.state.serviceSelectedValue === 'all') {
+            composedRows.push(
+              {
+                name: mapItems[j].name,
+                position: mapItems[j].position,
+                email: mapItems[j].email,
+                phone: mapItems[j].phone,
+                web: mapItems[j].web
+              }
+            );
+          }
+        }
+      }
+
+      if (this.state.serviceSelectedValue === services[i] || this.state.serviceSelectedValue === 'all') {
+        resultRows.push(
+          <ContactRow key={i} title={services[i]} rows={composedRows} />
+        );
+      }
+    }
+
+    return resultRows;
+  }
+
   resetFilters = () => {
     this.setState({
       countrySelectedValue: 'all',
@@ -199,12 +240,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   renderControls(mapItems: any) {
     const {
       cities,
-      countries, 
-      services 
+      countries,
+      services
     } = getUniqMapControls(mapItems);
 
     return (
-      <div className={'map__controls'}>
+      <div className={'mapControls'}>
         <div className={'container'}>
           <div className="row">
             <div className="col-12 col-md-3">
@@ -268,7 +309,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   }
 
   render() {
-    const { mapItems } = this.props;
+    const { mapItems, type } = this.props;
+    
+    // FOR TESTS
+    // for (let i = 0; i < mapItems.length; i++) {
+    //   mapItems[i].service = mapItems[i].association;
+    // }
 
     return (
       <>
@@ -287,6 +333,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               title={this.state.currentTitle}
               address={this.state.currentAddress}
               country={this.state.countrySelectedValue}
+              name={this.state.name}
+              position={this.state.position}
               onClick={() => this.setState({ showBox: !this.state.showBox })} 
             />
           }
@@ -314,8 +362,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
             })}
           </GoogleMapReact>
         </section>
-        <div className={'map__rows'}>
-          {this.renderRows(mapItems)}
+        <div className={'mapRows'}>
+          {type === 'service' ? this.renderServiceRows(mapItems) : this.renderContactRows(mapItems)}
         </div>
       </>
     );

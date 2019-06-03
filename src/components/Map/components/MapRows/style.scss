@@ -1,4 +1,4 @@
-.serviceRow {
+.mapRow {
 
   &__text {
     padding: 6rem 0;
@@ -41,7 +41,12 @@
     
     &__contacts {
       color: #5c5c5c;
-      p { padding-bottom: 1rem; }
+      
+      p {
+        padding-bottom: 1rem;
+        word-break: break-all;
+      }
+
       a {
         font-weight: 200;
         color: $red;

@@ -3,23 +3,23 @@ import * as React from 'react';
 import List from '../../../List';
 import ServiceRowItem from './components/MapRow';
 
-interface ServiceRowProps {
+interface MapRowsProps {
   title: string;
   items: any;
 }
 
-const ServiceRow = (props: ServiceRowProps) => {
+const MapRows = (props: MapRowsProps) => {
   const { title, items } = props;
 
   return (
     <List data={items}>
         {({ data }) => (
-          <div className={'serviceRow'}>
+          <div className={'mapRow'}>
             <div className="container">
-              <div className="row serviceRow__list">
+              <div className="row mapRow__list">
 
                 <div className="col-12 col-md-3">
-                  <h3 className={'serviceRow__list__title'}>{title}</h3>
+                  <h3 className={'mapRow__list__title'}>{title}</h3>
                 </div>
                 <div className="col-12 col-md-9">
                   {data && data.map((item, i) => (
@@ -44,4 +44,4 @@ const ServiceRow = (props: ServiceRowProps) => {
   );
 };
 
-export default ServiceRow;
+export default MapRows;

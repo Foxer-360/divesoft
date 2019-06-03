@@ -1,2 +1,4 @@
-import Map from './Map';
+import Map, { GoogleMapsApiKey } from './Map';
+
 export default Map;
+export { GoogleMapsApiKey };

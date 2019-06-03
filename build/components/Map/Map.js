@@ -19,6 +19,7 @@ var react_geolocated_1 = require("react-geolocated");
 exports.GoogleMapsApiKey = 'AIzaSyCSpatDLsxXguzdvuwbTrK3TulOh10MULI';
 var Marker_1 = require("./components/Marker");
 var MapRows_1 = require("./components/MapRows");
+var ContactRow_1 = require("./components/ContactRow");
 var MapBox_1 = require("../../partials/MapBox");
 var MapStyles_1 = require("./components/MapStyles");
 var getUniqMapControls_1 = require("../../helpers/getUniqMapControls");
@@ -55,6 +56,8 @@ var Map = /** @class */ (function (_super) {
             web: null,
             text: '',
             storeChief: '',
+            name: '',
+            position: ''
         };
         return _this;
     }
@@ -72,10 +75,12 @@ var Map = /** @class */ (function (_super) {
             web: item.web,
             storeChief: item.storeChief,
             text: item.text,
+            name: item.name,
+            position: item.position,
             showBox: item ? true : !this.state.showBox
         });
     };
-    Map.prototype.renderRows = function (mapItems) {
+    Map.prototype.renderServiceRows = function (mapItems) {
         var countries = getUniqMapControls_1.default(mapItems).countries;
         var resultRows = [];
         for (var i = 0; i < countries.length; i++) {
@@ -100,6 +105,30 @@ var Map = /** @class */ (function (_super) {
             }
             if (this.state.countrySelectedValue === countries[i] || this.state.countrySelectedValue === 'all') {
                 resultRows.push(React.createElement(MapRows_1.default, { key: i, title: countries[i], items: composedRows }));
+            }
+        }
+        return resultRows;
+    };
+    Map.prototype.renderContactRows = function (mapItems) {
+        var services = getUniqMapControls_1.default(mapItems).services;
+        var resultRows = [];
+        for (var i = 0; i < services.length; i++) {
+            var composedRows = [];
+            for (var j = 0; j < mapItems.length; j++) {
+                if (mapItems[j].service === services[i]) {
+                    if (mapItems[j].service === this.state.serviceSelectedValue || this.state.serviceSelectedValue === 'all') {
+                        composedRows.push({
+                            name: mapItems[j].name,
+                            position: mapItems[j].position,
+                            email: mapItems[j].email,
+                            phone: mapItems[j].phone,
+                            web: mapItems[j].web
+                        });
+                    }
+                }
+            }
+            if (this.state.serviceSelectedValue === services[i] || this.state.serviceSelectedValue === 'all') {
+                resultRows.push(React.createElement(ContactRow_1.default, { key: i, title: services[i], rows: composedRows }));
             }
         }
         return resultRows;
@@ -166,7 +195,7 @@ var Map = /** @class */ (function (_super) {
     Map.prototype.renderControls = function (mapItems) {
         var _this = this;
         var _a = getUniqMapControls_1.default(mapItems), cities = _a.cities, countries = _a.countries, services = _a.services;
-        return (React.createElement("div", { className: 'map__controls' },
+        return (React.createElement("div", { className: 'mapControls' },
             React.createElement("div", { className: 'container' },
                 React.createElement("div", { className: "row" },
                     React.createElement("div", { className: "col-12 col-md-3" },
@@ -192,19 +221,23 @@ var Map = /** @class */ (function (_super) {
     };
     Map.prototype.render = function () {
         var _this = this;
-        var mapItems = this.props.mapItems;
+        var _a = this.props, mapItems = _a.mapItems, type = _a.type;
+        // FOR TESTS
+        // for (let i = 0; i < mapItems.length; i++) {
+        //   mapItems[i].service = mapItems[i].association;
+        // }
         return (React.createElement(React.Fragment, null,
             this.renderControls(mapItems),
             React.createElement("section", { className: 'map' },
                 this.state.showBox &&
-                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.citySelectedValue, service: this.state.serviceSelectedValue, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.countrySelectedValue, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
+                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.citySelectedValue, service: this.state.serviceSelectedValue, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.countrySelectedValue, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: this.state.mapCenter, defaultZoom: 5, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
                     } }, mapItems && mapItems.map(function (item, i) {
                     return (React.createElement(Marker_1.default, { key: i, lat: parseFloat(item.lat), lng: parseFloat(item.lng), onClick: function () { return _this.setMapBox(item); } }));
                 }))),
-            React.createElement("div", { className: 'map__rows' }, this.renderRows(mapItems))));
+            React.createElement("div", { className: 'mapRows' }, type === 'service' ? this.renderServiceRows(mapItems) : this.renderContactRows(mapItems))));
     };
     return Map;
 }(React.Component));

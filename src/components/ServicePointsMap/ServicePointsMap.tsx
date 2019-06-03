@@ -39,7 +39,7 @@ export default function ServicePointsMap(props: ServicePointsMapProps) {
             </p>
           </div> : ''}
 
-        <Map mapItems={data} />
+        <Map mapItems={data} type={'service'} />
       </div>
       )}
     </List>

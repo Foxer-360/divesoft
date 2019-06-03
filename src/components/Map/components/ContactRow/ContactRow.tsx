@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import List from '../../List';
-import Link from '../../../partials/Link';
+import List from '../../../List';
+import Link from '../../../../partials/Link';
 
 export interface ContactRowState {
   numberOfPage: number;
@@ -9,9 +9,9 @@ export interface ContactRowState {
 
 interface Contact {
   name: string;
-  position: string;
-  email: string;
-  phone: string;
+  position?: string;
+  email?: string;
+  phone?: string;
   web?: LooseObject;
 }
 
@@ -60,11 +60,11 @@ class ContactRow extends React.Component<ContactRowProps, ContactRowState> {
                     <div className={'row'}>
                       {items && items.map((item, i) => (
                         <div key={i} className={'contactRow__item col-12 col-md-4'}>
-                          <h5>{item.name}</h5>
-                          <span>{item.position}</span>
-                          <p>W: <Link {...item.url}>{item.urlTitle}</Link></p>
-                          <p>M: <a href={`mailto:${item.email}`}>{item.email}</a></p>
-                          <p>P: <a href={`tel:${item.phone}`}>{item.phone}</a></p>
+                          {item.name && <h5>{item.name}</h5>}
+                          {item.position && <span>{item.position}</span>}
+                          {item.ur && <p>W: <Link {...item.url}>{item.urlTitle}</Link></p>}
+                          {item.email && <p>M: <a href={`mailto:${item.email}`}>{item.email}</a></p>}
+                          {item.phone && <p>P: <a href={`tel:${item.phone}`}>{item.phone}</a></p>}
                         </div>
                       ))}
                     </div>

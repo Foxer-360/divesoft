@@ -3,7 +3,7 @@ import * as ReactMarkdown from 'react-markdown';
 
 import Link from '../../../../../partials/Link';
 
-interface MapRowState {
+interface MapRow {
   show: boolean;
 }
 
@@ -15,6 +15,10 @@ interface MapRowProps {
   phone?: string;
   email?: string;
   web?: LooseObject;
+}
+
+interface MapRowState {
+  show: boolean;
 }
 
 class MapRow extends React.Component<MapRowProps, MapRowState> {
@@ -42,7 +46,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
         <div className="col-12 col-md-4">
           <h5 onClick={() => this.setState({ show: !this.state.show })}>{title}</h5>
           {this.state.show ?
-            <div className={'serviceRow__list__contacts'}>
+            <div className={'mapRow__list__contacts'}>
               {storeChief && <p>Store chief: {storeChief}</p>}
               {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
               {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
@@ -53,14 +57,14 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
         <div className="col-12 col-md-8">
           <div
             onClick={() => this.setState({ show: !this.state.show })}
-            className={`serviceRow__list__show ${this.state.show ? 'serviceRow__list__show--minus' : ''}`}
+            className={`mapRow__list__show ${this.state.show ? 'mapRow__list__show--minus' : ''}`}
           />
-          <div className={'serviceRow__list__item'}>
+          <div className={'mapRow__list__item'}>
             <p onClick={() => this.setState({ show: !this.state.show })}>{address}</p>
             {this.state.show && text && <ReactMarkdown source={text} />}
           </div>
         </div>
-        <div className={'serviceRow__list__divider'} />
+        <div className={'mapRow__list__divider'} />
       </div>
     );
   }

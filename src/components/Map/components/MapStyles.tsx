@@ -1,4 +1,4 @@
-const MapStlyes = [
+export const MapStlyes = [
   {
     'elementType': 'geometry',
     'stylers': [

@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ContactsMap_1 = require("./ContactsMap");
-exports.default = ContactsMap_1.default;
+var ContactRow_1 = require("./ContactRow");
+exports.default = ContactRow_1.default;
 //# sourceMappingURL=index.js.map

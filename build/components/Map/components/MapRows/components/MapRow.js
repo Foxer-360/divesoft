@@ -43,7 +43,7 @@ var MapRow = /** @class */ (function (_super) {
             React.createElement("div", { className: "col-12 col-md-4" },
                 React.createElement("h5", { onClick: function () { return _this.setState({ show: !_this.state.show }); } }, title),
                 this.state.show ?
-                    React.createElement("div", { className: 'serviceRow__list__contacts' },
+                    React.createElement("div", { className: 'mapRow__list__contacts' },
                         storeChief && React.createElement("p", null,
                             "Store chief: ",
                             storeChief),
@@ -57,11 +57,11 @@ var MapRow = /** @class */ (function (_super) {
                             "Web: ",
                             React.createElement(Link_1.default, __assign({}, web), (web.url && web.url.toString()) || title))) : ''),
             React.createElement("div", { className: "col-12 col-md-8" },
-                React.createElement("div", { onClick: function () { return _this.setState({ show: !_this.state.show }); }, className: "serviceRow__list__show " + (this.state.show ? 'serviceRow__list__show--minus' : '') }),
-                React.createElement("div", { className: 'serviceRow__list__item' },
+                React.createElement("div", { onClick: function () { return _this.setState({ show: !_this.state.show }); }, className: "mapRow__list__show " + (this.state.show ? 'mapRow__list__show--minus' : '') }),
+                React.createElement("div", { className: 'mapRow__list__item' },
                     React.createElement("p", { onClick: function () { return _this.setState({ show: !_this.state.show }); } }, address),
                     this.state.show && text && React.createElement(ReactMarkdown, { source: text }))),
-            React.createElement("div", { className: 'serviceRow__list__divider' })));
+            React.createElement("div", { className: 'mapRow__list__divider' })));
     };
     return MapRow;
 }(React.Component));

@@ -1,5 +1,3 @@
-@import './components/style.scss';
-
 .servicePointsMapWrapper {
   position: relative;
   width: 100%;
@@ -12,6 +10,9 @@
   &__title {
     color: $darkGrey;
     padding: 6rem 0;
-    @include max-md { padding: 3rem 0; }
+
+    @include max-md {
+      padding: 3rem 0;
+    }
   }
 }

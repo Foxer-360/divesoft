@@ -11,7 +11,7 @@ function ServicePointsMap(props) {
             title ?
                 React.createElement("div", { className: "container" },
                     React.createElement("p", { className: 'textDescription servicePointsMapWrapper__title' }, title)) : '',
-            React.createElement(Map_1.default, { mapItems: data })));
+            React.createElement(Map_1.default, { mapItems: data, type: 'service' })));
     }));
 }
 exports.default = ServicePointsMap;
