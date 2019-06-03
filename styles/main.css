@@ -3414,6 +3414,16 @@ a {
     padding: 1.5rem 0;
     width: 100%; }
 
+.marker {
+  border-style: solid;
+  border-left-width: 14px;
+  border-bottom-width: 14px;
+  border-color: #e50000 transparent transparent #e50000;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  z-index: 200;
+  cursor: pointer; }
+
 .hamburgerHolder {
   display: flex;
   justify-content: space-between;
@@ -4029,24 +4039,15 @@ a {
   .footer .text-copyright {
     padding-top: 2em; }
 
-.marker {
-  border-style: solid;
-  border-left-width: 14px;
-  border-bottom-width: 14px;
-  border-color: #e50000 transparent transparent #e50000;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  z-index: 200; }
-
-.map {
+.calendar .map {
   height: 400px;
   width: 100%;
   display: block;
   position: relative; }
   @media (min-width: 768px) {
-    .map {
+    .calendar .map {
       height: 510px; } }
-  .map__controls {
+  .calendar .map__controls {
     position: absolute;
     z-index: 200;
     width: 100%;
@@ -4055,14 +4056,14 @@ a {
     /* Custom Select */
     /* Transition */ }
     @media (max-width: 768px) {
-      .map__controls {
+      .calendar .map__controls {
         position: relative;
         top: 0; }
-        .map__controls .select {
+        .calendar .map__controls .select {
           margin-bottom: 10px; }
-          .map__controls .select:last-child {
+          .calendar .map__controls .select:last-child {
             margin-bottom: 20px; } }
-    .map__controls select {
+    .calendar .map__controls select {
       -webkit-appearance: none;
       -moz-appearance: none;
       -ms-appearance: none;
@@ -4072,7 +4073,7 @@ a {
       border: 0 !important;
       background: #fff;
       background-image: none; }
-    .map__controls .select {
+    .calendar .map__controls .select {
       position: relative;
       display: block;
       width: 100%;
@@ -4081,7 +4082,7 @@ a {
       background: #fff;
       overflow: hidden;
       border: 3px solid #e7e7e7 !important; }
-      .map__controls .select::after {
+      .calendar .map__controls .select::after {
         content: '';
         display: block;
         position: absolute;
@@ -4093,16 +4094,16 @@ a {
         border-width: 1px 1px 0 0;
         -webkit-transform: rotate(135deg);
                 transform: rotate(135deg); }
-    .map__controls select {
+    .calendar .map__controls select {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0 0 0 15px;
       color: #343434;
       cursor: pointer; }
-    .map__controls select::-ms-expand {
+    .calendar .map__controls select::-ms-expand {
       display: none; }
-    .map__controls .select::after {
+    .calendar .map__controls .select::after {
       transition: .25s all ease; }
 
 .calendar {
@@ -4787,15 +4788,6 @@ a {
     .contactsMapWrapper {
       padding-top: 50px; } }
 
-.marker {
-  border-style: solid;
-  border-left-width: 14px;
-  border-bottom-width: 14px;
-  border-color: #e50000 transparent transparent #e50000;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  z-index: 200; }
-
 .map {
   height: 400px;
   width: 100%;
@@ -4805,8 +4797,7 @@ a {
     .map {
       height: 510px; } }
   .map__rows {
-    padding-bottom: 30px;
-    bottom: 0 !important; }
+    padding-top: 5rem; }
   .map__controls {
     z-index: 200;
     width: 100%;
@@ -5540,10 +5531,16 @@ a {
 .serviceRow__list {
   position: relative;
   padding: 5rem 0 3rem 0; }
+  .serviceRow__list__item {
+    width: 85%;
+    cursor: pointer; }
+    .serviceRow__list__item p {
+      color: #5c5c5c; }
   @media (max-width: 768px) {
     .serviceRow__list__title {
       font-size: 2.4rem; } }
   .serviceRow__list h5 {
+    cursor: pointer;
     padding-bottom: 1.6rem; }
     @media (max-width: 768px) {
       .serviceRow__list h5 {
@@ -5574,6 +5571,7 @@ a {
     height: 1px;
     bottom: 0; }
   .serviceRow__list__show {
+    cursor: pointer;
     position: absolute;
     width: 18px;
     height: 18px;
@@ -5599,103 +5597,19 @@ a {
       display: none; }
     .serviceRow__list__show .col-12:last-of-type .row:last-of-type .col-12 .faq__list__divider {
       margin-bottom: 0; }
-  .serviceRow__list__item {
-    width: 85%; }
-    .serviceRow__list__item p {
-      color: #5c5c5c; }
 
 .servicePointsMapWrapper {
   position: relative;
   width: 100%; }
+  .servicePointsMapWrapper .btn {
+    padding: 14px 16px;
+    width: 100%; }
   .servicePointsMapWrapper__title {
     color: #343434;
     padding: 6rem 0; }
     @media (max-width: 768px) {
       .servicePointsMapWrapper__title {
         padding: 3rem 0; } }
-
-.marker {
-  border-style: solid;
-  border-left-width: 14px;
-  border-bottom-width: 14px;
-  border-color: #e50000 transparent transparent #e50000;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  z-index: 200; }
-
-.map {
-  height: 400px;
-  width: 100%;
-  display: block;
-  position: relative; }
-  @media (min-width: 768px) {
-    .map {
-      height: 510px; } }
-  @media (max-width: 768px) {
-    .map__rows {
-      position: relative;
-      bottom: -200px; } }
-  @media (max-width: 540px) {
-    .map__rows {
-      bottom: -240px; } }
-  .map__controls {
-    position: absolute;
-    z-index: 200;
-    width: 100%;
-    top: 40px;
-    /* Reset Select */
-    /* Custom Select */
-    /* Transition */ }
-    @media (max-width: 768px) {
-      .map__controls {
-        position: relative;
-        top: 0; }
-        .map__controls .select {
-          margin-bottom: 10px; }
-          .map__controls .select:last-child {
-            margin-bottom: 20px; } }
-    .map__controls select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      -ms-appearance: none;
-      appearance: none;
-      outline: 0;
-      box-shadow: none;
-      border: 0 !important;
-      background: #fff;
-      background-image: none; }
-    .map__controls .select {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 44px;
-      line-height: 44px;
-      background: #fff;
-      overflow: hidden;
-      border: 3px solid #e7e7e7 !important; }
-      .map__controls .select::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 13px;
-        right: 15px;
-        height: 8px;
-        width: 8px;
-        border: 1px solid #6c6c6c;
-        border-width: 1px 1px 0 0;
-        -webkit-transform: rotate(135deg);
-                transform: rotate(135deg); }
-    .map__controls select {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0 0 0 15px;
-      color: #343434;
-      cursor: pointer; }
-    .map__controls select::-ms-expand {
-      display: none; }
-    .map__controls .select::after {
-      transition: .25s all ease; }
 
 .aboutLeftPicture {
   padding: 80px 0; }
@@ -6119,3 +6033,63 @@ a {
             transform: rotate(-45deg);
     -webkit-transform-origin: top right;
             transform-origin: top right; }
+
+.mapBox {
+  position: absolute;
+  height: 90%;
+  top: 5%;
+  z-index: 2;
+  right: 6rem;
+  width: 380px;
+  min-width: 290px;
+  padding: 4rem 3rem;
+  background-color: white;
+  border-top: 3px solid #e50000;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1); }
+  @media (max-width: 540px) {
+    .mapBox {
+      width: 90%;
+      right: 5%; } }
+  .mapBox a {
+    color: #e50000; }
+    .mapBox a:hover {
+      text-decoration: underline; }
+  .mapBox p {
+    color: #6c6c6c;
+    padding-bottom: 1rem; }
+  .mapBox__info {
+    max-height: 180px;
+    overflow-y: scroll;
+    text-overflow: ellipsis; }
+    .mapBox__info::-webkit-scrollbar {
+      width: 3px;
+      height: 8px;
+      background-color: #aaa;
+      /* or add it to the track */ }
+    .mapBox__info::-webkit-scrollbar-thumb {
+      background: #686868; }
+  .mapBox--close {
+    cursor: pointer;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    width: 18px;
+    height: 18px;
+    right: 15px;
+    top: 15px; }
+    .mapBox--close:before {
+      background-color: #e50000;
+      width: 2px;
+      height: 16px;
+      position: absolute;
+      top: 4px;
+      left: 7px;
+      content: ""; }
+    .mapBox--close:after {
+      background-color: #e50000;
+      width: 16px;
+      height: 2px;
+      position: absolute;
+      top: 11px;
+      left: 0;
+      content: ""; }

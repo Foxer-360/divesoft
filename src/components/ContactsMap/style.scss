@@ -6,19 +6,6 @@
   @include max-sm { padding-top: 50px; }
 }
 
-.marker {
-  border-style: solid;
-	border-left-width: 14px;
-  border-bottom-width: 14px;
-	border-color:   
-    $red
-    transparent
-    transparent
-		$red;
-	transform: rotate(45deg);
-  z-index: 200;
-}
-
 .map {
   height: 400px;
   width: 100%;
@@ -27,8 +14,7 @@
   @include md { height: 510px; }
 
   &__rows {
-    padding-bottom: 30px;
-    bottom: 0 !important;
+    padding-top: 5rem;
   }
 
   &__controls {
