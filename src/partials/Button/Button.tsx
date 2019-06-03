@@ -8,8 +8,6 @@ export interface ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
-  console.log(props);
-  
   // Button with link
   if (props.url) {
     return (
