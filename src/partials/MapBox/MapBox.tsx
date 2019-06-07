@@ -4,11 +4,8 @@ import Link from '../Link';
 import Button from '../Button';
 
 export interface MapBoxProps {
-  top?: string;
-
   title?: string;
   name?: string;
-
   country?: string;
   text?: string;
   address?: string;
