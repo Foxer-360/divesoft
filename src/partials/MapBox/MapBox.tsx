@@ -4,7 +4,11 @@ import Link from '../Link';
 import Button from '../Button';
 
 export interface MapBoxProps {
+  top?: string;
+
   title?: string;
+  name?: string;
+
   country?: string;
   text?: string;
   address?: string;
@@ -15,7 +19,6 @@ export interface MapBoxProps {
   storeChief?: string;
   keywords?: string;
   web?: LooseObject;
-  name?: string;
   position?: string;
   url?: LooseObject;
   onClick: any;
