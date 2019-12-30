@@ -267,7 +267,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         />
                       </a>
                       {/* tslint:disable-next-line: max-line-length */}
-                      <a href="https://eshop.divesoft.eu" className={'btn btn_eshop cart-ico'}><span className="text">e-shop</span></a>
+                          <a href="https://eshop.divesoft.eu" className={'btn btn_eshop cart-ico'}><span className="text">e-shop</span></a>
                     </div>
                     {/* SEARCH AND LOGIN - end */}
 
@@ -347,6 +347,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         );
                         })
                       }
+                      <li className="e-shop">
+                        <a href="https://eshop.divesoft.eu">
+                          <span className="d-flex no-wrap">E-shop</span>
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>

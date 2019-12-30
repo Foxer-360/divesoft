@@ -187,25 +187,29 @@ var Header = /** @class */ (function (_super) {
                                     React.createElement("span", { className: "text" }, "e-shop"))))),
                     React.createElement("div", { className: "hiddenMenu " + (_this.state.menuActive ? 'hiddenMenu--active' : '') },
                         React.createElement("div", { className: 'hiddenMenu__wrapper' },
-                            React.createElement("ul", null, topNavItems && topNavItems.map(function (navItem, i) {
-                                return (React.createElement("li", { key: i, style: { position: 'relative' } },
-                                    React.createElement(Link_1.default, __assign({}, navItem.url, { url: _this.canToggle(navItem) }), (navItem.name === 'products' || navItem.children)
-                                        ?
-                                            React.createElement("span", { className: "d-flex no-wrap", onClick: function () { return _this.submenuVisibility(navItem); } }, navItem.name || navItem.title)
-                                        : React.createElement("span", { className: "d-flex no-wrap", onClick: function (e) { _this.closeMenu(); _this.submenuVisibility(''); } }, navItem.name || navItem.title)),
-                                    navItem.name === 'products' && _this.state.phoneSubMenuVisible === 'products' ?
-                                        React.createElement("div", { className: "dropdownProducts_phone", onClick: _this.hideSubMenu }, products && React.createElement("div", { className: "categoriesSubmenu" },
-                                            React.createElement("div", { className: "productsPreview__list" }, products.map(function (item) { return (React.createElement("div", { key: "products" + (item && item.title ? item.title : 'itemTitle'), className: 'categoriesSubmenu_list' },
-                                                React.createElement(Link_1.default, __assign({}, item.url, { onClick: function () { return _this.closeMenu(); }, onBlur: function () { return _this.submenuVisibility(''); }, className: "categoriesSubmenu_link" }), item.title))); })))) : '',
-                                    navItem.name === _this.state.phoneSubMenuVisible
-                                        && navItem.children
-                                        ? React.createElement("div", { className: "categoriesSubmenu_wrapper_phone", key: 'phone' + navItem.id },
-                                            React.createElement("nav", { className: "categoriesSubmenu" },
-                                                React.createElement("ul", { className: "categoriesSubmenu_list" }, navItem.children.map(function (navItemChild) {
-                                                    return React.createElement(Link_1.default, __assign({}, navItemChild.url, { className: "categoriesSubmenu_link", key: navItemChild.id, onClick: function () { return _this.closeMenu(); }, onBlur: function () { return _this.submenuVisibility(''); } }), navItemChild.name);
-                                                }))))
-                                        : ''));
-                            }))))),
+                            React.createElement("ul", null,
+                                topNavItems && topNavItems.map(function (navItem, i) {
+                                    return (React.createElement("li", { key: i, style: { position: 'relative' } },
+                                        React.createElement(Link_1.default, __assign({}, navItem.url, { url: _this.canToggle(navItem) }), (navItem.name === 'products' || navItem.children)
+                                            ?
+                                                React.createElement("span", { className: "d-flex no-wrap", onClick: function () { return _this.submenuVisibility(navItem); } }, navItem.name || navItem.title)
+                                            : React.createElement("span", { className: "d-flex no-wrap", onClick: function (e) { _this.closeMenu(); _this.submenuVisibility(''); } }, navItem.name || navItem.title)),
+                                        navItem.name === 'products' && _this.state.phoneSubMenuVisible === 'products' ?
+                                            React.createElement("div", { className: "dropdownProducts_phone", onClick: _this.hideSubMenu }, products && React.createElement("div", { className: "categoriesSubmenu" },
+                                                React.createElement("div", { className: "productsPreview__list" }, products.map(function (item) { return (React.createElement("div", { key: "products" + (item && item.title ? item.title : 'itemTitle'), className: 'categoriesSubmenu_list' },
+                                                    React.createElement(Link_1.default, __assign({}, item.url, { onClick: function () { return _this.closeMenu(); }, onBlur: function () { return _this.submenuVisibility(''); }, className: "categoriesSubmenu_link" }), item.title))); })))) : '',
+                                        navItem.name === _this.state.phoneSubMenuVisible
+                                            && navItem.children
+                                            ? React.createElement("div", { className: "categoriesSubmenu_wrapper_phone", key: 'phone' + navItem.id },
+                                                React.createElement("nav", { className: "categoriesSubmenu" },
+                                                    React.createElement("ul", { className: "categoriesSubmenu_list" }, navItem.children.map(function (navItemChild) {
+                                                        return React.createElement(Link_1.default, __assign({}, navItemChild.url, { className: "categoriesSubmenu_link", key: navItemChild.id, onClick: function () { return _this.closeMenu(); }, onBlur: function () { return _this.submenuVisibility(''); } }), navItemChild.name);
+                                                    }))))
+                                            : ''));
+                                }),
+                                React.createElement("li", { className: "e-shop" },
+                                    React.createElement("a", { href: "https://eshop.divesoft.eu" },
+                                        React.createElement("span", { className: "d-flex no-wrap" }, "E-shop"))))))),
                 _this.state.subMenuVisible === 'products' ?
                     React.createElement("div", { className: "submenuTiles", onMouseLeave: _this.hideSubMenu, style: submenuStyle }, products && React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row productsPreview__list" }, products.map(function (item, i) { return (React.createElement("div", { key: "products" + i, className: 'col-12 col-lg-6 col-xl-3' },
