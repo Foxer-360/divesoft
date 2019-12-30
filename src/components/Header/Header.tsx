@@ -259,7 +259,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                       />
                       {this.state.showSearch ?
                         <Search handleSearchShow={this.handleSearchShow} language={context.languageData.code} /> : ''}
-                      <a href="http://eshop.divesoft.eu/cz/login" className="login-link">
+                      <a href="https://eshop.divesoft.eu" className="login-link">
                         <img
                           src="/assets/divesoft/images/user.svg"
                           alt="account"
@@ -267,7 +267,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         />
                       </a>
                       {/* tslint:disable-next-line: max-line-length */}
-                      <a href="http://eshop.divesoft.eu" className={'btn btn_eshop cart-ico'}><span className="text">e-shop</span></a>
+                      <a href="https://eshop.divesoft.eu" className={'btn btn_eshop cart-ico'}><span className="text">e-shop</span></a>
                     </div>
                     {/* SEARCH AND LOGIN - end */}
 
@@ -367,7 +367,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                           <div className={'productsPreview__list__item'}>
                             {item.title && <h5>{item.title}</h5>}
                             <Link {...item.url} onClick={this.hideSubMenu} className="btn">
-                              More &rsaquo;	
+                              More &rsaquo;
                             </Link>
                           </div>
                         </div>
@@ -398,7 +398,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                                   <div className={'productsPreview__list__item'}>
                                       {/* <Media type={'image'} data={item.img} /> */}
                                       {navItemChild.name && <h5>{navItemChild.name}</h5>}
-                                      <Link 
+                                      <Link
                                         {...navItemChild.url}
                                         onClick={this.hideSubMenu}
                                         className="btn"
