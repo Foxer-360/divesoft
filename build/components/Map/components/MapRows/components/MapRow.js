@@ -21,14 +21,7 @@ var MapRow = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.renderListItem = function () {
             var _a = _this.props, address = _a.address, city = _a.city;
-            var items = [];
-            if (address) {
-                items.push(address.trim());
-            }
-            if (city) {
-                items.push(city.trim());
-            }
-            return items.join(', ');
+            return [address, city].filter(function (item) { return !!item.trim(); }).join(', ');
         };
         _this.state = {
             show: false
@@ -37,7 +30,7 @@ var MapRow = /** @class */ (function (_super) {
     }
     MapRow.prototype.render = function () {
         var _this = this;
-        var _a = this.props, title = _a.title, text = _a.text, address = _a.address, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web, city = _a.city;
+        var _a = this.props, title = _a.title, text = _a.text, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web;
         var url = web && web.url && web.url.trim && web.url.trim();
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-12 col-md-5" },

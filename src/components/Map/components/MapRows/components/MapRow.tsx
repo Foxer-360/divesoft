@@ -31,27 +31,17 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
       city,
     } = this.props;
 
-    const items = [];
-    if (address) {
-      items.push(address.trim());
-    }
-    if (city) {
-      items.push(city.trim());
-    }
-
-    return items.join(', ');
+    return [ address, city ].filter(item => !!item.trim()).join(', ');
   }
 
   public render () {
     const {
       title,
       text,
-      address,
       storeChief,
       phone,
       email,
       web,
-      city,
     } = this.props;
 
     const url = web && web.url && web.url.trim && web.url.trim();
