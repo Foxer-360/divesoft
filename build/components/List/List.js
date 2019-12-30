@@ -150,8 +150,18 @@ var List = /** @class */ (function (_super) {
                     // replace it with dynamic source item slug.
                     Object.keys(res).forEach(function (key) {
                         if (typeof res[key] === 'string') {
-                            var replaced = _this.replaceWithSourceItemValues(res[key], item.content);
-                            res[key] = replaced;
+                            res[key] = _this.replaceWithSourceItemValues(res[key], item.content);
+                        }
+                        else if (typeof res[key] === 'object' && !Array.isArray(res[key])) {
+                            try {
+                                res[key] = JSON.parse(_this.replaceWithSourceItemValues(JSON.stringify(res[key]), item.content));
+                            }
+                            catch (e) {
+                                console.error(e);
+                            }
+                        }
+                        else if (typeof res[key] === 'number') {
+                            res[key] = _this.replaceWithSourceItemValues(res[key], item.content);
                         }
                         else if (res[key].url) {
                             var regex = /ds\:(\w+)/g;
@@ -385,8 +395,8 @@ var List = /** @class */ (function (_super) {
                     var searchKeys = result[1].split(',');
                     if (Array.isArray(searchKeys) && searchKeys.length > 0) {
                         var getValueFromDatasourceItems = R.path(searchKeys);
-                        var replacement = getValueFromDatasourceItems(item);
-                        if (replacement && typeof replacement === 'string') {
+                        var replacement = getValueFromDatasourceItems(item) || '';
+                        if (typeof replacement === 'string') {
                             replaced = replaced.replace(result[0], isImage ? replacement : escape(replacement));
                         }
                         else if (replacement && typeof replacement === 'object') {

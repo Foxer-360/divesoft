@@ -1,15 +1,10 @@
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
 
-import Link from '../../../../../partials/Link';
-
-interface MapRow {
-  show: boolean;
-}
-
 interface MapRowProps {
   title: string;
   text?: string;
+  city?: string;
   address?: string;
   storeChief?: string;
   phone?: string;
@@ -30,6 +25,23 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
     };
   }
 
+  renderListItem = () => {
+    const {
+      address,
+      city,
+    } = this.props;
+
+    const items = [];
+    if (address) {
+      items.push(address.trim());
+    }
+    if (city) {
+      items.push(city.trim());
+    }
+
+    return items.join(', ');
+  }
+
   public render () {
     const {
       title,
@@ -38,8 +50,11 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
       storeChief,
       phone,
       email,
-      web
+      web,
+      city,
     } = this.props;
+
+    const url = web && web.url && web.url.trim && web.url.trim();
 
     return (
       <div className="row">
@@ -50,7 +65,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
               {storeChief && <p>Store chief: {storeChief}</p>}
               {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
               {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
-              {web && <p>Web: <Link {...web}>{(web.url && web.url.toString()) || title}</Link></p>}
+              {url && <p>Web: <a href={url} target={'_blank'}>{String(url)}</a></p>}
 
             </div> : ''}
         </div>
@@ -60,7 +75,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
             className={`mapRow__list__show ${this.state.show ? 'mapRow__list__show--minus' : ''}`}
           />
           <div className={'mapRow__list__item'}>
-            <p onClick={() => this.setState({ show: !this.state.show })}>{address}</p>
+            <p onClick={() => this.setState({ show: !this.state.show })}>{this.renderListItem()}</p>
             {this.state.show && text && <ReactMarkdown source={text} />}
           </div>
         </div>

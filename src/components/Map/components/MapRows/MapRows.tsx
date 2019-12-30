@@ -25,6 +25,7 @@ const MapRows = (props: MapRowsProps) => {
                   {data && data.map((item, i) => (
                     <ServiceRowItem
                       key={i}
+                      city={item.city}
                       web={item.web}
                       text={item.text}
                       title={item.title}
