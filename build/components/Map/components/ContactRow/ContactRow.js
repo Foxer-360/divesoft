@@ -12,21 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var List_1 = require("../../../List");
-var Link_1 = require("../../../../partials/Link");
 var ContactRow = /** @class */ (function (_super) {
     __extends(ContactRow, _super);
     function ContactRow(props) {
@@ -37,32 +24,27 @@ var ContactRow = /** @class */ (function (_super) {
         return _this;
     }
     ContactRow.prototype.render = function () {
-        var _this = this;
         var _a = this.props, title = _a.title, rows = _a.rows;
-        return (React.createElement(List_1.default, { data: rows }, function (_a) {
-            var getPage = _a.getPage;
-            var _b = getPage(_this.state.numberOfPage, 'infinite', 3), items = _b.items, lastPage = _b.lastPage;
-            return (React.createElement("div", { className: 'contactRow' },
-                React.createElement("div", { className: 'container' },
-                    React.createElement("div", { className: "row contactRow__divider" },
-                        React.createElement("div", { className: "col-12 col-md-3" },
-                            React.createElement("h3", null, title),
-                            _this.state.numberOfPage < lastPage &&
-                                React.createElement("button", { className: 'contactRow__showMore', onClick: function () { return _this.setState({ numberOfPage: _this.state.numberOfPage + 1 }); } }, "Show more")),
-                        React.createElement("div", { className: "col-12 col-md-9" },
-                            React.createElement("div", { className: 'row' }, items && items.map(function (item, i) { return (React.createElement("div", { key: i, className: 'contactRow__item col-12 col-md-4' },
-                                item.name && React.createElement("h5", null, item.name),
-                                item.position && React.createElement("span", null, item.position),
-                                item.ur && React.createElement("p", null,
+        console.log('rows >', rows);
+        return (React.createElement("div", { className: 'contactRow' },
+            React.createElement("div", { className: 'container' },
+                React.createElement("div", { className: "row contactRow__divider" },
+                    React.createElement("div", { className: "col-12 col-md-3" },
+                        React.createElement("h3", null, title)),
+                    React.createElement("div", { className: "col-12 col-md-9" },
+                        React.createElement("div", { className: 'row' }, rows && rows.map(function (item, i) { return (React.createElement("div", { key: i, className: 'contactRow__item col-12 col-md-4' },
+                            item.name && React.createElement("h5", null, item.name),
+                            item.position && React.createElement("span", null, item.position),
+                            item.web && item.web.url && item.web.url.trim()
+                                && React.createElement("p", null,
                                     "W: ",
-                                    React.createElement(Link_1.default, __assign({}, item.url), item.urlTitle)),
-                                item.email && React.createElement("p", null,
-                                    "M: ",
-                                    React.createElement("a", { href: "mailto:" + item.email }, item.email)),
-                                item.phone && React.createElement("p", null,
-                                    "P: ",
-                                    React.createElement("a", { href: "tel:" + item.phone }, item.phone)))); })))))));
-        }));
+                                    React.createElement("a", { href: item.web.url, target: "_blank" }, item.web.url)),
+                            item.email && React.createElement("p", null,
+                                "M: ",
+                                React.createElement("a", { href: "mailto:" + item.email }, item.email)),
+                            item.phone && React.createElement("p", null,
+                                "P: ",
+                                React.createElement("a", { href: "tel:" + item.phone }, item.phone)))); })))))));
     };
     return ContactRow;
 }(React.Component));

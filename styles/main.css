@@ -3584,7 +3584,8 @@ a {
         position: relative;
         padding: 0 0 15px 0; } }
   .contactRow__item {
-    position: relative; }
+    position: relative;
+    margin-bottom: .5em; }
     @media (max-width: 768px) {
       .contactRow__item:not(:last-child) {
         margin-bottom: 20px; } }
