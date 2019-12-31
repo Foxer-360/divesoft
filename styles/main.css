@@ -4920,23 +4920,26 @@ a {
     @media (max-width: 768px) {
       .downloads .mediaRatio {
         left: 15px; } }
-  .downloads__list__item {
-    position: relative; }
-    @media (max-width: 768px) {
-      .downloads__list__item {
-        padding-left: 25px; }
-        .downloads__list__item:not(:last-child) {
-          margin-bottom: 35px; } }
-    .downloads__list__item h4 {
-      padding-left: 50px;
-      padding-bottom: 1.5rem; }
-    .downloads__list__item a {
-      width: 100%;
-      color: #e50000;
-      display: block;
-      padding-left: 50px; }
-      .downloads__list__item a:hover {
-        text-decoration: underline; }
+  .downloads__list {
+    margin-bottom: -2em; }
+    .downloads__list__item {
+      position: relative;
+      margin-bottom: 2em; }
+      @media (max-width: 768px) {
+        .downloads__list__item {
+          padding-left: 25px; }
+          .downloads__list__item:not(:last-child) {
+            margin-bottom: 35px; } }
+      .downloads__list__item h4 {
+        padding-left: 50px;
+        padding-bottom: 1.5rem; }
+      .downloads__list__item a {
+        width: 100%;
+        color: #e50000;
+        display: block;
+        padding-left: 50px; }
+        .downloads__list__item a:hover {
+          text-decoration: underline; }
 
 .listOfLinks {
   padding-bottom: 30px; }
