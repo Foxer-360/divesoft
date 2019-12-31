@@ -5497,7 +5497,12 @@ a {
     .contactColumns__col h5 {
       color: #6c6c6c; }
     .contactColumns__col__address {
-      width: 90%; }
+      width: 90%;
+      padding-bottom: 2rem; }
+      .contactColumns__col__address p {
+        font-size: 2.4rem;
+        color: #343434;
+        font-weight: 500; }
   .contactColumns__bottomInfo {
     padding: 25px 0 !important; }
   .contactColumns__divider {

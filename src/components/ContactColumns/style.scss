@@ -7,7 +7,7 @@
   @include max-md { top: -35px; }
   @include max-sm { top: 20px; }
 
-  p { 
+  p {
     color: $lightGrey;
     margin: 0;
     padding: 3px 0;
@@ -29,11 +29,23 @@
     border-top: 3px solid $red;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     @include max-md { width: 100%; }
-    
+
     &:not(:last-child) { @include max-md { margin-bottom: 25px; } }
 
-    h5 { color: $lightGrey; }
-    &__address { width: 90%; }
+    h5 {
+      color: $lightGrey;
+    }
+
+    &__address {
+      width: 90%;
+      padding-bottom: 2rem;
+
+      p {
+        font-size: 2.4rem;
+        color: $darkGrey;
+        font-weight: 500;
+      }
+    }
   }
 
   &__bottomInfo { padding: 25px 0 !important; }
