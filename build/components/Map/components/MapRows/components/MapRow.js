@@ -21,7 +21,7 @@ var MapRow = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.renderListItem = function () {
             var _a = _this.props, address = _a.address, city = _a.city;
-            return [address, city].filter(function (item) { return !!item.trim(); }).join(', ');
+            return [address, city].filter(function (item) { return item && item.trim(); }).map(function (item) { return item.trim(); }).join(', ');
         };
         _this.state = {
             show: false
