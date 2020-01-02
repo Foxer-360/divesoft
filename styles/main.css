@@ -3550,7 +3550,7 @@ a {
       margin-bottom: 0; }
 
 .contactRow {
-  padding: 35px 0; }
+  padding: 35px 0 10px; }
   @media (max-width: 768px) {
     .contactRow {
       padding-bottom: 5px; } }
@@ -3562,7 +3562,7 @@ a {
     background-color: #e8e8e8;
     position: relative;
     display: block;
-    bottom: -35px;
+    bottom: -10px;
     content: '';
     height: 1px;
     width: 100%; }
@@ -3585,7 +3585,7 @@ a {
         padding: 0 0 15px 0; } }
   .contactRow__item {
     position: relative;
-    margin-bottom: .5em; }
+    margin-bottom: 1em; }
     @media (max-width: 768px) {
       .contactRow__item:not(:last-child) {
         margin-bottom: 20px; } }
