@@ -389,7 +389,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               styles: MapStyles
             }}
           >
-            {mapItems && mapItems.map((item, i) => {
+            {mapItems && mapItems
+              .filter(item => item.lng && item.lat)
+              .map((item, i) => {
               return (
                 <Marker
                   key={i}

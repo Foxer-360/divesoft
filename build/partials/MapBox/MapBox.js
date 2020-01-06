@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var ReactMarkdown = require("react-markdown");
 function MapBox(props) {
     var title = props.title, country = props.country, address = props.address, city = props.city, email = props.email, phone = props.phone, service = props.service, storeChief = props.storeChief, text = props.text, web = props.web, name = props.name, position = props.position, keywords = props.keywords, onClick = props.onClick;
     var url = web && web.url && web.url.trim && web.url.trim();
@@ -31,7 +32,7 @@ function MapBox(props) {
             service && React.createElement("p", null,
                 "Service: ",
                 service),
-            text && React.createElement("p", null, text))));
+            text && React.createElement(ReactMarkdown, { source: text }))));
 }
 exports.MapBox = MapBox;
 exports.default = MapBox;

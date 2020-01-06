@@ -257,7 +257,9 @@ var Map = /** @class */ (function (_super) {
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: this.state.mapCenter, defaultZoom: 5, zoom: this.state.mapZoom, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
-                    } }, mapItems && mapItems.map(function (item, i) {
+                    } }, mapItems && mapItems
+                    .filter(function (item) { return item.lng && item.lat; })
+                    .map(function (item, i) {
                     return (React.createElement(Marker_1.default, { key: i, lat: parseFloat(item.lat), lng: parseFloat(item.lng), onClick: function () { return _this.setMapBox(item); } }));
                 }))),
             React.createElement("div", { className: 'mapRows' }, type === 'service' ? this.renderServiceRows(mapItems) : this.renderContactRows(mapItems))));
