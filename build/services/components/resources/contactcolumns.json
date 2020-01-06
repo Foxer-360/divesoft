@@ -20,7 +20,7 @@
                     "title": "First column title"
                 },
                 "firstAddress": {
-                    "type": "text",
+                    "type": "markdown",
                     "title": "First column address"
                 },
                 "firstEmail": {
@@ -36,7 +36,7 @@
                     "title": "Second column title"
                 },
                 "secondAddress": {
-                    "type": "text",
+                    "type": "markdown",
                     "title": "Second column address"
                 },
                 "secondEmail": {

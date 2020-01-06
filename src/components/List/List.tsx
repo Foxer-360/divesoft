@@ -433,8 +433,8 @@ class List extends React.Component<Properties, {}> {
           const searchKeys = result[1].split(',');
           if (Array.isArray(searchKeys) && searchKeys.length > 0) {
             const getValueFromDatasourceItems = R.path(searchKeys);
-            const replacement = getValueFromDatasourceItems(item);
-            if (replacement && typeof replacement === 'string') {
+            const replacement = getValueFromDatasourceItems(item) || '';
+            if (typeof replacement === 'string') {
               replaced = replaced.replace(result[0], isImage ? replacement : escape(replacement));
             } else if (replacement && typeof replacement === 'object') {
               replaced = replaced.replace(result[0], JSON.stringify(replacement));
@@ -503,8 +503,17 @@ class List extends React.Component<Properties, {}> {
 
             Object.keys(res).forEach(key => {
               if (typeof res[key] === 'string') {
-                let replaced = this.replaceWithSourceItemValues(res[key], item.content);
-                res[key] = replaced;
+                res[key] = this.replaceWithSourceItemValues(res[key], item.content);
+              } else if (typeof res[key] === 'object' && !Array.isArray(res[key])) {
+                try {
+                  res[key] = JSON.parse(
+                    this.replaceWithSourceItemValues(JSON.stringify(res[key]), item.content)
+                  );
+                } catch (e) {
+                  console.error(e);
+                }
+              } else if (typeof res[key] === 'number') {
+                res[key] = this.replaceWithSourceItemValues(res[key], item.content);
               } else if (res[key].url) {
                 const regex = /ds\:(\w+)/g;
 

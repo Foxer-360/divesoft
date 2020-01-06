@@ -16,16 +16,18 @@
   }
 
   &__list {
+    margin-bottom: -2em;
 
     &__item {
       position: relative;
+      margin-bottom: 2em;
 
       @include max-md {
         padding-left: 25px;
         &:not(:last-child) { margin-bottom: 35px; }
       }
 
-      h4 { 
+      h4 {
         padding-left: 50px;
         padding-bottom: 1.5rem;
       }

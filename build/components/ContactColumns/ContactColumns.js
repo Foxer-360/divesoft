@@ -9,7 +9,7 @@ var ContactColumns = function (props) {
             React.createElement("div", { className: 'contactColumns__list d-flex justify-content-between' },
                 React.createElement("div", { className: 'contactColumns__col' },
                     firstTitle && React.createElement("h3", null, firstTitle),
-                    firstAddress && React.createElement("h4", { className: 'contactColumns__col__address' }, firstAddress),
+                    firstAddress && React.createElement(ReactMarkdown, { className: 'contactColumns__col__address', source: firstAddress }),
                     firstEmail &&
                         React.createElement("h5", null,
                             "E-mail: ",
@@ -17,7 +17,7 @@ var ContactColumns = function (props) {
                     firstAccounts && React.createElement(ReactMarkdown, { source: firstAccounts })),
                 React.createElement("div", { className: 'contactColumns__col' },
                     secondTitle && React.createElement("h3", null, secondTitle),
-                    secondAddress && React.createElement("h4", { className: 'contactColumns__col__address' }, secondAddress),
+                    secondAddress && React.createElement(ReactMarkdown, { className: 'contactColumns__col__address', source: secondAddress }),
                     secondEmail &&
                         React.createElement("h5", null,
                             "E-mail: ",

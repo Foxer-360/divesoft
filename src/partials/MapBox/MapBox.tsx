@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-import Link from '../Link';
-import Button from '../Button';
-
 export interface MapBoxProps {
   title?: string;
   name?: string;
@@ -28,7 +25,6 @@ export function MapBox(props: MapBoxProps) {
     address,
     city,
     email,
-    url,
     phone,
     service,
     storeChief,
@@ -40,10 +36,12 @@ export function MapBox(props: MapBoxProps) {
     onClick
   } = props;
 
+  const url = web && web.url && web.url.trim && web.url.trim();
+
   return (
     <div className={'mapBox'}>
       <div className={'mapBox--close'} onClick={() => onClick()} />
-      
+
       {title && <h3>{title}</h3>}
       {name && <h3>{name}</h3>}
 
@@ -58,12 +56,10 @@ export function MapBox(props: MapBoxProps) {
       {address && <h5>{address}</h5>}
       {position && <h5>{position}</h5>}
 
-      {url && <Button classes={'mapBox--btn'} url={url}>See details</Button>}
-
       <div className={'mapBox__info'}>
         {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
         {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
-        {web && <p>Web: <Link {...web}>{(web.url && web.url.toString()) || title}</Link></p>}
+        {url && <p>Web: <a href={url} target={'_blank'}>{String(url)}</a></p>}
         {storeChief && <p>Store chief: {storeChief}</p>}
         {service && <p>Service: {service}</p>}
         {text && <p>{text}</p>}

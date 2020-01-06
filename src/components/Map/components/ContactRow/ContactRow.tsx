@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-import List from '../../../List';
-import Link from '../../../../partials/Link';
-
 export interface ContactRowState {
   numberOfPage: number;
 }
@@ -32,50 +29,36 @@ class ContactRow extends React.Component<ContactRowProps, ContactRowState> {
   public render() {
     const { title, rows } = this.props;
 
+    console.log('rows >', rows);
+
     return (
+      <div className={'contactRow'}>
+        <div className={'container'}>
+          <div className="row contactRow__divider">
 
-      <List data={rows}>
-        {({ getPage }) => {
-          const { items, lastPage } = getPage(this.state.numberOfPage, 'infinite', 3);
+            <div className="col-12 col-md-3">
+              <h3>{title}</h3>
+            </div>
 
-          return (
-            <div className={'contactRow'}>
-              <div className={'container'}>
-                <div className="row contactRow__divider">
-
-                  <div className="col-12 col-md-3">
-                    <h3>{title}</h3>
-
-                  {this.state.numberOfPage < lastPage &&
-                    <button
-                      className={'contactRow__showMore'}
-                      onClick={() => this.setState({ numberOfPage: this.state.numberOfPage + 1 })}
-                    >Show more
-                    </button>
-                  }
-
+            <div className="col-12 col-md-9">
+              <div className={'row'}>
+                {rows && rows.map((item, i) => (
+                  <div key={i} className={'contactRow__item col-12 col-md-4'}>
+                    {item.name && <h5>{item.name}</h5>}
+                    {item.position && <span>{item.position}</span>}
+                    {item.web && item.web.url && item.web.url.trim()
+                      && <p>W: <a href={item.web.url} target="_blank">{item.web.url}</a></p>
+                    }
+                    {item.email && <p>M: <a href={`mailto:${item.email}`}>{item.email}</a></p>}
+                    {item.phone && <p>P: <a href={`tel:${item.phone}`}>{item.phone}</a></p>}
                   </div>
-
-                  <div className="col-12 col-md-9">
-                    <div className={'row'}>
-                      {items && items.map((item, i) => (
-                        <div key={i} className={'contactRow__item col-12 col-md-4'}>
-                          {item.name && <h5>{item.name}</h5>}
-                          {item.position && <span>{item.position}</span>}
-                          {item.ur && <p>W: <Link {...item.url}>{item.urlTitle}</Link></p>}
-                          {item.email && <p>M: <a href={`mailto:${item.email}`}>{item.email}</a></p>}
-                          {item.phone && <p>P: <a href={`tel:${item.phone}`}>{item.phone}</a></p>}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
+                ))}
               </div>
             </div>
-          );
-        }}
-      </List>
+
+          </div>
+        </div>
+      </div>
     );
   }
 }

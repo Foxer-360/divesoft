@@ -3550,7 +3550,7 @@ a {
       margin-bottom: 0; }
 
 .contactRow {
-  padding: 35px 0; }
+  padding: 35px 0 10px; }
   @media (max-width: 768px) {
     .contactRow {
       padding-bottom: 5px; } }
@@ -3562,7 +3562,7 @@ a {
     background-color: #e8e8e8;
     position: relative;
     display: block;
-    bottom: -35px;
+    bottom: -10px;
     content: '';
     height: 1px;
     width: 100%; }
@@ -3584,7 +3584,8 @@ a {
         position: relative;
         padding: 0 0 15px 0; } }
   .contactRow__item {
-    position: relative; }
+    position: relative;
+    margin-bottom: 1em; }
     @media (max-width: 768px) {
       .contactRow__item:not(:last-child) {
         margin-bottom: 20px; } }
@@ -4920,23 +4921,26 @@ a {
     @media (max-width: 768px) {
       .downloads .mediaRatio {
         left: 15px; } }
-  .downloads__list__item {
-    position: relative; }
-    @media (max-width: 768px) {
-      .downloads__list__item {
-        padding-left: 25px; }
-        .downloads__list__item:not(:last-child) {
-          margin-bottom: 35px; } }
-    .downloads__list__item h4 {
-      padding-left: 50px;
-      padding-bottom: 1.5rem; }
-    .downloads__list__item a {
-      width: 100%;
-      color: #e50000;
-      display: block;
-      padding-left: 50px; }
-      .downloads__list__item a:hover {
-        text-decoration: underline; }
+  .downloads__list {
+    margin-bottom: -2em; }
+    .downloads__list__item {
+      position: relative;
+      margin-bottom: 2em; }
+      @media (max-width: 768px) {
+        .downloads__list__item {
+          padding-left: 25px; }
+          .downloads__list__item:not(:last-child) {
+            margin-bottom: 35px; } }
+      .downloads__list__item h4 {
+        padding-left: 50px;
+        padding-bottom: 1.5rem; }
+      .downloads__list__item a {
+        width: 100%;
+        color: #e50000;
+        display: block;
+        padding-left: 50px; }
+        .downloads__list__item a:hover {
+          text-decoration: underline; }
 
 .listOfLinks {
   padding-bottom: 30px; }
@@ -5497,7 +5501,12 @@ a {
     .contactColumns__col h5 {
       color: #6c6c6c; }
     .contactColumns__col__address {
-      width: 90%; }
+      width: 90%;
+      padding-bottom: 2rem; }
+      .contactColumns__col__address p {
+        font-size: 2.4rem;
+        color: #343434;
+        font-weight: 500; }
   .contactColumns__bottomInfo {
     padding: 25px 0 !important; }
   .contactColumns__divider {
