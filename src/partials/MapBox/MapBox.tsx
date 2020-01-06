@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
 
 export interface MapBoxProps {
   title?: string;
@@ -61,7 +62,7 @@ export function MapBox(props: MapBoxProps) {
         {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
         {url && <p>Web: <a href={url} target={'_blank'}>{String(url)}</a></p>}
         {storeChief && <p>Store chief: {storeChief}</p>}
-        {service && <p>Service: {service}</p>}
+        {service && <ReactMarkdown source={service} />}
         {text && <p>{text}</p>}
       </div>
     </div>
