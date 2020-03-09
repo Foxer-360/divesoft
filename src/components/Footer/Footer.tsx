@@ -219,6 +219,17 @@ class Footer extends React.Component<FooterProps, FooterState> {
                         <ValidationAlert>
                           {'Wrong email format'}
                         </ValidationAlert>}
+
+                      {this.state.error.sending &&
+                        <ValidationAlert>
+                          {'Error sending email.'}
+                        </ValidationAlert>}
+
+                      {this.state.displayThankYou && (
+                        <div className={'subscribe__thankyou'}>
+                          Thanks for subscribing to our newsletter.
+                        </div>
+                      )}
                   </div>
                   <div className={'footer__divider'} />
                   <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
