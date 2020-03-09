@@ -161,7 +161,10 @@ var Footer = /** @class */ (function (_super) {
                             _this.state.error.email &&
                                 React.createElement(ValidationAlert_1.default, null, 'Enter your email'),
                             _this.state.error.emailValid &&
-                                React.createElement(ValidationAlert_1.default, null, 'Wrong email format')),
+                                React.createElement(ValidationAlert_1.default, null, 'Wrong email format'),
+                            _this.state.error.sending &&
+                                React.createElement(ValidationAlert_1.default, null, 'Error sending email.'),
+                            _this.state.displayThankYou && (React.createElement("div", { className: 'subscribe__thankyou' }, "Thanks for subscribing to our newsletter."))),
                         React.createElement("div", { className: 'footer__divider' }),
                         React.createElement("div", { className: 'footer__navigation row d-flex justify-content-between align-items-start' },
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
