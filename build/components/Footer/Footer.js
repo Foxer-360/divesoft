@@ -36,8 +36,10 @@ var ReactMarkdown = require("react-markdown");
 var Link_1 = require("../../partials/Link");
 var Loader_1 = require("../../partials/Loader");
 var CookiePopup_1 = require("./components/CookiePopup");
+var ValidationAlert_1 = require("../ValidationAlert");
 var GET_CONTEXT = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"], ["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"])));
 var GET_PAGES_URLS = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"], ["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"])));
+var CREATE_SUBSCRIBER = graphql_tag_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"], ["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"])));
 var ComposedQuery = react_adopt_1.adopt({
     context: function (_a) {
         var render = _a.render;
@@ -59,11 +61,66 @@ var ComposedQuery = react_adopt_1.adopt({
 var Footer = /** @class */ (function (_super) {
     __extends(Footer, _super);
     function Footer(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            email: '',
+            displayThankYou: false,
+            error: {
+                email: false,
+                emailValid: false,
+                sending: false,
+            },
+        };
+        return _this;
     }
     Footer.prototype.render = function () {
         var _this = this;
         var _a = this.props.data, copyrights = _a.copyrights, contacts = _a.contacts, facebookUrl = _a.facebookUrl, youtubeUrl = _a.youtubeUrl, instagramUrl = _a.instagramUrl;
+        var onChangeEmail = function (e) {
+            _this.setState({
+                email: e.target.value,
+            });
+        };
+        var isValid = function () {
+            var newError = __assign({}, _this.state.error);
+            newError.email = _this.state.email === '';
+            if (_this.state.email !== '') {
+                var result = /\S+@\S+\.\S+/.test(_this.state.email);
+                newError.emailValid = !result;
+            }
+            _this.setState({
+                error: newError,
+            });
+            return !newError.email && !newError.emailValid;
+        };
+        var onSubmit = function (createSubscriber) { return function () {
+            if (isValid() && typeof window !== 'undefined') {
+                createSubscriber({
+                    variables: {
+                        url: window.location.href,
+                        email: _this.state.email,
+                    },
+                })
+                    .then(function () {
+                    _this.setState({
+                        email: '',
+                        displayThankYou: true,
+                        error: {
+                            email: false,
+                            emailValid: false,
+                            sending: false,
+                        },
+                    });
+                })
+                    .catch(function (e) {
+                    var newError = __assign({}, _this.state.error, { sending: true });
+                    console.error(e);
+                    _this.setState({
+                        error: newError,
+                    });
+                });
+            }
+        }; };
         return (React.createElement(ComposedQuery, null, function (_a) {
             var _b = _a.getPagesUrls, loading = _b.loading, error = _b.error, data = _b.data, context = _a.context;
             if (!context.navigationsData ||
@@ -97,9 +154,14 @@ var Footer = /** @class */ (function (_super) {
                         React.createElement("div", { className: 'footer__newsletter' },
                             React.createElement("h3", null, "Divesoft newsletter"),
                             React.createElement("p", null, "Enter your e-mail to subscribe to our newsletter!"),
-                            React.createElement("form", { action: "#" },
-                                React.createElement("input", { type: "email" }),
-                                React.createElement("button", { className: 'btn' }, "OK"))),
+                            React.createElement("input", { type: 'e-mail', value: _this.state.email, onChange: function (e) { return onChangeEmail(e); }, placeholder: 'e-mail' }),
+                            React.createElement(react_apollo_1.Mutation, { mutation: CREATE_SUBSCRIBER }, function (createSubscriber) {
+                                return React.createElement("button", { onClick: onSubmit(createSubscriber), className: 'btn' }, "OK");
+                            }),
+                            _this.state.error.email &&
+                                React.createElement(ValidationAlert_1.default, null, 'Enter your email'),
+                            _this.state.error.emailValid &&
+                                React.createElement(ValidationAlert_1.default, null, 'Wrong email format')),
                         React.createElement("div", { className: 'footer__divider' }),
                         React.createElement("div", { className: 'footer__navigation row d-flex justify-content-between align-items-start' },
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
@@ -173,5 +235,5 @@ var Footer = /** @class */ (function (_super) {
     return Footer;
 }(React.Component));
 exports.default = Footer;
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3;
 //# sourceMappingURL=Footer.js.map
