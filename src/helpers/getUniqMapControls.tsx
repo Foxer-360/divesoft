@@ -1,7 +1,7 @@
 export default function getUniqMapControls(data: any) {
   let uniqCities = [];
   let uniqCountries = [];
-  let uniqServices = [];
+  let uniqAddresses = [];
 
   const propsToArray = () => {
     for (let i = 0; i < data.length; i++) {
@@ -10,9 +10,11 @@ export default function getUniqMapControls(data: any) {
     for (let i = 0; i < data.length; i++) {
       uniqCities.push(data[i].city);
     }
+    let addresses = [];
     for (let i = 0; i < data.length; i++) {
-      uniqServices.push(data[i].service);
+      data[i].address.split(',').map(item => addresses.push(item.trim()));
     }
+    uniqAddresses = Array.from(new Set(addresses));
   };
 
   const uniqueArray = arr => Array.from(new Set(arr));
@@ -20,11 +22,11 @@ export default function getUniqMapControls(data: any) {
   propsToArray();
   uniqCities = uniqueArray(uniqCities);
   uniqCountries = uniqueArray(uniqCountries);
-  uniqServices = uniqueArray(uniqServices);
+  uniqAddresses = uniqueArray(uniqAddresses);
 
   return {
     cities: uniqCities.sort(),
     countries: uniqCountries.sort(),
-    services: uniqServices.sort()
+    addresses: uniqAddresses.sort()
   };
 }

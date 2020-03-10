@@ -7,6 +7,7 @@ interface MarkerProps {
 }
 
 export default function Marker(props: MarkerProps) {
+  console.log(props)
   return (
     <>
       <div 
