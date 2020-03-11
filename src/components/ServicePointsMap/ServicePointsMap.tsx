@@ -21,12 +21,14 @@ interface MapItem {
 export interface ServicePointsMapProps {
   data: {
     title: string;
+    filterByAddress: boolean;
+    additionalFilterText: string;
     mapItems: MapItem[];
   };
 }
 
 export default function ServicePointsMap(props: ServicePointsMapProps) {
-  const { title, mapItems } = props.data;
+  const { title, filterByAddress, additionalFilterText, mapItems } = props.data;
 
   return (
     <List data={mapItems}>
@@ -39,7 +41,12 @@ export default function ServicePointsMap(props: ServicePointsMapProps) {
             </p>
           </div> : ''}
 
-        <Map mapItems={data} type={'service'} />
+        <Map 
+          mapItems={data} 
+          filterByAddress={filterByAddress} 
+          additionalFilterText={additionalFilterText} 
+          type={'service'}
+        />
       </div>
       )}
     </List>

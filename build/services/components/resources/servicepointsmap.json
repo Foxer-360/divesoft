@@ -2,6 +2,7 @@
     "name": "ServicePointsMap",
     "data": {
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisi justo, vitae eleifend enim vestibulum at. Nulla dignissim facilisis nisl et ultrices. Nam ac massa auctor, maximus eros in, malesuada eros. Vestibulum iaculis facilisis eleifend.",
+        "filterByAddress": "false",
         "mapItems": [
             {
                 "city": "Prague",
@@ -96,6 +97,14 @@
                 "title": {
                     "type": "text",
                     "title": "Title"
+                },
+                "filterByAddress": {
+                    "type": "boolean",
+                    "title": "Filter by address field?"
+                },
+                "additionalFilterText": {
+                    "type": "text",
+                    "title": "Additional filter text"
                 },
                 "mapItems": {
                     "type": "Array",
