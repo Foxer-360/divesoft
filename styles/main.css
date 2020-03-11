@@ -3949,7 +3949,7 @@ a {
           text-decoration: none; }
   .header__controls {
     height: 40px;
-    width: 200px; }
+    width: 160px; }
     @media (max-width: 540px) {
       .header__controls {
         width: 50px; } }
@@ -3986,7 +3986,7 @@ a {
     .header .hamburgerHolder {
       width: 105px; }
     .header .header__controls {
-      width: 105px; }
+      width: 85px; }
     .header a.btn_eshop.cart-ico {
       width: 45px;
       padding: 0; }

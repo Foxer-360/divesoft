@@ -179,11 +179,10 @@ var Header = /** @class */ (function (_super) {
                                 }))),
                             React.createElement("div", { className: 'header__controls d-flex justify-content-between align-items-center' },
                                 React.createElement("img", { onClick: function () { return _this.setState({ showSearch: !_this.state.showSearch }); }, src: "/assets/divesoft/images/search.svg", alt: "search", className: "header-ico header-ico_search", style: { cursor: 'pointer' } }),
-                                _this.state.showSearch ?
-                                    React.createElement(Search_1.default, { handleSearchShow: _this.handleSearchShow, language: context.languageData.code }) : '',
-                                React.createElement("a", { href: "https://eshop.divesoft.eu", className: "login-link" },
-                                    React.createElement("img", { src: "/assets/divesoft/images/user.svg", alt: "account", className: "header-ico header-ico_user" })),
-                                React.createElement("a", { href: "https://eshop.divesoft.eu", className: 'btn btn_eshop cart-ico' },
+                                _this.state.showSearch
+                                    ? React.createElement(Search_1.default, { handleSearchShow: _this.handleSearchShow, language: context.languageData.code })
+                                    : '',
+                                React.createElement("a", { href: "https://eshop.divesoft.com", className: 'btn btn_eshop cart-ico' },
                                     React.createElement("span", { className: "text" }, "e-shop"))))),
                     React.createElement("div", { className: "hiddenMenu " + (_this.state.menuActive ? 'hiddenMenu--active' : '') },
                         React.createElement("div", { className: 'hiddenMenu__wrapper' },
@@ -208,7 +207,7 @@ var Header = /** @class */ (function (_super) {
                                             : ''));
                                 }),
                                 React.createElement("li", { className: "e-shop" },
-                                    React.createElement("a", { href: "https://eshop.divesoft.eu" },
+                                    React.createElement("a", { href: "https://eshop.divesoft.com" },
                                         React.createElement("span", { className: "d-flex no-wrap" }, "E-shop"))))))),
                 _this.state.subMenuVisible === 'products' ?
                     React.createElement("div", { className: "submenuTiles", onMouseLeave: _this.hideSubMenu, style: submenuStyle }, products && React.createElement("div", { className: "container" },

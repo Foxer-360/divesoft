@@ -257,17 +257,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         className="header-ico header-ico_search"
                         style={{ cursor: 'pointer' }}
                       />
-                      {this.state.showSearch ?
-                        <Search handleSearchShow={this.handleSearchShow} language={context.languageData.code} /> : ''}
-                      <a href="https://eshop.divesoft.eu" className="login-link">
-                        <img
-                          src="/assets/divesoft/images/user.svg"
-                          alt="account"
-                          className="header-ico header-ico_user"
-                        />
+                      {this.state.showSearch
+                        ? <Search handleSearchShow={this.handleSearchShow} language={context.languageData.code} />
+                        : ''
+                      }
+                      <a href="https://eshop.divesoft.com" className={'btn btn_eshop cart-ico'}>
+                        <span className="text">e-shop</span>
                       </a>
-                      {/* tslint:disable-next-line: max-line-length */}
-                          <a href="https://eshop.divesoft.eu" className={'btn btn_eshop cart-ico'}><span className="text">e-shop</span></a>
                     </div>
                     {/* SEARCH AND LOGIN - end */}
 
@@ -348,7 +344,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                         })
                       }
                       <li className="e-shop">
-                        <a href="https://eshop.divesoft.eu">
+                        <a href="https://eshop.divesoft.com">
                           <span className="d-flex no-wrap">E-shop</span>
                         </a>
                       </li>

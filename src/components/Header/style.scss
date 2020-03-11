@@ -193,7 +193,7 @@
 
   &__controls {
     height: 40px;
-    width: 200px;
+    width: 160px;
 
     @include max-sm { width: 50px; }
 
@@ -243,7 +243,7 @@
     }
 
     .header__controls {
-      width: 105px;
+      width: 85px;
     }
 
     a.btn_eshop.cart-ico {
@@ -411,7 +411,6 @@
 
         .header__controls {
           margin: auto;
-
           button:hover {
             background-color: lighten(#e50000, 5%);
           }
