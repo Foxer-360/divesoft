@@ -31,14 +31,16 @@ var Map = /** @class */ (function (_super) {
             _this.setState({
                 countrySelectedValue: 'all',
                 citySelectedValue: 'all',
-                addressSelectedValue: 'all',
+                serviceSelectedValue: 'all',
+                addFilterSelectedValue: 'all',
                 showBox: false
             });
         };
         _this.state = {
             countrySelectedValue: 'all',
             citySelectedValue: 'all',
-            addressSelectedValue: 'all',
+            serviceSelectedValue: 'all',
+            addFilterSelectedValue: 'all',
             mapCenter: {
                 lat: 50,
                 lng: 14
@@ -46,7 +48,7 @@ var Map = /** @class */ (function (_super) {
             mapZoom: 5,
             cities: [],
             countries: [],
-            addresses: [],
+            addFilters: [],
             currrentEmail: '',
             currentPhone: '',
             currentTitle: '',
@@ -76,9 +78,6 @@ var Map = /** @class */ (function (_super) {
             currentPhone: item.phone,
             currentTitle: item.title,
             currentAddress: item.address,
-            citySelectedValue: item.city,
-            addressSelectedValue: item.address,
-            countrySelectedValue: item.country,
             web: item.web,
             storeChief: item.storeChief,
             text: item.text,
@@ -99,8 +98,9 @@ var Map = /** @class */ (function (_super) {
                 if (mapItems[j].country === countries[i]) {
                     if (mapItems[j].country === this.state.countrySelectedValue || this.state.countrySelectedValue === 'all') {
                         if (mapItems[j].city === this.state.citySelectedValue || this.state.citySelectedValue === 'all') {
-                            if (mapItems[j].address.includes(this.state.addressSelectedValue)
-                                || this.state.addressSelectedValue === 'all') {
+                            if (mapItems[j].addFilter && mapItems[j].addFilter.includes(this.state.addFilterSelectedValue)
+                                || mapItems[j].addFilter === this.state.addFilterSelectedValue
+                                || this.state.addFilterSelectedValue === 'all') {
                                 composedRows.push({
                                     city: mapItems[j].city,
                                     service: mapItems[j].service,
@@ -111,7 +111,8 @@ var Map = /** @class */ (function (_super) {
                                     storeChief: mapItems[j].storeChief,
                                     email: mapItems[j].email,
                                     phone: mapItems[j].phone,
-                                    web: mapItems[j].web
+                                    web: mapItems[j].web,
+                                    addFilter: mapItems[j].addFilter
                                 });
                             }
                         }
@@ -119,8 +120,9 @@ var Map = /** @class */ (function (_super) {
                 }
             }
             if (this.state.countrySelectedValue === countries[i] || this.state.countrySelectedValue === 'all') {
-                if (composedRows.some(function (item) { return item.address.includes(_this.state.addressSelectedValue); })
-                    || this.state.addressSelectedValue === 'all') {
+                if (composedRows.some(function (item) { return item.addFilter && item.addFilter.includes(_this.state.addFilterSelectedValue); })
+                    || mapItems.addFilter === this.state.addFilterSelectedValue
+                    || this.state.addFilterSelectedValue === 'all') {
                     resultRows.push(React.createElement(MapRows_1.default, { key: i, title: countries[i], items: composedRows.reverse() }));
                 }
             }
@@ -128,13 +130,13 @@ var Map = /** @class */ (function (_super) {
         return resultRows;
     };
     Map.prototype.renderContactRows = function (mapItems) {
-        var addresses = getUniqMapControls_1.default(mapItems).addresses;
+        var services = getUniqMapControls_1.default(mapItems).services;
         var resultRows = [];
-        for (var i = 0; i < addresses.length; i++) {
+        for (var i = 0; i < services.length; i++) {
             var composedRows = [];
             for (var j = 0; j < mapItems.length; j++) {
-                if (mapItems[j].address === addresses[i]) {
-                    if (mapItems[j].address === this.state.addressSelectedValue || this.state.addressSelectedValue === 'all') {
+                if (mapItems[j].service === services[i]) {
+                    if (mapItems[j].service === this.state.serviceSelectedValue || this.state.serviceSelectedValue === 'all') {
                         composedRows.push({
                             name: mapItems[j].name,
                             position: mapItems[j].position,
@@ -145,32 +147,31 @@ var Map = /** @class */ (function (_super) {
                     }
                 }
             }
-            if (this.state.addressSelectedValue === addresses[i] || this.state.addressSelectedValue === 'all') {
-                resultRows.push(React.createElement(ContactRow_1.default, { key: i, title: addresses[i], rows: composedRows }));
+            if (this.state.serviceSelectedValue === services[i] || this.state.serviceSelectedValue === 'all') {
+                resultRows.push(React.createElement(ContactRow_1.default, { key: i, title: services[i], rows: composedRows }));
             }
         }
         return resultRows;
     };
     Map.prototype.defineLocation = function (loc, type, mapItems) {
-        for (var i = 0; i < mapItems.length; i++) {
+        var _loop_1 = function (i) {
             if (mapItems[i][type] === loc) {
                 switch (type) {
                     case 'country':
-                        this.setState({
+                        this_1.setState({
                             citySelectedValue: 'all',
                             countrySelectedValue: mapItems[i].country,
                             mapZoom: 6
                         });
-                        // console.log(mapItems[i], mapItems[i].lat, mapItems[i].lng);
                         break;
                     case 'city':
-                        this.setState({
+                        this_1.setState({
                             countrySelectedValue: mapItems[i].country,
                             mapZoom: 11
                         });
                         break;
                     case 'service':
-                        this.setState({
+                        this_1.setState({
                             countrySelectedValue: mapItems[i].country,
                             citySelectedValue: mapItems[i].city,
                             mapZoom: 15
@@ -178,11 +179,27 @@ var Map = /** @class */ (function (_super) {
                         break;
                     default: break;
                 }
-                return {
-                    lat: parseFloat(mapItems[i].lat),
-                    lng: parseFloat(mapItems[i].lng)
-                };
+                if (mapItems[i].lat > 85) {
+                    var countryMapItems = mapItems.filter(function (item) { return item.country === mapItems[i].country && item.lat < 85; });
+                    if (countryMapItems.length === 0) {
+                        return { value: this_1.state.mapCenter };
+                    }
+                    return { value: {
+                            lat: parseFloat(countryMapItems[0].lat),
+                            lng: parseFloat(countryMapItems[0].lng)
+                        } };
+                }
+                return { value: {
+                        lat: parseFloat(mapItems[i].lat),
+                        lng: parseFloat(mapItems[i].lng)
+                    } };
             }
+        };
+        var this_1 = this;
+        for (var i = 0; i < mapItems.length; i++) {
+            var state_1 = _loop_1(i);
+            if (typeof state_1 === "object")
+                return state_1.value;
         }
     };
     Map.prototype.filterCities = function (country, mapItems) {
@@ -209,10 +226,17 @@ var Map = /** @class */ (function (_super) {
                     mapCenter: this.defineLocation(safeSearchTypeValue, type, mapItems)
                 });
                 break;
-            case 'address':
+            case 'service':
+                this.setState({
+                    showBox: true,
+                    serviceSelectedValue: safeSearchTypeValue,
+                    mapCenter: this.defineLocation(safeSearchTypeValue, type, mapItems)
+                });
+                break;
+            case 'addFilter':
                 this.setState({
                     showBox: false,
-                    addressSelectedValue: safeSearchTypeValue,
+                    addFilterSelectedValue: safeSearchTypeValue,
                 });
                 break;
             default: return;
@@ -220,20 +244,20 @@ var Map = /** @class */ (function (_super) {
     };
     Map.prototype.renderControls = function (mapItems) {
         var _this = this;
-        var _a = getUniqMapControls_1.default(mapItems), countries = _a.countries, addresses = _a.addresses;
+        var _a = getUniqMapControls_1.default(mapItems), countries = _a.countries, addFilters = _a.addFilters;
         var cities = this.filterCities(this.state.countrySelectedValue, mapItems).sort();
         return (React.createElement("div", { className: 'mapControls' },
             React.createElement("div", { className: 'container' },
                 React.createElement("div", { className: "row justify-content-center" },
-                    this.props.filterByAddress && React.createElement("div", { className: "col-12 col-md-3" },
+                    this.props.thirdFilter && React.createElement("div", { className: "col-12 col-md-3" },
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, mapItems, 'address'); }, value: this.state.addressSelectedValue },
-                                this.state.addressSelectedValue === 'all' &&
-                                    React.createElement("option", { key: "addressSelectedValue" }, this.props.additionalFilterText),
-                                addresses && addresses.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                            React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, mapItems, 'addFilter'); }, value: this.state.addFilterSelectedValue },
+                                this.state.addFilterSelectedValue === 'all' &&
+                                    React.createElement("option", { key: "addFilterSelectedValue" }, this.props.addFilterText),
+                                addFilters && this.orderByAlphabet(addFilters).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-4 col-lg-3" },
                         React.createElement("div", { className: 'select' },
-                            React.createElement("select", { value: this.state.countrySelectedValue, onChange: function (e) { return _this.onSelectChange(e, mapItems, 'country'); } },
+                            React.createElement("select", { value: this.state.countrySelectedValue, onChange: function (e) { _this.onSelectChange(e, mapItems, 'country'); } },
                                 this.state.countrySelectedValue === 'all' &&
                                     React.createElement("option", { key: "countrySelectedValue" }, "Select country"),
                                 countries && this.orderByAlphabet(countries).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
@@ -264,15 +288,17 @@ var Map = /** @class */ (function (_super) {
             this.renderControls(mapItems),
             React.createElement("section", { className: 'map' },
                 this.state.showBox &&
-                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.citySelectedValue, service: this.state.addressSelectedValue, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.countrySelectedValue, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
+                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.citySelectedValue, service: this.state.serviceSelectedValue, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.countrySelectedValue, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: this.state.mapCenter, defaultZoom: 5, zoom: this.state.mapZoom, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
                     } }, mapItems && mapItems
-                    .filter(function (item) { return item.lng && item.lat
+                    .filter(function (item) { return Math.abs(item.lng) && Math.abs(item.lat)
                     && (item.country === _this.state.countrySelectedValue || _this.state.countrySelectedValue === 'all')
                     && (item.city === _this.state.citySelectedValue || _this.state.citySelectedValue === 'all')
-                    && (item.address === _this.state.addressSelectedValue || _this.state.addressSelectedValue === 'all'); })
+                    && (item.addFilter === _this.state.addFilterSelectedValue
+                        || item.addFilter && item.addFilter.includes(_this.state.addFilterSelectedValue)
+                        || _this.state.addFilterSelectedValue === 'all'); })
                     .map(function (item, i) {
                     return (React.createElement(Marker_1.default, { key: i, lat: parseFloat(item.lat), lng: parseFloat(item.lng), onClick: function () { return _this.setMapBox(item); } }));
                 }))),
