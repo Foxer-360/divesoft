@@ -1,12 +1,13 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { adopt } from 'react-adopt';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import * as ReactMarkdown from 'react-markdown';
 
 import Link from '../../partials/Link';
 import Loader from '../../partials/Loader';
 import CookiePopup from './components/CookiePopup';
+import ValidationAlert from '../ValidationAlert';
 
 const GET_CONTEXT = gql`
   {
@@ -26,6 +27,14 @@ const GET_PAGES_URLS = gql`
       url
       name
       description
+    }
+  }
+`;
+
+const CREATE_SUBSCRIBER = gql`
+  mutation($email: String!, $url: String!) {
+    createSubscriber(data: { email: $email, url: $url }) {
+      id
     }
   }
 `;
@@ -56,15 +65,84 @@ export interface FooterProps {
   };
 }
 
-export interface FooterState {}
+export interface FooterState {
+  email: string;
+  displayThankYou: boolean;
+  error: {
+    email: boolean;
+    emailValid: boolean;
+    sending: boolean;
+  };
+}
 
 class Footer extends React.Component<FooterProps, FooterState> {
   constructor(props: FooterProps) {
     super(props);
+
+    this.state = {
+      email: '',
+      displayThankYou: false,
+      error: {
+        email: false,
+        emailValid: false,
+        sending: false,
+      },
+    };
   }
 
   public render() {
     const { copyrights, contacts, facebookUrl, youtubeUrl, instagramUrl } = this.props.data;
+
+    const onChangeEmail = (e: any) => {
+      this.setState({
+        email: e.target.value,
+      });
+    };
+
+    const isValid = () => {
+      const newError = { ...this.state.error };
+      newError.email = this.state.email === '';
+  
+      if (this.state.email !== '') {
+        const result = /\S+@\S+\.\S+/.test(this.state.email);
+        newError.emailValid = !result;
+      }
+  
+      this.setState({
+        error: newError,
+      });
+  
+      return !newError.email && !newError.emailValid;
+    };
+
+    const onSubmit = (createSubscriber) => () => {
+      if (isValid() && typeof window !== 'undefined') {
+        createSubscriber({
+          variables: {
+            url: window.location.href,
+            email: this.state.email,
+          },
+        })
+          .then(() => {
+            this.setState({
+              email: '',
+              displayThankYou: true,
+              error: {
+                email: false,
+                emailValid: false,
+                sending: false,
+              },
+            });
+          })
+          .catch(e => {
+            const newError = { ...this.state.error, sending: true };
+            console.error(e);
+            this.setState({
+              error: newError,
+            });
+          });
+      }
+    };
 
     return (
       <ComposedQuery>
@@ -119,10 +197,39 @@ class Footer extends React.Component<FooterProps, FooterState> {
                   <div className={'footer__newsletter'}>
                     <h3>Divesoft newsletter</h3>
                     <p>Enter your e-mail to subscribe to our newsletter!</p>
-                    <form action="#">
-                      <input type="email"/>
-                      <button className={'btn'}>OK</button>
-                    </form>
+                      <input
+                        type={'e-mail'}
+                        value={this.state.email}
+                        onChange={e => onChangeEmail(e)}
+                        placeholder={'e-mail'}
+                      />
+                      <Mutation mutation={CREATE_SUBSCRIBER}>
+                        {createSubscriber => 
+                          <button onClick={onSubmit(createSubscriber)} className={'btn'}>
+                            OK
+                          </button>}
+                      </Mutation>
+
+                      {this.state.error.email &&
+                        <ValidationAlert>
+                          {'Enter your email'}
+                        </ValidationAlert>}
+
+                      {this.state.error.emailValid &&
+                        <ValidationAlert>
+                          {'Wrong email format'}
+                        </ValidationAlert>}
+
+                      {this.state.error.sending &&
+                        <ValidationAlert>
+                          {'Error sending email.'}
+                        </ValidationAlert>}
+
+                      {this.state.displayThankYou && (
+                        <div className={'subscribe__thankyou'}>
+                          Thanks for subscribing to our newsletter.
+                        </div>
+                      )}
                   </div>
                   <div className={'footer__divider'} />
                   <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
