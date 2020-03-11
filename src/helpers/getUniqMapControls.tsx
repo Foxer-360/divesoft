@@ -1,20 +1,18 @@
 export default function getUniqMapControls(data: any) {
   let uniqCities = [];
   let uniqCountries = [];
-  let uniqAddresses = [];
+  let uniqServices = [];
+  let uniqAddFilters = [];
 
   const propsToArray = () => {
     for (let i = 0; i < data.length; i++) {
       uniqCountries.push(data[i].country);
-    }
-    for (let i = 0; i < data.length; i++) {
       uniqCities.push(data[i].city);
+      uniqServices.push(data[i].service);
+      if (data && data[i] && data[i].addFilter) {
+        data[i].addFilter.split(',').map(item => uniqAddFilters.push(item.trim()));
+      }
     }
-    let addresses = [];
-    for (let i = 0; i < data.length; i++) {
-      data[i].address.split(',').map(item => addresses.push(item.trim()));
-    }
-    uniqAddresses = Array.from(new Set(addresses));
   };
 
   const uniqueArray = arr => Array.from(new Set(arr));
@@ -22,11 +20,13 @@ export default function getUniqMapControls(data: any) {
   propsToArray();
   uniqCities = uniqueArray(uniqCities);
   uniqCountries = uniqueArray(uniqCountries);
-  uniqAddresses = uniqueArray(uniqAddresses);
+  uniqServices = uniqueArray(uniqServices);
+  uniqAddFilters = uniqueArray(uniqAddFilters);
 
   return {
     cities: uniqCities.sort(),
     countries: uniqCountries.sort(),
-    addresses: uniqAddresses.sort()
+    services: uniqServices.sort(),
+    addFilters: uniqAddFilters.sort()
   };
 }
