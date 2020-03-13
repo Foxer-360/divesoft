@@ -53,6 +53,9 @@ var Map = /** @class */ (function (_super) {
             currentPhone: '',
             currentTitle: '',
             currentAddress: '',
+            currentCountry: '',
+            currentCity: '',
+            currentService: '',
             showBox: false,
             lat: 0,
             lng: 0,
@@ -78,6 +81,9 @@ var Map = /** @class */ (function (_super) {
             currentPhone: item.phone,
             currentTitle: item.title,
             currentAddress: item.address,
+            currentCountry: item.country,
+            currentCity: item.city,
+            currentService: item.service,
             web: item.web,
             storeChief: item.storeChief,
             text: item.text,
@@ -288,7 +294,7 @@ var Map = /** @class */ (function (_super) {
             this.renderControls(mapItems),
             React.createElement("section", { className: 'map' },
                 this.state.showBox &&
-                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.citySelectedValue, service: this.state.serviceSelectedValue, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.countrySelectedValue, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
+                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.currentCity, service: this.state.currentService, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.currentCountry, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({ showBox: !_this.state.showBox }); } }),
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: { lat: 50, lng: 14 }, center: this.state.mapCenter, defaultZoom: 5, zoom: this.state.mapZoom, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
