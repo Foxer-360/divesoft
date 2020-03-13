@@ -13,7 +13,7 @@ import getUniqMapControls from '../../helpers/getUniqMapControls';
 import { number } from 'prop-types';
 
 export interface MapProps {
-  mapItems: any;
+  mapItems: LooseObject;
   thirdFilter?: boolean;
   addFilterText?: string;
   type: string;
@@ -83,14 +83,14 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       position: ''
     };
   }
-  readLatLng(item: any) {
+  readLatLng(item: LooseObject) {
     return {
       lat: parseFloat(item.lat),
       lng: parseFloat(item.lng)
     };
   }
   
-  setMapBox(item: any) {
+  setMapBox(item: LooseObject) {
     this.setState({
       lat: item.lat,
       lng: item.lng,
@@ -112,7 +112,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     });
   }
 
-  renderServiceRows(mapItems: any) {
+  renderServiceRows(mapItems: LooseObject) {
     const { countries } = getUniqMapControls(mapItems);
     let resultRows = [];
 
@@ -161,7 +161,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     return resultRows;
   }
 
-  renderContactRows(mapItems: any) {
+  renderContactRows(mapItems: LooseObject) {
     const { services } = getUniqMapControls(mapItems);
     let resultRows = [];
 
@@ -204,7 +204,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     });
   }
 
-  defineLocation(loc: string, type: string, mapItems: any) {
+  defineLocation(loc: string, type: string, mapItems: LooseObject) {
     for (let i = 0; i < mapItems.length; i++) {
       if (mapItems[i][type] === loc) {
         switch (type) {
@@ -249,7 +249,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     }
   }
 
-  filterCities(country: string, mapItems: any) {
+  filterCities(country: string, mapItems: LooseObject) {
     let filteredCities = [];
     mapItems.forEach(item => {
       item && item.country && item.city && item.country === country ? filteredCities.push(item.city) : '';
@@ -257,7 +257,29 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     return filteredCities;
   }
 
-  onSelectChange(event: React.FormEvent<HTMLSelectElement>, mapItems: any, type?: string) {
+  filterCountries(addFilter: string, mapItems: LooseObject) {
+    let filteredCountries = [];
+    mapItems.forEach(item => {
+      item && item.addFilter && item.country && item.addFilter.includes(addFilter) 
+      ? filteredCountries.push(item.country) 
+      : '';
+    });
+    const uniqFilteredCountries = Array.from(new Set(filteredCountries));
+    return uniqFilteredCountries;
+  }
+
+  filterAddFilter(country: string, mapItems: LooseObject, addFilter: LooseObject) {
+    let filteredAddFilter = [];
+    mapItems.forEach(item => {
+      item && item.country && item.addFilter && item.country.trim() === country.trim() 
+      ? addFilter.map(i => item.addFilter.includes(i) ? filteredAddFilter.push(i) : null)
+      : '';
+    });
+    const uniqFilteredAddFilter = Array.from(new Set(filteredAddFilter));
+    return uniqFilteredAddFilter;
+  }
+
+  onSelectChange(event: React.FormEvent<HTMLSelectElement>, mapItems: LooseObject, type?: string) {
     var safeSearchTypeValue: string = event.currentTarget.value;
 
     switch (type) {
@@ -294,13 +316,17 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     }
   }
 
-  renderControls(mapItems: any) {
+  renderControls(mapItems: LooseObject) {
     const {
       countries,
       addFilters
     } = getUniqMapControls(mapItems);
 
     const cities = this.filterCities(this.state.countrySelectedValue, mapItems).sort();
+
+    const filteredCountries = this.filterCountries(this.state.addFilterSelectedValue, mapItems).sort();
+
+    const filteredAddFilter = this.filterAddFilter(this.state.countrySelectedValue, mapItems, addFilters).sort();
 
     return (
       <div className={'mapControls'}>
@@ -317,9 +343,14 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                       {this.props.addFilterText}
                     </option>}
 
-                  {addFilters && this.orderByAlphabet(addFilters).map((item, i) => (
+                  {this.state.countrySelectedValue === 'all'
+                  ? addFilters && this.orderByAlphabet(addFilters).map((item, i) => (
                     <option key={i} value={item}>{item}</option>
-                  ))}
+                  ))
+                  : addFilters && this.orderByAlphabet(filteredAddFilter).map((item, i) => (
+                    <option key={i} value={item}>{item}</option>
+                  ))
+                  }
                 </select>
               </div>
             </div>}
@@ -333,8 +364,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     <option key="countrySelectedValue">
                       Select country
                     </option>}
-
-                  {countries && this.orderByAlphabet(countries).map((item, i) => (
+                  
+                  {this.state.addFilterSelectedValue === 'all'
+                  ? countries && this.orderByAlphabet(countries).map((item, i) => (
+                    <option key={i} value={item}>{item}</option>
+                  ))
+                  : filteredCountries && this.orderByAlphabet(filteredCountries).map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
@@ -373,7 +408,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     );
   }
 
-  orderByAlphabet(item: any) {
+  orderByAlphabet(item: LooseObject) {
     item.sort();
     return item;
   }
