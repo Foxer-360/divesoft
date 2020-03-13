@@ -16,7 +16,7 @@ export interface MapBoxProps {
   web?: LooseObject;
   position?: string;
   url?: LooseObject;
-  onClick: any;
+  onClick: Function;
 }
 
 export function MapBox(props: MapBoxProps) {

@@ -98,11 +98,11 @@
           "type": "text",
           "title": "Title"
         },
-        "filterByAddress": {
+        "thirdFilter": {
           "type": "boolean",
-          "title": "Filter by address field?"
+          "title": "Additional filter?"
         },
-        "additionalFilterText": {
+        "addFilterText": {
           "type": "text",
           "title": "Additional filter text"
         },
@@ -158,6 +158,10 @@
               "web": {
                 "type": "urlAutocomplete",
                 "title": "Web"
+              },
+              "addFilter": {
+                "type": "text",
+                "title": "Additional filter by"
               }
             }
           }

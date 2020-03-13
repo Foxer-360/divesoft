@@ -5,7 +5,7 @@ import ServiceRowItem from './components/MapRow';
 
 interface MapRowsProps {
   title: string;
-  items: any;
+  items: LooseObject;
 }
 
 const MapRows = (props: MapRowsProps) => {

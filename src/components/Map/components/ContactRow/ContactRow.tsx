@@ -29,8 +29,6 @@ class ContactRow extends React.Component<ContactRowProps, ContactRowState> {
   public render() {
     const { title, rows } = this.props;
 
-    console.log('rows >', rows);
-
     return (
       <div className={'contactRow'}>
         <div className={'container'}>
