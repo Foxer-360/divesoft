@@ -36,6 +36,9 @@ export interface MapState {
   currentPhone: string;
   currentAddress: string;
   currentTitle: string;
+  currentCountry: string;
+  currentCity: string;
+  currentService: string;
   showBox: boolean;
   lat: number;
   lng: number;
@@ -67,6 +70,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       currentPhone: '',
       currentTitle: '',
       currentAddress: '',
+      currentCountry: '',
+      currentCity: '',
+      currentService: '',
       showBox: false,
       lat: 0,
       lng: 0,
@@ -92,6 +98,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       currentPhone: item.phone,
       currentTitle: item.title,
       currentAddress: item.address,
+      currentCountry: item.country,
+      currentCity: item.city,
+      currentService: item.service,
       web: item.web,
       storeChief: item.storeChief,
       text: item.text,
@@ -385,14 +394,14 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
             <MapBox
               web={this.state.web}
               text={this.state.text}
-              city={this.state.citySelectedValue}
-              service={this.state.serviceSelectedValue}
+              city={this.state.currentCity}
+              service={this.state.currentService}
               storeChief={this.state.storeChief}
               email={this.state.currrentEmail}
               phone={this.state.currentPhone}
               title={this.state.currentTitle}
               address={this.state.currentAddress}
-              country={this.state.countrySelectedValue}
+              country={this.state.currentCountry}
               name={this.state.name}
               position={this.state.position}
               onClick={() => this.setState({ showBox: !this.state.showBox })}
