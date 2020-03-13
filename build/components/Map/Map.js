@@ -215,6 +215,26 @@ var Map = /** @class */ (function (_super) {
         });
         return filteredCities;
     };
+    Map.prototype.filterCountries = function (addFilter, mapItems) {
+        var filteredCountries = [];
+        mapItems.forEach(function (item) {
+            item && item.addFilter && item.country && item.addFilter.includes(addFilter)
+                ? filteredCountries.push(item.country)
+                : '';
+        });
+        var uniqFilteredCountries = Array.from(new Set(filteredCountries));
+        return uniqFilteredCountries;
+    };
+    Map.prototype.filterAddFilter = function (country, mapItems, addFilter) {
+        var filteredAddFilter = [];
+        mapItems.forEach(function (item) {
+            item && item.country && item.addFilter && item.country.trim() === country.trim()
+                ? addFilter.map(function (i) { return item.addFilter.includes(i) ? filteredAddFilter.push(i) : null; })
+                : '';
+        });
+        var uniqFilteredAddFilter = Array.from(new Set(filteredAddFilter));
+        return uniqFilteredAddFilter;
+    };
     Map.prototype.onSelectChange = function (event, mapItems, type) {
         var safeSearchTypeValue = event.currentTarget.value;
         switch (type) {
@@ -252,6 +272,8 @@ var Map = /** @class */ (function (_super) {
         var _this = this;
         var _a = getUniqMapControls_1.default(mapItems), countries = _a.countries, addFilters = _a.addFilters;
         var cities = this.filterCities(this.state.countrySelectedValue, mapItems).sort();
+        var filteredCountries = this.filterCountries(this.state.addFilterSelectedValue, mapItems).sort();
+        var filteredAddFilter = this.filterAddFilter(this.state.countrySelectedValue, mapItems, addFilters).sort();
         return (React.createElement("div", { className: 'mapControls' },
             React.createElement("div", { className: 'container' },
                 React.createElement("div", { className: "row justify-content-center" },
@@ -260,13 +282,17 @@ var Map = /** @class */ (function (_super) {
                             React.createElement("select", { onChange: function (e) { return _this.onSelectChange(e, mapItems, 'addFilter'); }, value: this.state.addFilterSelectedValue },
                                 this.state.addFilterSelectedValue === 'all' &&
                                     React.createElement("option", { key: "addFilterSelectedValue" }, this.props.addFilterText),
-                                addFilters && this.orderByAlphabet(addFilters).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                                this.state.countrySelectedValue === 'all'
+                                    ? addFilters && this.orderByAlphabet(addFilters).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })
+                                    : addFilters && this.orderByAlphabet(filteredAddFilter).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-4 col-lg-3" },
                         React.createElement("div", { className: 'select' },
                             React.createElement("select", { value: this.state.countrySelectedValue, onChange: function (e) { _this.onSelectChange(e, mapItems, 'country'); } },
                                 this.state.countrySelectedValue === 'all' &&
                                     React.createElement("option", { key: "countrySelectedValue" }, "Select country"),
-                                countries && this.orderByAlphabet(countries).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
+                                this.state.addFilterSelectedValue === 'all'
+                                    ? countries && this.orderByAlphabet(countries).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })
+                                    : filteredCountries && this.orderByAlphabet(filteredCountries).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     this.state.countrySelectedValue !== 'all' &&
                         React.createElement("div", { className: "col-12 col-md-4 col-lg-3" },
                             React.createElement("div", { className: 'select' },
