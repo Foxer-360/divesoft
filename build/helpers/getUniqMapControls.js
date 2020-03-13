@@ -11,7 +11,6 @@ function getUniqMapControls(data) {
             uniqCities.push(data[i].city);
             uniqServices.push(data[i].service);
             if (data && data[i] && data[i].addFilter) {
-                console.log(data[i].addFilter);
                 data[i].addFilter.split(',').map(function (item) { return uniqAddFilters.push(item.trim()); });
             }
         }

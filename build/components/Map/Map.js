@@ -211,6 +211,7 @@ var Map = /** @class */ (function (_super) {
     Map.prototype.filterCities = function (country, mapItems) {
         var filteredCities = [];
         mapItems.forEach(function (item) {
+            // tslint:disable-next-line: no-unused-expression
             item && item.country && item.city && item.country === country ? filteredCities.push(item.city) : '';
         });
         return filteredCities;
@@ -220,6 +221,7 @@ var Map = /** @class */ (function (_super) {
         mapItems.forEach(function (item) {
             item && item.addFilter && item.country && item.addFilter.includes(addFilter)
                 ? filteredCountries.push(item.country)
+                // tslint:disable-next-line: no-unused-expression
                 : '';
         });
         var uniqFilteredCountries = Array.from(new Set(filteredCountries));
@@ -230,6 +232,7 @@ var Map = /** @class */ (function (_super) {
         mapItems.forEach(function (item) {
             item && item.country && item.addFilter && item.country.trim() === country.trim()
                 ? addFilter.map(function (i) { return item.addFilter.includes(i) ? filteredAddFilter.push(i) : null; })
+                // tslint:disable-next-line: no-unused-expression
                 : '';
         });
         var uniqFilteredAddFilter = Array.from(new Set(filteredAddFilter));
@@ -283,7 +286,7 @@ var Map = /** @class */ (function (_super) {
                                 this.state.addFilterSelectedValue === 'all' &&
                                     React.createElement("option", { key: "addFilterSelectedValue" }, this.props.addFilterText),
                                 this.state.countrySelectedValue === 'all'
-                                    ? addFilters && this.orderByAlphabet(addFilters).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })
+                                    ? addFilters && addFilters.map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })
                                     : addFilters && this.orderByAlphabet(filteredAddFilter).map(function (item, i) { return (React.createElement("option", { key: i, value: item }, item)); })))),
                     React.createElement("div", { className: "col-12 col-md-4 col-lg-3" },
                         React.createElement("div", { className: 'select' },
