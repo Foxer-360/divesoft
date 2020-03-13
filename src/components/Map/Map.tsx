@@ -252,6 +252,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   filterCities(country: string, mapItems: LooseObject) {
     let filteredCities = [];
     mapItems.forEach(item => {
+      // tslint:disable-next-line: no-unused-expression
       item && item.country && item.city && item.country === country ? filteredCities.push(item.city) : '';
     });
     return filteredCities;
@@ -262,6 +263,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     mapItems.forEach(item => {
       item && item.addFilter && item.country && item.addFilter.includes(addFilter) 
       ? filteredCountries.push(item.country) 
+      // tslint:disable-next-line: no-unused-expression
       : '';
     });
     const uniqFilteredCountries = Array.from(new Set(filteredCountries));
@@ -273,6 +275,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     mapItems.forEach(item => {
       item && item.country && item.addFilter && item.country.trim() === country.trim() 
       ? addFilter.map(i => item.addFilter.includes(i) ? filteredAddFilter.push(i) : null)
+      // tslint:disable-next-line: no-unused-expression
       : '';
     });
     const uniqFilteredAddFilter = Array.from(new Set(filteredAddFilter));
@@ -344,7 +347,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     </option>}
 
                   {this.state.countrySelectedValue === 'all'
-                  ? addFilters && this.orderByAlphabet(addFilters).map((item, i) => (
+                  ? addFilters && addFilters.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))
                   : addFilters && this.orderByAlphabet(filteredAddFilter).map((item, i) => (
@@ -358,7 +361,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               <div className={'select'}>
                 <select
                   value={this.state.countrySelectedValue}
-                  onChange={e => {this.onSelectChange(e, mapItems, 'country')}}
+                  onChange={e => {this.onSelectChange(e, mapItems, 'country'); }}
                 >
                   {this.state.countrySelectedValue === 'all' &&
                     <option key="countrySelectedValue">

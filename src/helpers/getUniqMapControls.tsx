@@ -10,7 +10,6 @@ export default function getUniqMapControls(data: LooseObject) {
       uniqCities.push(data[i].city);
       uniqServices.push(data[i].service);
       if (data && data[i] && data[i].addFilter) {
-        console.log(data[i].addFilter)
         data[i].addFilter.split(',').map(item => uniqAddFilters.push(item.trim()));
       }
     }
