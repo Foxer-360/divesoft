@@ -24,6 +24,11 @@ export interface MapState {
   citySelectedValue: string;
   serviceSelectedValue: string;
   addFilterSelectedValue: string;
+  defaultMapCenter: {
+    lat: number,
+    lng: number
+  };
+  defaultMapZoom: number;
   mapCenter: {
     lat: number,
     lng: number
@@ -47,6 +52,7 @@ export interface MapState {
   storeChief: string;
   name: string;
   position: string;
+  map: LooseObject;
 }
 
 class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
@@ -58,6 +64,11 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       citySelectedValue: 'all',
       serviceSelectedValue: 'all',
       addFilterSelectedValue: 'all',
+      defaultMapCenter: {
+        lat: 50,
+        lng: 14
+      },
+      defaultMapZoom: 5,
       mapCenter: {
         lat: 50,
         lng: 14
@@ -80,7 +91,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       text: '',
       storeChief: '',
       name: '',
-      position: ''
+      position: '',
+      map: {}
     };
   }
   readLatLng(item: LooseObject) {
@@ -91,6 +103,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   }
   
   setMapBox(item: LooseObject) {
+    this.setState({
+      mapZoom: 13,
+    });
     this.setState({
       lat: item.lat,
       lng: item.lng,
@@ -416,6 +431,10 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     return item;
   }
 
+  apiIsLoaded = (map, maps) => {
+    this.setState({map: map});
+  }
+
   render() {
     const { mapItems, type } = this.props;
 
@@ -442,21 +461,26 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               country={this.state.currentCountry}
               name={this.state.name}
               position={this.state.position}
-              onClick={() => this.setState({ showBox: !this.state.showBox })}
+              onClick={() => this.setState({
+                showBox: !this.state.showBox,
+                mapZoom: this.state.defaultMapZoom,
+                mapCenter: this.state.defaultMapCenter
+              })}
             />
           }
 
           <GoogleMapReact
             yesIWantToUseGoogleMapApiInternals={true}
             bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-            defaultCenter={{ lat: 50, lng: 14 }}
+            defaultCenter={this.state.defaultMapCenter}
             center={this.state.mapCenter}
-            defaultZoom={5}
+            defaultZoom={this.state.defaultMapZoom}
             zoom={this.state.mapZoom}
             options={{
               scrollwheel: false,
               styles: MapStyles
             }}
+            onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           >
             {mapItems && mapItems
               .filter(item => Math.abs(item.lng) && Math.abs(item.lat)
