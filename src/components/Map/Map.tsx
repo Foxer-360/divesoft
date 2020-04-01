@@ -94,6 +94,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       position: '',
       map: {}
     };
+
+    this.setMapBox = this.setMapBox.bind(this);
   }
   readLatLng(item: LooseObject) {
     return {
@@ -103,9 +105,6 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   }
   
   setMapBox(item: LooseObject) {
-    this.setState({
-      mapZoom: 13,
-    });
     this.setState({
       lat: item.lat,
       lng: item.lng,
@@ -124,6 +123,14 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       showBox: item ? true : !this.state.showBox,
       mapZoom: 14,
       mapCenter: this.readLatLng(item)
+    });
+  }
+
+  closeMapBox = () => {
+    this.setState({
+      showBox: !this.state.showBox,
+      mapZoom: this.state.defaultMapZoom,
+      mapCenter: this.state.defaultMapCenter
     });
   }
 
@@ -153,7 +160,11 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     email: mapItems[j].email,
                     phone: mapItems[j].phone,
                     web: mapItems[j].web,
-                    addFilter: mapItems[j].addFilter
+                    addFilter: mapItems[j].addFilter,
+                    lat: mapItems[j].lat,
+                    lng: mapItems[j].lng,
+                    name: mapItems[j].name,
+                    position: mapItems[j].position,
                   }
                 );
               }
@@ -167,7 +178,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
         || mapItems.addFilter === this.state.addFilterSelectedValue
         || this.state.addFilterSelectedValue === 'all') {
           resultRows.push(
-            <MapRows key={i} title={countries[i]} items={composedRows.reverse()} />
+            <MapRows 
+              key={i} 
+              title={countries[i]} 
+              items={composedRows.reverse()} 
+              open={this.setMapBox} 
+            />
           );
         }
       }
@@ -461,11 +477,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               country={this.state.currentCountry}
               name={this.state.name}
               position={this.state.position}
-              onClick={() => this.setState({
-                showBox: !this.state.showBox,
-                mapZoom: this.state.defaultMapZoom,
-                mapCenter: this.state.defaultMapCenter
-              })}
+              onClick={() => this.closeMapBox()}
             />
           }
 
