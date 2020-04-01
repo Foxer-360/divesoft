@@ -27,6 +27,13 @@ var Map = /** @class */ (function (_super) {
     __extends(Map, _super);
     function Map(props) {
         var _this = _super.call(this, props) || this;
+        _this.closeMapBox = function () {
+            _this.setState({
+                showBox: !_this.state.showBox,
+                mapZoom: _this.state.defaultMapZoom,
+                mapCenter: _this.state.defaultMapCenter
+            });
+        };
         _this.resetFilters = function () {
             _this.setState({
                 countrySelectedValue: 'all',
@@ -74,6 +81,7 @@ var Map = /** @class */ (function (_super) {
             position: '',
             map: {}
         };
+        _this.setMapBox = _this.setMapBox.bind(_this);
         return _this;
     }
     Map.prototype.readLatLng = function (item) {
@@ -83,9 +91,6 @@ var Map = /** @class */ (function (_super) {
         };
     };
     Map.prototype.setMapBox = function (item) {
-        this.setState({
-            mapZoom: 13,
-        });
         this.setState({
             lat: item.lat,
             lng: item.lng,
@@ -130,7 +135,11 @@ var Map = /** @class */ (function (_super) {
                                     email: mapItems[j].email,
                                     phone: mapItems[j].phone,
                                     web: mapItems[j].web,
-                                    addFilter: mapItems[j].addFilter
+                                    addFilter: mapItems[j].addFilter,
+                                    lat: mapItems[j].lat,
+                                    lng: mapItems[j].lng,
+                                    name: mapItems[j].name,
+                                    position: mapItems[j].position,
                                 });
                             }
                         }
@@ -141,7 +150,7 @@ var Map = /** @class */ (function (_super) {
                 if (composedRows.some(function (item) { return item.addFilter && item.addFilter.includes(_this.state.addFilterSelectedValue); })
                     || mapItems.addFilter === this.state.addFilterSelectedValue
                     || this.state.addFilterSelectedValue === 'all') {
-                    resultRows.push(React.createElement(MapRows_1.default, { key: i, title: countries[i], items: composedRows.reverse() }));
+                    resultRows.push(React.createElement(MapRows_1.default, { key: i, title: countries[i], items: composedRows.reverse(), open: this.setMapBox }));
                 }
             }
         }
@@ -335,11 +344,7 @@ var Map = /** @class */ (function (_super) {
             this.renderControls(mapItems),
             React.createElement("section", { className: 'map' },
                 this.state.showBox &&
-                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.currentCity, service: this.state.currentService, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.currentCountry, name: this.state.name, position: this.state.position, onClick: function () { return _this.setState({
-                            showBox: !_this.state.showBox,
-                            mapZoom: _this.state.defaultMapZoom,
-                            mapCenter: _this.state.defaultMapCenter
-                        }); } }),
+                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.currentCity, service: this.state.currentService, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.currentCountry, name: this.state.name, position: this.state.position, onClick: function () { return _this.closeMapBox(); } }),
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: this.state.defaultMapCenter, center: this.state.mapCenter, defaultZoom: this.state.defaultMapZoom, zoom: this.state.mapZoom, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
