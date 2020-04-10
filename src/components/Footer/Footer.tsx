@@ -194,43 +194,6 @@ class Footer extends React.Component<FooterProps, FooterState> {
               <footer className={'footer'}>
                 <CookiePopup />
                 <div className={'container'}>
-                  <div className={'footer__newsletter'}>
-                    <h3>Divesoft newsletter</h3>
-                    <p>Enter your e-mail to subscribe to our newsletter!</p>
-                      <input
-                        type={'e-mail'}
-                        value={this.state.email}
-                        onChange={e => onChangeEmail(e)}
-                        placeholder={'e-mail'}
-                      />
-                      <Mutation mutation={CREATE_SUBSCRIBER}>
-                        {createSubscriber => 
-                          <button onClick={onSubmit(createSubscriber)} className={'btn'}>
-                            OK
-                          </button>}
-                      </Mutation>
-
-                      {this.state.error.email &&
-                        <ValidationAlert>
-                          {'Enter your email'}
-                        </ValidationAlert>}
-
-                      {this.state.error.emailValid &&
-                        <ValidationAlert>
-                          {'Wrong email format'}
-                        </ValidationAlert>}
-
-                      {this.state.error.sending &&
-                        <ValidationAlert>
-                          {'Error sending email.'}
-                        </ValidationAlert>}
-
-                      {this.state.displayThankYou && (
-                        <div className={'subscribe__thankyou'}>
-                          Thanks for subscribing to our newsletter.
-                        </div>
-                      )}
-                  </div>
                   <div className={'footer__divider'} />
                   <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>

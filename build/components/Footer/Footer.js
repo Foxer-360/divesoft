@@ -151,20 +151,6 @@ var Footer = /** @class */ (function (_super) {
                 React.createElement("footer", { className: 'footer' },
                     React.createElement(CookiePopup_1.default, null),
                     React.createElement("div", { className: 'container' },
-                        React.createElement("div", { className: 'footer__newsletter' },
-                            React.createElement("h3", null, "Divesoft newsletter"),
-                            React.createElement("p", null, "Enter your e-mail to subscribe to our newsletter!"),
-                            React.createElement("input", { type: 'e-mail', value: _this.state.email, onChange: function (e) { return onChangeEmail(e); }, placeholder: 'e-mail' }),
-                            React.createElement(react_apollo_1.Mutation, { mutation: CREATE_SUBSCRIBER }, function (createSubscriber) {
-                                return React.createElement("button", { onClick: onSubmit(createSubscriber), className: 'btn' }, "OK");
-                            }),
-                            _this.state.error.email &&
-                                React.createElement(ValidationAlert_1.default, null, 'Enter your email'),
-                            _this.state.error.emailValid &&
-                                React.createElement(ValidationAlert_1.default, null, 'Wrong email format'),
-                            _this.state.error.sending &&
-                                React.createElement(ValidationAlert_1.default, null, 'Error sending email.'),
-                            _this.state.displayThankYou && (React.createElement("div", { className: 'subscribe__thankyou' }, "Thanks for subscribing to our newsletter."))),
                         React.createElement("div", { className: 'footer__divider' }),
                         React.createElement("div", { className: 'footer__navigation row d-flex justify-content-between align-items-start' },
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
