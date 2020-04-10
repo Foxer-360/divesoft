@@ -10,6 +10,8 @@ interface MapRowProps {
   phone?: string;
   email?: string;
   web?: LooseObject;
+  item: LooseObject;
+  open: Function;
 }
 
 interface MapRowState {
@@ -33,6 +35,13 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
     return [ address, city ].filter(item => item && item.trim()).map(item => item.trim()).join(', ');
   }
 
+  rowClick = (item) => {
+    if (!this.state.show) {
+      this.props.open(item);
+    }
+    this.setState({ show: !this.state.show });
+  }
+
   public render () {
     const {
       title,
@@ -41,6 +50,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
       phone,
       email,
       web,
+      item,
     } = this.props;
 
     const url = web && web.url && web.url.trim && web.url.trim();
@@ -48,7 +58,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
     return (
       <div className="row">
         <div className="col-12 col-md-5">
-          <h5 onClick={() => this.setState({ show: !this.state.show })}>{title}</h5>
+          <h5 onClick={() => this.rowClick(item)}>{title}</h5>
           {this.state.show ?
             <div className={'mapRow__list__contacts'}>
               {storeChief && <p>Store chief: {storeChief}</p>}
@@ -60,11 +70,11 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
         </div>
         <div className="col-12 col-md-7">
           <div
-            onClick={() => this.setState({ show: !this.state.show })}
+            onClick={() => this.rowClick(item)}
             className={`mapRow__list__show ${this.state.show ? 'mapRow__list__show--minus' : ''}`}
           />
           <div className={'mapRow__list__item'}>
-            <p onClick={() => this.setState({ show: !this.state.show })}>{this.renderListItem()}</p>
+            <p onClick={() => this.rowClick(item)}>{this.renderListItem()}</p>
             {this.state.show && text && <ReactMarkdown source={text} />}
           </div>
         </div>

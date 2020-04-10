@@ -36,6 +36,7 @@ var ReactMarkdown = require("react-markdown");
 var Link_1 = require("../../partials/Link");
 var Loader_1 = require("../../partials/Loader");
 var CookiePopup_1 = require("./components/CookiePopup");
+var ValidationAlert_1 = require("../ValidationAlert");
 var GET_CONTEXT = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"], ["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"])));
 var GET_PAGES_URLS = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"], ["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"])));
 var CREATE_SUBSCRIBER = graphql_tag_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"], ["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"])));
