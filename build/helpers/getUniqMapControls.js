@@ -3,29 +3,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function getUniqMapControls(data) {
     var uniqCities = [];
     var uniqCountries = [];
-    var uniqAddresses = [];
+    var uniqServices = [];
+    var uniqAddFilters = [];
     var propsToArray = function () {
         for (var i = 0; i < data.length; i++) {
             uniqCountries.push(data[i].country);
-        }
-        for (var i = 0; i < data.length; i++) {
             uniqCities.push(data[i].city);
+            uniqServices.push(data[i].service);
+            if (data && data[i] && data[i].addFilter) {
+                data[i].addFilter.split(',').map(function (item) { return uniqAddFilters.push(item.trim()); });
+            }
         }
-        var addresses = [];
-        for (var i = 0; i < data.length; i++) {
-            data[i].address.split(',').map(function (item) { return addresses.push(item.trim()); });
-        }
-        uniqAddresses = Array.from(new Set(addresses));
     };
     var uniqueArray = function (arr) { return Array.from(new Set(arr)); };
     propsToArray();
     uniqCities = uniqueArray(uniqCities);
     uniqCountries = uniqueArray(uniqCountries);
-    uniqAddresses = uniqueArray(uniqAddresses);
+    uniqServices = uniqueArray(uniqServices);
+    uniqAddFilters = uniqueArray(uniqAddFilters);
     return {
         cities: uniqCities.sort(),
         countries: uniqCountries.sort(),
-        addresses: uniqAddresses.sort()
+        services: uniqServices.sort(),
+        addFilters: uniqAddFilters.sort()
     };
 }
 exports.default = getUniqMapControls;

@@ -25,7 +25,6 @@ var ContactRow = /** @class */ (function (_super) {
     }
     ContactRow.prototype.render = function () {
         var _a = this.props, title = _a.title, rows = _a.rows;
-        console.log('rows >', rows);
         return (React.createElement("div", { className: 'contactRow' },
             React.createElement("div", { className: 'container' },
                 React.createElement("div", { className: "row contactRow__divider" },

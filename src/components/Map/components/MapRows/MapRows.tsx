@@ -5,7 +5,8 @@ import ServiceRowItem from './components/MapRow';
 
 interface MapRowsProps {
   title: string;
-  items: any;
+  items: LooseObject;
+  open?: Function;
 }
 
 const MapRows = (props: MapRowsProps) => {
@@ -33,6 +34,8 @@ const MapRows = (props: MapRowsProps) => {
                       email={item.email}
                       address={item.address}
                       storeChief={item.storeChief}
+                      item={item}
+                      open={props.open}
                     />
                   ))}
                 </div>

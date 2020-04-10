@@ -23,6 +23,12 @@ var MapRow = /** @class */ (function (_super) {
             var _a = _this.props, address = _a.address, city = _a.city;
             return [address, city].filter(function (item) { return item && item.trim(); }).map(function (item) { return item.trim(); }).join(', ');
         };
+        _this.rowClick = function (item) {
+            if (!_this.state.show) {
+                _this.props.open(item);
+            }
+            _this.setState({ show: !_this.state.show });
+        };
         _this.state = {
             show: false
         };
@@ -30,11 +36,11 @@ var MapRow = /** @class */ (function (_super) {
     }
     MapRow.prototype.render = function () {
         var _this = this;
-        var _a = this.props, title = _a.title, text = _a.text, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web;
+        var _a = this.props, title = _a.title, text = _a.text, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web, item = _a.item;
         var url = web && web.url && web.url.trim && web.url.trim();
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-12 col-md-5" },
-                React.createElement("h5", { onClick: function () { return _this.setState({ show: !_this.state.show }); } }, title),
+                React.createElement("h5", { onClick: function () { return _this.rowClick(item); } }, title),
                 this.state.show ?
                     React.createElement("div", { className: 'mapRow__list__contacts' },
                         storeChief && React.createElement("p", null,
@@ -50,9 +56,9 @@ var MapRow = /** @class */ (function (_super) {
                             "Web: ",
                             React.createElement("a", { href: url, target: '_blank' }, String(url)))) : ''),
             React.createElement("div", { className: "col-12 col-md-7" },
-                React.createElement("div", { onClick: function () { return _this.setState({ show: !_this.state.show }); }, className: "mapRow__list__show " + (this.state.show ? 'mapRow__list__show--minus' : '') }),
+                React.createElement("div", { onClick: function () { return _this.rowClick(item); }, className: "mapRow__list__show " + (this.state.show ? 'mapRow__list__show--minus' : '') }),
                 React.createElement("div", { className: 'mapRow__list__item' },
-                    React.createElement("p", { onClick: function () { return _this.setState({ show: !_this.state.show }); } }, this.renderListItem()),
+                    React.createElement("p", { onClick: function () { return _this.rowClick(item); } }, this.renderListItem()),
                     this.state.show && text && React.createElement(ReactMarkdown, { source: text }))),
             React.createElement("div", { className: 'mapRow__list__divider' })));
     };

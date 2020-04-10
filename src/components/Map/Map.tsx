@@ -13,16 +13,22 @@ import getUniqMapControls from '../../helpers/getUniqMapControls';
 import { number } from 'prop-types';
 
 export interface MapProps {
-  mapItems: any;
-  filterByAddress?: boolean;
-  additionalFilterText?: string;
+  mapItems: LooseObject;
+  thirdFilter?: boolean;
+  addFilterText?: string;
   type: string;
 }
 
 export interface MapState {
   countrySelectedValue: string;
   citySelectedValue: string;
-  addressSelectedValue: string;
+  serviceSelectedValue: string;
+  addFilterSelectedValue: string;
+  defaultMapCenter: {
+    lat: number,
+    lng: number
+  };
+  defaultMapZoom: number;
   mapCenter: {
     lat: number,
     lng: number
@@ -30,11 +36,14 @@ export interface MapState {
   mapZoom: number;
   cities: Array<string>;
   countries: Array<string>;
-  addresses: Array<string>;
+  addFilters: Array<string>;
   currrentEmail: string;
   currentPhone: string;
   currentAddress: string;
   currentTitle: string;
+  currentCountry: string;
+  currentCity: string;
+  currentService: string;
   showBox: boolean;
   lat: number;
   lng: number;
@@ -43,6 +52,7 @@ export interface MapState {
   storeChief: string;
   name: string;
   position: string;
+  map: LooseObject;
 }
 
 class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
@@ -52,7 +62,13 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     this.state = {
       countrySelectedValue: 'all',
       citySelectedValue: 'all',
-      addressSelectedValue: 'all',
+      serviceSelectedValue: 'all',
+      addFilterSelectedValue: 'all',
+      defaultMapCenter: {
+        lat: 50,
+        lng: 14
+      },
+      defaultMapZoom: 5,
       mapCenter: {
         lat: 50,
         lng: 14
@@ -60,11 +76,14 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       mapZoom: 5,
       cities: [],
       countries: [],
-      addresses: [],
+      addFilters: [],
       currrentEmail: '',
       currentPhone: '',
       currentTitle: '',
       currentAddress: '',
+      currentCountry: '',
+      currentCity: '',
+      currentService: '',
       showBox: false,
       lat: 0,
       lng: 0,
@@ -72,18 +91,20 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       text: '',
       storeChief: '',
       name: '',
-      position: ''
+      position: '',
+      map: {}
     };
-  }
 
-  readLatLng(item: any) {
+    this.setMapBox = this.setMapBox.bind(this);
+  }
+  readLatLng(item: LooseObject) {
     return {
       lat: parseFloat(item.lat),
       lng: parseFloat(item.lng)
     };
   }
-
-  setMapBox(item: any) {
+  
+  setMapBox(item: LooseObject) {
     this.setState({
       lat: item.lat,
       lng: item.lng,
@@ -91,9 +112,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       currentPhone: item.phone,
       currentTitle: item.title,
       currentAddress: item.address,
-      citySelectedValue: item.city,
-      addressSelectedValue: item.address,
-      countrySelectedValue: item.country,
+      currentCountry: item.country,
+      currentCity: item.city,
+      currentService: item.service,
       web: item.web,
       storeChief: item.storeChief,
       text: item.text,
@@ -105,7 +126,15 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     });
   }
 
-  renderServiceRows(mapItems: any) {
+  closeMapBox = () => {
+    this.setState({
+      showBox: !this.state.showBox,
+      mapZoom: this.state.defaultMapZoom,
+      mapCenter: this.state.defaultMapCenter
+    });
+  }
+
+  renderServiceRows(mapItems: LooseObject) {
     const { countries } = getUniqMapControls(mapItems);
     let resultRows = [];
 
@@ -116,8 +145,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
         if (mapItems[j].country === countries[i]) {
           if (mapItems[j].country === this.state.countrySelectedValue || this.state.countrySelectedValue === 'all') {
             if (mapItems[j].city === this.state.citySelectedValue || this.state.citySelectedValue === 'all') {
-              if (mapItems[j].address.includes(this.state.addressSelectedValue)
-              || this.state.addressSelectedValue === 'all') {
+              if (mapItems[j].addFilter && mapItems[j].addFilter.includes(this.state.addFilterSelectedValue)
+              || mapItems[j].addFilter === this.state.addFilterSelectedValue
+              || this.state.addFilterSelectedValue === 'all') {
                 composedRows.push(
                   {
                     city: mapItems[j].city,
@@ -129,7 +159,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     storeChief: mapItems[j].storeChief,
                     email: mapItems[j].email,
                     phone: mapItems[j].phone,
-                    web: mapItems[j].web
+                    web: mapItems[j].web,
+                    addFilter: mapItems[j].addFilter,
+                    lat: mapItems[j].lat,
+                    lng: mapItems[j].lng,
+                    name: mapItems[j].name,
+                    position: mapItems[j].position,
                   }
                 );
               }
@@ -139,11 +174,17 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       }
 
       if (this.state.countrySelectedValue === countries[i] || this.state.countrySelectedValue === 'all') {
-        if (composedRows.some(item => item.address.includes(this.state.addressSelectedValue))
-        || this.state.addressSelectedValue === 'all') {
+        if (composedRows.some(item => item.addFilter && item.addFilter.includes(this.state.addFilterSelectedValue))
+        || mapItems.addFilter === this.state.addFilterSelectedValue
+        || this.state.addFilterSelectedValue === 'all') {
           resultRows.push(
-            <MapRows key={i} title={countries[i]} items={composedRows.reverse()} />
-            );
+            <MapRows 
+              key={i} 
+              title={countries[i]} 
+              items={composedRows.reverse()} 
+              open={this.setMapBox} 
+            />
+          );
         }
       }
     }
@@ -151,16 +192,16 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     return resultRows;
   }
 
-  renderContactRows(mapItems: any) {
-    const { addresses } = getUniqMapControls(mapItems);
+  renderContactRows(mapItems: LooseObject) {
+    const { services } = getUniqMapControls(mapItems);
     let resultRows = [];
 
-    for (let i = 0; i < addresses.length; i++) {
+    for (let i = 0; i < services.length; i++) {
       let composedRows = [];
 
       for (let j = 0; j < mapItems.length; j++) {
-        if (mapItems[j].address === addresses[i]) {
-          if (mapItems[j].address === this.state.addressSelectedValue || this.state.addressSelectedValue === 'all') {
+        if (mapItems[j].service === services[i]) {
+          if (mapItems[j].service === this.state.serviceSelectedValue || this.state.serviceSelectedValue === 'all') {
             composedRows.push(
               {
                 name: mapItems[j].name,
@@ -174,9 +215,9 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
         }
       }
 
-      if (this.state.addressSelectedValue === addresses[i] || this.state.addressSelectedValue === 'all') {
+      if (this.state.serviceSelectedValue === services[i] || this.state.serviceSelectedValue === 'all') {
         resultRows.push(
-          <ContactRow key={i} title={addresses[i]} rows={composedRows} />
+          <ContactRow key={i} title={services[i]} rows={composedRows} />
         );
       }
     }
@@ -188,12 +229,13 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     this.setState({
       countrySelectedValue: 'all',
       citySelectedValue: 'all',
-      addressSelectedValue: 'all',
+      serviceSelectedValue: 'all',
+      addFilterSelectedValue: 'all',
       showBox: false
     });
   }
 
-  defineLocation(loc: string, type: string, mapItems: any) {
+  defineLocation(loc: string, type: string, mapItems: LooseObject) {
     for (let i = 0; i < mapItems.length; i++) {
       if (mapItems[i][type] === loc) {
         switch (type) {
@@ -203,7 +245,6 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               countrySelectedValue: mapItems[i].country,
               mapZoom: 6
             });
-            // console.log(mapItems[i], mapItems[i].lat, mapItems[i].lng);
             break;
           case 'city':
             this.setState({
@@ -221,7 +262,16 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
 
           default: break;
         }
-
+        if (mapItems[i].lat > 85) {
+          let countryMapItems = mapItems.filter(item => item.country === mapItems[i].country && item.lat < 85);
+          if (countryMapItems.length === 0) {
+            return this.state.mapCenter;
+          }
+          return {
+            lat: parseFloat(countryMapItems[0].lat),
+            lng: parseFloat(countryMapItems[0].lng)
+          };
+        }
         return {
           lat: parseFloat(mapItems[i].lat),
           lng: parseFloat(mapItems[i].lng)
@@ -230,15 +280,40 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     }
   }
 
-  filterCities(country: string, mapItems: any) {
+  filterCities(country: string, mapItems: LooseObject) {
     let filteredCities = [];
     mapItems.forEach(item => {
+      // tslint:disable-next-line: no-unused-expression
       item && item.country && item.city && item.country === country ? filteredCities.push(item.city) : '';
     });
     return filteredCities;
   }
 
-  onSelectChange(event: React.FormEvent<HTMLSelectElement>, mapItems: any, type?: string) {
+  filterCountries(addFilter: string, mapItems: LooseObject) {
+    let filteredCountries = [];
+    mapItems.forEach(item => {
+      item && item.addFilter && item.country && item.addFilter.includes(addFilter) 
+      ? filteredCountries.push(item.country) 
+      // tslint:disable-next-line: no-unused-expression
+      : '';
+    });
+    const uniqFilteredCountries = Array.from(new Set(filteredCountries));
+    return uniqFilteredCountries;
+  }
+
+  filterAddFilter(country: string, mapItems: LooseObject, addFilter: LooseObject) {
+    let filteredAddFilter = [];
+    mapItems.forEach(item => {
+      item && item.country && item.addFilter && item.country.trim() === country.trim() 
+      ? addFilter.map(i => item.addFilter.includes(i) ? filteredAddFilter.push(i) : null)
+      // tslint:disable-next-line: no-unused-expression
+      : '';
+    });
+    const uniqFilteredAddFilter = Array.from(new Set(filteredAddFilter));
+    return uniqFilteredAddFilter;
+  }
+
+  onSelectChange(event: React.FormEvent<HTMLSelectElement>, mapItems: LooseObject, type?: string) {
     var safeSearchTypeValue: string = event.currentTarget.value;
 
     switch (type) {
@@ -256,10 +331,17 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
           mapCenter: this.defineLocation(safeSearchTypeValue, type, mapItems)
         });
         break;
-      case 'address':
+      case 'service':
+        this.setState({
+          showBox: true,
+          serviceSelectedValue: safeSearchTypeValue,
+          mapCenter: this.defineLocation(safeSearchTypeValue, type, mapItems)
+        });
+        break;
+      case 'addFilter':
         this.setState({
           showBox: false,
-          addressSelectedValue: safeSearchTypeValue,
+          addFilterSelectedValue: safeSearchTypeValue,
           // mapCenter: this.defineLocation(safeSearchTypeValue, type, mapItems)
         });
         break;
@@ -268,32 +350,41 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     }
   }
 
-  renderControls(mapItems: any) {
+  renderControls(mapItems: LooseObject) {
     const {
       countries,
-      addresses
+      addFilters
     } = getUniqMapControls(mapItems);
 
     const cities = this.filterCities(this.state.countrySelectedValue, mapItems).sort();
+
+    const filteredCountries = this.filterCountries(this.state.addFilterSelectedValue, mapItems).sort();
+
+    const filteredAddFilter = this.filterAddFilter(this.state.countrySelectedValue, mapItems, addFilters).sort();
 
     return (
       <div className={'mapControls'}>
         <div className={'container'}>
           <div className="row justify-content-center">
-            {this.props.filterByAddress && <div className="col-12 col-md-3">
+            {this.props.thirdFilter && <div className="col-12 col-md-3">
               <div className={'select'}>
                 <select
-                  onChange={e => this.onSelectChange(e, mapItems, 'address')}
-                  value={this.state.addressSelectedValue}
+                  onChange={e => this.onSelectChange(e, mapItems, 'addFilter')}
+                  value={this.state.addFilterSelectedValue}
                 >
-                  {this.state.addressSelectedValue === 'all' &&
-                    <option key="addressSelectedValue">
-                      {this.props.additionalFilterText}
+                  {this.state.addFilterSelectedValue === 'all' &&
+                    <option key="addFilterSelectedValue">
+                      {this.props.addFilterText}
                     </option>}
 
-                  {addresses && addresses.map((item, i) => (
+                  {this.state.countrySelectedValue === 'all'
+                  ? addFilters && addFilters.map((item, i) => (
                     <option key={i} value={item}>{item}</option>
-                  ))}
+                  ))
+                  : addFilters && this.orderByAlphabet(filteredAddFilter).map((item, i) => (
+                    <option key={i} value={item}>{item}</option>
+                  ))
+                  }
                 </select>
               </div>
             </div>}
@@ -301,14 +392,18 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               <div className={'select'}>
                 <select
                   value={this.state.countrySelectedValue}
-                  onChange={e => this.onSelectChange(e, mapItems, 'country')}
+                  onChange={e => {this.onSelectChange(e, mapItems, 'country'); }}
                 >
                   {this.state.countrySelectedValue === 'all' &&
                     <option key="countrySelectedValue">
                       Select country
                     </option>}
-
-                  {countries && this.orderByAlphabet(countries).map((item, i) => (
+                  
+                  {this.state.addFilterSelectedValue === 'all'
+                  ? countries && this.orderByAlphabet(countries).map((item, i) => (
+                    <option key={i} value={item}>{item}</option>
+                  ))
+                  : filteredCountries && this.orderByAlphabet(filteredCountries).map((item, i) => (
                     <option key={i} value={item}>{item}</option>
                   ))}
                 </select>
@@ -347,9 +442,13 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     );
   }
 
-  orderByAlphabet(item: any) {
+  orderByAlphabet(item: LooseObject) {
     item.sort();
     return item;
+  }
+
+  apiIsLoaded = (map, maps) => {
+    this.setState({map: map});
   }
 
   render() {
@@ -359,7 +458,6 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
     // for (let i = 0; i < mapItems.length; i++) {
     //   mapItems[i].service = mapItems[i].association;
     // }
-
     return (
       <>
         {this.renderControls(mapItems)}
@@ -369,37 +467,42 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
             <MapBox
               web={this.state.web}
               text={this.state.text}
-              city={this.state.citySelectedValue}
-              service={this.state.addressSelectedValue}
+              city={this.state.currentCity}
+              service={this.state.currentService}
               storeChief={this.state.storeChief}
               email={this.state.currrentEmail}
               phone={this.state.currentPhone}
               title={this.state.currentTitle}
               address={this.state.currentAddress}
-              country={this.state.countrySelectedValue}
+              country={this.state.currentCountry}
               name={this.state.name}
               position={this.state.position}
-              onClick={() => this.setState({ showBox: !this.state.showBox })}
+              onClick={() => this.closeMapBox()}
             />
           }
 
           <GoogleMapReact
             yesIWantToUseGoogleMapApiInternals={true}
             bootstrapURLKeys={{ key: GoogleMapsApiKey }}
-            defaultCenter={{ lat: 50, lng: 14 }}
+            defaultCenter={this.state.defaultMapCenter}
             center={this.state.mapCenter}
-            defaultZoom={5}
+            defaultZoom={this.state.defaultMapZoom}
             zoom={this.state.mapZoom}
             options={{
               scrollwheel: false,
               styles: MapStyles
             }}
+            onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           >
             {mapItems && mapItems
-              .filter(item => item.lng && item.lat
+              .filter(item => Math.abs(item.lng) && Math.abs(item.lat)
                 && (item.country === this.state.countrySelectedValue || this.state.countrySelectedValue === 'all')
                 && (item.city === this.state.citySelectedValue || this.state.citySelectedValue === 'all')
-                && (item.address === this.state.addressSelectedValue || this.state.addressSelectedValue === 'all'))
+                && (item.addFilter === this.state.addFilterSelectedValue
+                  || item.addFilter && item.addFilter.includes(this.state.addFilterSelectedValue) 
+                  || this.state.addFilterSelectedValue === 'all'
+                  )
+                )
               .map((item, i) => {
               return (
                 <Marker
