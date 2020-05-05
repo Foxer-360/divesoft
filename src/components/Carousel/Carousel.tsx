@@ -45,7 +45,9 @@ const Carousel = (props: CarouselProps) => (
                     <h1 style={slide.isBackgroundBlack ? {color: 'white'} : {}}>
                       {slide.title}
                     </h1>}
-                  <p>{slide.description}</p>
+                  <p style={slide.isBackgroundBlack ? {color: '#ccc'} : {}}>
+                    {slide.description}
+                  </p>
                   {slide.buttonTitle &&
                     <div
                       className={'carousel__content__btnHolder'}
