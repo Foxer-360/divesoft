@@ -3394,11 +3394,17 @@ a {
       padding: 40px 0; } }
   .hero h1, .hero h2 {
     padding-bottom: 0; }
+  .hero p {
+    color: inherit; }
   .hero__content {
     text-align: center; }
   .hero .btn {
     max-width: 300px;
     margin: 0 auto; }
+  .hero .hero__content__white {
+    color: white; }
+    .hero .hero__content__white p {
+      color: #efefef; }
 
 .search {
   position: fixed;
