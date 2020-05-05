@@ -35,4 +35,16 @@
             }
         }
     }
+
+    @include max-sm {
+        padding-left: 0;
+        width: 100%;
+        overflow-x: scroll;
+        .product-crossroad-container {
+            padding: 0;
+            .product-crossroad-list {
+                justify-content: center;
+            }
+        }
+    }
 }

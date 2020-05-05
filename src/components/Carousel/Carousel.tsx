@@ -45,7 +45,7 @@ const Carousel = (props: CarouselProps) => (
                     <h1 style={slide.isBackgroundBlack ? {color: 'white'} : {}}>
                       {slide.title}
                     </h1>}
-                  <p style={slide.isBackgroundBlack ? {color: '#ccc'} : {}}>
+                  <p style={slide.isBackgroundBlack ? {color: '#efefef'} : {}}>
                     {slide.description}
                   </p>
                   {slide.buttonTitle &&
