@@ -36,7 +36,7 @@ var MapRow = /** @class */ (function (_super) {
     }
     MapRow.prototype.render = function () {
         var _this = this;
-        var _a = this.props, title = _a.title, text = _a.text, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web, item = _a.item;
+        var _a = this.props, title = _a.title, text = _a.text, storeChief = _a.storeChief, phone = _a.phone, email = _a.email, web = _a.web, item = _a.item, otherCountries = _a.otherCountries;
         var url = web && web.url && web.url.trim && web.url.trim();
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-12 col-md-5" },
@@ -54,7 +54,11 @@ var MapRow = /** @class */ (function (_super) {
                             React.createElement("a", { href: "mailto:" + email }, email)),
                         url && React.createElement("p", null,
                             "Web: ",
-                            React.createElement("a", { href: url, target: '_blank' }, String(url)))) : ''),
+                            React.createElement("a", { href: url, target: '_blank' }, String(url))),
+                        otherCountries &&
+                            JSON.parse(otherCountries).length > 0 &&
+                            React.createElement("p", { className: "countries" },
+                                "Countries: ", item.country + ", " + JSON.parse(otherCountries).join(', '))) : ''),
             React.createElement("div", { className: "col-12 col-md-7" },
                 React.createElement("div", { onClick: function () { return _this.rowClick(item); }, className: "mapRow__list__show " + (this.state.show ? 'mapRow__list__show--minus' : '') }),
                 React.createElement("div", { className: 'mapRow__list__item' },

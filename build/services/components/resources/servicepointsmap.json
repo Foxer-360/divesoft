@@ -135,6 +135,10 @@
                                 "type": "text",
                                 "title": "Country"
                             },
+                            "otherCountries": {
+                                "type": "text",
+                                "title": "Other countries"
+                            },
                             "text": {
                                 "type": "markdown",
                                 "title": "Text"

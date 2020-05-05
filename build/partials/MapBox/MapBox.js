@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ReactMarkdown = require("react-markdown");
 function MapBox(props) {
-    var title = props.title, country = props.country, address = props.address, city = props.city, email = props.email, phone = props.phone, service = props.service, storeChief = props.storeChief, text = props.text, web = props.web, name = props.name, position = props.position, keywords = props.keywords, onClick = props.onClick;
+    var title = props.title, country = props.country, address = props.address, city = props.city, email = props.email, phone = props.phone, service = props.service, storeChief = props.storeChief, text = props.text, web = props.web, name = props.name, position = props.position, keywords = props.keywords, otherCountries = props.otherCountries, onClick = props.onClick;
     var url = web && web.url && web.url.trim && web.url.trim();
     return (React.createElement("div", { className: 'mapBox' },
         React.createElement("div", { className: 'mapBox--close', onClick: function () { return onClick(); } }),
@@ -26,6 +26,10 @@ function MapBox(props) {
             url && React.createElement("p", null,
                 "Web: ",
                 React.createElement("a", { href: url, target: '_blank' }, String(url))),
+            otherCountries &&
+                JSON.parse(otherCountries).length > 0 &&
+                React.createElement("p", { className: "countries" },
+                    "Countries: ", country + ", " + JSON.parse(otherCountries).join(', ')),
             storeChief && React.createElement("p", null,
                 "Store chief: ",
                 storeChief),

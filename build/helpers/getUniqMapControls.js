@@ -8,6 +8,9 @@ function getUniqMapControls(data) {
     var propsToArray = function () {
         for (var i = 0; i < data.length; i++) {
             uniqCountries.push(data[i].country);
+            // tslint:disable-next-line: no-unused-expression
+            data[i].otherCountries && JSON.parse(data[i].otherCountries).length > 0 &&
+                JSON.parse(data[i].otherCountries).forEach(function (item) { return uniqCountries.push(item); });
             uniqCities.push(data[i].city);
             uniqServices.push(data[i].service);
             if (data && data[i] && data[i].addFilter) {

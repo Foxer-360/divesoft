@@ -3505,6 +3505,8 @@ a {
       color: #e50000; }
       .mapRow__list__contacts a:hover {
         text-decoration: underline; }
+    .mapRow__list__contacts .countries {
+      word-break: keep-all; }
   .mapRow__list::before {
     background-color: #e8e8e8;
     position: absolute;

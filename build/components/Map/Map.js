@@ -79,6 +79,7 @@ var Map = /** @class */ (function (_super) {
             storeChief: '',
             name: '',
             position: '',
+            otherCountries: '',
             map: {}
         };
         _this.setMapBox = _this.setMapBox.bind(_this);
@@ -106,6 +107,7 @@ var Map = /** @class */ (function (_super) {
             text: item.text,
             name: item.name,
             position: item.position,
+            otherCountries: item.otherCountries,
             showBox: item ? true : !this.state.showBox,
             mapZoom: 14,
             mapCenter: this.readLatLng(item)
@@ -118,8 +120,11 @@ var Map = /** @class */ (function (_super) {
         for (var i = 0; i < countries.length; i++) {
             var composedRows = [];
             for (var j = 0; j < mapItems.length; j++) {
-                if (mapItems[j].country === countries[i]) {
-                    if (mapItems[j].country === this.state.countrySelectedValue || this.state.countrySelectedValue === 'all') {
+                if (mapItems[j].country === countries[i] ||
+                    mapItems[j].otherCountries && mapItems[j].otherCountries.includes(countries[i])) {
+                    if (mapItems[j].country === this.state.countrySelectedValue ||
+                        mapItems[j].otherCountries && mapItems[j].otherCountries.includes(countries[i]) ||
+                        this.state.countrySelectedValue === 'all') {
                         if (mapItems[j].city === this.state.citySelectedValue || this.state.citySelectedValue === 'all') {
                             if (mapItems[j].addFilter && mapItems[j].addFilter.includes(this.state.addFilterSelectedValue)
                                 || mapItems[j].addFilter === this.state.addFilterSelectedValue
@@ -128,6 +133,7 @@ var Map = /** @class */ (function (_super) {
                                     city: mapItems[j].city,
                                     service: mapItems[j].service,
                                     country: mapItems[j].country,
+                                    otherCountries: mapItems[j].otherCountries,
                                     title: mapItems[j].title,
                                     text: mapItems[j].text,
                                     address: mapItems[j].address,
@@ -240,8 +246,13 @@ var Map = /** @class */ (function (_super) {
     Map.prototype.filterCountries = function (addFilter, mapItems) {
         var filteredCountries = [];
         mapItems.forEach(function (item) {
-            item && item.addFilter && item.country && item.addFilter.includes(addFilter)
-                ? filteredCountries.push(item.country)
+            item &&
+                item.addFilter &&
+                item.country &&
+                item.addFilter.includes(addFilter)
+                ? (filteredCountries.push(item.country),
+                    // tslint:disable-next-line: no-unused-expression
+                    item.otherCountries && JSON.parse(item.otherCountries).forEach(function (i) { return filteredCountries.push(i); }))
                 // tslint:disable-next-line: no-unused-expression
                 : '';
         });
@@ -251,7 +262,11 @@ var Map = /** @class */ (function (_super) {
     Map.prototype.filterAddFilter = function (country, mapItems, addFilter) {
         var filteredAddFilter = [];
         mapItems.forEach(function (item) {
-            item && item.country && item.addFilter && item.country.trim() === country.trim()
+            item &&
+                item.country &&
+                item.addFilter &&
+                (item.country.trim() === country.trim() ||
+                    item.otherCountries && item.otherCountries.includes(country.trim()))
                 ? addFilter.map(function (i) { return item.addFilter.includes(i) ? filteredAddFilter.push(i) : null; })
                 // tslint:disable-next-line: no-unused-expression
                 : '';
@@ -344,7 +359,7 @@ var Map = /** @class */ (function (_super) {
             this.renderControls(mapItems),
             React.createElement("section", { className: 'map' },
                 this.state.showBox &&
-                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.currentCity, service: this.state.currentService, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.currentCountry, name: this.state.name, position: this.state.position, onClick: function () { return _this.closeMapBox(); } }),
+                    React.createElement(MapBox_1.default, { web: this.state.web, text: this.state.text, city: this.state.currentCity, service: this.state.currentService, storeChief: this.state.storeChief, email: this.state.currrentEmail, phone: this.state.currentPhone, title: this.state.currentTitle, address: this.state.currentAddress, country: this.state.currentCountry, name: this.state.name, position: this.state.position, otherCountries: this.state.otherCountries, onClick: function () { return _this.closeMapBox(); } }),
                 React.createElement(google_map_react_1.default, { yesIWantToUseGoogleMapApiInternals: true, bootstrapURLKeys: { key: exports.GoogleMapsApiKey }, defaultCenter: this.state.defaultMapCenter, center: this.state.mapCenter, defaultZoom: this.state.defaultMapZoom, zoom: this.state.mapZoom, options: {
                         scrollwheel: false,
                         styles: MapStyles_1.default
