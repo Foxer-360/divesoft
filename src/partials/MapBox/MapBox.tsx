@@ -16,6 +16,7 @@ export interface MapBoxProps {
   web?: LooseObject;
   position?: string;
   url?: LooseObject;
+  otherCountries?: string;
   onClick: Function;
 }
 
@@ -34,6 +35,7 @@ export function MapBox(props: MapBoxProps) {
     name,
     position,
     keywords,
+    otherCountries,
     onClick
   } = props;
 
@@ -61,6 +63,10 @@ export function MapBox(props: MapBoxProps) {
         {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
         {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
         {url && <p>Web: <a href={url} target={'_blank'}>{String(url)}</a></p>}
+        {otherCountries && 
+        JSON.parse(otherCountries).length > 0 &&
+          <p className="countries">Countries: {`${country}, ${JSON.parse(otherCountries).join(', ')}`}</p>
+        }
         {storeChief && <p>Store chief: {storeChief}</p>}
         {service && <p>Service: {service}</p>}
         {text && <ReactMarkdown source={text} />}

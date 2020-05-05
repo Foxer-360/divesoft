@@ -30,7 +30,6 @@ export interface ServicePointsMapProps {
 
 export default function ServicePointsMap(props: ServicePointsMapProps) {
   const { title, thirdFilter, addFilterText, mapItems } = props.data;
-
   return (
     <List data={mapItems}>
       {({ data }) => (

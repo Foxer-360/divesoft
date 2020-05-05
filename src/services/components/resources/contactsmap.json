@@ -123,7 +123,7 @@
                 "title": "Name"
               },
               "country": {
-                "type": "text",
+                "type": "object",
                 "title": "Country"
               },
               "position": {

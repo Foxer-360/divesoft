@@ -34,6 +34,7 @@ const MapRows = (props: MapRowsProps) => {
                       email={item.email}
                       address={item.address}
                       storeChief={item.storeChief}
+                      otherCountries={item.otherCountries}
                       item={item}
                       open={props.open}
                     />

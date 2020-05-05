@@ -52,6 +52,7 @@ export interface MapState {
   storeChief: string;
   name: string;
   position: string;
+  otherCountries: string;
   map: LooseObject;
 }
 
@@ -92,6 +93,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       storeChief: '',
       name: '',
       position: '',
+      otherCountries: '',
       map: {}
     };
 
@@ -120,6 +122,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       text: item.text,
       name: item.name,
       position: item.position,
+      otherCountries: item.otherCountries,
       showBox: item ? true : !this.state.showBox,
       mapZoom: 14,
       mapCenter: this.readLatLng(item)
@@ -142,8 +145,11 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       let composedRows = [];
 
       for (let j = 0; j < mapItems.length; j++) {
-        if (mapItems[j].country === countries[i]) {
-          if (mapItems[j].country === this.state.countrySelectedValue || this.state.countrySelectedValue === 'all') {
+        if (mapItems[j].country === countries[i] || 
+            mapItems[j].otherCountries && mapItems[j].otherCountries.includes(countries[i])) {
+          if (mapItems[j].country === this.state.countrySelectedValue ||
+            mapItems[j].otherCountries && mapItems[j].otherCountries.includes(countries[i]) ||
+            this.state.countrySelectedValue === 'all') {
             if (mapItems[j].city === this.state.citySelectedValue || this.state.citySelectedValue === 'all') {
               if (mapItems[j].addFilter && mapItems[j].addFilter.includes(this.state.addFilterSelectedValue)
               || mapItems[j].addFilter === this.state.addFilterSelectedValue
@@ -153,6 +159,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     city: mapItems[j].city,
                     service: mapItems[j].service,
                     country: mapItems[j].country,
+                    otherCountries: mapItems[j].otherCountries,
                     title: mapItems[j].title,
                     text: mapItems[j].text,
                     address: mapItems[j].address,
@@ -292,8 +299,13 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   filterCountries(addFilter: string, mapItems: LooseObject) {
     let filteredCountries = [];
     mapItems.forEach(item => {
-      item && item.addFilter && item.country && item.addFilter.includes(addFilter) 
-      ? filteredCountries.push(item.country) 
+      item &&
+      item.addFilter &&
+      item.country &&
+      item.addFilter.includes(addFilter) 
+      ? (filteredCountries.push(item.country),
+        // tslint:disable-next-line: no-unused-expression
+        item.otherCountries && JSON.parse(item.otherCountries).forEach(i => filteredCountries.push(i)))
       // tslint:disable-next-line: no-unused-expression
       : '';
     });
@@ -304,7 +316,12 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
   filterAddFilter(country: string, mapItems: LooseObject, addFilter: LooseObject) {
     let filteredAddFilter = [];
     mapItems.forEach(item => {
-      item && item.country && item.addFilter && item.country.trim() === country.trim() 
+      item &&
+      item.country &&
+      item.addFilter &&
+      (item.country.trim() === country.trim() ||
+      item.otherCountries && item.otherCountries.includes(country.trim())
+      )
       ? addFilter.map(i => item.addFilter.includes(i) ? filteredAddFilter.push(i) : null)
       // tslint:disable-next-line: no-unused-expression
       : '';
@@ -477,6 +494,7 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               country={this.state.currentCountry}
               name={this.state.name}
               position={this.state.position}
+              otherCountries={this.state.otherCountries}
               onClick={() => this.closeMapBox()}
             />
           }

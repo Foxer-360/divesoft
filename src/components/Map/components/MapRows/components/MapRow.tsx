@@ -12,6 +12,7 @@ interface MapRowProps {
   web?: LooseObject;
   item: LooseObject;
   open: Function;
+  otherCountries: string;
 }
 
 interface MapRowState {
@@ -51,6 +52,7 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
       email,
       web,
       item,
+      otherCountries,
     } = this.props;
 
     const url = web && web.url && web.url.trim && web.url.trim();
@@ -65,6 +67,10 @@ class MapRow extends React.Component<MapRowProps, MapRowState> {
               {phone && <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>}
               {email && <p>Email: <a href={`mailto:${email}`}>{email}</a></p>}
               {url && <p>Web: <a href={url} target={'_blank'}>{String(url)}</a></p>}
+              {otherCountries && 
+              JSON.parse(otherCountries).length > 0 &&
+                <p className="countries">Countries: {`${item.country}, ${JSON.parse(otherCountries).join(', ')}`}</p>
+              }
 
             </div> : ''}
         </div>

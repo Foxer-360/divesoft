@@ -7,6 +7,9 @@ export default function getUniqMapControls(data: LooseObject) {
   const propsToArray = () => {
     for (let i = 0; i < data.length; i++) {
       uniqCountries.push(data[i].country);
+      // tslint:disable-next-line: no-unused-expression
+      data[i].otherCountries && JSON.parse(data[i].otherCountries).length > 0 &&
+        JSON.parse(data[i].otherCountries).forEach(item => uniqCountries.push(item));
       uniqCities.push(data[i].city);
       uniqServices.push(data[i].service);
       if (data && data[i] && data[i].addFilter) {
