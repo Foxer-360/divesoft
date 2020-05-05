@@ -4798,7 +4798,7 @@ a {
     .carousel__content p {
       font-size: 2.4rem;
       font-weight: 400;
-      color: #808080;
+      color: #555;
       padding-bottom: 3.6rem; }
       @media (max-width: 768px) {
         .carousel__content p {
