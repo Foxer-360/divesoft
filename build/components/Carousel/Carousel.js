@@ -29,7 +29,7 @@ var Carousel = function (props) { return (React.createElement(List_1.default, { 
                             React.createElement("h2", { style: slide.isBackgroundBlack ? { color: 'white' } : {} }, slide.subTitle),
                         slide.title &&
                             React.createElement("h1", { style: slide.isBackgroundBlack ? { color: 'white' } : {} }, slide.title),
-                        React.createElement("p", { style: slide.isBackgroundBlack ? { color: '#ccc' } : {} }, slide.description),
+                        React.createElement("p", { style: slide.isBackgroundBlack ? { color: '#efefef' } : {} }, slide.description),
                         slide.buttonTitle &&
                             React.createElement("div", { className: 'carousel__content__btnHolder', style: slide.isCentred ? { margin: '0 auto' } : {} },
                                 React.createElement(Button_1.default, { classes: (slide.isBackgroundBlack ? '' : 'btn--bordered') + "\n                                  " + (slide.isCentred ? 'btn--center' : ''), url: slide.url }, slide.buttonTitle)))))))); })) || [];
