@@ -8,11 +8,17 @@
   @include max-sm { padding: 40px 0; }
 
   h1, h2 { padding-bottom: 0; }
+  p {color: inherit;}
 
   &__content { text-align: center; }
 
   .btn {
     max-width: 300px;
     margin: 0 auto;
+  }
+
+  .hero__content__white {
+    color: white;
+    p {color: #efefef;}
   }
 }

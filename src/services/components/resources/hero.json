@@ -44,6 +44,10 @@
         "smallFontSize": {
           "type": "boolean",
           "title": "Make title smaller?"
+        },
+        "whiteText": {
+          "type": "boolean",
+          "title": "Make text white?"
         }
       }
     }
