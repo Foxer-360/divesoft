@@ -77,8 +77,8 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps, ImgWithFallb
       <div
         className={'mediaRatio'}
         style={{
-          paddingTop: `${(parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10) /
-            parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10)) *
+          paddingTop: `${(parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10) /
+            parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10)) *
             100}%`,
         }}
       >
