@@ -66,8 +66,8 @@ var ImgWithFallback = /** @class */ (function (_super) {
         var props = this.props;
         var error = this.state.error;
         return (React.createElement("div", { className: 'mediaRatio', style: {
-                paddingTop: (parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10) /
-                    parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10)) *
+                paddingTop: (parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10) /
+                    parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10)) *
                     100 + "%",
             } },
             React.createElement("img", { alt: alt, className: 'mediaImage inner', src: error ? props.originalSrc : this.getSizedUrl(props), onError: function () {
