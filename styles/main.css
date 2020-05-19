@@ -5074,6 +5074,9 @@ a {
     color: #5c5c5c;
     line-height: 2.8rem;
     padding: 0; }
+  .videoGallery__item .mediaRatio > .inner {
+    -o-object-fit: initial;
+       object-fit: initial; }
   .videoGallery__description {
     display: block;
     margin: 0 auto;
