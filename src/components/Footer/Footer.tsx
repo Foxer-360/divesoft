@@ -31,14 +31,6 @@ const GET_PAGES_URLS = gql`
   }
 `;
 
-const CREATE_SUBSCRIBER = gql`
-  mutation($email: String!, $url: String!) {
-    createSubscriber(data: { email: $email, url: $url }) {
-      id
-    }
-  }
-`;
-
 const ComposedQuery = adopt({
   context: ({ render }) => <Query query={GET_CONTEXT}>{({ data }) => render(data)}</Query>,
   getPagesUrls: ({ render, context: { languageData, websiteData } }) => {
@@ -115,35 +107,6 @@ class Footer extends React.Component<FooterProps, FooterState> {
       return !newError.email && !newError.emailValid;
     };
 
-    const onSubmit = (createSubscriber) => () => {
-      if (isValid() && typeof window !== 'undefined') {
-        createSubscriber({
-          variables: {
-            url: window.location.href,
-            email: this.state.email,
-          },
-        })
-          .then(() => {
-            this.setState({
-              email: '',
-              displayThankYou: true,
-              error: {
-                email: false,
-                emailValid: false,
-                sending: false,
-              },
-            });
-          })
-          .catch(e => {
-            const newError = { ...this.state.error, sending: true };
-            console.error(e);
-            this.setState({
-              error: newError,
-            });
-          });
-      }
-    };
-
     return (
       <ComposedQuery>
         {({ getPagesUrls: { loading, error, data }, context }) => {
@@ -168,25 +131,32 @@ class Footer extends React.Component<FooterProps, FooterState> {
 
           const transformedNavigations = this.transformNavigationsIntoTree(navigations, data.pagesUrls);
 
-          const firstBottomNav = 'firstBottom';
+          const firstBottomNav = 'BottomPRODUCTS';
 
           const firstBottomNavItems =
             transformedNavigations && transformedNavigations[firstBottomNav] ?
             transformedNavigations[firstBottomNav] :
             [];
 
-          const secondBottomNav = 'secondBottom';
+          const secondBottomNav = 'BottomABOUT';
 
           const secondBottomNavItems =
             transformedNavigations && transformedNavigations[secondBottomNav] ?
             transformedNavigations[secondBottomNav] :
             [];
 
-          const thirdBottomNav = 'thirdBottom';
+          const thirdBottomNav = 'BottomSUPPORT';
 
           const thirdBottomNavItems =
             transformedNavigations && transformedNavigations[thirdBottomNav] ?
             transformedNavigations[thirdBottomNav] :
+            [];
+
+          const fourthBottomNav = 'BottomContacts';
+
+          const fourthBottomNavItems =
+            transformedNavigations && transformedNavigations[fourthBottomNav] ?
+            transformedNavigations[fourthBottomNav] :
             [];
 
           return (
@@ -220,6 +190,11 @@ class Footer extends React.Component<FooterProps, FooterState> {
                               </Link>
                             </li>
                           ))}
+                          <li>
+                            <Link url="https://wetnotes.com/">
+                              Wetnotes
+                            </Link>
+                          </li>
                       </ul>
                     </nav>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
@@ -235,10 +210,19 @@ class Footer extends React.Component<FooterProps, FooterState> {
                           ))}
                       </ul>
                     </nav>
-                    <div className={'footer__navigation__contacts col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Contact</h6>
-                      {contacts && <ReactMarkdown source={contacts} />}
-                    </div>
+                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
+                      <h6 className="headline">Dealers</h6>
+                      <ul>
+                        {fourthBottomNavItems &&
+                          fourthBottomNavItems.map((navItem, i) => (
+                            <li key={i}>
+                              <Link {...navItem.url}>
+                                {navItem.name || navItem.title}
+                              </Link>
+                            </li>
+                          ))}
+                      </ul>
+                    </nav>
                   </div>
                   <div className={'footer__divider'} />
                   <div className={'footer__bottom row'}>
