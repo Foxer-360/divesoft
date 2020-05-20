@@ -32,13 +32,11 @@ var React = require("react");
 var graphql_tag_1 = require("graphql-tag");
 var react_adopt_1 = require("react-adopt");
 var react_apollo_1 = require("react-apollo");
-var ReactMarkdown = require("react-markdown");
 var Link_1 = require("../../partials/Link");
 var Loader_1 = require("../../partials/Loader");
 var CookiePopup_1 = require("./components/CookiePopup");
 var GET_CONTEXT = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"], ["\n  {\n    languageData @client\n    pageData @client\n    websiteData @client\n    languagesData @client\n    navigationsData @client\n  }\n"])));
 var GET_PAGES_URLS = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"], ["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"])));
-var CREATE_SUBSCRIBER = graphql_tag_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"], ["\n  mutation($email: String!, $url: String!) {\n    createSubscriber(data: { email: $email, url: $url }) {\n      id\n    }\n  }\n"])));
 var ComposedQuery = react_adopt_1.adopt({
     context: function (_a) {
         var render = _a.render;
@@ -92,34 +90,6 @@ var Footer = /** @class */ (function (_super) {
             });
             return !newError.email && !newError.emailValid;
         };
-        var onSubmit = function (createSubscriber) { return function () {
-            if (isValid() && typeof window !== 'undefined') {
-                createSubscriber({
-                    variables: {
-                        url: window.location.href,
-                        email: _this.state.email,
-                    },
-                })
-                    .then(function () {
-                    _this.setState({
-                        email: '',
-                        displayThankYou: true,
-                        error: {
-                            email: false,
-                            emailValid: false,
-                            sending: false,
-                        },
-                    });
-                })
-                    .catch(function (e) {
-                    var newError = __assign({}, _this.state.error, { sending: true });
-                    console.error(e);
-                    _this.setState({
-                        error: newError,
-                    });
-                });
-            }
-        }; };
         return (React.createElement(ComposedQuery, null, function (_a) {
             var _b = _a.getPagesUrls, loading = _b.loading, error = _b.error, data = _b.data, context = _a.context;
             if (!context.navigationsData ||
@@ -134,17 +104,21 @@ var Footer = /** @class */ (function (_super) {
             }
             var navigations = context.navigationsData, languageCode = context.languageData.code;
             var transformedNavigations = _this.transformNavigationsIntoTree(navigations, data.pagesUrls);
-            var firstBottomNav = 'firstBottom';
+            var firstBottomNav = 'BottomPRODUCTS';
             var firstBottomNavItems = transformedNavigations && transformedNavigations[firstBottomNav] ?
                 transformedNavigations[firstBottomNav] :
                 [];
-            var secondBottomNav = 'secondBottom';
+            var secondBottomNav = 'BottomABOUT';
             var secondBottomNavItems = transformedNavigations && transformedNavigations[secondBottomNav] ?
                 transformedNavigations[secondBottomNav] :
                 [];
-            var thirdBottomNav = 'thirdBottom';
+            var thirdBottomNav = 'BottomSUPPORT';
             var thirdBottomNavItems = transformedNavigations && transformedNavigations[thirdBottomNav] ?
                 transformedNavigations[thirdBottomNav] :
+                [];
+            var fourthBottomNav = 'BottomContacts';
+            var fourthBottomNavItems = transformedNavigations && transformedNavigations[fourthBottomNav] ?
+                transformedNavigations[fourthBottomNav] :
                 [];
             return (React.createElement(React.Fragment, null,
                 React.createElement("footer", { className: 'footer' },
@@ -159,17 +133,22 @@ var Footer = /** @class */ (function (_super) {
                                         React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }))),
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
                                 React.createElement("h6", { className: "headline" }, "Support"),
-                                React.createElement("ul", null, secondBottomNavItems &&
-                                    secondBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
-                                        React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }))),
+                                React.createElement("ul", null,
+                                    secondBottomNavItems &&
+                                        secondBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
+                                            React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }),
+                                    React.createElement("li", null,
+                                        React.createElement(Link_1.default, { url: "https://wetnotes.com/" }, "Wetnotes")))),
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
                                 React.createElement("h6", { className: "headline" }, "Dealers"),
                                 React.createElement("ul", null, thirdBottomNavItems &&
                                     thirdBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }))),
-                            React.createElement("div", { className: 'footer__navigation__contacts col-12 col-md-6 col-xl' },
-                                React.createElement("h6", { className: "headline" }, "Contact"),
-                                contacts && React.createElement(ReactMarkdown, { source: contacts }))),
+                            React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
+                                React.createElement("h6", { className: "headline" }, "Dealers"),
+                                React.createElement("ul", null, fourthBottomNavItems &&
+                                    fourthBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
+                                        React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); })))),
                         React.createElement("div", { className: 'footer__divider' }),
                         React.createElement("div", { className: 'footer__bottom row' },
                             React.createElement("div", { className: 'col-12 col-md-6 col-xl' }, copyrights && React.createElement("p", { className: 'text-copyright' }, copyrights)),
@@ -223,5 +202,5 @@ var Footer = /** @class */ (function (_super) {
     return Footer;
 }(React.Component));
 exports.default = Footer;
-var templateObject_1, templateObject_2, templateObject_3;
+var templateObject_1, templateObject_2;
 //# sourceMappingURL=Footer.js.map

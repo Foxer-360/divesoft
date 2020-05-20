@@ -26,10 +26,6 @@
                 "instagramUrl": {
                     "type": "urlAutocomplete",
                     "title": "instagram URL"
-                },
-                "contacts": {
-                    "type": "markdown",
-                    "title": "Contacts"
                 }
             }
         }
