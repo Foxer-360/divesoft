@@ -116,7 +116,7 @@ var Footer = /** @class */ (function (_super) {
             var thirdBottomNavItems = transformedNavigations && transformedNavigations[thirdBottomNav] ?
                 transformedNavigations[thirdBottomNav] :
                 [];
-            var fourthBottomNav = 'BottomContacts';
+            var fourthBottomNav = 'BottomCONTACTS';
             var fourthBottomNavItems = transformedNavigations && transformedNavigations[fourthBottomNav] ?
                 transformedNavigations[fourthBottomNav] :
                 [];
@@ -127,12 +127,12 @@ var Footer = /** @class */ (function (_super) {
                         React.createElement("div", { className: 'footer__divider' }),
                         React.createElement("div", { className: 'footer__navigation row d-flex justify-content-between align-items-start' },
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
-                                React.createElement("h6", { className: "headline" }, "About"),
+                                React.createElement("h6", { className: "headline" }, "Products"),
                                 React.createElement("ul", null, firstBottomNavItems &&
                                     firstBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }))),
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
-                                React.createElement("h6", { className: "headline" }, "Support"),
+                                React.createElement("h6", { className: "headline" }, "About"),
                                 React.createElement("ul", null,
                                     secondBottomNavItems &&
                                         secondBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
@@ -140,12 +140,12 @@ var Footer = /** @class */ (function (_super) {
                                     React.createElement("li", null,
                                         React.createElement(Link_1.default, { url: "https://wetnotes.com/" }, "Wetnotes")))),
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
-                                React.createElement("h6", { className: "headline" }, "Dealers"),
+                                React.createElement("h6", { className: "headline" }, "Support"),
                                 React.createElement("ul", null, thirdBottomNavItems &&
                                     thirdBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); }))),
                             React.createElement("nav", { className: 'footer__navigation__item col-12 col-md-6 col-xl' },
-                                React.createElement("h6", { className: "headline" }, "Dealers"),
+                                React.createElement("h6", { className: "headline" }, "Contacts"),
                                 React.createElement("ul", null, fourthBottomNavItems &&
                                     fourthBottomNavItems.map(function (navItem, i) { return (React.createElement("li", { key: i },
                                         React.createElement(Link_1.default, __assign({}, navItem.url), navItem.name || navItem.title))); })))),
