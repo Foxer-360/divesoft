@@ -152,7 +152,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
             transformedNavigations[thirdBottomNav] :
             [];
 
-          const fourthBottomNav = 'BottomContacts';
+          const fourthBottomNav = 'BottomCONTACTS';
 
           const fourthBottomNavItems =
             transformedNavigations && transformedNavigations[fourthBottomNav] ?
@@ -167,7 +167,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
                   <div className={'footer__divider'} />
                   <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">About</h6>
+                      <h6 className="headline">Products</h6>
                       <ul>
                         {firstBottomNavItems &&
                           firstBottomNavItems.map((navItem, i) => (
@@ -180,7 +180,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
                       </ul>
                     </nav>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Support</h6>
+                      <h6 className="headline">About</h6>
                       <ul>
                         {secondBottomNavItems &&
                           secondBottomNavItems.map((navItem, i) => (
@@ -198,7 +198,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
                       </ul>
                     </nav>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Dealers</h6>
+                      <h6 className="headline">Support</h6>
                       <ul>
                         {thirdBottomNavItems &&
                           thirdBottomNavItems.map((navItem, i) => (
@@ -211,7 +211,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
                       </ul>
                     </nav>
                     <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Dealers</h6>
+                      <h6 className="headline">Contacts</h6>
                       <ul>
                         {fourthBottomNavItems &&
                           fourthBottomNavItems.map((navItem, i) => (
