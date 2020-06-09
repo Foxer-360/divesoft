@@ -9,7 +9,8 @@
 .carousel {
   height: 700px;
   background-size: cover;
-  
+  background-position: center center;
+
   @include max-md { height: 450px; }
   @include max-sm { height: 400px; }
 
@@ -34,7 +35,7 @@
     padding: 0 2.5rem;
     text-align: center;
   }
-  
+
   &__contentWrapper {
     display: table;
     height: 100%;
@@ -80,7 +81,7 @@
 
   &--prevArrow {
     left: 1.5rem !important;
-    
+
     @include max-md {
       left: 2.5rem !important;
       width: 16px !important;
@@ -94,7 +95,7 @@
   }
   &--nextArrow {
     right: 1.8rem !important;
-    
+
     @include max-md {
       right: 2.8rem !important;
       width: 16px !important;

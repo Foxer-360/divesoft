@@ -9,6 +9,14 @@
             "height": "700"
           }
         },
+        "image_mobile": {
+          "image": {
+            "recommendedSizes": {
+              "width": "800",
+              "height": "800"
+            }
+          }
+        },
         "title": "Divesoft BACKMOUNT",
         "subTitle": "Solid, versatile, simple",
         "description": "Traditional configuration used in most expeditions and environments.",
@@ -24,6 +32,14 @@
             "height": "700"
           }
         },
+        "image_mobile": {
+          "image": {
+            "recommendedSizes": {
+              "width": "800",
+              "height": "800"
+            }
+          }
+        },
         "title": "Divesoft BACKMOUNT",
         "description": "Traditional configuration used in most expeditions and environments.",
         "url": "",
@@ -36,6 +52,14 @@
           "recommendedSizes": {
             "width": "1600",
             "height": "700"
+          }
+        },
+        "image_mobile": {
+          "image": {
+            "recommendedSizes": {
+              "width": "800",
+              "height": "800"
+            }
           }
         },
         "title": "Divesoft BACKMOUNT",
@@ -58,6 +82,9 @@
           "items": {
             "properties": {
               "image": {
+                "type": "image"
+              },
+              "image_mobile": {
                 "type": "image"
               },
               "title": {
