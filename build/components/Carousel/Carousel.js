@@ -20,8 +20,15 @@ var PrevArrow_1 = require("../../partials/PrevArrow");
 var getImageUrl_1 = require("../../helpers/getImageUrl");
 var Carousel = function (props) { return (React.createElement(List_1.default, { data: props.data.slides || [] }, function (_a) {
     var slides = _a.data;
+    var windowWidth = window && window.innerWidth;
+    var backgroundImageResponsive = function (slide) {
+        if (windowWidth < 765 && slide.image_mobile) {
+            return "url(" + getImageUrl_1.default(slide.image_mobile) + ")";
+        }
+        return slide.image && "url(" + getImageUrl_1.default(slide.image) + ")";
+    };
     var arrayOfSlides = (slides && slides.map(function (slide, i) { return (React.createElement("div", { key: i },
-        React.createElement("div", { className: 'carousel', style: { backgroundImage: slide.image && "url(" + getImageUrl_1.default(slide.image) + ")" } },
+        React.createElement("div", { className: 'carousel', style: { backgroundImage: backgroundImageResponsive(slide) } },
             React.createElement("div", { className: 'container', style: { height: '100%' } },
                 React.createElement("div", { className: 'carousel__contentWrapper' },
                     React.createElement("div", { className: "carousel__content " + (slide.isCentred ? 'center' : '') },

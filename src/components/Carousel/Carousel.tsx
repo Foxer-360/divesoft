@@ -9,6 +9,7 @@ import getImageUrl from '../../helpers/getImageUrl';
 
 interface Slide {
   image?: LooseObject;
+  image_mobile?: LooseObject;
   url?: LooseObject;
   title?: string;
   subTitle?: string;
@@ -28,11 +29,20 @@ const Carousel = (props: CarouselProps) => (
   <List data={props.data.slides || []}>
     {({ data: slides }) => {
 
+      const windowWidth = window && window.innerWidth;
+
+      const backgroundImageResponsive = (slide: any) => {
+        if (windowWidth < 765 && slide.image_mobile) {
+          return `url(${getImageUrl(slide.image_mobile)})`;
+        }
+        return slide.image && `url(${getImageUrl(slide.image)})`;
+      };
+
       const arrayOfSlides = (slides && slides.map((slide, i) => (
         <div key={i}>
-          <div 
-            className={'carousel'} 
-            style={{ backgroundImage: slide.image && `url(${getImageUrl(slide.image)})` }}
+          <div
+            className={'carousel'}
+            style={{ backgroundImage: backgroundImageResponsive(slide) }}
           >
             <div className={'container'} style={{ height: '100%' }}>
               <div className={'carousel__contentWrapper'}>
@@ -67,7 +77,7 @@ const Carousel = (props: CarouselProps) => (
           </div>
         </div>
       ))) || [];
-    
+
       var settings = {
         speed: 1000,
         dots: true,
