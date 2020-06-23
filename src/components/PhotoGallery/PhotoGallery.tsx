@@ -108,7 +108,7 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
           return (
             <div className="photoGallery">
               <div className={'container'}>
-                {title && <h2>{title}</h2>}
+                {title && <h2 className={`textTitle`}>{title}</h2>}
                 {description && <h4>{description}</h4>}
 
                 <Lightbox

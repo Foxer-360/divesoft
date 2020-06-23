@@ -26,7 +26,7 @@ const ProductsMenu = (props: ProductsMenuProps) => {
     <div className={'product-previews'}>
       <div className="container">
         <div className={'product-previews__top'}>
-          {title && <h3>{title}</h3>}
+          {title && <h2 className={`textTitle`}>{title}</h2>}
           {subTitle && <p className={'textDescription'}>{subTitle}</p>}
         </div>
         <div className={'product-preview__list row'}>
