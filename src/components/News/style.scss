@@ -11,15 +11,18 @@
     }
   }
 
-  &__title {
-    color: #5c5c5c;
-    padding-left: 85px;
-    line-height: 3.3rem;
+  .news__title {
+    > p {
+      color: #5c5c5c;
+      padding-left: 85px;
+      font-weight: 500;
+      font-size: 2.4rem;
 
-    @include max-lg { padding-left: 25px; }
-    @include max-sm {
-      padding-left: 0;
-      line-height: 2.4rem;
+      @include max-lg { padding-left: 25px; }
+      @include max-sm {
+        padding-left: 0;
+        line-height: 2.4rem;
+      }
     }
   }
 

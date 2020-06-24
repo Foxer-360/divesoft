@@ -7,6 +7,7 @@ import Button from '../../partials/Button';
 export interface NewsProps {
   data: {
     title?: string;
+    hideShare: boolean;
     shareUrl?: LooseObject;
     firstText: string;
     firstImg?: LooseObject;
@@ -29,6 +30,7 @@ const News = (props: NewsProps) => {
     thirdImg,
     thirdText,
     buttonUrl,
+    hideShare,
    } = props.data;
 
   const facebookUrl = window && window.location && window.location.href &&
@@ -39,11 +41,15 @@ const News = (props: NewsProps) => {
     <div className={'news'}>
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-9">
-            {title && <h4 className={'news__title'}>{title}</h4>}
+          <div className="col-12 col-md-9 news__title">
+            {title &&
+              <ReactMarkdown
+                source={title}
+              />
+            }
           </div>
           <div className="col-12 col-md-3">
-            {facebookUrl &&
+            {facebookUrl && !hideShare &&
               <div className={'news__btnHolder'}>
                 <button
                   onClick={() => {

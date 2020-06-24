@@ -48,7 +48,7 @@ var NewsAndEvents = /** @class */ (function (_super) {
                     backgroundImage: backgroundImage && "url(" + getImageUrl_1.default(backgroundImage) + ")"
                 } },
                 React.createElement("div", { className: 'container' },
-                    title && React.createElement("h3", { style: { color: "" + titleColor } }, title),
+                    title && React.createElement("h2", { className: "textTitle", style: { color: "" + titleColor } }, title),
                     React.createElement("div", { className: 'newsAndEvents__list row d-flex justify-content-between align-items-center' }, items &&
                         items.map(function (item, i) { return (React.createElement("div", { key: i, className: 'newsAndEvents__list__item col-12 col-md-4' },
                             React.createElement("div", { className: "row" }, item.img && React.createElement(Media_1.default, { type: 'image', data: item.img })),

@@ -83,7 +83,7 @@ var PhotoGallery = /** @class */ (function (_super) {
             var _b = getPage(_this.state.numberOfPage, 'infinite', 8), items = _b.items, lastPage = _b.lastPage;
             return (React.createElement("div", { className: "photoGallery" },
                 React.createElement("div", { className: 'container' },
-                    title && React.createElement("h2", null, title),
+                    title && React.createElement("h2", { className: "textTitle" }, title),
                     description && React.createElement("h4", null, description),
                     React.createElement(react_images_1.default, { images: _this.state.imageUrls, isOpen: _this.state.lightboxIsOpen, currentImage: _this.state.currentImage, onClickPrev: _this.gotoPrevious, onClickNext: _this.gotoNext, onClose: _this.closeLightbox }),
                     _this.renderGallery(items),

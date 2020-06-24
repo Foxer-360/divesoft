@@ -3214,6 +3214,11 @@ a {
     color: #e50000;
     text-decoration: none; }
 
+.textTitle {
+  display: block;
+  font-size: 3rem;
+  text-align: center; }
+
 .textDescription {
   text-align: center;
   font-size: 2.4rem;
@@ -3313,15 +3318,16 @@ a {
       text-decoration: underline; }
     .news a:visited {
       color: #e50000; }
-  .news__title {
+  .news .news__title > p {
     color: #5c5c5c;
     padding-left: 85px;
-    line-height: 3.3rem; }
+    font-weight: 500;
+    font-size: 2.4rem; }
     @media (max-width: 992px) {
-      .news__title {
+      .news .news__title > p {
         padding-left: 25px; } }
     @media (max-width: 540px) {
-      .news__title {
+      .news .news__title > p {
         padding-left: 0;
         line-height: 2.4rem; } }
   .news__text {

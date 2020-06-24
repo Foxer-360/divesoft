@@ -52,7 +52,7 @@ class NewsAndEvents extends React.Component<NewsAndEventsProps, NewsAndEventsSta
               }}
             >
               <div className={'container'}>
-                {title && <h3 style={{ color: `${titleColor}` }}>{title}</h3>}
+                {title && <h2 className={`textTitle`} style={{ color: `${titleColor}` }}>{title}</h2>}
                 <div className={'newsAndEvents__list row d-flex justify-content-between align-items-center'}>
 
                   {items &&

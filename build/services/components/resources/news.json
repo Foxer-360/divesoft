@@ -3,6 +3,7 @@
     "data": {
         "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget mauris in diam bibendum blandit id id nunc.",
         "shareUrl": "",
+        "hideShare": false,
         "firstText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget mauris in diam bibendum blandit id id nunc. Sed vehicula condimentum nulla non dictum. Cras sit amet viverra nunc. Donec at est sed felis blandit venenatis. Ut dapibus turpis elit, ut convallis magna finibus vitae. Aenean vel quam ut nisi euismod ullamcorper. Proin quis tincidunt neque. Cras risus massa, faucibus sit amet justo a, faucibus vulputate tellus. Morbi eget rutrum tellus. Cras augue tellus, viverra ut mauris nec, vehicula vestibulum ex. Nulla aliquet suscipit sem sit amet finibus. In fermentum luctus velit id euismod. Donec a tellus dolor. Aliquam non sodales ipsum. Nullam lobortis rutrum tortor, ac varius turpis tincidunt quis.",
         "firstImg": {
             "recommendedSizes": {
@@ -31,12 +32,16 @@
             "type": "object",
             "properties": {
                 "title": {
-                    "type": "text",
+                    "type": "markdown",
                     "title": "Title"
                 },
                 "shareUrl": {
                     "type": "urlAutocomplete",
                     "title": "Share URL"
+                },
+                "hideShare": {
+                    "type": "boolean",
+                    "title": "Hide share button?"
                 },
                 "firstText": {
                     "type": "markdown",
