@@ -5,7 +5,7 @@ var ReactMarkdown = require("react-markdown");
 var Media_1 = require("../../partials/Media");
 var Button_1 = require("../../partials/Button");
 var News = function (props) {
-    var _a = props.data, title = _a.title, firstText = _a.firstText, firstImg = _a.firstImg, secondText = _a.secondText, secondImg = _a.secondImg, thirdImg = _a.thirdImg, thirdText = _a.thirdText, buttonUrl = _a.buttonUrl, showShare = _a.showShare;
+    var _a = props.data, title = _a.title, firstText = _a.firstText, firstImg = _a.firstImg, secondText = _a.secondText, secondImg = _a.secondImg, thirdImg = _a.thirdImg, thirdText = _a.thirdText, buttonUrl = _a.buttonUrl, hideShare = _a.hideShare;
     var facebookUrl = window && window.location && window.location.href &&
         'https://www.facebook.com/sharer/sharer.php?u='
             + window.location.href;
@@ -14,7 +14,7 @@ var News = function (props) {
             React.createElement("div", { className: "row" },
                 React.createElement("div", { className: "col-12 col-md-9 news__title" }, title &&
                     React.createElement(ReactMarkdown, { source: title })),
-                React.createElement("div", { className: "col-12 col-md-3" }, facebookUrl && showShare &&
+                React.createElement("div", { className: "col-12 col-md-3" }, facebookUrl && !hideShare &&
                     React.createElement("div", { className: 'news__btnHolder' },
                         React.createElement("button", { onClick: function () {
                                 window.open(facebookUrl, 'Facebook Share', 'toolbar=0,status=0,width=640,height=550,top=100,left=100');

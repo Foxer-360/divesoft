@@ -7,7 +7,7 @@ import Button from '../../partials/Button';
 export interface NewsProps {
   data: {
     title?: string;
-    showShare: boolean;
+    hideShare: boolean;
     shareUrl?: LooseObject;
     firstText: string;
     firstImg?: LooseObject;
@@ -30,7 +30,7 @@ const News = (props: NewsProps) => {
     thirdImg,
     thirdText,
     buttonUrl,
-    showShare,
+    hideShare,
    } = props.data;
 
   const facebookUrl = window && window.location && window.location.href &&
@@ -49,7 +49,7 @@ const News = (props: NewsProps) => {
             }
           </div>
           <div className="col-12 col-md-3">
-            {facebookUrl && showShare &&
+            {facebookUrl && !hideShare &&
               <div className={'news__btnHolder'}>
                 <button
                   onClick={() => {
