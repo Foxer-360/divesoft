@@ -48,6 +48,13 @@ const GET_PAGES_URLS = gql`
 const ComposerLink = props => {
   const { children, urlNewWindow, url, pageId, dynamic, ...args } = props;
 
+  let securedUrl = ''
+  if (url && url.includes('http://foxer360-')) {
+    securedUrl = url.replace('http://foxer360-', 'https://foxer360-')
+  } else {
+    securedUrl = url
+  }
+
   return (
     <ComposedQuery>
       {({ getPagesUrls: { loading, error, data } }) => {
@@ -66,12 +73,12 @@ const ComposerLink = props => {
           pageUrlObj = pagesUrls.find(u => u.page === pageId || u.url === url);
         }
 
-        if (!pageUrlObj && !isExternalLink(url)) { return ''; }
+        if (!pageUrlObj && !isExternalLink(securedUrl)) { return ''; }
 
-        if (isExternalLink(url) || args.forceHtml || urlNewWindow) {
+        if (isExternalLink(securedUrl) || args.forceHtml || urlNewWindow) {
           return (
             <a
-              href={(isExternalLink(url) && url) || (pageUrlObj && pageUrlObj.url) || '/404'}
+              href={(isExternalLink(securedUrl) && securedUrl) || (pageUrlObj && pageUrlObj.url) || '/404'}
               {...args}
               target={urlNewWindow ? '_blank' : ''}
             >
@@ -80,7 +87,7 @@ const ComposerLink = props => {
           );
         } else {
           return (
-            <Link to={(dynamic && url) || (pageUrlObj ? pageUrlObj.url : '/404')} {...args}>
+            <Link to={(dynamic && securedUrl) || (pageUrlObj ? pageUrlObj.url : '/404')} {...args}>
               {children}
             </Link>
           );
