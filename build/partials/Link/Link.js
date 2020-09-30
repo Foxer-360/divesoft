@@ -56,6 +56,13 @@ var ComposedQuery = react_adopt_1.adopt({
 var GET_PAGES_URLS = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"], ["\n  query pagesUrls($language: ID!, $websiteId: ID!) {\n    pagesUrls(where: { language: $language, websiteId: $websiteId }) {\n      id\n      page\n      url\n      name\n      description\n    }\n  }\n"])));
 var ComposerLink = function (props) {
     var children = props.children, urlNewWindow = props.urlNewWindow, url = props.url, pageId = props.pageId, dynamic = props.dynamic, args = __rest(props, ["children", "urlNewWindow", "url", "pageId", "dynamic"]);
+    var securedUrl = '';
+    if (url && url.includes('http://foxer360-')) {
+        securedUrl = url.replace('http://foxer360-', 'https://foxer360-');
+    }
+    else {
+        securedUrl = url;
+    }
     return (React.createElement(ComposedQuery, null, function (_a) {
         var _b = _a.getPagesUrls, loading = _b.loading, error = _b.error, data = _b.data;
         if (loading) {
@@ -69,14 +76,14 @@ var ComposerLink = function (props) {
         if (pagesUrls) {
             pageUrlObj = pagesUrls.find(function (u) { return u.page === pageId || u.url === url; });
         }
-        if (!pageUrlObj && !isExternalLink(url)) {
+        if (!pageUrlObj && !isExternalLink(securedUrl)) {
             return '';
         }
-        if (isExternalLink(url) || args.forceHtml || urlNewWindow) {
-            return (React.createElement("a", __assign({ href: (isExternalLink(url) && url) || (pageUrlObj && pageUrlObj.url) || '/404' }, args, { target: urlNewWindow ? '_blank' : '' }), children));
+        if (isExternalLink(securedUrl) || args.forceHtml || urlNewWindow) {
+            return (React.createElement("a", __assign({ href: (isExternalLink(securedUrl) && securedUrl) || (pageUrlObj && pageUrlObj.url) || '/404' }, args, { target: urlNewWindow ? '_blank' : '' }), children));
         }
         else {
-            return (React.createElement(react_router_dom_1.Link, __assign({ to: (dynamic && url) || (pageUrlObj ? pageUrlObj.url : '/404') }, args), children));
+            return (React.createElement(react_router_dom_1.Link, __assign({ to: (dynamic && securedUrl) || (pageUrlObj ? pageUrlObj.url : '/404') }, args), children));
         }
     }));
 };
