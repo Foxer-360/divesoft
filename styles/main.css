@@ -3834,7 +3834,7 @@ a {
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position: center center;
-        background-image: url("/assets/divesoft/images/ppbg.jpg"); } }
+        background-color: #f0f0f0; } }
   .dropdownProducts_phone .productsPreview__list, .dropdownProducts_phone .submenuTiles__list, .submenuTiles_phone .productsPreview__list, .submenuTiles_phone .submenuTiles__list {
     flex-direction: column; }
     .dropdownProducts_phone .productsPreview__list__item, .dropdownProducts_phone .submenuTiles__list__item, .submenuTiles_phone .productsPreview__list__item, .submenuTiles_phone .submenuTiles__list__item {
@@ -5512,7 +5512,7 @@ a {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url("/assets/divesoft/images/ppbg.jpg"); }
+    background-color: #f0f0f0; }
     .productsPreview__list__item .mediaRatio {
       padding: 0 !important;
       width: 235px;
