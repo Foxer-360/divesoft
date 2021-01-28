@@ -1,4 +1,5 @@
-import * as React from 'react';
+import * as React from "react";
+import { readEnvVariable } from "../../../../helpers";
 
 export interface ImgWithFallbackProps {
   alt?: string;
@@ -10,86 +11,72 @@ export interface ImgWithFallbackProps {
   className: string;
 }
 
-export interface ImgWithFallbackState {
-  loading: boolean;
-  error: boolean;
-}
-
-class ImgWithFallback extends React.Component<ImgWithFallbackProps, ImgWithFallbackState> {
-  constructor(props: ImgWithFallbackProps) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      error: false
-    };
-
-    this.createVariantIfDoesNotExist = this.createVariantIfDoesNotExist.bind(this);
-    this.getSizedUrl = this.getSizedUrl.bind(this);
-  }
+class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
 
   createVariantIfDoesNotExist = () => {
-    if (this.props.recommendedSizes) {
-      fetch(`${process.env.REACT_APP_MEDIA_LIBRARY_SERVER}/createDimension`, {
-        method: 'POST',
+    const { recommendedSizes, originalData } = this.props;
+
+    if (recommendedSizes) {
+      fetch(`${readEnvVariable('REACT_APP_MEDIA_LIBRARY_SERVER')}/createDimension`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: this.props.originalData.id,
-          width: parseInt(this.props.recommendedSizes.width, 10),
-          height: parseInt(this.props.recommendedSizes.height, 10),
+          id: originalData.id,
+          width: parseInt(recommendedSizes.width, 10),
+          height: parseInt(recommendedSizes.height, 10),
         }),
       })
-        .then(response => {
+        .then((response) => {
           // this.getSizedUrl();
         })
         .catch(() => {
-          console.error('There was an error creating variant');
+          console.error("There was an error creating variant");
         });
     }
-  }
+  };
 
-  getSizedUrl = props => {
-    let sizes = props.recommendedSizes;
+  getSizedUrl = () => {
+    const { recommendedSizes: sizes, originalData, baseUrl, hash, originalSrc } = this.props;
 
     if (sizes && sizes.width && sizes.height) {
-      let filename = props.originalData.filename.split('.');
-      filename[0] = filename[0] + '_' + sizes.width + '_' + sizes.height;
-      filename = filename.join('.');
-
-      return props.baseUrl + props.originalData.category + props.hash + '_' + filename;
+      let filename = originalData.filename.split(".");
+      filename[0] = filename[0] + "_" + sizes.width + "_" + sizes.height;
+      filename = filename.join(".");
+      return baseUrl + originalData.category + hash + "_" + filename;
     }
 
-    return props.originalSrc;
-  }
+    return originalSrc;
+  };
 
-  handleError = () => {
+  handleError = (event: any) => {
+    const { originalSrc }  = this.props;
     this.createVariantIfDoesNotExist();
-  }
+    event.target.src = originalSrc;
+  };
 
-  public render() {
-    const { alt } = this.props;
-    const props = this.props;
-    const error = this.state.error;
+  render() {
+    const { alt, recommendedSizes, originalSrc } = this.props;
+    const resizable = !originalSrc.includes('.svg');
 
     return (
       <div
-        className={'mediaRatio'}
+        className="mediaRatio"
         style={{
-          paddingTop: `${(parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10) /
-            parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10)) *
-            100}%`,
+          paddingTop: `${
+            (parseInt(recommendedSizes ? recommendedSizes.width : 1, 10) /
+              parseInt(recommendedSizes ? recommendedSizes.height : 1, 10)) *
+            100
+          }%`,
         }}
       >
         <img
           alt={alt}
-          className={'mediaImage inner'}
-          src={error ? props.originalSrc : this.getSizedUrl(props)}
-          onError={() => {
-            this.createVariantIfDoesNotExist();
-            this.setState({ error: true });
-          }}
+          className="mediaImage inner"
+          src={resizable ? this.getSizedUrl() : originalSrc}
+          onError={this.handleError}
+          onErrorCapture={this.handleError}
           onContextMenu={() => {
             this.createVariantIfDoesNotExist();
           }}

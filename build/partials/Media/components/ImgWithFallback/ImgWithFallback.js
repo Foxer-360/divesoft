@@ -14,66 +14,60 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var helpers_1 = require("../../../../helpers");
 var ImgWithFallback = /** @class */ (function (_super) {
     __extends(ImgWithFallback, _super);
-    function ImgWithFallback(props) {
-        var _this = _super.call(this, props) || this;
+    function ImgWithFallback() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.createVariantIfDoesNotExist = function () {
-            if (_this.props.recommendedSizes) {
-                fetch(process.env.REACT_APP_MEDIA_LIBRARY_SERVER + "/createDimension", {
-                    method: 'POST',
+            var _a = _this.props, recommendedSizes = _a.recommendedSizes, originalData = _a.originalData;
+            if (recommendedSizes) {
+                fetch(helpers_1.readEnvVariable('REACT_APP_MEDIA_LIBRARY_SERVER') + "/createDimension", {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        id: _this.props.originalData.id,
-                        width: parseInt(_this.props.recommendedSizes.width, 10),
-                        height: parseInt(_this.props.recommendedSizes.height, 10),
+                        id: originalData.id,
+                        width: parseInt(recommendedSizes.width, 10),
+                        height: parseInt(recommendedSizes.height, 10),
                     }),
                 })
                     .then(function (response) {
                     // this.getSizedUrl();
                 })
                     .catch(function () {
-                    console.error('There was an error creating variant');
+                    console.error("There was an error creating variant");
                 });
             }
         };
-        _this.getSizedUrl = function (props) {
-            var sizes = props.recommendedSizes;
+        _this.getSizedUrl = function () {
+            var _a = _this.props, sizes = _a.recommendedSizes, originalData = _a.originalData, baseUrl = _a.baseUrl, hash = _a.hash, originalSrc = _a.originalSrc;
             if (sizes && sizes.width && sizes.height) {
-                var filename = props.originalData.filename.split('.');
-                filename[0] = filename[0] + '_' + sizes.width + '_' + sizes.height;
-                filename = filename.join('.');
-                return props.baseUrl + props.originalData.category + props.hash + '_' + filename;
+                var filename = originalData.filename.split(".");
+                filename[0] = filename[0] + "_" + sizes.width + "_" + sizes.height;
+                filename = filename.join(".");
+                return baseUrl + originalData.category + hash + "_" + filename;
             }
-            return props.originalSrc;
+            return originalSrc;
         };
-        _this.handleError = function () {
+        _this.handleError = function (event) {
+            var originalSrc = _this.props.originalSrc;
             _this.createVariantIfDoesNotExist();
+            event.target.src = originalSrc;
         };
-        _this.state = {
-            loading: true,
-            error: false
-        };
-        _this.createVariantIfDoesNotExist = _this.createVariantIfDoesNotExist.bind(_this);
-        _this.getSizedUrl = _this.getSizedUrl.bind(_this);
         return _this;
     }
     ImgWithFallback.prototype.render = function () {
         var _this = this;
-        var alt = this.props.alt;
-        var props = this.props;
-        var error = this.state.error;
-        return (React.createElement("div", { className: 'mediaRatio', style: {
-                paddingTop: (parseInt(props.recommendedSizes ? props.recommendedSizes.width : 1, 10) /
-                    parseInt(props.recommendedSizes ? props.recommendedSizes.height : 1, 10)) *
+        var _a = this.props, alt = _a.alt, recommendedSizes = _a.recommendedSizes, originalSrc = _a.originalSrc;
+        var resizable = !originalSrc.includes('.svg');
+        return (React.createElement("div", { className: "mediaRatio", style: {
+                paddingTop: (parseInt(recommendedSizes ? recommendedSizes.width : 1, 10) /
+                    parseInt(recommendedSizes ? recommendedSizes.height : 1, 10)) *
                     100 + "%",
             } },
-            React.createElement("img", { alt: alt, className: 'mediaImage inner', src: error ? props.originalSrc : this.getSizedUrl(props), onError: function () {
-                    _this.createVariantIfDoesNotExist();
-                    _this.setState({ error: true });
-                }, onContextMenu: function () {
+            React.createElement("img", { alt: alt, className: "mediaImage inner", src: resizable ? this.getSizedUrl() : originalSrc, onError: this.handleError, onErrorCapture: this.handleError, onContextMenu: function () {
                     _this.createVariantIfDoesNotExist();
                 } })));
     };
