@@ -30,6 +30,7 @@ import {
   ProductComponents,
   ProductMountRouter,
   ProductCrossRoad,
+  CarouselFiftyFifty,
 } from '../../components';
 
 import * as resources from './resources';
@@ -63,11 +64,12 @@ class ComponentsService {
     PRODUCTCOMPONENTS: 'ProductComponents',
     PRODUCTMOUNTROUTER: 'ProductMountRouter',
     PRODUCTCROSSROAD: 'ProductCrossRoad',
+    CAROUSELFIFTYFIFTY: 'CarouselFiftyFifty',
   };
 
   /***/
   getAllowedTypes() {
-    const res = Object.keys(this.Types).map(key => {
+    const res = Object.keys(this.Types).map((key) => {
       return this.Types[key];
     });
     return res;
@@ -130,6 +132,8 @@ class ComponentsService {
         return ContactsMap;
       case this.Types.PRODUCTCROSSROAD:
         return ProductCrossRoad;
+      case this.Types.CAROUSELFIFTYFIFTY:
+        return CarouselFiftyFifty;
 
       default:
         return () => <AlertNotFound type="component" />;

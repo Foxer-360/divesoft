@@ -1,0 +1,112 @@
+{
+  "name": "CarouselFiftyFifty",
+  "data": {
+    "slides": [
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "secondaryImage": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "title": "Divesoft BACKMOUNT",
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "backgroundColor": "#d4d4d4",
+        "imageOnRight": false,
+        "isCentred": true
+      },
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "secondaryImage": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "title": "Divesoft BACKMOUNT",
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "backgroundColor": "#d4d4d4",
+        "imagePosition": true,
+        "isCentred": true
+      },
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "secondaryImage": {
+          "recommendedSizes": {
+            "width": "400",
+            "height": "400"
+          }
+        },
+        "title": "Divesoft BACKMOUNT",
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "backgroundColor": "#d4d4d4",
+        "imageOnRight": false,
+        "isCentred": true
+      }
+    ]
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "slides": {
+          "type": "array",
+          "title": "Slides",
+          "items": {
+            "properties": {
+              "image": {
+                "type": "image"
+              },
+              "secondaryImage": {
+                "type": "image"
+              },
+              "title": {
+                "type": "text",
+                "title": "Title"
+              },
+              "subTitle": {
+                "type": "text",
+                "title": "Subtitle"
+              },
+              "description": {
+                "type": "text",
+                "title": "Description"
+              },
+              "backgroundColor": {
+                "type": "string",
+                "title": "Background color"
+              },
+              "imageOnRight": {
+                "type": "boolean",
+                "title": "Image on right side?"
+              },
+              "isCentred": {
+                "type": "boolean",
+                "title": "Is centred?"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
