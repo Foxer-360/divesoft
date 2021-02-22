@@ -49,11 +49,11 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
         id={`imageTextSection--${mainIndex}`}
       >
         <div
-          className="carouselImageText__imgHolder"
+          className={'carouselImageText__imgHolder'}
           style={{ backgroundImage: `url("${originalUrl}")`, backgroundColor: backgroundColor }}
         />
-        <div className="carouselImageText__contentHolder">
-          <div className="carouselImageText__contentHolder__cornerLogo">
+        <div className={'carouselImageText__contentHolder'}>
+          <div className={'carouselImageText__contentHolder__cornerLogo'}>
             {secondaryImage && (
               <div
                 className={`carouselImageText__contentHolder__image ${

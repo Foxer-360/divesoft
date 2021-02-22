@@ -70,7 +70,7 @@ const CarouselFiftyFifty = (props: CarouselFiftyFiftyProps) => (
       };
 
       return (
-        <div className="carouselFiftyFifty">
+        <div className={'carouselFiftyFifty'}>
           <Slider {...settings}>{arrayOfSlides}</Slider>
         </div>
       );

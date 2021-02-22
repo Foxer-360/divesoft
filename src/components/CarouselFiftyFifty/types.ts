@@ -1,1 +1,1 @@
-export type imagePositionType = "right" | "left";
+export type imagePositionType = 'right' | 'left';

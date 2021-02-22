@@ -1,2 +1,2 @@
-import CarouselFiftyFifty from "./CarouselFiftyFifty";
+import CarouselFiftyFifty from './CarouselFiftyFifty';
 export default CarouselFiftyFifty;
