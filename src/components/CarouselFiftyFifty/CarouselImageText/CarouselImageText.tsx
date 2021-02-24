@@ -4,7 +4,6 @@ import * as ReactMarkdown from 'react-markdown/with-html';
 import { BASE_URL } from './const';
 
 interface CarouselImageTextProps {
-  mainIndex: number;
   title?: string;
   subtitle?: string;
   image?: LooseObject;
@@ -25,17 +24,7 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
   };
 
   public render() {
-    const {
-      text,
-      image,
-      secondaryImage,
-      title,
-      mainIndex,
-      imagePosition,
-      subtitle,
-      centerText,
-      backgroundColor,
-    } = this.props;
+    const { text, image, secondaryImage, title, imagePosition, subtitle, centerText, backgroundColor } = this.props;
 
     const { category, hash, filename } = image;
 
@@ -46,7 +35,6 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
         className={`carouselImageText ${
           imagePosition && imagePosition === 'right' ? 'carouselImageText--right' : 'carouselImageText--left'
         } `}
-        id={`imageTextSection--${mainIndex}`}
       >
         <div
           className={'carouselImageText__imgHolder'}

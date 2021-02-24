@@ -40,9 +40,10 @@ const CarouselFiftyFifty = (props: CarouselFiftyFiftyProps) => (
               imageOnRight,
               secondaryImage,
             } = slide;
+
             return (
               <CarouselImageText
-                mainIndex={i}
+                key={`imageTextSection--${i}`}
                 title={title}
                 subtitle={subTitle}
                 image={image}
@@ -56,7 +57,7 @@ const CarouselFiftyFifty = (props: CarouselFiftyFiftyProps) => (
           })) ||
         [];
 
-      var settings = {
+      const settings = {
         speed: 1000,
         dots: true,
         arrows: true,
