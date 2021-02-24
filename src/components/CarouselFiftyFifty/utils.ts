@@ -1,6 +1,6 @@
 import { IMAGE_POSITION_RIGHT, IMAGE_POSITION_LEFT } from './const';
-import { imagePositionType } from './types';
+import { ImagePositionType } from './types';
 
-export const getImagePosition = (imageOnRight): imagePositionType => {
+export const getImagePosition = (imageOnRight): ImagePositionType => {
   return imageOnRight ? IMAGE_POSITION_RIGHT : IMAGE_POSITION_LEFT;
 };
