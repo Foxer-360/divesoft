@@ -5,60 +5,79 @@
       {
         "image": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
           }
         },
         "secondaryImage": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
           }
         },
         "title": "Divesoft BACKMOUNT",
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
         "subTitle": "Solid, versatile, simple",
         "description": "Traditional configuration used in most expeditions and environments.",
-        "backgroundColor": "#d4d4d4",
+        "url": "",
+        "buttonTitle": "more information",
         "imageOnRight": false,
         "isCentred": true
       },
       {
         "image": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
           }
         },
-        "secondaryImage": {
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
           }
         },
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
         "title": "Divesoft BACKMOUNT",
         "subTitle": "Solid, versatile, simple",
         "description": "Traditional configuration used in most expeditions and environments.",
-        "backgroundColor": "#d4d4d4",
-        "imagePosition": true,
+        "url": "",
+        "buttonTitle": "more information",
+        "imageOnRight": false,
         "isCentred": true
       },
       {
         "image": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
           }
         },
-        "secondaryImage": {
+        "secondaryImage": {},
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
           "recommendedSizes": {
-            "width": "400",
-            "height": "400"
+            "width": "1200",
+            "height": "1200"
           }
         },
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
         "title": "Divesoft BACKMOUNT",
         "subTitle": "Solid, versatile, simple",
         "description": "Traditional configuration used in most expeditions and environments.",
-        "backgroundColor": "#d4d4d4",
+        "url": "",
+        "buttonTitle": "more information",
         "imageOnRight": false,
         "isCentred": true
       }
@@ -73,12 +92,6 @@
           "title": "Slides",
           "items": {
             "properties": {
-              "image": {
-                "type": "image"
-              },
-              "secondaryImage": {
-                "type": "image"
-              },
               "title": {
                 "type": "text",
                 "title": "Title"
@@ -91,9 +104,34 @@
                 "type": "text",
                 "title": "Description"
               },
-              "backgroundColor": {
+              "url": {
+                "type": "urlAutocomplete",
+                "title": "URL"
+              },
+              "buttonTitle": {
+                "type": "text",
+                "title": "Button title"
+              },
+              "image": {
+                "type": "image"
+              },
+              "imageBackgroundColor": {
                 "type": "string",
-                "title": "Background color"
+                "title": "Image background color"
+              },
+              "secondaryImage": {
+                "type": "image"
+              },
+              "textImage": {
+                "type": "image"
+              },
+              "textBackgroundColor": {
+                "type": "string",
+                "title": "Text background color"
+              },
+              "isTextWhite": {
+                "type": "boolean",
+                "title": "Is text white?"
               },
               "imageOnRight": {
                 "type": "boolean",

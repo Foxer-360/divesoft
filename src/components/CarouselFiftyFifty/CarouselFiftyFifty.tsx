@@ -11,11 +11,15 @@ interface Slide {
   image?: LooseObject;
   title?: string;
   secondaryImage?: LooseObject;
+  textImage?: LooseObject;
   subTitle?: string;
   description?: string;
   isCentred?: boolean;
   imageOnRight?: boolean;
   backgroundColor?: string;
+  textBackgroundColor?: string;
+  url?: LooseObject;
+  buttonTitle?: string;
 }
 
 export interface CarouselFiftyFiftyProps {
@@ -36,9 +40,14 @@ const CarouselFiftyFifty = (props: CarouselFiftyFiftyProps) => (
               image,
               description,
               isCentred,
-              backgroundColor,
+              imageBackgroundColor,
               imageOnRight,
               secondaryImage,
+              textImage,
+              textBackgroundColor,
+              isTextWhite,
+              url,
+              buttonTitle,
             } = slide;
 
             return (
@@ -51,7 +60,12 @@ const CarouselFiftyFifty = (props: CarouselFiftyFiftyProps) => (
                 imagePosition={getImagePosition(imageOnRight)}
                 text={description}
                 centerText={isCentred}
-                backgroundColor={backgroundColor}
+                imageBackgroundColor={imageBackgroundColor}
+                textBackgroundColor={textBackgroundColor}
+                isTextWhite={isTextWhite}
+                textImage={textImage}
+                url={url}
+                buttonTitle={buttonTitle}
               />
             );
           })) ||
