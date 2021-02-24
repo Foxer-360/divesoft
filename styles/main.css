@@ -5717,22 +5717,6 @@ a {
         padding-top: 0; } }
     .aboutLeftPicture__content h2 {
       position: relative; }
-      .aboutLeftPicture__content h2:before {
-        content: ' ';
-        position: absolute;
-        display: block;
-        width: 24px;
-        height: 24px;
-        top: -15px;
-        left: -20px;
-        border-color: #e50000;
-        border-style: solid;
-        border-width: 6px 0 0 6px; }
-        @media (max-width: 768px) {
-          .aboutLeftPicture__content h2:before {
-            top: -8px;
-            left: -8px;
-            border-width: 4px 0 0 4px; } }
     .aboutLeftPicture__content h4 {
       color: #6c6c6c; }
     .aboutLeftPicture__content p {
@@ -5764,22 +5748,6 @@ a {
       padding: 40px 0; } }
   .aboutRightPicture__content h2 {
     position: relative; }
-    .aboutRightPicture__content h2:before {
-      content: ' ';
-      position: absolute;
-      display: block;
-      width: 24px;
-      height: 24px;
-      top: -15px;
-      left: -20px;
-      border-color: #e50000;
-      border-style: solid;
-      border-width: 6px 0 0 6px; }
-      @media (max-width: 768px) {
-        .aboutRightPicture__content h2:before {
-          top: -8px;
-          left: -8px;
-          border-width: 4px 0 0 4px; } }
   .aboutRightPicture__content h4 {
     color: #6c6c6c; }
   .aboutRightPicture__content p {
@@ -6120,7 +6088,8 @@ a {
       .carouselImageText--right .carouselImageText__contentHolder {
         padding-left: 2rem;
         padding-top: 5px;
-        order: 2; } }
+        order: 2;
+        background-position: center center; } }
   .carouselImageText--right .carouselImageText__imgHolder {
     order: 2;
     background-position: left center; }
@@ -6130,11 +6099,13 @@ a {
         order: 1; } }
   .carouselImageText--left .carouselImageText__contentHolder {
     order: 2;
-    padding-right: 80px; }
+    padding-right: 80px;
+    background-position: left center; }
     @media (max-width: 768px) {
       .carouselImageText--left .carouselImageText__contentHolder {
         padding-top: 5px;
-        padding-right: 2rem; } }
+        padding-right: 2rem;
+        background-position: center center; } }
   .carouselImageText--left .carouselImageText__imgHolder {
     order: 1; }
   .carouselImageText__imgHolder {
@@ -6152,26 +6123,15 @@ a {
     display: flex;
     padding: 3.5rem 4.5rem;
     flex-direction: column;
-    justify-content: center; }
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%; }
     @media (max-width: 768px) {
       .carouselImageText__contentHolder {
         flex: 1;
         width: 100%;
         padding: 2rem 2rem 4rem 2rem; } }
-    .carouselImageText__contentHolder__cornerLogo:before {
-      content: '';
-      position: relative;
-      display: block;
-      width: 24px;
-      height: 24px;
-      right: 15px;
-      border-color: #e50000;
-      border-style: solid;
-      border-width: 6px 0 0 6px; }
-      @media (max-width: 768px) {
-        .carouselImageText__contentHolder__cornerLogo:before {
-          top: 10px;
-          border-width: 4px 0 0 4px; } }
     .carouselImageText__contentHolder__image {
       margin-bottom: 1rem; }
       @media (min-width: 768px) {
@@ -6206,16 +6166,19 @@ a {
                   transform: translate(0%, 0%); }
       .carouselImageText__contentHolder__image img {
         display: block;
-        max-width: 120px; }
-        @media (min-width: 768px) {
-          .carouselImageText__contentHolder__image img {
-            max-width: 178px; } }
+        max-width: 80px; }
       .carouselImageText__contentHolder__image--center .mediaRatio,
       .carouselImageText__contentHolder__image--center .lazyload-placeholder {
         margin: 0 auto; }
         .carouselImageText__contentHolder__image--center .mediaRatio > .inner,
         .carouselImageText__contentHolder__image--center .lazyload-placeholder > .inner {
           margin: 0 auto; }
+    .carouselImageText__contentHolder__btnHolder {
+      max-width: 320px; }
+      .carouselImageText__contentHolder__btnHolder--center {
+        margin: 0 auto; }
+      .carouselImageText__contentHolder__btnHolder .btn {
+        width: 100%; }
     .carouselImageText__contentHolder__text--center h2,
     .carouselImageText__contentHolder__text--center h4,
     .carouselImageText__contentHolder__text--center p {
