@@ -1,32 +1,20 @@
 .carouselFiftyFifty {
-  background-size: cover;
-  background-position: center center;
-
-  @include max-md {
-    .slick-track {
-      display: flex;
-      align-items: stretch;
-    }
-
-    .slick-slide {
-      display: flex;
-      flex: 1;
-      height: unset;
-    }
+  .slick-track {
+    display: flex;
   }
 
-  @include max-xl {
-    .slick-track {
-      display: flex;
-    }
-    .slick-slide {
-      display: flex;
-      height: unset;
+  .slick-slide {
+    display: flex;
+    height: unset;
+    float: unset;
+
+    > div {
+      width: 100%;
     }
   }
 
   &--prevArrow {
-    left: 1.5rem !important;
+    left: 1.5rem;
 
     @include max-md {
       left: 2.5rem !important;
@@ -40,7 +28,7 @@
     }
   }
   &--nextArrow {
-    right: 1.8rem !important;
+    right: 1.8rem;
 
     @include max-md {
       right: 2.8rem !important;
