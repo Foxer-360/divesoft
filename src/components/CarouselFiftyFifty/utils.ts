@@ -1,6 +1,6 @@
+import { IMAGE_POSITION_RIGHT, IMAGE_POSITION_LEFT } from './const';
 import { imagePositionType } from './types';
 
 export const getImagePosition = (imageOnRight): imagePositionType => {
-  if (imageOnRight) return 'right';
-  return 'left';
+  return imageOnRight ? IMAGE_POSITION_RIGHT : IMAGE_POSITION_LEFT;
 };
