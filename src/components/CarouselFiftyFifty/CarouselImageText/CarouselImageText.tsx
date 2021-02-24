@@ -1,7 +1,7 @@
-import Media from '@source/partials/Media';
 import * as React from 'react';
-import * as ReactMarkdown from 'react-markdown/with-html';
-import { BASE_URL } from './const';
+import Button from '@source/partials/Button';
+import Media from '@source/partials/Media';
+import { getImageOriginalUrl, getTextColor, shouldButtonRender } from './utils';
 
 interface CarouselImageTextProps {
   title?: string;
@@ -11,7 +11,12 @@ interface CarouselImageTextProps {
   secondaryImage?: LooseObject;
   text?: string;
   centerText?: boolean;
-  backgroundColor?: string;
+  imageBackgroundColor?: string;
+  textBackgroundColor?: string;
+  isTextWhite?: boolean;
+  textImage?: LooseObject;
+  url?: LooseObject;
+  buttonTitle?: string;
 }
 
 interface CarouselImageTextState {
@@ -24,11 +29,21 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
   };
 
   public render() {
-    const { text, image, secondaryImage, title, imagePosition, subtitle, centerText, backgroundColor } = this.props;
-
-    const { category, hash, filename } = image;
-
-    const originalUrl = BASE_URL + category + hash + '_' + filename;
+    const {
+      text,
+      image,
+      secondaryImage,
+      title,
+      imagePosition,
+      subtitle,
+      centerText,
+      imageBackgroundColor,
+      textBackgroundColor,
+      isTextWhite,
+      textImage,
+      url,
+      buttonTitle,
+    } = this.props;
 
     return (
       <section
@@ -38,29 +53,41 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
       >
         <div
           className={'carouselImageText__imgHolder'}
-          style={{ backgroundImage: `url("${originalUrl}")`, backgroundColor: backgroundColor }}
+          style={{ backgroundImage: `url("${getImageOriginalUrl(image)}")`, backgroundColor: imageBackgroundColor }}
         />
-        <div className={'carouselImageText__contentHolder'}>
-          <div className={'carouselImageText__contentHolder__cornerLogo'}>
-            {secondaryImage && (
-              <div
-                className={`carouselImageText__contentHolder__image ${
-                  centerText ? 'carouselImageText__contentHolder__image--center' : ''
-                }`}
-              >
-                <Media type="image" data={secondaryImage} />
-              </div>
-            )}
-
+        <div
+          className={'carouselImageText__contentHolder'}
+          style={{ backgroundImage: `url("${getImageOriginalUrl(textImage)}")`, backgroundColor: textBackgroundColor }}
+        >
+          {secondaryImage && (
             <div
-              className={`carouselImageText__contentHolder__text ${
-                centerText ? 'carouselImageText__contentHolder__text--center' : ''
+              className={`carouselImageText__contentHolder__image ${
+                centerText ? 'carouselImageText__contentHolder__image--center' : ''
               }`}
             >
-              <h2>{title}</h2>
-              <h4>{subtitle}</h4>
-              <ReactMarkdown source={text} />
+              <Media width={'100'} height={'100'} type="image" data={secondaryImage} />
             </div>
+          )}
+
+          <div
+            className={`carouselImageText__contentHolder__text ${
+              centerText ? 'carouselImageText__contentHolder__text--center' : ''
+            }`}
+          >
+            {title && <h2 style={getTextColor(isTextWhite)}>{title}</h2>}
+            {subtitle && <h4 style={getTextColor(isTextWhite)}>{subtitle}</h4>}
+            {text && <p style={getTextColor(isTextWhite)}>{text}</p>}
+            {shouldButtonRender(url, buttonTitle) && (
+              <div
+                className={`carouselImageText__contentHolder__btnHolder ${
+                  centerText ? 'carouselImageText__contentHolder__btnHolder--center' : ''
+                }`}
+              >
+                <Button classes={`${isTextWhite ? '' : 'btn--bordered'} ${centerText ? 'btn--center' : ''}`} url={url}>
+                  {buttonTitle}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
