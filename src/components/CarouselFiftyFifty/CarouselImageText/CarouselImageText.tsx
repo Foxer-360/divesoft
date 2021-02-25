@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@source/partials/Button';
 import Media from '@source/partials/Media';
-import { getImageOriginalUrl, getTextColor, shouldButtonRender } from './utils';
+import { getBackgroundImageStyle, getTextColor, shouldButtonRender } from './utils';
 
 interface CarouselImageTextProps {
   title?: string;
@@ -19,20 +19,45 @@ interface CarouselImageTextProps {
   buttonTitle?: string;
 }
 
-interface CarouselImageTextState {
-  isVisible: boolean;
-}
+class CarouselImageText extends React.Component<CarouselImageTextProps> {
+  renderSecondaryImage = () => {
+    const { secondaryImage, centerText } = this.props;
 
-class CarouselImageText extends React.Component<CarouselImageTextProps, CarouselImageTextState> {
-  public state: CarouselImageTextState = {
-    isVisible: false,
+    if (!secondaryImage) return null;
+
+    return (
+      <div
+        className={`carouselImageText__contentHolder__image ${
+          centerText ? 'carouselImageText__contentHolder__image--center' : ''
+        }`}
+      >
+        <Media width={'100'} height={'100'} type="image" data={secondaryImage} />
+      </div>
+    );
   };
 
-  public render() {
+  renderCallToActionBtn = () => {
+    const { centerText, isTextWhite, url, buttonTitle } = this.props;
+
+    if (!shouldButtonRender(url, buttonTitle)) return null;
+
+    return (
+      <div
+        className={`carouselImageText__contentHolder__btnHolder ${
+          centerText ? 'carouselImageText__contentHolder__btnHolder--center' : ''
+        }`}
+      >
+        <Button classes={`${!isTextWhite ? 'btn--bordered' : ''} ${centerText ? 'btn--center' : ''}`} url={url}>
+          {buttonTitle}
+        </Button>
+      </div>
+    );
+  };
+
+  render() {
     const {
       text,
       image,
-      secondaryImage,
       title,
       imagePosition,
       subtitle,
@@ -41,8 +66,6 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
       textBackgroundColor,
       isTextWhite,
       textImage,
-      url,
-      buttonTitle,
     } = this.props;
 
     return (
@@ -51,24 +74,12 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
           imagePosition && imagePosition === 'right' ? 'carouselImageText--right' : 'carouselImageText--left'
         } `}
       >
-        <div
-          className={'carouselImageText__imgHolder'}
-          style={{ backgroundImage: `url("${getImageOriginalUrl(image)}")`, backgroundColor: imageBackgroundColor }}
-        />
+        <div className={'carouselImageText__imgHolder'} style={getBackgroundImageStyle(image, imageBackgroundColor)} />
         <div
           className={'carouselImageText__contentHolder'}
-          style={{ backgroundImage: `url("${getImageOriginalUrl(textImage)}")`, backgroundColor: textBackgroundColor }}
+          style={getBackgroundImageStyle(textImage, textBackgroundColor)}
         >
-          {secondaryImage && (
-            <div
-              className={`carouselImageText__contentHolder__image ${
-                centerText ? 'carouselImageText__contentHolder__image--center' : ''
-              }`}
-            >
-              <Media width={'100'} height={'100'} type="image" data={secondaryImage} />
-            </div>
-          )}
-
+          {this.renderSecondaryImage()}
           <div
             className={`carouselImageText__contentHolder__text ${
               centerText ? 'carouselImageText__contentHolder__text--center' : ''
@@ -77,17 +88,7 @@ class CarouselImageText extends React.Component<CarouselImageTextProps, Carousel
             {title && <h2 style={getTextColor(isTextWhite)}>{title}</h2>}
             {subtitle && <h4 style={getTextColor(isTextWhite)}>{subtitle}</h4>}
             {text && <p style={getTextColor(isTextWhite)}>{text}</p>}
-            {shouldButtonRender(url, buttonTitle) && (
-              <div
-                className={`carouselImageText__contentHolder__btnHolder ${
-                  centerText ? 'carouselImageText__contentHolder__btnHolder--center' : ''
-                }`}
-              >
-                <Button classes={`${isTextWhite ? '' : 'btn--bordered'} ${centerText ? 'btn--center' : ''}`} url={url}>
-                  {buttonTitle}
-                </Button>
-              </div>
-            )}
+            {this.renderCallToActionBtn()}
           </div>
         </div>
       </section>
