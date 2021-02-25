@@ -1,10 +1,9 @@
-const getImgUrl = data => {
-  const baseUrl = 'https://foxer360-media-library.s3.eu-central-1.amazonaws.com/';
+import { BASE_URL } from '@source/const/mediaLibrary';
 
+export const getImgUrl = (data) => {
   if (data && data.filename) {
-    return baseUrl + data.category + data.hash + '_' + data.filename;
+    return BASE_URL + data.category + data.hash + '_' + data.filename;
   }
+
   return null;
 };
-
-export default getImgUrl;

@@ -1,5 +1,6 @@
 import { CSSProperties } from 'react';
-import { BASE_URL, WHITE_COLOR } from './const';
+import { BASE_URL } from '@source/const/mediaLibrary';
+import { WHITE_COLOR } from './const';
 
 const getImageOriginalUrl = (image: LooseObject | undefined): string => {
   if (!image) return '';
