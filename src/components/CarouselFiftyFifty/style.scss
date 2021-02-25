@@ -1,0 +1,44 @@
+.carouselFiftyFifty {
+  .slick-track {
+    display: flex;
+  }
+
+  .slick-slide {
+    display: flex;
+    height: unset;
+    float: unset;
+
+    > div {
+      width: 100%;
+    }
+  }
+
+  &--prevArrow {
+    left: 1.5rem;
+
+    @include max-md {
+      left: 2.5rem !important;
+      width: 16px !important;
+      height: 9px !important;
+
+      .prevArrow--top,
+      .prevArrow--bottom {
+        height: 3px !important;
+      }
+    }
+  }
+  &--nextArrow {
+    right: 1.8rem;
+
+    @include max-md {
+      right: 2.8rem !important;
+      width: 16px !important;
+      height: 9px !important;
+
+      .nextArrow--top,
+      .nextArrow--bottom {
+        height: 3px !important;
+      }
+    }
+  }
+}

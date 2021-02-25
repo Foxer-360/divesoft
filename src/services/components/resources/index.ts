@@ -26,6 +26,7 @@ import * as aboutrightpicture from './aboutrightpicture.json';
 import * as productcomponents from './productcomponents.json';
 import * as productmountrouter from './productmountrouter.json';
 import * as productcrossroad from './productcrossroad.json';
+import * as carouselfiftyfifty from './carouselfiftyfifty.json';
 
 export {
   def as default,
@@ -56,4 +57,5 @@ export {
   productcomponents,
   productmountrouter,
   productcrossroad,
+  carouselfiftyfifty,
 };

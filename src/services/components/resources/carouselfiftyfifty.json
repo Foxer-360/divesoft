@@ -1,0 +1,150 @@
+{
+  "name": "CarouselFiftyFifty",
+  "data": {
+    "slides": [
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "secondaryImage": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "title": "Divesoft BACKMOUNT",
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "url": "",
+        "buttonTitle": "more information",
+        "imageOnRight": false,
+        "isCentred": true
+      },
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
+        "title": "Divesoft BACKMOUNT",
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "url": "",
+        "buttonTitle": "more information",
+        "imageOnRight": false,
+        "isCentred": true
+      },
+      {
+        "image": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "secondaryImage": {},
+        "imageBackgroundColor": "#d4d4d4",
+        "textImage": {
+          "recommendedSizes": {
+            "width": "1200",
+            "height": "1200"
+          }
+        },
+        "textBackgroundColor": "#d4d4d4",
+        "isTextWhite": false,
+        "title": "Divesoft BACKMOUNT",
+        "subTitle": "Solid, versatile, simple",
+        "description": "Traditional configuration used in most expeditions and environments.",
+        "url": "",
+        "buttonTitle": "more information",
+        "imageOnRight": false,
+        "isCentred": true
+      }
+    ]
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "slides": {
+          "type": "array",
+          "title": "Slides",
+          "items": {
+            "properties": {
+              "title": {
+                "type": "text",
+                "title": "Title"
+              },
+              "subTitle": {
+                "type": "text",
+                "title": "Subtitle"
+              },
+              "description": {
+                "type": "text",
+                "title": "Description"
+              },
+              "url": {
+                "type": "urlAutocomplete",
+                "title": "URL"
+              },
+              "buttonTitle": {
+                "type": "text",
+                "title": "Button title"
+              },
+              "image": {
+                "type": "image"
+              },
+              "imageBackgroundColor": {
+                "type": "string",
+                "title": "Image background color"
+              },
+              "secondaryImage": {
+                "type": "image"
+              },
+              "textImage": {
+                "type": "image"
+              },
+              "textBackgroundColor": {
+                "type": "string",
+                "title": "Text background color"
+              },
+              "isTextWhite": {
+                "type": "boolean",
+                "title": "Is text white?"
+              },
+              "imageOnRight": {
+                "type": "boolean",
+                "title": "Image on right side?"
+              },
+              "isCentred": {
+                "type": "boolean",
+                "title": "Is centred?"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

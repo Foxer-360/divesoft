@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BASE_URL } from '@source/const/mediaLibrary';
 import ImgWithFallback from './components/ImgWithFallback/';
 
 export interface MediaProps {
@@ -12,8 +13,6 @@ export interface MediaProps {
 
 export interface MediaState {}
 
-const baseUrl = 'https://foxer360-media-library.s3.eu-central-1.amazonaws.com/';
-
 class Media extends React.Component<MediaProps, MediaState> {
   constructor(props: MediaProps) {
     super(props);
@@ -24,23 +23,23 @@ class Media extends React.Component<MediaProps, MediaState> {
     if (width && height) {
       return {
         width,
-        height
+        height,
       };
     }
 
     return recommendedSizes;
-  }
+  };
 
-  renderAsImage = data => {
+  renderAsImage = (data) => {
     if (data && data.filename) {
       let recommendedSizes = (data && data.recommendedSizes) || null;
-      let originalUrl = baseUrl + data.category + data.hash + '_' + data.filename;
+      let originalUrl = BASE_URL + data.category + data.hash + '_' + data.filename;
       recommendedSizes = this.setDimensions(recommendedSizes);
       return (
         <ImgWithFallback
           originalSrc={originalUrl}
           alt={data.alt || ''}
-          baseUrl={baseUrl}
+          baseUrl={BASE_URL}
           recommendedSizes={recommendedSizes}
           originalData={data}
           hash={data.hash}
@@ -50,7 +49,7 @@ class Media extends React.Component<MediaProps, MediaState> {
     } else {
       return null;
     }
-  }
+  };
 
   renderAsVideoEmbed(data: any) {
     let embedUrl = data.url;
@@ -59,9 +58,11 @@ class Media extends React.Component<MediaProps, MediaState> {
       <div
         className={`mediaRatio mediaRatio--video ${this.props.className}`}
         style={{
-          paddingTop: `${(parseInt(data.recommendedSizes ? data.recommendedSizes.height : 9, 10) /
-            parseInt(data.recommendedSizes ? data.recommendedSizes.width : 16, 10)) *
-            100}%`
+          paddingTop: `${
+            (parseInt(data.recommendedSizes ? data.recommendedSizes.height : 9, 10) /
+              parseInt(data.recommendedSizes ? data.recommendedSizes.width : 16, 10)) *
+            100
+          }%`,
         }}
       >
         <iframe className="mediaEmbeddedVideo inner" src={embedUrl} allowFullScreen={true} frameBorder="0" />
@@ -70,7 +71,7 @@ class Media extends React.Component<MediaProps, MediaState> {
   }
 
   renderAsFile(data: any) {
-    let originalUrl = baseUrl + data.category + data.hash + '_' + data.filename;
+    let originalUrl = BASE_URL + data.category + data.hash + '_' + data.filename;
 
     return (
       <div className={'fileDownload__holder'}>

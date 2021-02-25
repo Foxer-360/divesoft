@@ -33,57 +33,57 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
       currentImage: 0,
       numberOfPage: 1,
       lightboxIsOpen: false,
-      imageUrls: this.getImageUrls()
+      imageUrls: this.getImageUrls(),
     };
   }
 
   renderGallery = (data: any) => {
-    if (!data) { return; }
+    if (!data) {
+      return;
+    }
 
     const gallery = data.map((item, i) => {
       return (
-        <div
-          key={i}
-          className={`photoGallery__img col-6 col-md-3`}
-          onClick={(e) => this.openLightbox(i, e)}
-        >
-          <Media data={item.img} type={'image'} />
+        <div key={i} className={`photoGallery__img col-6 col-md-3`} onClick={(e) => this.openLightbox(i, e)}>
+          <Media width={'400'} height={'400'} data={item.img} type={'image'} />
         </div>
       );
     });
 
     return <div className="row">{gallery}</div>;
-  }
+  };
 
   getImageUrls = () => {
     const { images } = this.props.data;
-    if (!images) { return; }
+    if (!images) {
+      return;
+    }
 
     let result = [];
 
     images.map((item, i) => {
       result[i] = {
-        src: getImageUrl(item.img)
+        src: getImageUrl(item.img),
       };
     });
 
     return result;
-  }
+  };
 
   openLightbox = (index: number, event: any) => {
     event.preventDefault();
     this.setState({
       currentImage: index,
-      lightboxIsOpen: true
+      lightboxIsOpen: true,
     });
-  }
+  };
 
   closeLightbox = () => {
     this.setState({
       currentImage: 0,
-      lightboxIsOpen: false
+      lightboxIsOpen: false,
     });
-  }
+  };
 
   gotoPrevious = () => this.setState({ currentImage: this.state.currentImage - 1 });
 
@@ -92,12 +92,14 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
   gotoImage = (index: number) => this.setState({ currentImage: index });
 
   handleClickImage = () => {
-    if (this.state.currentImage === this.state.imageUrls.length - 1) { return; }
+    if (this.state.currentImage === this.state.imageUrls.length - 1) {
+      return;
+    }
 
     this.gotoNext();
-  }
+  };
 
-  public render () {
+  public render() {
     const { title, description, divider, images } = this.props.data;
 
     return (
@@ -122,12 +124,14 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
 
                 {this.renderGallery(items)}
 
-                {this.state.numberOfPage < lastPage &&
+                {this.state.numberOfPage < lastPage && (
                   <button
                     className={'btn'}
                     onClick={() => this.setState({ numberOfPage: this.state.numberOfPage + 1 })}
-                  >Show more
-                  </button>}
+                  >
+                    Show more
+                  </button>
+                )}
 
                 {divider && <div className={'photoGallery__divider'} />}
               </div>

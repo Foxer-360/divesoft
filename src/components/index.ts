@@ -26,6 +26,7 @@ import AboutRightPicture from './AboutRightPicture';
 import ProductComponents from './ProductComponents';
 import ProductMountRouter from './ProductMountRouter';
 import ProductCrossRoad from './ProductCrossRoad';
+import CarouselFiftyFifty from './CarouselFiftyFifty';
 
 export {
   AlertNotFound,
@@ -56,4 +57,5 @@ export {
   ProductComponents,
   ProductMountRouter,
   ProductCrossRoad,
+  CarouselFiftyFifty,
 };
