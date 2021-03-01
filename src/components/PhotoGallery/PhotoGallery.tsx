@@ -44,7 +44,11 @@ class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState>
 
     const gallery = data.map((item, i) => {
       return (
-        <div key={i} className={`photoGallery__img col-6 col-md-3`} onClick={(e) => this.openLightbox(i, e)}>
+        <div
+          key={i}
+          className={`photoGallery__img col-12 col-sm-6 col-md-4 col-lg-3`}
+          onClick={(e) => this.openLightbox(i, e)}
+        >
           <Media width={'400'} height={'400'} data={item.img} type={'image'} />
         </div>
       );
