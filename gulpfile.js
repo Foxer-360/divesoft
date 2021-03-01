@@ -1,9 +1,11 @@
 const path = require('path');
 const { execSync } = require('child_process');
-const { dest, parallel, pipe, src, watch } = require('gulp');
+const { dest, parallel, src, watch } = require('gulp');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
+
+const { resolveAliases } = require('./scripts/resolveAliases');
 
 const root = path.resolve(__dirname);
 
@@ -12,6 +14,9 @@ function buildJs(cb) {
   execSync(`npx tsc --build ./tsconfig.json`, {
     cwd: root,
   });
+
+  // Resolve @source aliases from build
+  resolveAliases(path.resolve(root, 'build'));
 
   cb();
 }
