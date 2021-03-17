@@ -27,6 +27,7 @@ import * as productcomponents from './productcomponents.json';
 import * as productmountrouter from './productmountrouter.json';
 import * as productcrossroad from './productcrossroad.json';
 import * as carouselfiftyfifty from './carouselfiftyfifty.json';
+import * as productmicrosite from './productmicrosite.json';
 
 export {
   def as default,
@@ -58,4 +59,5 @@ export {
   productmountrouter,
   productcrossroad,
   carouselfiftyfifty,
+  productmicrosite,
 };
