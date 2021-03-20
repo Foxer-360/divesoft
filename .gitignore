@@ -1,6 +1,10 @@
 node_modules/
 .DS_Store
+
+# IDEs
 .vscode/
-.prettierrc
 .idea
-build/
+
+# build
+build
+styles/main.css
