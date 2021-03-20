@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Container from '@source/partials/Container';
 import MicrositeHeader from './MicrositeHeader';
+import MicrositeContent from './MicrositeContent';
 
 const ProductMicrosite = () => {
   return (
     <div className="productMicrosite">
       <MicrositeHeader />
-      <Container className="productMicrosite__container">ProductMicrosite</Container>
+      <MicrositeContent />
     </div>
   );
 };
