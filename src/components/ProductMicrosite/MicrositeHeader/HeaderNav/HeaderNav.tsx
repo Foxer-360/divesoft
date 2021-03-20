@@ -12,10 +12,10 @@ interface IProps {
 
 const HeaderNav = ({ links }: IProps) => {
   return (
-    <nav className="productMicrosite__header__nav">
-      <ul className="productMicrosite__header__nav__list">
+    <nav className="productMicrosite__headerNav">
+      <ul className="productMicrosite__headerNav__list">
         {links.map(({ title, url }, index) => (
-          <li key={`${title}-${url}-${index}`} className="productMicrosite__header__nav__link">
+          <li key={`${title}-${url}-${index}`} className="productMicrosite__headerNav__link">
             <Link url={url}>{title}</Link>
           </li>
         ))}
