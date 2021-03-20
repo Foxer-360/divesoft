@@ -3,14 +3,11 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { adopt } from 'react-adopt';
 
-import Search from '../Search';
-import Link from '../../partials/Link';
-import Media from '../../partials/Media';
-import Loader from '../../partials/Loader';
-import Button from '../../partials/Button';
+import Search from '@source/components/Search';
+import Link from '@source/partials/Link';
+import Loader from '@source/partials/Loader';
+import HeaderLogo from '@source/partials/HeaderLogo';
 import Hamburger from './components/Hamburger';
-// import Country from './components/Country/Country';
-// import { useState, useEffect } from 'react';
 
 const GET_CONTEXT = gql`
   {
@@ -105,11 +102,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   componentWillUnmount() {
     return window && window.removeEventListener('scroll', this.scrolled);
   }
-
-  // tslint:disable-next-line: no-any
-  // componentDidUpdate({}: any, prevState: any) {
-  //   setTimeout(() => this.setScrolledState(prevState.scrolledPixels), 1000);
-  // }
 
   setScrolledState(prevScroll: number) {
     if (this.state.scrolledPixels > 1000) {
@@ -207,22 +199,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               >
                 <div className="container">
                   <div
-                    // className={'header__wrapper d-flex justify-content-between align-items-center'}
                     className={'header__wrapper'}
-                    // style={{
-                    //   position: this.state.menuActive ? 'fixed' : 'relative'
-                    // }}
                   >
                     <Hamburger active={this.state.menuActive} onClick={this.toggleMenu} />
-                    <div className="header__logo">
-                      <Link
-                        url={`${context.websiteData.urlMask === '/'
+                    <HeaderLogo
+                      url={`${context.websiteData.urlMask === '/'
                           ? ''
                           : context.websiteData.urlMask}/${context.languageData.code}`}
-                      >
-                        <img src="/assets/divesoft/images/logo.svg" alt="logo" />
-                      </Link>
-                    </div>
+                    />
                     {/* TOP MENU - desktop - start */}
                     <nav>
                       <ul>
