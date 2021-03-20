@@ -6,7 +6,7 @@ const ProductMicrosite = () => {
   return (
     <div className="productMicrosite">
       <MicrositeHeader />
-      <Container>ProductMicrosite</Container>
+      <Container className="productMicrosite__container">ProductMicrosite</Container>
     </div>
   );
 };

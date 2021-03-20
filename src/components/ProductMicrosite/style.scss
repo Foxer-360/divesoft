@@ -2,4 +2,8 @@
 
 .productMicrosite {
   height: 1000vh;
+
+  &__container {
+    padding-top: 1em;
+  }
 }
