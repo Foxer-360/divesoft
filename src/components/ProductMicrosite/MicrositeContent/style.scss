@@ -1,3 +1,27 @@
-.productMicrosite__container {
+@import 'Paragraph/style.scss';
+@import 'Subtitle/style.scss';
+@import 'Title/style.scss';
+
+@import 'ContentCard/style.scss';
+@import 'HalfContentCard/style.scss';
+@import 'ProductPreview/style.scss';
+
+.productMicrosite__content {
   padding-top: 1em;
+
+  & &__orderBox {
+    background: rgba($lightGrey, 0.2);
+  }
+
+  &__btnWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 2.5em;
+  }
+
+  &__price {
+    font-size: 2.5em;
+    padding-right: 2em;
+  }
 }
