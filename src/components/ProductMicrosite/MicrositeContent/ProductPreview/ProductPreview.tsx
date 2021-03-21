@@ -1,6 +1,9 @@
 import * as React from 'react';
+import ContentCard, { IContentCardProps } from '../ContentCard';
 
-const ProductPreview = () => {
+interface IProps extends IContentCardProps {}
+
+const ProductPreview = ({ title, text }: IProps) => {
   return (
     <div className="productMicrosite__productPreview">
       <img
@@ -8,6 +11,7 @@ const ProductPreview = () => {
         src="/assets/divesoft/images/freedom.png"
         alt="Product preview"
       />
+      <ContentCard title={title} text={text} />
     </div>
   );
 };
