@@ -1,14 +1,13 @@
 import * as React from 'react';
 import Paragraph from '../Paragraph';
 import Title from '../Title';
-import { DEFAULT_TEXT, DEFAULT_TITLE } from './const';
 
 export interface IContentCardProps {
-  title?: string;
-  text?: string;
+  title: string;
+  text: string;
 }
 
-const ContentCard = ({ title = DEFAULT_TITLE, text = DEFAULT_TEXT }: IContentCardProps) => {
+const ContentCard = ({ title, text }: IContentCardProps) => {
   return (
     <section className="productMicrosite__contentCard">
       <div className="productMicrosite__contentCard__wrapper">
