@@ -1,0 +1,17 @@
+.productMicrosite__contentCard {
+  padding: 4em 0;
+
+  &__wrapper {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__headline {
+    padding-bottom: 0.5em;
+  }
+
+  &__text {
+    padding: 0;
+  }
+}
