@@ -5,6 +5,7 @@
 @import 'ContentCard/style.scss';
 @import 'ContentList/style.scss';
 @import 'HalfContentCard/style.scss';
+@import 'OrderButton/style.scss';
 @import 'ProductPreview/style.scss';
 
 .productMicrosite__content {
@@ -12,17 +13,5 @@
 
   & &__orderBox {
     background: rgba($lightGrey, 0.2);
-  }
-
-  &__btnWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-top: 2.5em;
-  }
-
-  &__price {
-    font-size: 2.5em;
-    padding-right: 2em;
   }
 }

@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Button from '@source/partials/Button';
-import Container from '@source/partials/Container';
 import HalfContentCard from './HalfContentCard';
 import ProductPreview from './ProductPreview';
-import { DEFAULT_LIST_ITEMS, DEFAULT_SUBTITLE, DEFAULT_TEXT, DEFAULT_TITLE } from './const';
 import ContentList from './ContentList';
+import OrderButton from './OrderButton';
+import { DEFAULT_LIST_ITEMS, DEFAULT_SUBTITLE, DEFAULT_TEXT, DEFAULT_TITLE } from './const';
 
 const MicrositeContent = () => {
   return (
@@ -19,10 +18,7 @@ const MicrositeContent = () => {
         subtitle={DEFAULT_SUBTITLE}
         text={DEFAULT_TEXT}
       >
-        <div className="productMicrosite__content__btnWrapper">
-          <strong className="productMicrosite__content__price">XXX,-</strong>
-          <Button>Objednat</Button>
-        </div>
+        <OrderButton />
       </HalfContentCard>
     </div>
   );
