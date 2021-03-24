@@ -12,6 +12,15 @@
   &__listItem {
     max-width: calc(100% / 3);
     padding: 0 2em 1em;
+
+    @include max-lg {
+      max-width: calc(100% / 2);
+    }
+
+    @include max-sm {
+      max-width: 100%;
+      text-align: center;
+    }
   }
 
   &__itemTitleWrapper {
@@ -20,14 +29,22 @@
     align-items: center;
     padding-bottom: 1em;
 
+    @include max-sm {
+      flex-direction: column;
+    }
+
     &:before {
       content: '';
       display: block;
-      width: 4em;
+      min-width: 4em;
       height: 4em;
       margin-right: 0.75em;
       background: $lightGrey;
       border-radius: 50%;
+
+      @include max-sm {
+        margin: 0 0 0.5em;
+      }
     }
   }
 
