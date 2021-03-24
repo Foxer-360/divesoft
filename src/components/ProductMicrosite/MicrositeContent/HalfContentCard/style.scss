@@ -11,10 +11,8 @@ $rightSide: right;
       padding-#{if($condition, $rightSide, $leftSide)}: 5em;
     }
 
-    .productMicrosite__halfContentCard__imageWrapper {
-      &:before {
-        #{$side}: 0;
-      }
+    .productMicrosite__halfContentCard__imageBackground {
+      #{$side}: 0;
     }
   }
 }
@@ -32,16 +30,15 @@ $rightSide: right;
 
   &__imageWrapper {
     position: relative;
+  }
 
-    &:before {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 200%;
-      height: 100%;
-      top: 0;
-      background: rgba($lightGrey, 0.2);
-    }
+  &__imageBackground {
+    position: absolute;
+    display: block;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    background: rgba($lightGrey, 0.2);
   }
 
   &__image {

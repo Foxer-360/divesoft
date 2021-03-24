@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Container from '@source/partials/Container';
 import Paragraph from '../Paragraph';
 import Subtitle from '../Subtitle';
 import Title from '../Title';
@@ -21,21 +22,24 @@ const HalfContentCard = (props: IProps) => {
   const { title, text, subtitle, children, contentSide = CONTENT_SIDE_ENUM.left, className } = props;
 
   return (
-    <section className={`productMicrosite__halfContentCard ${contentSide} ${className}`}>
-      <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__content">
-        <Title>{title}</Title>
-        {subtitle && <Subtitle>{subtitle}</Subtitle>}
-        <Paragraph>{text}</Paragraph>
-        {children}
-      </div>
-      <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__imageWrapper">
-        <img
-          className="productMicrosite__halfContentCard__image"
-          src="/assets/divesoft/images/freedom.png"
-          alt="Content card image"
-        />
-      </div>
-    </section>
+    <Container className={className}>
+      <section className={`productMicrosite__halfContentCard ${contentSide}`}>
+        <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__content">
+          <Title>{title}</Title>
+          {subtitle && <Subtitle>{subtitle}</Subtitle>}
+          <Paragraph>{text}</Paragraph>
+          {children}
+        </div>
+        <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__imageWrapper">
+          <div className="productMicrosite__halfContentCard__imageBackground">Image background</div>
+          <img
+            className="productMicrosite__halfContentCard__image"
+            src="/assets/divesoft/images/freedom.png"
+            alt="Content card image"
+          />
+        </div>
+      </section>
+    </Container>
   );
 };
 
