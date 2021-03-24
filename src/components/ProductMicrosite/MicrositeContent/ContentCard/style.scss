@@ -1,9 +1,16 @@
 .productMicrosite__contentCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   padding: 4em 0;
 
+  @include max-md {
+    font-size: 75%;
+  }
+
   &__wrapper {
-    width: 650px;
-    margin: 0 auto;
+    max-width: 650px;
+    margin: 0 1em;
     text-align: center;
   }
 
