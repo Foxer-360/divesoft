@@ -11,6 +11,7 @@ const MicrositeContent = () => {
       <ProductPreview title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
       <HalfContentCard title={DEFAULT_TITLE} subtitle={DEFAULT_SUBTITLE} text={DEFAULT_TEXT} />
       <HalfContentCard contentSide="right" title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
+      <ProductPreview type="small" title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
       <ContentList title={DEFAULT_TITLE} text={DEFAULT_TEXT} listItems={DEFAULT_LIST_ITEMS} />
       <HalfContentCard
         className="productMicrosite__content__orderBox"
