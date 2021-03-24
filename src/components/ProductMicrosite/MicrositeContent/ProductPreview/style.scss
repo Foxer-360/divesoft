@@ -1,4 +1,16 @@
 .productMicrosite__productPreview {
+  display: flex;
+  flex-direction: column;
+
+  &.small {
+    flex-direction: column-reverse;
+
+    .productMicrosite__productPreview__imageWrapper {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
   &__image {
     object-fit: contain;
     object-position: center;
