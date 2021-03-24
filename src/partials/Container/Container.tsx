@@ -8,8 +8,8 @@ interface IProps {
 
 const Container = ({ children, className, style }: IProps) => {
   return (
-    <div style={style} className={`container ${className}`}>
-      {children}
+    <div style={style} className={`containerWrapper ${className}`}>
+      <div className="container">{children}</div>
     </div>
   );
 };
