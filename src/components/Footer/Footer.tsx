@@ -82,7 +82,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
         emailValid: false,
         sending: false,
       },
-      isTrustBoxLoaded: true,
+      isTrustBoxLoaded: false,
     };
   }
 
