@@ -1,13 +1,12 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { adopt } from 'react-adopt';
-import { Query, Mutation } from 'react-apollo';
-import * as ReactMarkdown from 'react-markdown';
+import { Query } from 'react-apollo';
 
 import Link from '../../partials/Link';
 import Loader from '../../partials/Loader';
 import CookiePopup from './components/CookiePopup';
-import ValidationAlert from '../ValidationAlert';
+import TrustBox from './components/TrustBox';
 
 const GET_CONTEXT = gql`
   {
@@ -39,7 +38,7 @@ const ComposedQuery = adopt({
     }
     return (
       <Query query={GET_PAGES_URLS} variables={{ language: languageData.id, websiteId: websiteData.id }}>
-        {data => {
+        {(data) => {
           return render(data);
         }}
       </Query>
@@ -85,38 +84,10 @@ class Footer extends React.Component<FooterProps, FooterState> {
   public render() {
     const { copyrights, contacts, facebookUrl, youtubeUrl, instagramUrl } = this.props.data;
 
-    const onChangeEmail = (e: any) => {
-      this.setState({
-        email: e.target.value,
-      });
-    };
-
-    const isValid = () => {
-      const newError = { ...this.state.error };
-      newError.email = this.state.email === '';
-  
-      if (this.state.email !== '') {
-        const result = /\S+@\S+\.\S+/.test(this.state.email);
-        newError.emailValid = !result;
-      }
-  
-      this.setState({
-        error: newError,
-      });
-  
-      return !newError.email && !newError.emailValid;
-    };
-
     return (
       <ComposedQuery>
-        {({ getPagesUrls: { loading, error, data }, context }) => {
-          if (
-            !context.navigationsData ||
-            !context.languageData ||
-            !context.languagesData ||
-            !data ||
-            !data.pagesUrls
-          ) {
+        {({ getPagesUrls: { _, error, data }, context }) => {
+          if (!context.navigationsData || !context.languageData || !context.languagesData || !data || !data.pagesUrls) {
             return <Loader />;
           }
 
@@ -124,128 +95,114 @@ class Footer extends React.Component<FooterProps, FooterState> {
             return `Error...${error}`;
           }
 
-          const {
-            navigationsData: navigations,
-            languageData: { code: languageCode },
-          } = context;
+          const { navigationsData: navigations } = context;
 
           const transformedNavigations = this.transformNavigationsIntoTree(navigations, data.pagesUrls);
 
           const firstBottomNav = 'BottomPRODUCTS';
 
           const firstBottomNavItems =
-            transformedNavigations && transformedNavigations[firstBottomNav] ?
-            transformedNavigations[firstBottomNav] :
-            [];
+            transformedNavigations && transformedNavigations[firstBottomNav]
+              ? transformedNavigations[firstBottomNav]
+              : [];
 
           const secondBottomNav = 'BottomABOUT';
 
           const secondBottomNavItems =
-            transformedNavigations && transformedNavigations[secondBottomNav] ?
-            transformedNavigations[secondBottomNav] :
-            [];
+            transformedNavigations && transformedNavigations[secondBottomNav]
+              ? transformedNavigations[secondBottomNav]
+              : [];
 
           const thirdBottomNav = 'BottomSUPPORT';
 
           const thirdBottomNavItems =
-            transformedNavigations && transformedNavigations[thirdBottomNav] ?
-            transformedNavigations[thirdBottomNav] :
-            [];
+            transformedNavigations && transformedNavigations[thirdBottomNav]
+              ? transformedNavigations[thirdBottomNav]
+              : [];
 
           const fourthBottomNav = 'BottomCONTACTS';
 
           const fourthBottomNavItems =
-            transformedNavigations && transformedNavigations[fourthBottomNav] ?
-            transformedNavigations[fourthBottomNav] :
-            [];
+            transformedNavigations && transformedNavigations[fourthBottomNav]
+              ? transformedNavigations[fourthBottomNav]
+              : [];
 
           return (
-            <>
-              <footer className={'footer'}>
-                <CookiePopup />
-                <div className={'container'}>
-                  <div className={'footer__divider'} />
-                  <div className={'footer__navigation row d-flex justify-content-between align-items-start'}>
-                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Products</h6>
-                      <ul>
-                        {firstBottomNavItems &&
-                          firstBottomNavItems.map((navItem, i) => (
-                            <li key={i}>
-                              <Link {...navItem.url}>
-                                {navItem.name || navItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                      </ul>
-                    </nav>
-                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">About</h6>
-                      <ul>
-                        {secondBottomNavItems &&
-                          secondBottomNavItems.map((navItem, i) => (
-                            <li key={i}>
-                              <Link {...navItem.url}>
-                                {navItem.name || navItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                          <li>
-                            <Link url="https://wetnotes.com/">
-                              Wetnotes
-                            </Link>
+            <footer className="footer">
+              <CookiePopup />
+              <div className="container">
+                <div className="footer__divider" />
+                <div className="footer__navigation row d-flex justify-content-between align-items-start">
+                  <nav className="footer__navigation__item col-12 col-md-6 col-xl">
+                    <h6 className="headline">Products</h6>
+                    <ul>
+                      {firstBottomNavItems &&
+                        firstBottomNavItems.map((navItem, i) => (
+                          <li key={i}>
+                            <Link {...navItem.url}>{navItem.name || navItem.title}</Link>
                           </li>
-                      </ul>
-                    </nav>
-                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Support</h6>
-                      <ul>
-                        {thirdBottomNavItems &&
-                          thirdBottomNavItems.map((navItem, i) => (
-                            <li key={i}>
-                              <Link {...navItem.url}>
-                                {navItem.name || navItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                      </ul>
-                    </nav>
-                    <nav className={'footer__navigation__item col-12 col-md-6 col-xl'}>
-                      <h6 className="headline">Contacts</h6>
-                      <ul>
-                        {fourthBottomNavItems &&
-                          fourthBottomNavItems.map((navItem, i) => (
-                            <li key={i}>
-                              <Link {...navItem.url}>
-                                {navItem.name || navItem.title}
-                              </Link>
-                            </li>
-                          ))}
-                      </ul>
-                    </nav>
+                        ))}
+                    </ul>
+                  </nav>
+                  <nav className="footer__navigation__item col-12 col-md-6 col-xl">
+                    <h6 className="headline">About</h6>
+                    <ul>
+                      {secondBottomNavItems &&
+                        secondBottomNavItems.map((navItem, i) => (
+                          <li key={i}>
+                            <Link {...navItem.url}>{navItem.name || navItem.title}</Link>
+                          </li>
+                        ))}
+                      <li>
+                        <Link url="https://wetnotes.com/">Wetnotes</Link>
+                      </li>
+                    </ul>
+                  </nav>
+                  <nav className="footer__navigation__item col-12 col-md-6 col-xl">
+                    <h6 className="headline">Support</h6>
+                    <ul>
+                      {thirdBottomNavItems &&
+                        thirdBottomNavItems.map((navItem, i) => (
+                          <li key={i}>
+                            <Link {...navItem.url}>{navItem.name || navItem.title}</Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </nav>
+                  <nav className="footer__navigation__item col-12 col-md-6 col-xl">
+                    <h6 className="headline">Contacts</h6>
+                    <ul>
+                      {fourthBottomNavItems &&
+                        fourthBottomNavItems.map((navItem, i) => (
+                          <li key={i}>
+                            <Link {...navItem.url}>{navItem.name || navItem.title}</Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </nav>
+                </div>
+                <div className="footer__divider" />
+                <div className="footer__bottom row">
+                  <div className="col-12 col-md-6 col-xl">
+                    {copyrights && <p className="text-copyright">{copyrights}</p>}
                   </div>
-                  <div className={'footer__divider'} />
-                  <div className={'footer__bottom row'}>
-                    <div className={'col-12 col-md-6 col-xl'}>
-                        {copyrights && <p className={'text-copyright'}>{copyrights}</p>}
-                    </div>
-                    <div className={'col-12 col-md-6 col-xl'}>
-                      <div className={'footer__bottom__social d-flex'}>
-                        <Link {...facebookUrl} className="facebook">
-                          <div />
-                        </Link>
-                        <Link {...youtubeUrl} className="youtube">
-                          <div />
-                        </Link>
-                        <Link {...instagramUrl} className="instagram">
-                          <div />
-                        </Link>
-                      </div>
+                  <div className="col-12 col-md-6 col-xl">
+                    <div className="footer__bottom__social d-flex">
+                      <Link {...facebookUrl} className="facebook">
+                        <div />
+                      </Link>
+                      <Link {...youtubeUrl} className="youtube">
+                        <div />
+                      </Link>
+                      <Link {...instagramUrl} className="instagram">
+                        <div />
+                      </Link>
                     </div>
                   </div>
                 </div>
-              </footer>
-            </>
+              </div>
+              <TrustBox />
+            </footer>
           );
         }}
       </ComposedQuery>
