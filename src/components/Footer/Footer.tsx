@@ -8,6 +8,8 @@ import Loader from '../../partials/Loader';
 import CookiePopup from './components/CookiePopup';
 import TrustBox from './components/TrustBox';
 
+const { Component } = React;
+
 const GET_CONTEXT = gql`
   {
     languageData @client
@@ -47,6 +49,7 @@ const ComposedQuery = adopt({
 });
 
 export interface FooterProps {
+  Helmet: typeof Component;
   data: {
     copyrights: string;
     facebookUrl: LooseObject;
@@ -64,6 +67,7 @@ export interface FooterState {
     emailValid: boolean;
     sending: boolean;
   };
+  isTrustBoxLoaded: boolean;
 }
 
 class Footer extends React.Component<FooterProps, FooterState> {
@@ -78,11 +82,18 @@ class Footer extends React.Component<FooterProps, FooterState> {
         emailValid: false,
         sending: false,
       },
+      isTrustBoxLoaded: true,
     };
   }
 
+  componentDidMount() {
+    setTimeout(() => this.setState({ isTrustBoxLoaded: true }), 500);
+  }
+
   public render() {
-    const { copyrights, contacts, facebookUrl, youtubeUrl, instagramUrl } = this.props.data;
+    const { isTrustBoxLoaded } = this.state;
+    const { Helmet } = this.props;
+    const { copyrights, facebookUrl, youtubeUrl, instagramUrl } = this.props.data;
 
     return (
       <ComposedQuery>
@@ -129,6 +140,9 @@ class Footer extends React.Component<FooterProps, FooterState> {
 
           return (
             <footer className="footer">
+              <Helmet>
+                <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" />
+              </Helmet>
               <CookiePopup />
               <div className="container">
                 <div className="footer__divider" />
@@ -181,6 +195,12 @@ class Footer extends React.Component<FooterProps, FooterState> {
                     </ul>
                   </nav>
                 </div>
+                {isTrustBoxLoaded && (
+                  <>
+                    <div className="footer__divider" />
+                    <TrustBox />
+                  </>
+                )}
                 <div className="footer__divider" />
                 <div className="footer__bottom row">
                   <div className="col-12 col-md-6 col-xl">
@@ -201,7 +221,6 @@ class Footer extends React.Component<FooterProps, FooterState> {
                   </div>
                 </div>
               </div>
-              <TrustBox />
             </footer>
           );
         }}

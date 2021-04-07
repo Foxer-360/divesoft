@@ -28,7 +28,7 @@ const TrustBox = () => {
   return (
     <div
       ref={ref} // We need a reference to this element to load the TrustBox in the effect.
-      className="trustpilot-widget" // Renamed this to className.
+      style={{ textAlign: 'center', padding: '1em 0' }}
       {...data}
       // [ long list of data attributes...]
     >
