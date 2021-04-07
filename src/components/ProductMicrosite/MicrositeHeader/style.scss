@@ -1,0 +1,13 @@
+@import 'HeaderNav/style.scss';
+
+.productMicrosite__header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0;
+  padding: 1em 2em;
+  background: $white;
+  box-shadow: 0 10px 5px -10px rgba($black, 0.5);
+  z-index: 10;
+}

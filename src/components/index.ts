@@ -27,6 +27,7 @@ import ProductComponents from './ProductComponents';
 import ProductMountRouter from './ProductMountRouter';
 import ProductCrossRoad from './ProductCrossRoad';
 import CarouselFiftyFifty from './CarouselFiftyFifty';
+import ProductMicrosite from './ProductMicrosite';
 
 export {
   AlertNotFound,
@@ -58,4 +59,5 @@ export {
   ProductMountRouter,
   ProductCrossRoad,
   CarouselFiftyFifty,
+  ProductMicrosite,
 };
