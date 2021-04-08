@@ -103,7 +103,7 @@
                 "title": "Title"
               },
               "description": {
-                "type": "text",
+                "type": "markdown",
                 "title": "Description"
               },
               "image": {
