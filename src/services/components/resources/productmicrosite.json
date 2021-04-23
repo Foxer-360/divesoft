@@ -1,4 +1,117 @@
 {
   "name": "ProductMicrosite",
-  "data": {}
+  "data": {
+    "productName": "Product name",
+    "productPrice": "XXX",
+    "productUrl": "",
+    "firstSectionTitle": "First section title",
+    "firstSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "secondSectionTitle": "Second section title",
+    "secondSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "thirdSectionTitle": "Third section title",
+    "thirdSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "fourthSectionTitle": "Fourth section title",
+    "fourthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "fifthSectionTitle": "Fifth section title",
+    "fifthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "fifthSectionItems": [
+      {
+        "title": "Item 1",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+      },
+      {
+        "title": "Item 2",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+      },
+      {
+        "title": "Item 3",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+      }
+    ],
+    "sixthSectionTitle": "Sixth section title",
+    "sixthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "text",
+          "title": "Product name"
+        },
+        "productPrice": {
+          "type": "text",
+          "title": "Product price"
+        },
+        "productUrl": {
+          "type": "text",
+          "title": "Product order url"
+        },
+        "firstSectionTitle": {
+          "type": "text",
+          "title": "First section title"
+        },
+        "firstSectionDescription": {
+          "type": "markdown",
+          "title": "First section description"
+        },
+        "secondSectionTitle": {
+          "type": "text",
+          "title": "Second section title"
+        },
+        "secondSectionDescription": {
+          "type": "markdown",
+          "title": "Second section description"
+        },
+        "thirdSectionTitle": {
+          "type": "text",
+          "title": "Third section title"
+        },
+        "thirdSectionDescription": {
+          "type": "markdown",
+          "title": "Third section description"
+        },
+        "fourthSectionTitle": {
+          "type": "text",
+          "title": "Fourth section title"
+        },
+        "fourthSectionDescription": {
+          "type": "markdown",
+          "title": "Fourth section description"
+        },
+        "fifthSectionTitle": {
+          "type": "text",
+          "title": "Fifth section title"
+        },
+        "fifthSectionDescription": {
+          "type": "markdown",
+          "title": "Fifth section description"
+        },
+        "fifthSectionItems": {
+          "type": "array",
+          "title": "Fifth section items",
+          "items": {
+            "properties": {
+              "title": {
+                "type": "text",
+                "title": "Item title"
+              },
+              "description": {
+                "type": "markdown",
+                "title": "Item description"
+              }
+            }
+          }
+        },
+        "sixthSectionTitle": {
+          "type": "text",
+          "title": "Sixth section title"
+        },
+        "sixthSectionDescription": {
+          "type": "markdown",
+          "title": "Sixth section description"
+        }
+      }
+    }
+  }
 }
