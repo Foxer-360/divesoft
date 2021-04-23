@@ -8,8 +8,10 @@
     "firstSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
     "secondSectionTitle": "Second section title",
     "secondSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "secondSectionBgColor": "#000",
     "thirdSectionTitle": "Third section title",
     "thirdSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "thirdSectionBgColor": "#000",
     "fourthSectionTitle": "Fourth section title",
     "fourthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
     "fifthSectionTitle": "Fifth section title",
@@ -29,7 +31,8 @@
       }
     ],
     "sixthSectionTitle": "Sixth section title",
-    "sixthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+    "sixthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "sixthSectionBgColor": "#000"
   },
   "form": {
     "schema": {
@@ -63,6 +66,10 @@
           "type": "markdown",
           "title": "Second section description"
         },
+        "secondSectionBgColor": {
+          "type": "text",
+          "title": "Second section backgroun color"
+        },
         "thirdSectionTitle": {
           "type": "text",
           "title": "Third section title"
@@ -70,6 +77,10 @@
         "thirdSectionDescription": {
           "type": "markdown",
           "title": "Third section description"
+        },
+        "thirdSectionBgColor": {
+          "type": "text",
+          "title": "Third section backgroun color"
         },
         "fourthSectionTitle": {
           "type": "text",
@@ -110,6 +121,10 @@
         "sixthSectionDescription": {
           "type": "markdown",
           "title": "Sixth section description"
+        },
+        "sixthSectionBgColor": {
+          "type": "text",
+          "title": "Sixth section backgroun color"
         }
       }
     }
