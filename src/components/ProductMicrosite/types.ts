@@ -1,4 +1,4 @@
-interface IFifthSectionItem {
+export interface IListItem {
   title: string;
   description: string;
 }
@@ -17,7 +17,7 @@ export interface IProductMicrositeData {
   fourthSectionDescription: string;
   fifthSectionTitle: string;
   fifthSectionDescription: string;
-  fifthSectionItems: IFifthSectionItem[];
+  fifthSectionItems: IListItem[];
   sixthSectionTitle: string;
   sixthSectionDescription: string;
 }

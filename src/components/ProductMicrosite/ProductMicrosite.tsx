@@ -13,7 +13,7 @@ const ProductMicrosite = ({ data }: IProps) => {
   return (
     <div className="productMicrosite">
       <MicrositeHeader productName={productName} productUrl={productUrl} />
-      <MicrositeContent />
+      <MicrositeContent data={data} />
     </div>
   );
 };

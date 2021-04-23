@@ -1,7 +1,7 @@
 import * as React from 'react';
 import HeaderLogo from '@source/partials/HeaderLogo';
-import Button from '@source/partials/Button';
-import Subtitle from '../MicrositeContent/Subtitle';
+import Subtitle from '../Subtitle';
+import OrderLink from '../OrderLink';
 
 interface IProps {
   productName: string;
@@ -13,9 +13,7 @@ const MicrositeHeader = ({ productName, productUrl }: IProps) => {
     <header className="productMicrosite__header">
       <HeaderLogo url="/en" />
       <Subtitle>{productName}</Subtitle>
-      <a href={productUrl} target="__blank">
-        <Button>Objednat</Button>
-      </a>
+      <OrderLink url={productUrl} />
     </header>
   );
 };
