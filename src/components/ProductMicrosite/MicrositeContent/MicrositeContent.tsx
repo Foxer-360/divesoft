@@ -15,25 +15,30 @@ const MicrositeContent = ({ data }: IProps) => {
     productUrl,
     firstSectionTitle,
     firstSectionDescription,
+    firstSectionImage,
     secondSectionTitle,
     secondSectionDescription,
     secondSectionBgColor,
+    secondSectionImage,
     thirdSectionTitle,
     thirdSectionDescription,
     thirdSectionBgColor,
+    thirdSectionImage,
     fourthSectionTitle,
     fourthSectionDescription,
+    fourthSectionImage,
     fifthSectionTitle,
     fifthSectionDescription,
     fifthSectionItems,
     sixthSectionTitle,
     sixthSectionDescription,
     sixthSectionBgColor,
+    sixthSectionImage,
   } = data;
 
   return (
     <div className="productMicrosite__content">
-      <ProductPreview title={firstSectionTitle} text={firstSectionDescription} />
+      <ProductPreview image={firstSectionImage} title={firstSectionTitle} text={firstSectionDescription} />
       <HalfContentCard title={secondSectionTitle} text={secondSectionDescription} imageBgColor={secondSectionBgColor} />
       <HalfContentCard
         contentSide="right"
@@ -41,7 +46,12 @@ const MicrositeContent = ({ data }: IProps) => {
         text={thirdSectionDescription}
         imageBgColor={thirdSectionBgColor}
       />
-      <ProductPreview type="small" title={fourthSectionTitle} text={fourthSectionDescription} />
+      <ProductPreview
+        type="small"
+        image={fourthSectionImage}
+        title={fourthSectionTitle}
+        text={fourthSectionDescription}
+      />
       <ContentList title={fifthSectionTitle} text={fifthSectionDescription} listItems={fifthSectionItems} />
       <HalfContentCard
         className="productMicrosite__content__orderBox"
