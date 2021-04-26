@@ -6,9 +6,9 @@ export interface MediaProps {
   type: string;
   width?: string;
   height?: string;
-  // tslint:disable:no-any
-  data: any;
-  className?: any;
+  data: LooseObject;
+  className?: string;
+  imageClassName?: string;
 }
 
 export interface MediaState {}
@@ -31,6 +31,8 @@ class Media extends React.Component<MediaProps, MediaState> {
   };
 
   renderAsImage = (data) => {
+    const { imageClassName } = this.props;
+
     if (data && data.filename) {
       let recommendedSizes = (data && data.recommendedSizes) || null;
       let originalUrl = BASE_URL + data.category + data.hash + '_' + data.filename;
@@ -43,7 +45,7 @@ class Media extends React.Component<MediaProps, MediaState> {
           recommendedSizes={recommendedSizes}
           originalData={data}
           hash={data.hash}
-          className={this.props.className}
+          className={imageClassName}
         />
       );
     } else {
