@@ -16,7 +16,7 @@ $rightSide: right;
     }
 
     .productMicrosite__halfContentCard__imageBackground {
-      #{$side}: 0;
+      #{$side}: 1px;
 
       @include max-md {
         #{$side}: -50%;
@@ -53,13 +53,17 @@ $rightSide: right;
 
   &__imageWrapper {
     position: relative;
+
+    .mediaRatio {
+      padding-top: 60% !important;
+    }
   }
 
   &__imageBackground {
     position: absolute;
     display: block;
     width: 200%;
-    height: 100%;
+    height: calc(100% - 1px);
     top: 0;
     background: rgba($lightGrey, 0.2);
   }
@@ -68,7 +72,7 @@ $rightSide: right;
     position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover !important;
     z-index: 1;
   }
 }

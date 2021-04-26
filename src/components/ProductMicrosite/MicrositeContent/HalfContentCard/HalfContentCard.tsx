@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Container from '@source/partials/Container';
+import Media from '@source/partials/Media';
 import Paragraph from '../Paragraph';
 import Title from '../Title';
 
@@ -12,13 +13,14 @@ interface IProps {
   title: string;
   text: string;
   imageBgColor: string;
+  image: LooseObject;
   children?: React.ReactNode;
   contentSide?: keyof typeof CONTENT_SIDE_ENUM;
   className?: string;
 }
 
 const HalfContentCard = (props: IProps) => {
-  const { title, text, imageBgColor, children, contentSide = CONTENT_SIDE_ENUM.left, className } = props;
+  const { title, text, imageBgColor, image, children, contentSide = CONTENT_SIDE_ENUM.left, className } = props;
 
   return (
     <Container className={className}>
@@ -32,11 +34,7 @@ const HalfContentCard = (props: IProps) => {
           <div style={{ backgroundColor: imageBgColor }} className="productMicrosite__halfContentCard__imageBackground">
             Image background
           </div>
-          <img
-            className="productMicrosite__halfContentCard__image"
-            src="/assets/divesoft/images/freedom.png"
-            alt="Content card image"
-          />
+          <Media imageClassName="productMicrosite__halfContentCard__image" type="image" data={image} />
         </div>
       </section>
     </Container>
