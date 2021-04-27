@@ -14,7 +14,7 @@
     },
     "secondSectionTitle": "Second section title",
     "secondSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
-    "secondSectionBgColor": "#000",
+    "secondSectionImageBgColor": "#eee",
     "secondSectionImage": {
       "recommendedSizes": {
         "width": "1000",
@@ -23,7 +23,7 @@
     },
     "thirdSectionTitle": "Third section title",
     "thirdSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
-    "thirdSectionBgColor": "#000",
+    "thirdSectionImageBgColor": "#eee",
     "thirdSectionImage": {
       "recommendedSizes": {
         "width": "1000",
@@ -56,7 +56,8 @@
     ],
     "sixthSectionTitle": "Sixth section title",
     "sixthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
-    "sixthSectionBgColor": "#000",
+    "sixthSectionImageBgColor": "#eee",
+    "sixthSectionBgColor": "#ddd",
     "sixthSectionImage": {
       "recommendedSizes": {
         "width": "1000",
@@ -99,9 +100,9 @@
           "type": "markdown",
           "title": "Second section description"
         },
-        "secondSectionBgColor": {
+        "secondSectionImageBgColor": {
           "type": "text",
-          "title": "Second section backgroun color"
+          "title": "Second section image background color"
         },
         "secondSectionImage": {
           "type": "image"
@@ -114,9 +115,9 @@
           "type": "markdown",
           "title": "Third section description"
         },
-        "thirdSectionBgColor": {
+        "thirdSectionImageBgColor": {
           "type": "text",
-          "title": "Third section backgroun color"
+          "title": "Third section image background color"
         },
         "thirdSectionImage": {
           "type": "image"
@@ -164,9 +165,13 @@
           "type": "markdown",
           "title": "Sixth section description"
         },
+        "sixthSectionImageBgColor": {
+          "type": "text",
+          "title": "Sixth section image background color"
+        },
         "sixthSectionBgColor": {
           "type": "text",
-          "title": "Sixth section backgroun color"
+          "title": "Sixth section background color"
         },
         "sixthSectionImage": {
           "type": "image"
