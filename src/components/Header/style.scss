@@ -152,11 +152,16 @@
   }
 
   &__logo {
-    width: 190px;
-    min-width: 190px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 190px;
+    min-width: 190px;
+
+    @include max-sm {
+      width: 130px;
+      min-width: 130px;
+    }
 
     a {
       display: block;
