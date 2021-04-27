@@ -1,6 +1,6 @@
 import * as React from 'react';
+import getImageUrl from '@source/helpers/getImageUrl';
 import Container from '@source/partials/Container';
-import Media from '@source/partials/Media';
 import Paragraph from '../Paragraph';
 import Title from '../Title';
 
@@ -14,17 +14,28 @@ interface IProps {
   text: string;
   imageBgColor: string;
   image: LooseObject;
+  bgColor?: string;
   children?: React.ReactNode;
   contentSide?: keyof typeof CONTENT_SIDE_ENUM;
   className?: string;
 }
 
 const HalfContentCard = (props: IProps) => {
-  const { title, text, imageBgColor, image, children, contentSide = CONTENT_SIDE_ENUM.left, className } = props;
+  const {
+    title,
+    text,
+    imageBgColor,
+    image,
+    bgColor,
+    children,
+    contentSide = CONTENT_SIDE_ENUM.left,
+    className = '',
+  } = props;
+  const { alt: imageAlt } = image;
 
   return (
-    <Container className={className}>
-      <section className={`productMicrosite__halfContentCard ${contentSide}`}>
+    <Container style={{ backgroundColor: bgColor }}>
+      <section className={`productMicrosite__halfContentCard ${contentSide} ${className}`}>
         <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__content">
           <Title>{title}</Title>
           <Paragraph>{text}</Paragraph>
@@ -32,9 +43,14 @@ const HalfContentCard = (props: IProps) => {
         </div>
         <div className="productMicrosite__halfContentCard__item productMicrosite__halfContentCard__imageWrapper">
           <div style={{ backgroundColor: imageBgColor }} className="productMicrosite__halfContentCard__imageBackground">
-            Image background
+            Background image
           </div>
-          <Media imageClassName="productMicrosite__halfContentCard__image" type="image" data={image} />
+          <div
+            className="productMicrosite__halfContentCard__image"
+            style={{ backgroundImage: `url("${getImageUrl(image)}")` }}
+          >
+            {imageAlt || 'Product image'}
+          </div>
         </div>
       </section>
     </Container>

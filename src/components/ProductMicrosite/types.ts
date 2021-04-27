@@ -19,11 +19,11 @@ export interface IProductMicrositeData {
   firstSectionImage: LooseObject;
   secondSectionTitle: string;
   secondSectionDescription: string;
-  secondSectionBgColor: string;
+  secondSectionImageBgColor: string;
   secondSectionImage: LooseObject;
   thirdSectionTitle: string;
   thirdSectionDescription: string;
-  thirdSectionBgColor: string;
+  thirdSectionImageBgColor: string;
   thirdSectionImage: LooseObject;
   fourthSectionTitle: string;
   fourthSectionDescription: string;
@@ -33,6 +33,7 @@ export interface IProductMicrositeData {
   fifthSectionItems: IListItem[];
   sixthSectionTitle: string;
   sixthSectionDescription: string;
+  sixthSectionImageBgColor: string;
   sixthSectionBgColor: string;
   sixthSectionImage: LooseObject;
 }

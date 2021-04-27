@@ -18,11 +18,11 @@ const MicrositeContent = ({ data }: IProps) => {
     firstSectionImage,
     secondSectionTitle,
     secondSectionDescription,
-    secondSectionBgColor,
+    secondSectionImageBgColor,
     secondSectionImage,
     thirdSectionTitle,
     thirdSectionDescription,
-    thirdSectionBgColor,
+    thirdSectionImageBgColor,
     thirdSectionImage,
     fourthSectionTitle,
     fourthSectionDescription,
@@ -32,6 +32,7 @@ const MicrositeContent = ({ data }: IProps) => {
     fifthSectionItems,
     sixthSectionTitle,
     sixthSectionDescription,
+    sixthSectionImageBgColor,
     sixthSectionBgColor,
     sixthSectionImage,
   } = data;
@@ -42,14 +43,14 @@ const MicrositeContent = ({ data }: IProps) => {
       <HalfContentCard
         title={secondSectionTitle}
         text={secondSectionDescription}
-        imageBgColor={secondSectionBgColor}
+        imageBgColor={secondSectionImageBgColor}
         image={secondSectionImage}
       />
       <HalfContentCard
         contentSide="right"
         title={thirdSectionTitle}
         text={thirdSectionDescription}
-        imageBgColor={thirdSectionBgColor}
+        imageBgColor={thirdSectionImageBgColor}
         image={thirdSectionImage}
       />
       <ProductPreview
@@ -63,8 +64,9 @@ const MicrositeContent = ({ data }: IProps) => {
         className="productMicrosite__content__orderBox"
         title={sixthSectionTitle}
         text={sixthSectionDescription}
-        imageBgColor={sixthSectionBgColor}
+        imageBgColor={sixthSectionImageBgColor}
         image={sixthSectionImage}
+        bgColor={sixthSectionBgColor}
       >
         <OrderButton productPrice={productPrice} productUrl={productUrl} />
       </HalfContentCard>

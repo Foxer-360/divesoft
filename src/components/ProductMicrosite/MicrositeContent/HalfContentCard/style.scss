@@ -15,8 +15,16 @@ $rightSide: right;
       }
     }
 
+    .productMicrosite__halfContentCard__imageWrapper {
+      #{$side}: 50%;
+
+      @include max-md {
+        #{$side}: 0;
+      }
+    }
+
     .productMicrosite__halfContentCard__imageBackground {
-      #{$side}: 1px;
+      #{$side}: 0;
 
       @include max-md {
         #{$side}: -50%;
@@ -30,13 +38,20 @@ $rightSide: right;
 }
 
 .productMicrosite__halfContentCard {
+  position: relative;
   display: flex;
-  padding: 4em 0;
+  min-height: 330px;
+  margin: 4em 0;
+
+  @include max-md {
+    min-height: unset;
+  }
 
   @include contentSide($leftSide);
   @include contentSide($rightSide);
 
   &__item {
+    display: block;
     width: 50%;
 
     @include max-md {
@@ -52,10 +67,13 @@ $rightSide: right;
   }
 
   &__imageWrapper {
-    position: relative;
+    position: absolute;
+    height: 100%;
+    top: 0;
 
-    .mediaRatio {
-      padding-top: 60% !important;
+    @include max-md {
+      position: relative;
+      height: 250px;
     }
   }
 
@@ -63,16 +81,20 @@ $rightSide: right;
     position: absolute;
     display: block;
     width: 200%;
-    height: calc(100% - 1px);
+    height: 100%;
     top: 0;
     background: rgba($lightGrey, 0.2);
+    text-indent: -9999px;
   }
 
   &__image {
     position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover !important;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
     z-index: 1;
   }
 }
