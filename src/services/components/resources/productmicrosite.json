@@ -43,15 +43,33 @@
     "fifthSectionItems": [
       {
         "title": "Item 1",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
       },
       {
         "title": "Item 2",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
       },
       {
         "title": "Item 3",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum."
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
       }
     ],
     "sixthSectionTitle": "Sixth section title",
@@ -153,6 +171,9 @@
               "description": {
                 "type": "markdown",
                 "title": "Item description"
+              },
+              "iconImage": {
+                "type": "image"
               }
             }
           }
