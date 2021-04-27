@@ -12,7 +12,7 @@ const MicrositeHeader = ({ productName, productUrl }: IProps) => {
   return (
     <header className="productMicrosite__header">
       <HeaderLogo url="/en" />
-      <Subtitle>{productName}</Subtitle>
+      <Subtitle className="productMicrosite__header__productName">{productName}</Subtitle>
       <OrderLink url={productUrl} />
     </header>
   );

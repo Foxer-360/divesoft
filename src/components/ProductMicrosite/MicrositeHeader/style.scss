@@ -9,4 +9,16 @@
   background: $white;
   box-shadow: 0 10px 5px -10px rgba($black, 0.5);
   z-index: 10;
+
+  @include max-sm {
+    padding: 0.5em;
+  }
+
+  & &__productName {
+    padding: 0;
+
+    @include max-md {
+      display: none;
+    }
+  }
 }
