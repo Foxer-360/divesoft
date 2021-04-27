@@ -37,6 +37,8 @@ const MicrositeContent = ({ data }: IProps) => {
     sixthSectionImage,
   } = data;
 
+  console.log('MicrositeContent ~ fifthSectionItems', fifthSectionItems);
+
   return (
     <div className="productMicrosite__content">
       <ProductPreview image={firstSectionImage} title={firstSectionTitle} text={firstSectionDescription} />

@@ -8,6 +8,7 @@ export interface ITextProps {
 export interface IListItem {
   title: string;
   description: string;
+  iconImage: LooseObject;
 }
 
 export interface IProductMicrositeData {
