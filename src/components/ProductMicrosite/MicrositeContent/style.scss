@@ -1,5 +1,4 @@
 @import 'Paragraph/style.scss';
-@import 'Subtitle/style.scss';
 @import 'Title/style.scss';
 
 @import 'ContentCard/style.scss';
@@ -12,6 +11,7 @@
   padding-top: 1em;
 
   & &__orderBox {
-    background: rgba($lightGrey, 0.2);
+    margin: 0;
+    padding: 4em 0;
   }
 }

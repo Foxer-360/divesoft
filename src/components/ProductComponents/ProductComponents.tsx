@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
 import Slider from 'react-slick';
 import Responsive from 'react-responsive';
 
@@ -22,66 +23,70 @@ export interface ProductComponentsProps {
   };
 }
 
-const Mobile = props => <Responsive {...props} maxWidth={767} />;
-const Default = props => <Responsive {...props} minWidth={768} />;
+const Mobile = (props) => <Responsive {...props} maxWidth={767} />;
+const Default = (props) => <Responsive {...props} minWidth={768} />;
 
 const ProductComponents = (props: ProductComponentsProps) => {
   const { title, description, columns, components } = props.data;
 
   return (
     <List data={components || []}>
-        {({ data: slides }) => {
-          const arrayOfMobileSlides = (slides && slides.map((slide, i) => (
-            <div key={i}>
-              <div className={'productComponents__mobileItem'}>
-                <Media type={'image'} data={slide.image} />
-                {slide.title && <h5>{slide.title}</h5>}
-                {slide.description && <p>{slide.description}</p>}
-                <Link {...slide.url}>More information</Link>
+      {({ data: slides }) => {
+        const arrayOfMobileSlides =
+          (slides &&
+            slides.map((slide, i) => (
+              <div key={i}>
+                <div className={'productComponents__mobileItem'}>
+                  <Media type={'image'} data={slide.image} />
+                  {slide.title && <h5>{slide.title}</h5>}
+                  {slide.description && <p>{slide.description}</p>}
+                  <Link {...slide.url}>More information</Link>
+                </div>
               </div>
-            </div>
-          ))) || [];
+            ))) ||
+          [];
 
-          var settings = {
-            speed: 1000,
-            dots: false,
-            arrows: true,
-            autoplay: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            pauseOnHover: true
-          };
+        const settings = {
+          speed: 1000,
+          dots: false,
+          arrows: true,
+          autoplay: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          pauseOnHover: true,
+        };
 
-          return (
-            <div className={'productComponents'}>
-              <div className="container">
-                {title && <h2>{title}</h2>}
-                {description && <p className={'textDescription'}>{description}</p>}
+        return (
+          <div className={'productComponents'}>
+            <div className="container">
+              {title && <h2>{title}</h2>}
+              {description && <p className={'textDescription'}>{description}</p>}
 
-                <Default>
-                  <div className={'productComponents__list row'}>
-                    {slides && slides.map((item, i) => (
+              <Default>
+                <div className={'productComponents__list row'}>
+                  {slides &&
+                    slides.map((item, i) => (
                       <div key={i} className={`col-12 col-md-6 ${columns}`}>
                         <div className={'productComponents__list__item'}>
-                          <Media type={'image'} data={item.image} width="130" height="130"/>
+                          <Media type={'image'} data={item.image} width="130" height="130" />
                           <div className={'productComponents__list__item__content'}>
                             <h5>{item.title}</h5>
-                            <p>{item.description}</p>
+                            <ReactMarkdown source={item.description} />
                             <Link {...item.url}>More information</Link>
                           </div>
                         </div>
                       </div>
                     ))}
-                  </div>
-                </Default>
+                </div>
+              </Default>
 
-                <Mobile>
-                  <Slider {...settings}>{arrayOfMobileSlides}</Slider>
-                </Mobile>
-              </div>
+              <Mobile>
+                <Slider {...settings}>{arrayOfMobileSlides}</Slider>
+              </Mobile>
             </div>
-          );
-        }}
+          </div>
+        );
+      }}
     </List>
   );
 };

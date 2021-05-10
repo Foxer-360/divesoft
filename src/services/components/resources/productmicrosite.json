@@ -1,4 +1,203 @@
 {
   "name": "ProductMicrosite",
-  "data": {}
+  "data": {
+    "productName": "Product name",
+    "productPrice": "XXX",
+    "productUrl": "",
+    "firstSectionTitle": "First section title",
+    "firstSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "firstSectionImage": {
+      "recommendedSizes": {
+        "width": "2000",
+        "height": "1000"
+      }
+    },
+    "secondSectionTitle": "Second section title",
+    "secondSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "secondSectionImageBgColor": "#eee",
+    "secondSectionImage": {
+      "recommendedSizes": {
+        "width": "1000",
+        "height": "500"
+      }
+    },
+    "thirdSectionTitle": "Third section title",
+    "thirdSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "thirdSectionImageBgColor": "#eee",
+    "thirdSectionImage": {
+      "recommendedSizes": {
+        "width": "1000",
+        "height": "500"
+      }
+    },
+    "fourthSectionTitle": "Fourth section title",
+    "fourthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "fourthSectionImage": {
+      "recommendedSizes": {
+        "width": "2000",
+        "height": "1000"
+      }
+    },
+    "fifthSectionTitle": "Fifth section title",
+    "fifthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "fifthSectionItems": [
+      {
+        "title": "Item 1",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
+      },
+      {
+        "title": "Item 2",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
+      },
+      {
+        "title": "Item 3",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+        "iconImage": {
+          "recommendedSizes": {
+            "width": "50",
+            "height": "50"
+          }
+        }
+      }
+    ],
+    "sixthSectionTitle": "Sixth section title",
+    "sixthSectionDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur magna libero, ultricies finibus interdum at, consequat in ante. Nam vehicula iaculis nulla ut vestibulum.",
+    "sixthSectionImageBgColor": "#eee",
+    "sixthSectionBgColor": "#ddd",
+    "sixthSectionImage": {
+      "recommendedSizes": {
+        "width": "1000",
+        "height": "500"
+      }
+    }
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "text",
+          "title": "Product name"
+        },
+        "productPrice": {
+          "type": "text",
+          "title": "Product price"
+        },
+        "productUrl": {
+          "type": "text",
+          "title": "Product order url"
+        },
+        "firstSectionTitle": {
+          "type": "text",
+          "title": "First section title"
+        },
+        "firstSectionDescription": {
+          "type": "markdown",
+          "title": "First section description"
+        },
+        "firstSectionImage": {
+          "type": "image"
+        },
+        "secondSectionTitle": {
+          "type": "text",
+          "title": "Second section title"
+        },
+        "secondSectionDescription": {
+          "type": "markdown",
+          "title": "Second section description"
+        },
+        "secondSectionImageBgColor": {
+          "type": "text",
+          "title": "Second section image background color"
+        },
+        "secondSectionImage": {
+          "type": "image"
+        },
+        "thirdSectionTitle": {
+          "type": "text",
+          "title": "Third section title"
+        },
+        "thirdSectionDescription": {
+          "type": "markdown",
+          "title": "Third section description"
+        },
+        "thirdSectionImageBgColor": {
+          "type": "text",
+          "title": "Third section image background color"
+        },
+        "thirdSectionImage": {
+          "type": "image"
+        },
+        "fourthSectionTitle": {
+          "type": "text",
+          "title": "Fourth section title"
+        },
+        "fourthSectionDescription": {
+          "type": "markdown",
+          "title": "Fourth section description"
+        },
+        "fourthSectionImage": {
+          "type": "image"
+        },
+        "fifthSectionTitle": {
+          "type": "text",
+          "title": "Fifth section title"
+        },
+        "fifthSectionDescription": {
+          "type": "markdown",
+          "title": "Fifth section description"
+        },
+        "fifthSectionItems": {
+          "type": "array",
+          "title": "Fifth section items",
+          "items": {
+            "properties": {
+              "title": {
+                "type": "text",
+                "title": "Item title"
+              },
+              "description": {
+                "type": "markdown",
+                "title": "Item description"
+              },
+              "iconImage": {
+                "type": "image"
+              }
+            }
+          }
+        },
+        "sixthSectionTitle": {
+          "type": "text",
+          "title": "Sixth section title"
+        },
+        "sixthSectionDescription": {
+          "type": "markdown",
+          "title": "Sixth section description"
+        },
+        "sixthSectionImageBgColor": {
+          "type": "text",
+          "title": "Sixth section image background color"
+        },
+        "sixthSectionBgColor": {
+          "type": "text",
+          "title": "Sixth section background color"
+        },
+        "sixthSectionImage": {
+          "type": "image"
+        }
+      }
+    }
+  }
 }

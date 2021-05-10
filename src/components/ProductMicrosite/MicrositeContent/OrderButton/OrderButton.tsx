@@ -1,11 +1,16 @@
 import * as React from 'react';
-import Button from '@source/partials/Button';
+import OrderLink from '../../OrderLink';
 
-const OrderButton = () => {
+interface IProps {
+  productPrice: string;
+  productUrl: string;
+}
+
+const OrderButton = ({ productPrice, productUrl }: IProps) => {
   return (
     <div className="productMicrosite__orderBtn">
-      <strong className="productMicrosite__orderBtn__price">XXX,-</strong>
-      <Button>Objednat</Button>
+      <strong className="productMicrosite__orderBtn__price">{productPrice},-</strong>
+      <OrderLink url={productUrl} />
     </div>
   );
 };

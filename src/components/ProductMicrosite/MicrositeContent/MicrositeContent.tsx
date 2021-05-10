@@ -1,25 +1,76 @@
 import * as React from 'react';
+import { IProductMicrositeData } from '../types';
 import HalfContentCard from './HalfContentCard';
 import ProductPreview from './ProductPreview';
 import ContentList from './ContentList';
 import OrderButton from './OrderButton';
-import { DEFAULT_LIST_ITEMS, DEFAULT_SUBTITLE, DEFAULT_TEXT, DEFAULT_TITLE } from './const';
 
-const MicrositeContent = () => {
+interface IProps {
+  data: IProductMicrositeData;
+}
+
+const MicrositeContent = ({ data }: IProps) => {
+  const {
+    productPrice,
+    productUrl,
+    firstSectionTitle,
+    firstSectionDescription,
+    firstSectionImage,
+    secondSectionTitle,
+    secondSectionDescription,
+    secondSectionImageBgColor,
+    secondSectionImage,
+    thirdSectionTitle,
+    thirdSectionDescription,
+    thirdSectionImageBgColor,
+    thirdSectionImage,
+    fourthSectionTitle,
+    fourthSectionDescription,
+    fourthSectionImage,
+    fifthSectionTitle,
+    fifthSectionDescription,
+    fifthSectionItems,
+    sixthSectionTitle,
+    sixthSectionDescription,
+    sixthSectionImageBgColor,
+    sixthSectionBgColor,
+    sixthSectionImage,
+  } = data;
+
+  console.log('MicrositeContent ~ fifthSectionItems', fifthSectionItems);
+
   return (
     <div className="productMicrosite__content">
-      <ProductPreview title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
-      <HalfContentCard title={DEFAULT_TITLE} subtitle={DEFAULT_SUBTITLE} text={DEFAULT_TEXT} />
-      <HalfContentCard contentSide="right" title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
-      <ProductPreview type="small" title={DEFAULT_TITLE} text={DEFAULT_TEXT} />
-      <ContentList title={DEFAULT_TITLE} text={DEFAULT_TEXT} listItems={DEFAULT_LIST_ITEMS} />
+      <ProductPreview image={firstSectionImage} title={firstSectionTitle} text={firstSectionDescription} />
+      <HalfContentCard
+        title={secondSectionTitle}
+        text={secondSectionDescription}
+        imageBgColor={secondSectionImageBgColor}
+        image={secondSectionImage}
+      />
+      <HalfContentCard
+        contentSide="right"
+        title={thirdSectionTitle}
+        text={thirdSectionDescription}
+        imageBgColor={thirdSectionImageBgColor}
+        image={thirdSectionImage}
+      />
+      <ProductPreview
+        type="small"
+        image={fourthSectionImage}
+        title={fourthSectionTitle}
+        text={fourthSectionDescription}
+      />
+      <ContentList title={fifthSectionTitle} text={fifthSectionDescription} listItems={fifthSectionItems} />
       <HalfContentCard
         className="productMicrosite__content__orderBox"
-        title={DEFAULT_TITLE}
-        subtitle={DEFAULT_SUBTITLE}
-        text={DEFAULT_TEXT}
+        title={sixthSectionTitle}
+        text={sixthSectionDescription}
+        imageBgColor={sixthSectionImageBgColor}
+        image={sixthSectionImage}
+        bgColor={sixthSectionBgColor}
       >
-        <OrderButton />
+        <OrderButton productPrice={productPrice} productUrl={productUrl} />
       </HalfContentCard>
     </div>
   );

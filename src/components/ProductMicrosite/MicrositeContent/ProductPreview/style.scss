@@ -6,13 +6,21 @@
     flex-direction: column-reverse;
 
     .productMicrosite__productPreview__imageWrapper {
-      max-width: 700px;
-      margin: 0 auto;
+      .mediaRatio {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__imageWrapper {
+    .mediaRatio {
+      padding-top: 55% !important;
     }
   }
 
   &__image {
-    object-fit: contain;
-    object-position: center;
+    object-fit: contain !important;
+    object-position: center !important;
   }
 }

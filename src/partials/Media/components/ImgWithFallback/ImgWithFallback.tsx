@@ -1,5 +1,5 @@
-import * as React from "react";
-import { readEnvVariable } from "../../../../helpers";
+import * as React from 'react';
+import { readEnvVariable } from '../../../../helpers';
 
 export interface ImgWithFallbackProps {
   alt?: string;
@@ -8,19 +8,18 @@ export interface ImgWithFallbackProps {
   hash: string;
   recommendedSizes: LooseObject;
   originalData: LooseObject;
-  className: string;
+  className?: string;
 }
 
 class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
-
   createVariantIfDoesNotExist = () => {
     const { recommendedSizes, originalData } = this.props;
 
     if (recommendedSizes) {
       fetch(`${readEnvVariable('REACT_APP_MEDIA_LIBRARY_SERVER')}/createDimension`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           id: originalData.id,
@@ -32,7 +31,7 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
           // this.getSizedUrl();
         })
         .catch(() => {
-          console.error("There was an error creating variant");
+          console.error('There was an error creating variant');
         });
     }
   };
@@ -41,23 +40,23 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
     const { recommendedSizes: sizes, originalData, baseUrl, hash, originalSrc } = this.props;
 
     if (sizes && sizes.width && sizes.height) {
-      let filename = originalData.filename.split(".");
-      filename[0] = filename[0] + "_" + sizes.width + "_" + sizes.height;
-      filename = filename.join(".");
-      return baseUrl + originalData.category + hash + "_" + filename;
+      let filename = originalData.filename.split('.');
+      filename[0] = filename[0] + '_' + sizes.width + '_' + sizes.height;
+      filename = filename.join('.');
+      return baseUrl + originalData.category + hash + '_' + filename;
     }
 
     return originalSrc;
   };
 
   handleError = (event: any) => {
-    const { originalSrc }  = this.props;
+    const { originalSrc } = this.props;
     this.createVariantIfDoesNotExist();
     event.target.src = originalSrc;
   };
 
   render() {
-    const { alt, recommendedSizes, originalSrc } = this.props;
+    const { alt, recommendedSizes, originalSrc, className } = this.props;
     const resizable = !originalSrc.includes('.svg');
 
     return (
@@ -73,7 +72,7 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
       >
         <img
           alt={alt}
-          className="mediaImage inner"
+          className={`mediaImage inner ${className || ''}`}
           src={resizable ? this.getSizedUrl() : originalSrc}
           onError={this.handleError}
           onErrorCapture={this.handleError}
