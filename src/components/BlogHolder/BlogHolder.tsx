@@ -98,7 +98,6 @@ export interface BlogHolderProps {
     displayItemDetails: boolean;
     blogLinkUrl: LooseObject;
     title: string;
-    linesOfText?: string;
     numberOfItems: string;
     justPerexesWithTagsOfPage: boolean;
   };
@@ -435,7 +434,7 @@ class BlogHolder extends React.Component<BlogHolderProps, BlogHolderState> {
                     )}
 
                     {buttonLink && buttonLink.url.length > 0 && (
-                      <Button url={buttonLink}>buttonText</Button>
+                      <Button url={buttonLink}>{buttonText}</Button>
                     )}
                   </div>
                 </div>
@@ -465,7 +464,7 @@ class BlogHolder extends React.Component<BlogHolderProps, BlogHolderState> {
 
     if (blogArticleComponentData) {
       const {
-        data: { perex, image, title: name, linesOfText },
+        data: { perex, image, title: name },
       } = findFirst(content.content, 'content', { name: 'BlogArticle' });
 
       return (
