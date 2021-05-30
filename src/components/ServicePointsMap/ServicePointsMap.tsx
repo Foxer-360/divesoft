@@ -17,6 +17,8 @@ interface MapItem {
   phone?: string;
   web?: LooseObject;
   addFilter?: string;
+  slugComponents?: string;
+  detailsLink?: boolean;
 }
 
 export interface ServicePointsMapProps {

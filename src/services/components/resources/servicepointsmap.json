@@ -166,6 +166,14 @@
               "addFilter": {
                 "type": "text",
                 "title": "Additional filter by"
+              },
+              "slugComponents": {
+                "type": "string",
+                "title": "URL slug components (e.g. 'contacts/dealers/%name% %address%' = 'https://www.divesoft.com/en/contacts/dealers/kentec-diving-66-kareena-road')"
+              },
+              "detailsLink": {
+                "type": "boolean",
+                "title": "Show more details link?"
               }
             }
           }
