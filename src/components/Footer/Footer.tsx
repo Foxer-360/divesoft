@@ -145,7 +145,6 @@ class Footer extends React.Component<FooterProps, FooterState> {
               </Helmet>
               <CookiePopup />
               <div className="container">
-                <div className="footer__divider" />
                 <div className="footer__navigation row d-flex justify-content-between align-items-start">
                   <nav className="footer__navigation__item col-12 col-md-6 col-xl">
                     <h6 className="headline">Products</h6>
