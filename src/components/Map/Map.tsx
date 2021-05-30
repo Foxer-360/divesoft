@@ -53,6 +53,8 @@ export interface MapState {
   name: string;
   position: string;
   otherCountries: string;
+  slugComponents: string;
+  detailsLink: boolean;
   map: LooseObject;
 }
 
@@ -94,6 +96,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       name: '',
       position: '',
       otherCountries: '',
+      slugComponents: '',
+      detailsLink: false,
       map: {}
     };
 
@@ -123,6 +127,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
       name: item.name,
       position: item.position,
       otherCountries: item.otherCountries,
+      slugComponents: item.slugComponents,
+      detailsLink: item.detailsLink,
       showBox: item ? true : !this.state.showBox,
       mapZoom: 14,
       mapCenter: this.readLatLng(item)
@@ -172,6 +178,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
                     lng: mapItems[j].lng,
                     name: mapItems[j].name,
                     position: mapItems[j].position,
+                    slugComponents: mapItems[j].slugComponents,
+                    detailsLink: mapItems[j].detailsLink,
                   }
                 );
               }
@@ -495,6 +503,8 @@ class Map extends React.Component<MapProps & GeolocatedProps, MapState> {
               name={this.state.name}
               position={this.state.position}
               otherCountries={this.state.otherCountries}
+              slugComponents={this.state.slugComponents}
+              detailsLink={this.state.detailsLink}
               onClick={() => this.closeMapBox()}
             />
           }

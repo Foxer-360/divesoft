@@ -37,6 +37,8 @@ const MapRows = (props: MapRowsProps) => {
                       otherCountries={item.otherCountries}
                       item={item}
                       open={props.open}
+                      slugComponents={item.slugComponents}
+                      detailsLink={item.detailsLink}
                     />
                   ))}
                 </div>

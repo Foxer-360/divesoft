@@ -56,6 +56,10 @@
       .countries {
         word-break: keep-all;
       }
+
+      &__detailsLink {
+        font-weight: bold !important;
+      }
     }
     
     &::before {
