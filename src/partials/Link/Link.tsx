@@ -65,15 +65,13 @@ const ComposerLink = props => {
         if (error) {
           return `Error: ${error}`;
         }
-
         let pageUrlObj;
         const { pagesUrls } = data;
 
         if (pagesUrls) {
           pageUrlObj = pagesUrls.find(u => u.page === pageId || u.url === url);
         }
-
-        if (!pageUrlObj && !isExternalLink(securedUrl)) { return ''; }
+        if (!dynamic && !pageUrlObj && !isExternalLink(securedUrl)) { return ''; }
 
         if (isExternalLink(securedUrl) || args.forceHtml || urlNewWindow) {
           return (
