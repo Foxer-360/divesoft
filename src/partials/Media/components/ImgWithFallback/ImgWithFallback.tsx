@@ -9,6 +9,7 @@ export interface ImgWithFallbackProps {
   recommendedSizes: LooseObject;
   originalData: LooseObject;
   className?: string;
+  nowrapper?: boolean;
 }
 
 class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
@@ -59,17 +60,32 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
     const { alt, recommendedSizes, originalSrc, className } = this.props;
     const resizable = !originalSrc.includes('.svg');
 
-    return (
-      <div
-        className="mediaRatio"
-        style={{
-          paddingTop: `${
-            (parseInt(recommendedSizes ? recommendedSizes.width : 1, 10) /
-              parseInt(recommendedSizes ? recommendedSizes.height : 1, 10)) *
-            100
-          }%`,
-        }}
-      >
+    if (!this.props.nowrapper) {
+      return (
+        <div
+          className="mediaRatio"
+          style={{
+            paddingTop: `${
+              (parseInt(recommendedSizes ? recommendedSizes.width : 1, 10) /
+                parseInt(recommendedSizes ? recommendedSizes.height : 1, 10)) *
+              100
+            }%`,
+          }}
+        >
+          <img
+            alt={alt}
+            className={`mediaImage inner ${className || ''}`}
+            src={resizable ? this.getSizedUrl() : originalSrc}
+            onError={this.handleError}
+            onErrorCapture={this.handleError}
+            onContextMenu={() => {
+              this.createVariantIfDoesNotExist();
+            }}
+          />
+        </div>
+      );
+    } else {
+      return (
         <img
           alt={alt}
           className={`mediaImage inner ${className || ''}`}
@@ -80,8 +96,8 @@ class ImgWithFallback extends React.Component<ImgWithFallbackProps> {
             this.createVariantIfDoesNotExist();
           }}
         />
-      </div>
-    );
+      )
+    }
   }
 }
 

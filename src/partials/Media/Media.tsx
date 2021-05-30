@@ -9,6 +9,7 @@ export interface MediaProps {
   data: LooseObject;
   className?: string;
   imageClassName?: string;
+  nowrapper?: boolean;
 }
 
 export interface MediaState {}
@@ -46,6 +47,7 @@ class Media extends React.Component<MediaProps, MediaState> {
           originalData={data}
           hash={data.hash}
           className={imageClassName}
+          nowrapper={this.props.nowrapper}
         />
       );
     } else {

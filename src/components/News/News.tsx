@@ -74,7 +74,7 @@ const News = (props: NewsProps) => {
 
         {firstImg && <div className="row">
           <div className="col-12">
-            <Media type={'image'} data={firstImg} className={'news__firstImg'} height={'1110'} width={'800'} />
+            <Media type={'image'} data={firstImg} className={'news__firstImg'} height={'800'} width={'1110'} nowrapper />
           </div></div>}
 
         {secondText && <div className="row">
@@ -84,10 +84,10 @@ const News = (props: NewsProps) => {
 
         <div className="row">
           <div className="col-12 col-md-6">
-            {secondImg && <Media className={'news__secondImg'} type={'image'} data={secondImg} height={'540'} width={'540'} />}
+            {secondImg && <Media className={'news__secondImg'} type={'image'} data={secondImg} height={'540'} width={'540'}  nowrapper />}
           </div>
           <div className="col-12 col-md-6">
-            {thirdImg && <Media className={'news__thirdImg'} type={'image'} data={thirdImg} height={'540'} width={'540'} />}
+            {thirdImg && <Media className={'news__thirdImg'} type={'image'} data={thirdImg} height={'540'} width={'540'}  nowrapper />}
           </div>
         </div>
 
