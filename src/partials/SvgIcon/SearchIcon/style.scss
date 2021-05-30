@@ -1,0 +1,14 @@
+.searchIcon {
+  width: 25px;
+  height: 25px;
+  transition: 300ms $customEase;
+  cursor: pointer;
+
+  &--red {
+    fill: $red;
+  }
+
+  &--gray {
+    fill: #cccccc;
+  }
+}

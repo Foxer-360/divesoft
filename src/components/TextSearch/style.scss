@@ -1,0 +1,94 @@
+.textSearch {
+  display: flex;
+  flex-direction: row;
+  order: 1;
+  background-color: transparent;
+  position: relative;
+
+  @media (min-width: 980px) {
+    order: 4;
+    width: 150px;
+    justify-content: flex-end;
+  }
+
+  &:hover {
+    @include md {
+    }
+  }
+
+  input {
+    display: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #cccccc;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: 300ms $customEase;
+    background-color: transparent;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background: white;
+    padding: 10px;
+    width: 100%;
+    border-radius: 0;
+    -webkit-appearance: none;
+    padding-right: 24px;
+
+    @media (min-width: 980px) {
+      display: block;
+      width: 140px;
+      position: relative;
+      background: none;
+      top: auto;
+      left: auto;
+      padding: 0;
+
+      &::placeholder {
+        color: #cccccc;
+      }
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 32px;
+    display: block;
+
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+    transition: 300ms $customEase;
+  }
+
+  &--focused {
+    input {
+      border-bottom: 1px solid $red;
+      color: black;
+      display: block;
+
+      &:focus {
+        border-bottom: 1px solid $red;
+        color: black;
+      }
+
+      @include md {
+        &:focus {
+          border-bottom: 1px solid $red;
+          color: black;
+        }
+      }
+    }
+  }
+}

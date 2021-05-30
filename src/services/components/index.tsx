@@ -32,6 +32,8 @@ import {
   ProductCrossRoad,
   CarouselFiftyFifty,
   ProductMicrosite,
+  BlogArticle,
+  BlogHolder,
 } from '../../components';
 
 import * as resources from './resources';
@@ -67,6 +69,8 @@ class ComponentsService {
     PRODUCTCROSSROAD: 'ProductCrossRoad',
     CAROUSELFIFTYFIFTY: 'CarouselFiftyFifty',
     PRODUCTMICROSITE: 'ProductMicrosite',
+    BLOGARTICLE: 'BlogArticle',
+    BLOGHOLDER: 'BlogHolder',
   };
 
   /***/
@@ -138,6 +142,10 @@ class ComponentsService {
         return CarouselFiftyFifty;
       case this.Types.PRODUCTMICROSITE:
         return ProductMicrosite;
+      case this.Types.BLOGARTICLE:
+        return BlogArticle;
+      case this.Types.BLOGHOLDER:
+        return BlogHolder;
 
       default:
         return () => <AlertNotFound type="component" />;

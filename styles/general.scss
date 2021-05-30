@@ -24,6 +24,38 @@ body {
   }
 }
 
+.flexList {
+  display: flex;
+  justify-content: center;
+}
+
+.sectionHeading {
+  color: $darkGrey;
+  font-size: 2.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.56px;
+  text-align: center;
+
+  @include md {
+    font-size: 3.8rem;
+    letter-spacing: 1.1px;
+  }
+
+  @include lg {
+    font-size: 5rem;
+  }
+
+  @include xl {
+    font-size: 5.5rem;
+    line-height: 65px;
+  }
+
+  span {
+    color: $red;
+  }
+}
+
 .slick-dots {
   bottom: 2.5rem;
 

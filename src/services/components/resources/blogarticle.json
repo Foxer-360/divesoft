@@ -1,0 +1,45 @@
+{
+  "name": "BlogArticle",
+  "data": {
+    "title": "Parturient porttitor.",
+    "perex": "Hac congue a integer convallis rutrum eget cum et blandit scelerisque placerat turpis per diam pulvinar mattis diam mi vel libero. Dignissim vestibulum a laoreet neque a adipiscing euismod quis id venenatis lectus cras neque id. Penatibus ipsum ut nullam per ad a et lacinia habitasse potenti condimentum id nibh quam amet a imperdiet eros cursus. Malesuada interdum vestibulum ac laoreet venenatis odio eu imperdiet a praesent himenaeos velit condimentum congue sapien a inceptos. Ullamcorper viverra tellus parturient nec eu in consectetur tellus a a condimentum a consectetur ipsum a lacus. Proin vestibulum bibendum sed vestibulum parturient adipiscing netus nec at at parturient volutpat primis phasellus montes cursus vestibulum a condimentum a. Adipiscing a et ipsum sodales condimentum maecenas ac non at vestibulum condimentum commodo a at a fringilla parturient at sociis donec suspendisse in a aenean dui mauris.Ligula vel eu sapien at adipiscing scelerisque ad hac mattis congue pretium platea commodo a euismod dictumst quam conubia eros fringilla non et tristique ut.Dapibus parturient a euismod laoreet a aptent lacus a porta morbi ipsum praesent et adipiscing est leo dui malesuada tincidunt id suspendisse suspendisse nec lacus.Fermentum.",
+    "content": "Hac congue a integer convallis rutrum eget cum et blandit scelerisque placerat turpis per diam pulvinar mattis diam mi vel libero. Dignissim vestibulum a laoreet neque a adipiscing euismod quis id venenatis lectus cras neque id. Penatibus ipsum ut nullam per ad a et lacinia habitasse potenti condimentum id nibh quam amet a imperdiet eros cursus. Malesuada interdum vestibulum ac laoreet venenatis odio eu imperdiet a praesent himenaeos velit condimentum congue sapien a inceptos. Ullamcorper viverra tellus parturient nec eu in consectetur tellus a a condimentum a consectetur ipsum a lacus. Proin vestibulum bibendum sed vestibulum parturient adipiscing netus nec at at parturient volutpat primis phasellus montes cursus vestibulum a condimentum a. Adipiscing a et ipsum sodales condimentum maecenas ac non at vestibulum condimentum commodo a at a fringilla parturient at sociis donec suspendisse in a aenean dui mauris.Ligula vel eu sapien at adipiscing scelerisque ad hac mattis congue pretium platea commodo a euismod dictumst quam conubia eros fringilla non et tristique ut.Dapibus parturient a euismod laoreet a aptent lacus a porta morbi ipsum praesent et adipiscing est leo dui malesuada tincidunt id suspendisse suspendisse nec lacus.Fermentum.",
+    "showTags": false,
+    "showDate": false
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "text",
+          "title": "Title"
+        },
+        
+        "showTags": {
+          "type": "boolean",
+          "title": "Show tags?"
+        },
+
+        "showDate": {
+          "type": "boolean",
+          "title": "Show date?"
+        },
+
+        "image": {
+          "type": "image"
+        },
+
+        "perex": {
+          "type": "markdown",
+          "title": "Perex"
+        },
+
+        "content": {
+          "type": "markdown",
+          "title": "Content"
+        }
+      }
+    }
+  }
+}

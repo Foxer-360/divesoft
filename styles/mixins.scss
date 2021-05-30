@@ -108,3 +108,9 @@
 @function strip-unit($number) {
   @return $number / ($number * 0 + 1);
 }
+
+@mixin small-wide-up {
+  @media (min-width: #{$small-wide-up}) {
+    @content;
+  }
+}

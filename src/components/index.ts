@@ -28,6 +28,8 @@ import ProductMountRouter from './ProductMountRouter';
 import ProductCrossRoad from './ProductCrossRoad';
 import CarouselFiftyFifty from './CarouselFiftyFifty';
 import ProductMicrosite from './ProductMicrosite';
+import BlogArticle from './BlogArticle';
+import BlogHolder from './BlogHolder';
 
 export {
   AlertNotFound,
@@ -60,4 +62,6 @@ export {
   ProductCrossRoad,
   CarouselFiftyFifty,
   ProductMicrosite,
+  BlogArticle,
+  BlogHolder,
 };

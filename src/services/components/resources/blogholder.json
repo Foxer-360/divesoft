@@ -1,0 +1,102 @@
+{
+  "name": "BlogHolder",
+  "data": {
+    "title": "Blog",
+    "displayFilters": false,
+    "displayItemDetails": false,
+    "primaryTags": [],
+    "secondaryTags": [],
+    "numberOfItems": "2",
+    "buttonText": "načíst další články",
+    "buttonAlign": "center",
+    "linesOfText": "3",
+    "items": [
+      {
+        "title": "Jak si vybrat správné pastelky",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis orci...",
+        "linkText": "Zobrazit článek",
+        "linkUrl": ""
+      },
+      {
+        "title": "Jak si vybrat správné pastelky",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mattis orci...",
+        "linkText": "Zobrazit článek",
+        "linkUrl": ""
+      }
+    ]
+  },
+  "form": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "linesOfText": {
+          "type": "text",
+          "title": "Lines of text"
+        },
+        "title": {
+          "type": "markdown",
+          "title": "Title"
+        },
+        "displayFilters": {
+          "type": "checkbox",
+          "title": "Display Filters?"
+        },
+        "displayItemDetails": {
+          "type": "checkbox",
+          "title": "Display Item Details?"
+        },
+        "primaryTags": {
+          "type": "array",
+          "title": "Primary tags",
+          "items": {
+            "properties": {
+              "tag": {
+                "type": "tags",
+                "title": "Tag"
+              },
+              "name": {
+                "type": "text",
+                "title": "New tag name"
+              }
+            }
+          }
+        },
+        "secondaryTags": {
+          "type": "array",
+          "title": "Secondary tags",
+          "items": {
+            "properties": {
+              "tag": {
+                "type": "tags",
+                "title": "Tag"
+              },
+              "name": {
+                "type": "text",
+                "title": "New tag name"
+              }
+            }
+          }
+        },
+        "numberOfItems": {
+          "type": "number",
+          "title": "Number of items displayed?"
+        },
+        "button": {
+          "type": "section",
+          "title": "Button",
+          "properties": {
+            "buttonText": {
+              "type": "string",
+              "title": "Button text",
+              "placeholder": "Enter button text"
+            },
+            "buttonLink": {
+              "type": "urlAutocomplete",
+              "title": "Button Link"
+            }
+          }
+        }
+      }
+    }
+  }
+}
