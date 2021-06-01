@@ -215,6 +215,10 @@ class BlogHolder extends React.Component<BlogHolderProps, BlogHolderState> {
 
             const articles = pages
               .filter(p => {
+                if (p.tags.some(t => t.name.toLowerCase() === 'hidden')) {
+                  return false;
+                }
+
                 if (
                   !p.translations.find(
                     t =>
@@ -232,6 +236,7 @@ class BlogHolder extends React.Component<BlogHolderProps, BlogHolderState> {
                 if (filter && !p.tags.some(t => t.id === filter)) {
                   return false;
                 }
+
 
                 if (pageData && p.translations && p.translations[0].id === pageData.id) {
                   return false;
