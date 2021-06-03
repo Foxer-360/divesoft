@@ -172,7 +172,8 @@ const SearchResults = (props: SearchResultsProps) => {
             .filter(page => {
               return JSON.stringify(page)
                 .toLowerCase()
-                .includes(searchQuery.toLowerCase());
+                .includes(searchQuery.toLowerCase())
+                && page.tags.some(t => t.name.toLowerCase() === 'hidden');
             })
             .map(p => {
               let pageUrlObj = pagesUrls.find(pUrl => pUrl.page === p.id);
