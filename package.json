@@ -49,7 +49,7 @@
     "graphql": "0.13.0",
     "graphql-tag": "^2.9.2",
     "lodash": "^4.17.4",
-    "moment": "^2.23.0",
+    "moment": "^2.29.4",
     "obj-traverse": "^1.0.0",
     "react-adopt": "^0.6.0",
     "react-apollo": "2.5.1",
